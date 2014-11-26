@@ -1,18 +1,20 @@
-<?xml version="1.0"?>
-<package >
-  <metadata>
-    <id>Nerdery.Umbraco.Vault</id>
-    <version>$version$</version>
-    <title>Umbraco Vault</title>
-    <authors>ksykora, ptrandam, amorger</authors>
-    <owners>nerdery</owners>
-    <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
-    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
-    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>A library that provides mapping between Umbraco documents and C# objects.</description>
-    <releaseNotes></releaseNotes>
-    <copyright>Copyright 2014</copyright>
-    <tags>C# Umbraco Nerdery Mapping</tags>
-  </metadata>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Nerdery.Umbraco.Vault</id>
+        <version>1.0.0</version>
+        <title>Umbraco Vault</title>
+        <authors>ksykora,ptrandem,amorger</authors>
+        <owners>nerdery</owners>
+        <projectUrl>https://github.com/ptrandem/vault</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your markup.  It allows you to create lightly-decorated classes that Vault will understand how to hydrate. This gives you the full view model-style experience in Umbraco that you are accustomed to in MVC, complete with strongly-typed view properties (no more magic strings in your views).</description>
+        <releaseNotes />
+        <copyright>Copyright 2014</copyright>
+        <tags>C# Umbraco Nerdery Mapping</tags>
+        <dependencies>
+            <dependency id="UmbracoCms.Core" version="[6.2.1, 6.2.4]" />
+            <dependency id="uComponents" version="[6.0.0]" />
+        </dependencies>
+    </metadata>
 </package>
