@@ -20,7 +20,7 @@ namespace Nerdery.Umbraco.Vault.TypeHandlers
                             ? Vault.Context.GetMediaById<T>(idString)
                             : Vault.Context.GetContentById<T>(idString);
 			        }
-			        catch (ArgumentException ex)
+			        catch (ArgumentException)
 			        {
 			            return default(T);
 			        }
