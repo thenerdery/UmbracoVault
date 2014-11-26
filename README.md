@@ -4,8 +4,7 @@
 
 | Branch | Status |
 | ------ | ------ |
-| master (stable) | [![Build status](https://ci.appveyor.com/api/projects/status/gysla166a8byrxy4?svg=true)](https://ci.appveyor.com/project/kensykora/vault)
- |
+| master | [![Build status](https://ci.appveyor.com/api/projects/status/gysla166a8byrxy4?svg=true)](https://ci.appveyor.com/project/kensykora/vault) |
 | develop | [![Build status](https://ci.appveyor.com/api/projects/status/gysla166a8byrxy4/branch/develop?svg=true)](https://ci.appveyor.com/project/kensykora/vault/branch/develop) |
 
 **Version 0.9, Designed for Umbraco 6.x**
