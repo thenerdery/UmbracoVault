@@ -1,5 +1,13 @@
 #Vault for Umbraco 6
 
+### Build Status:
+
+| Branch | Status |
+| ------ | ------ |
+| master (stable) | [![Build status](https://ci.appveyor.com/api/projects/status/gysla166a8byrxy4?svg=true)](https://ci.appveyor.com/project/kensykora/vault)
+ |
+| develop | [![Build status](https://ci.appveyor.com/api/projects/status/gysla166a8byrxy4/branch/develop?svg=true)](https://ci.appveyor.com/project/kensykora/vault/branch/develop) |
+
 **Version 0.9, Designed for Umbraco 6.x**
 
 ***Note**: We're already hard at work developing and testing a more refined version of Vault designed to support Umbraco 7. Some features identified in this document may not apply to newer versions of Umbraco Vault. But don't worry, the good stuff will stick around.*
