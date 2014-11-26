@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nerdery.Umbraco.Vault</RootNamespace>
+    <AssemblyName>Nerdery.Umbraco.Vault</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Review|AnyCPU'">
+    <OutputPath>bin\Review\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'QA|AnyCPU'">
+    <OutputPath>bin\QA\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="businesslogic">
+      <HintPath>UmbracoLib.6.2.1\businesslogic.dll</HintPath>
+    </Reference>
+    <Reference Include="cms, Version=1.0.4583.15475, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>UmbracoLib.6.2.1\cms.dll</HintPath>
+    </Reference>
+    <Reference Include="interfaces">
+      <HintPath>UmbracoLib.6.2.1\interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>UmbracoLib.6.2.1\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>UmbracoLib.6.2.1\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="uComponents.DataTypes">
+      <HintPath>UmbracoLib.6.2.1\uComponents.DataTypes.dll</HintPath>
+    </Reference>
+    <Reference Include="umbraco">
+      <HintPath>UmbracoLib.6.2.1\umbraco.dll</HintPath>
+    </Reference>
+    <Reference Include="Umbraco.Core">
+      <HintPath>UmbracoLib.6.2.1\Umbraco.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\UmbracoIgnorePropertyAttribute.cs" />
+    <Compile Include="Attributes\UmbracoDataTypeGridPropertyAttribute.cs" />
+    <Compile Include="Attributes\UmbracoEnumPropertyAttribute.cs" />
+    <Compile Include="Attributes\IgnoreAutoLoadAttribute.cs" />
+    <Compile Include="Attributes\UmbracoEntityAttribute.cs" />
+    <Compile Include="Attributes\UmbracoMediaEntityAttribute.cs" />
+    <Compile Include="Attributes\UmbracoMediaPropertyAttribute.cs" />
+    <Compile Include="Attributes\UmbracoPropertyAttribute.cs" />
+    <Compile Include="Attributes\UmbracoRichTextPropertyAttribute.cs" />
+    <Compile Include="Caching\CacheManager.cs" />
+    <Compile Include="Collections\VaultItemCollection.cs" />
+    <Compile Include="Controllers\VaultDefaultRenderController.cs" />
+    <Compile Include="Controllers\VaultDefaultGenericController.cs" />
+    <Compile Include="Exceptions\ConstructorUnavailableException.cs" />
+    <Compile Include="Exceptions\TemplateFileNotFoundException.cs" />
+    <Compile Include="Exceptions\ViewModelNotFoundException.cs" />
+    <Compile Include="Extensions\AttributeExtensions.cs" />
+    <Compile Include="Extensions\ContentExtensions.cs" />
+    <Compile Include="Extensions\ControlExtensions.cs" />
+    <Compile Include="Extensions\PropertyInfoExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Collections\ExternalIteratorEnumerable.cs" />
+    <Compile Include="Collections\ExternalIteratorEnumerator.cs" />
+    <Compile Include="Extensions\TransformationExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="IUmbracoContextInternals.cs" />
+    <Compile Include="Transformations\ITransformation.cs" />
+    <Compile Include="Transformations\SuperScriptTransformation.cs" />
+    <Compile Include="TypeHandlers\UmbracoEntityTypeHandler.cs" />
+    <Compile Include="TypeHandlers\DataTypeGridTypeHandler.cs" />
+    <Compile Include="TypeHandlers\EnumTypeHandler.cs" />
+    <Compile Include="TypeHandlers\GenericIListTypeHandler.cs" />
+    <Compile Include="TypeHandlers\ITypeHandler.cs" />
+    <Compile Include="TypeHandlers\UrlPickerStateTypeHandler.cs" />
+    <Compile Include="TypeHandlers\GenericIEnumerableTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Primitives\ByteTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Primitives\CharTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Primitives\BoolTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Primitives\IntArrayTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Primitives\ObjectTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Primitives\DoubleTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Primitives\StringArrayTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Primitives\ULongTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Primitives\LongTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Primitives\UShortTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Primitives\ShortTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Primitives\UIntTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Primitives\DecimalTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Primitives\FloatTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Primitives\IntTypeHandler.cs" />
+    <Compile Include="TypeHandlers\MediaTypeHandler.cs" />
+    <Compile Include="TypeHandlers\Primitives\SByteTypeHandler.cs" />
+    <Compile Include="TypeHandlers\RichTextTypeHandler.cs" />
+    <Compile Include="TypeHandlers\TypeHandlerFactory.cs" />
+    <Compile Include="ClassConstructor.cs" />
+    <Compile Include="TypeHandlers\Primitives\StringTypeHandler.cs" />
+    <Compile Include="UmbracoApplication\EventHandler.cs" />
+    <Compile Include="UmbracoContentModel.cs" />
+    <Compile Include="UmbracoContentRenderModel.cs" />
+    <Compile Include="UmbracoContext.cs" />
+    <Compile Include="IUmbracoContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vault.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

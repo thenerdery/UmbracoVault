@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30324.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nerdery.Umbraco.Vault", "Nerdery.Umbraco.Vault\Nerdery.Umbraco.Vault.csproj", "{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nerdery.Umbraco.Vault.Tests", "Nerdery.Umbraco.Vault.Tests\Nerdery.Umbraco.Vault.Tests.csproj", "{E6C4F958-10BE-4641-8531-32270AA6EFBD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{82B3D9D6-525C-4A7F-A149-EE409ED011E8}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		QA|Any CPU = QA|Any CPU
+		Release|Any CPU = Release|Any CPU
+		Review|Any CPU = Review|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}.QA|Any CPU.ActiveCfg = QA|Any CPU
+		{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}.QA|Any CPU.Build.0 = QA|Any CPU
+		{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}.Review|Any CPU.ActiveCfg = Review|Any CPU
+		{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}.Review|Any CPU.Build.0 = Review|Any CPU
+		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.QA|Any CPU.ActiveCfg = Release|Any CPU
+		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.QA|Any CPU.Build.0 = Release|Any CPU
+		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.Review|Any CPU.ActiveCfg = Release|Any CPU
+		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.Review|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

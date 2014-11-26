@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Nerdery.Umbraco.Vault</id>
+    <version>$version$</version>
+    <title>Umbraco Vault</title>
+    <authors>ksykora, ptrandam, amorger</authors>
+    <owners>nerdery</owners>
+    <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
+    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
+    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A library that provides mapping between Umbraco documents and C# objects.</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>C# Umbraco Nerdery Mapping</tags>
+  </metadata>
+</package>
