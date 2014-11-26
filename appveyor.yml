@@ -17,3 +17,4 @@ configuration:
   - Release
 build:
   publish_nuget: true
+  publish_nuget_symbols: true
