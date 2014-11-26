@@ -27,3 +27,9 @@ deploy:
       secure: 0ToyIMPccSDucw5aqB9Yf0jNLcxaCWIhgTMpc00hndc=
     skip_symbols: true
     artifact: /.*\.nupkg/
+
+  - provider: environment
+    name: Nerdery NuGet
+    on:
+      branch: develop
+      configuration: Release
