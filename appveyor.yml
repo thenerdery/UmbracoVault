@@ -1,7 +1,17 @@
-version: 0.1.0.{build}
+version: 0.1.0
+branches:
+  only:
+    - master
+    - develop
+    - release/*
+    - feature/*
+os: Windows Server 2012
 assembly_info:
   patch: true
-  file: MyVersion.cs
-  assembly_version: {version}
-  assembly_file_version: {version}
-  assembly_informational_version: {version}
+  file: AssemblyInfo.*
+  assembly_version: "{version}"
+  assembly_file_version: "{version}"
+  assembly_informational_version: "{version}"
+configuration:
+  - Debug
+  - Release
