@@ -6,7 +6,8 @@
         <authors>ksykora,ptrandem,amorger</authors>
         <owners>nerdery</owners>
         <projectUrl>https://github.com/ptrandem/vault</projectUrl>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<licenseUrl>https://github.com/ptrandem/vault/blob/master/LICENSE</licenseUrl>
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
         <description>Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your markup.  It allows you to create lightly-decorated classes that Vault will understand how to hydrate. This gives you the full view model-style experience in Umbraco that you are accustomed to in MVC, complete with strongly-typed view properties (no more magic strings in your views).</description>
         <releaseNotes />
         <copyright>Copyright 2014</copyright>
