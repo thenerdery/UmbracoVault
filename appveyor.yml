@@ -15,9 +15,7 @@ assembly_info:
 configuration:
   - Debug
   - Release
-build:
-  publish_nuget: true
-  publish_nuget_symbols: true
+after_build: nuget pack Nerdery.Umbraco.Vault/Nerdery.Umbraco.Vault.csproj -Version %appveyor_build_version%
 deploy:
   - provider: NuGet
     server: https://nuget.nerderylabs.com/nuget
