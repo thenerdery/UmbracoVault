@@ -1,3 +1,5 @@
+environment:
+  CURRENT_VERSION: 0.9.0
 version: 0.9.0-{build}
 branches:
   only:
@@ -9,13 +11,13 @@ os: Windows Server 2012
 assembly_info:
   patch: true
   file: AssemblyInfo.*
-  assembly_version: "0.9.0.{build}"
-  assembly_file_version: "0.9.0.{build}"
-  assembly_informational_version: "0.9.0.{build}"
+  assembly_version: "$(CURRENT_VERSION).{build}"
+  assembly_file_version: "$(CURRENT_VERSION).{build}"
+  assembly_informational_version: "$(CURRENT_VERSION).{build}"
 configuration:
   - Debug
   - Release
-after_build: nuget pack Nerdery.Umbraco.Vault/Nerdery.Umbraco.Vault.csproj -Version %appveyor_build_version%
+after_build: nuget pack Nerdery.Umbraco.Vault/Nerdery.Umbraco.Vault.csproj -Version %CURRENT_VERSION%-build%APPVEYOR_BUILD_NUMBER%
 deploy:
   - provider: NuGet
     server: https://nuget.nerderylabs.com/nuget
