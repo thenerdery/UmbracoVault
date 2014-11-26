@@ -1,6 +1,7 @@
 ## CI
 
 Setup environment and conditional deploys for debug / release and tags
+Setup nerdery org account for AppVeyor
 
 ## Code
 
