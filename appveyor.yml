@@ -15,3 +15,5 @@ assembly_info:
 configuration:
   - Debug
   - Release
+build:
+  publish_nuget: true
