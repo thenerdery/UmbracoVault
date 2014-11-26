@@ -3,8 +3,8 @@
     <metadata>
         <id>Nerdery.Umbraco.Vault</id>
         <title>Umbraco Vault</title>
-        <authors>ksykora,ptrandem,amorger</authors>
-        <owners>nerdery</owners>
+        <authors>Paul Trandem, Ken Sykora, Andrew Morger, Jared Swarts</authors>
+        <owners>thenerdery</owners>
         <projectUrl>https://github.com/ptrandem/vault</projectUrl>
 		<licenseUrl>https://github.com/ptrandem/vault/blob/master/LICENSE</licenseUrl>
         <requireLicenseAcceptance>true</requireLicenseAcceptance>
