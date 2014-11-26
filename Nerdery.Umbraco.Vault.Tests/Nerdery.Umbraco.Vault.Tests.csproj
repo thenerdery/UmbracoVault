@@ -55,18 +55,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="businesslogic">
-      <HintPath>..\Libs\businesslogic.dll</HintPath>
-    </Reference>
-    <Reference Include="cms">
-      <HintPath>..\Libs\cms.dll</HintPath>
-    </Reference>
-    <Reference Include="controls">
-      <HintPath>..\Libs\controls.dll</HintPath>
-    </Reference>
-    <Reference Include="interfaces">
-      <HintPath>..\Libs\interfaces.dll</HintPath>
-    </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
     </Reference>
@@ -77,21 +65,6 @@
       <HintPath>..\packages\AutoFixture.AutoMoq.3.18.5\lib\net40\Ploeh.AutoFixture.AutoMoq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="uComponents.Core">
-      <HintPath>..\Libs\uComponents.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="uComponents.DataTypes">
-      <HintPath>..\Libs\uComponents.DataTypes.dll</HintPath>
-    </Reference>
-    <Reference Include="umbraco">
-      <HintPath>..\Libs\umbraco.dll</HintPath>
-    </Reference>
-    <Reference Include="umbraco.DataLayer">
-      <HintPath>..\Libs\umbraco.DataLayer.dll</HintPath>
-    </Reference>
-    <Reference Include="umbraco.providers">
-      <HintPath>..\Libs\umbraco.providers.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
