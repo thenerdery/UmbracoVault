@@ -16,9 +16,12 @@ assembly_info:
   assembly_informational_version: "$(CURRENT_VERSION).{build}"
 cache:
   - packages
+configuration:
+  - Debug
+  - Release
 after_build:
-  - nuget pack Nerdery.Umbraco.Vault/Nerdery.Umbraco.Vault.csproj -Properties Configuration=Debug -Symbols -Version %CURRENT_VERSION%-build%APPVEYOR_BUILD_NUMBER%
-  - nuget pack Nerdery.Umbraco.Vault/Nerdery.Umbraco.Vault.csproj -Properties Configuration=Release -Version %CURRENT_VERSION%
+  - nuget pack Nerdery.Umbraco.Vault/Nerdery.Umbraco.Vault.csproj -Symbols -Version %CURRENT_VERSION%-build%APPVEYOR_BUILD_NUMBER%
+  - nuget pack Nerdery.Umbraco.Vault/Nerdery.Umbraco.Vault.csproj -Version %CURRENT_VERSION%
 artifacts:
   - path: "*.nupkg"
 deploy:
