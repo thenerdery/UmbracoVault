@@ -214,7 +214,9 @@
     <Content Include="Views\Web.config" />
     <Content Include="config\xsltExtensions.config" />
     <Content Include="config\UrlRewriting.config" />
-    <Content Include="config\umbracoSettings.config" />
+    <Content Include="config\umbracoSettings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="config\trees.config" />
     <Content Include="config\tinyMceConfig.config" />
     <Content Include="config\Skinning.config" />
@@ -232,6 +234,8 @@
     <Content Include="config\BaseRestExtensions.config" />
     <Content Include="config\applications.config" />
     <Content Include="config\404handlers.config" />
+    <Content Include="Views\BasicDataTypes.cshtml" />
+    <Content Include="Views\GenericContent.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -253,7 +257,15 @@
     <Content Include="xslt\dummy.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\BasicDataTypes.cs" />
+    <Compile Include="Models\GenericContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Nerdery.Umbraco.Vault\Nerdery.Umbraco.Vault.csproj">
+      <Project>{7a5c0119-ef41-4b19-88da-35c7b5f7e481}</Project>
+      <Name>Nerdery.Umbraco.Vault</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
