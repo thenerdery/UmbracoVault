@@ -62,6 +62,13 @@ namespace Nerdery.Umbraco.Vault.Tests
             }
 
             [TestMethod]
+            public void Bool_IsSet()
+            {
+                Assert.AreNotEqual(Destination.Bool, default(bool));
+                Assert.AreEqual(Source.Bool, Destination.Bool);
+            }
+
+            [TestMethod]
             public void Byte_IsSet()
             {
                 Assert.AreNotEqual(Destination.Byte, default(byte));
