@@ -194,41 +194,8 @@
     <Reference Include="TidyNet">
       <HintPath>..\packages\UmbracoCms.Core.6.2.1\lib\TidyNet.dll</HintPath>
     </Reference>
-    <Reference Include="uComponents.Controls">
-      <HintPath>..\packages\uComponents.6.0.0\lib\net40\uComponents.Controls.dll</HintPath>
-    </Reference>
-    <Reference Include="uComponents.Core">
-      <HintPath>..\packages\uComponents.6.0.0\lib\net40\uComponents.Core.dll</HintPath>
-    </Reference>
     <Reference Include="uComponents.DataTypes">
       <HintPath>..\packages\uComponents.6.0.0\lib\net40\uComponents.DataTypes.dll</HintPath>
-    </Reference>
-    <Reference Include="uComponents.DataTypes.RazorDataTypeModels">
-      <HintPath>..\packages\uComponents.6.0.0\lib\net40\uComponents.DataTypes.RazorDataTypeModels.dll</HintPath>
-    </Reference>
-    <Reference Include="uComponents.Installer">
-      <HintPath>..\packages\uComponents.6.0.0\lib\net40\uComponents.Installer.dll</HintPath>
-    </Reference>
-    <Reference Include="uComponents.Legacy">
-      <HintPath>..\packages\uComponents.6.0.0\lib\net40\uComponents.Legacy.dll</HintPath>
-    </Reference>
-    <Reference Include="uComponents.MacroEngines">
-      <HintPath>..\packages\uComponents.6.0.0\lib\net40\uComponents.MacroEngines.dll</HintPath>
-    </Reference>
-    <Reference Include="uComponents.Mapping">
-      <HintPath>..\packages\uComponents.6.0.0\lib\net40\uComponents.Mapping.dll</HintPath>
-    </Reference>
-    <Reference Include="uComponents.NotFoundHandlers">
-      <HintPath>..\packages\uComponents.6.0.0\lib\net40\uComponents.NotFoundHandlers.dll</HintPath>
-    </Reference>
-    <Reference Include="uComponents.PropertyEditors.ValueConverters">
-      <HintPath>..\packages\uComponents.6.0.0\lib\net40\uComponents.PropertyEditors.ValueConverters.dll</HintPath>
-    </Reference>
-    <Reference Include="uComponents.UI">
-      <HintPath>..\packages\uComponents.6.0.0\lib\net40\uComponents.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="uComponents.XsltExtensions">
-      <HintPath>..\packages\uComponents.6.0.0\lib\net40\uComponents.XsltExtensions.dll</HintPath>
     </Reference>
     <Reference Include="umbraco">
       <HintPath>..\packages\UmbracoCms.Core.6.2.1\lib\umbraco.dll</HintPath>

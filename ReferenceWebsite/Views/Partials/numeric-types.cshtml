@@ -1,0 +1,32 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    var poco = Nerdery.Umbraco.Vault.Vault.Context.GetCurrent<ReferenceWebsite.Models.NumericPrimitives>();
+}
+
+<table border=1>
+	<thead>
+		<tr>
+		<th colspan=4>Numeric Types</th>
+		<tr>
+			<th>Type</th>
+			<th>Expected</th>
+			<th>Actual</th>
+			<th>Correct?</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr><td>Bool</td><td>True</td><td>@poco.Bool</td><td>@(true == @poco.Bool)</td></tr>
+		<tr><td>Byte</td><td>@(Byte.MaxValue)</td><td>@poco.Byte</td><td>@(Byte.MaxValue==@poco.Byte)</td></tr>
+		<tr><td>Decimal</td><td>@(Decimal.MaxValue)</td><td>@poco.Decimal</td><td>@(Decimal.MaxValue==@poco.Decimal)</td></tr>
+		<tr><td>Double</td><td>@(double.MaxValue)</td><td>@poco.Double</td><td>@(double.MaxValue.ToString()==@poco.Double.ToString())</td></tr>
+		<tr><td>Float</td><td>@(float.MaxValue)</td><td>@poco.Float</td><td>@(float.MaxValue.ToString()==@poco.Float.ToString())</td></tr>
+		<tr><td>Int</td><td>@(Int32.MinValue)</td><td>@poco.Int</td><td>@(Int32.MaxValue==@poco.Int)</td></tr>
+		<tr><td>Long</td><td>@(long.MaxValue)</td><td>@poco.Long</td><td>@(long.MaxValue==@poco.Long)</td></tr>
+		<tr><td>SByte</td><td>@SByte.MinValue</td><td>@poco.SByte</td><td>@(SByte.MinValue==@poco.SByte)</td></tr>
+		<tr><td>Short</td><td>@short.MinValue</td><td>@poco.Short</td><td>@(short.MinValue==@poco.Short)</td></tr>
+		<tr><td>UInt</td><td>@uint.MaxValue</td><td>@poco.UInt</td><td>@(uint.MaxValue==@poco.UInt)</td></tr>
+		<tr><td>ULong</td><td>@ulong.MaxValue</td><td>@poco.ULong</td><td>@(ulong.MaxValue==poco.ULong)</td></tr>
+		<tr><td>UShort</td><td>@ushort.MaxValue</td><td>@poco.UShort</td><td>@(ushort.MaxValue==poco.UShort)</td></tr>
+	</tbody>
+</table>
+

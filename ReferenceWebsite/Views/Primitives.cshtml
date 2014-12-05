@@ -1,0 +1,22 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = null;
+}
+
+@Html.Partial("breadcrumbs")
+
+@{
+	var typeViews = new List<string>{
+		"numeric-types",
+		"text-types"
+	};
+}
+
+<ul>
+@foreach(var pv in typeViews)
+{
+	<li>
+		@Html.Partial(pv)
+	</li>
+}
+</ul>

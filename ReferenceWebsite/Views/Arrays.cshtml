@@ -1,0 +1,45 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = null;
+    var poco = Nerdery.Umbraco.Vault.Vault.Context.GetCurrent<ReferenceWebsite.Models.Arrays>();
+}
+
+@Html.Partial("breadcrumbs")
+
+<table border=1>
+	<thead>
+		<tr>
+			<th>Type</th>
+			<th>Expected</th>
+			<th>Actual</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>IntArray</td>
+			<td>7 , 14, 21</td>
+			<td>@for (var i = 0; i < poco.IntArray.Length; i++)
+				{
+					<span>@poco.IntArray[i]</span>
+					if (i < poco.IntArray.Length - 1)
+					{
+						<span>,</span>
+					}
+				}
+			</td>
+		</tr>
+		<tr>
+			<td>StringArray</td>
+			<td>cat , dog , fish</td>
+			<td>@for (var i = 0; i < poco.StringArray.Length; i++)
+				{
+					<span>@poco.StringArray[i]</span>
+					if (i < poco.StringArray.Length - 1)
+					{
+						<span>,</span>
+					}
+				}
+			</td>
+		</tr>
+	</thead>
+</table>

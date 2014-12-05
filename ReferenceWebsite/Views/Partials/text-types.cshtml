@@ -1,0 +1,23 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{
+    var poco = Nerdery.Umbraco.Vault.Vault.Context.GetCurrent<ReferenceWebsite.Models.TextPrimitives>();
+}
+
+<table border=1>
+	<thead>
+		<th colspan=4>Text Types</th>
+		<tr>
+			<th>Type</th>
+			<th>Expected</th>
+			<th>Actual</th>
+			<th>Correct?</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr><td>Char</td><td>Z</td><td>@poco.Char</td><td>@('Z'==@poco.Char)</td></tr>
+		<tr><td>String</td><td>string value</td><td>@poco.String</td><td>@("string value"==@poco.String)</td></tr>
+	</tbody>
+</table>
+
+		

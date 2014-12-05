@@ -1,0 +1,9 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+<ul>
+    @foreach (var ancestor in Model.Content.Ancestors().Where(t => t.IsVisible()))
+    {
+        <li><a href="@ancestor.Url">@ancestor.Name</a></li>
+    }
+    <li>@Model.Content.Name</li>
+</ul>

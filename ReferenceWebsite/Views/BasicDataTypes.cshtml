@@ -1,7 +1,0 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
-@{
-    Layout = null;
-    var poco = Nerdery.Umbraco.Vault.Vault.Context.GetCurrent<ReferenceWebsite.Models.BasicDataTypes>();
-}
-
-<b>String</b> - Should read "string value": @poco.String
