@@ -1,7 +1,12 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using Nerdery.Umbraco.Vault
+
 @{
+    const int PAUL = 1078;
     Layout = null;
-    var poco = Nerdery.Umbraco.Vault.Vault.Context.GetCurrent<ReferenceWebsite.Models.Objects>();
+    var poco = Vault.Context.GetCurrent<ReferenceWebsite.Models.Objects>();
+
+    var paul = Vault.Context.GetContentById<ReferenceWebsite.Models.StaffMember>(PAUL);
 }
 
 @Html.Partial("breadcrumbs")
@@ -15,6 +20,6 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr><td>Object</td><td>???</td><td>@poco.Object</td></tr>
+		<tr><td>Object</td><td>Minneapolis</td><td>@paul.PrimaryLocation.Name</td></tr>
 	</thead>
 </table>

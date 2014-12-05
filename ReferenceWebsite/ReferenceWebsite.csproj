@@ -236,6 +236,16 @@
     <Content Include="config\404handlers.config" />
     <Content Include="Views\BasicDataTypes.cshtml" />
     <Content Include="Views\GenericContent.cshtml" />
+    <Content Include="Views\Partials\breadcrumbs.cshtml" />
+    <Content Include="Views\Partials\numeric-types.cshtml" />
+    <Content Include="Views\Partials\text-types.cshtml" />
+    <Content Include="Views\Arrays.cshtml" />
+    <Content Include="Views\LocationDetail.cshtml" />
+    <Content Include="Views\NumericTypes.cshtml" />
+    <Content Include="Views\Objects.cshtml" />
+    <Content Include="Views\Primitives.cshtml" />
+    <Content Include="Views\StafferDetail.cshtml" />
+    <Content Include="Views\TextTypes.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

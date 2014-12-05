@@ -61,21 +61,17 @@ namespace ReferenceWebsite.Models
         public string Alt { get; set; }
     }
 
-    [UmbracoEntity(AutoMap = true)]
+    [UmbracoEntity(AutoMap=true)]
     public class Location
     {
-        public int LocationId { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }
     }
 
-    [UmbracoEntity(AutoMap = true)]
-    public class Staffer
+    [UmbracoEntity(AutoMap = true, Alias = "person" )]
+    public class StaffMember
     {
-        public int StafferId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public int LocationId { get; set; }
+        public string Name { get; set; }
+        public Location PrimaryLocation { get; set; }
     }
 
 #endregion
