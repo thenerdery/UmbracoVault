@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using uComponents.DataTypes.UrlPicker.Dto;
 
 namespace ReferenceWebsite.Models
 {
@@ -72,6 +73,16 @@ namespace ReferenceWebsite.Models
     {
         public string Name { get; set; }
         public Location PrimaryLocation { get; set; }
+    }
+
+#endregion
+
+#region uComponents Examples
+
+    [UmbracoEntity(AutoMap = true)]
+    public class UComponentsUrlModel
+    {
+        public UrlPickerState UrlState { get; set; }
     }
 
 #endregion

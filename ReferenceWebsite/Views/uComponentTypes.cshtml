@@ -1,0 +1,10 @@
+﻿@using Nerdery.Umbraco.Vault
+
+@{
+    Layout = null;
+	var poco = Nerdery.Umbraco.Vault.Vault.Context.GetCurrent<ReferenceWebsite.Models.UComponentsUrlModel>();
+}
+
+@Html.Partial("breadcrumbs")
+
+<p>uComponents.UrlPicker: @Html.Partial("ucomponents-url")</p>
