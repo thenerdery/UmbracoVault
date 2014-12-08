@@ -1,0 +1,11 @@
+﻿@{
+    Layout = null;
+	var poco = Nerdery.Umbraco.Vault.Vault.Context.GetCurrent<ReferenceWebsite.Models.UComponentsDataTypeGridCollection>();
+}
+
+<span>@poco.Count</span>
+@foreach(var entry in poco)
+{
+	<span>@entry.Name</span>
+	<span>@entry.Date</span>
+}
