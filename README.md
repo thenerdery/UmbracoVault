@@ -232,17 +232,17 @@ TODO: List the ways
 
 ##Meet the Context Methods
 
-```T GetCurrent<T>()``` Retrieves a data item for the current node. T is the object type to cast the item to.
-```object GetCurrent(Type type)``` Non-generic retrieval of a data item for the current node.
-```T GetContentById<T>(string idString)``` Retrieves a data item with the specified ID.
-```T GetContentById<T>(int id)``` Retrieves a data item with the specified ID.
-```T GetMediaById<T>(string idString)``` Retrieves a media item with the specified ID.
-```T GetMediaById<T>(int id)``` Retrieves a media item with the specified ID.
-```IEnumerable<T> GetContentByCsv<T>(string csv)``` Retrieves content matching the csv. (TODO: What does the csv look like?)
-```IEnumerable<T> GetByDocumentType<T>()``` Retrieves all documents of the specified type.
-```IEnumerable<string> GetUrlsForDocumentType<T>()``` Retrieves URLs for all documents of the specified type.
-```IEnumerable<T> GetChildren<T>(int? parentNodeId = null)``` Retrieves all children of the specified NodeId (or the root if no parentNodeId specified) that are of type T.```
-```IEnumerable<T> QueryRelative<T>(string query)``` Executes the specified XPath query. (TODO: Example or something)
+- ```T GetCurrent<T>()``` Retrieves a data item for the current node. T is the object type to cast the item to.
+- ```object GetCurrent(Type type)``` Non-generic retrieval of a data item for the current node.
+- ```T GetContentById<T>(string idString)``` Retrieves a data item with the specified ID.
+- ```T GetContentById<T>(int id)``` Retrieves a data item with the specified ID.
+- ```T GetMediaById<T>(string idString)``` Retrieves a media item with the specified ID.
+- ```T GetMediaById<T>(int id)``` Retrieves a media item with the specified ID.
+- ```IEnumerable<T> GetContentByCsv<T>(string csv)``` Retrieves content matching the csv. (TODO: What does the csv look like?)
+- ```IEnumerable<T> GetByDocumentType<T>()``` Retrieves all documents of the specified type.
+- ```IEnumerable<string> GetUrlsForDocumentType<T>()``` Retrieves URLs for all documents of the specified type.
+- ```IEnumerable<T> GetChildren<T>(int? parentNodeId = null)``` Retrieves all children of the specified NodeId (or the root if no parentNodeId specified) that are of type T.```
+- ```IEnumerable<T> QueryRelative<T>(string query)``` Executes the specified XPath query. (TODO: Example or something)
 
 TODO: describe the context methods in more detail
 
@@ -270,9 +270,9 @@ Other uComponents types require a property attribute to be set on the view model
 
 ```
 [UmbracoEntity(AutoMap = true)]
-    public class UComponentsDataTypeGridModel
-    {
-        [UmbracoDataTypeGridProperty]
-        public List<UComponentsDataTypeGridItem> DataTypeGrid { get; set; }
-    }
+public class UComponentsDataTypeGridModel
+{
+    [UmbracoDataTypeGridProperty]
+    public List<UComponentsDataTypeGridItem> DataTypeGrid { get; set; }
+}
 ```
