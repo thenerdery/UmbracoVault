@@ -194,10 +194,6 @@
     <Reference Include="TidyNet">
       <HintPath>..\packages\UmbracoCms.Core.6.2.1\lib\TidyNet.dll</HintPath>
     </Reference>
-    <Reference Include="uComponents.DataTypes, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\uComponents.6.0.0\lib\net40\uComponents.DataTypes.dll</HintPath>
-    </Reference>
     <Reference Include="umbraco">
       <HintPath>..\packages\UmbracoCms.Core.6.2.1\lib\umbraco.dll</HintPath>
     </Reference>
@@ -234,7 +230,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\UmbracoIgnorePropertyAttribute.cs" />
-    <Compile Include="Attributes\UmbracoDataTypeGridPropertyAttribute.cs" />
     <Compile Include="Attributes\UmbracoEnumPropertyAttribute.cs" />
     <Compile Include="Attributes\IgnoreAutoLoadAttribute.cs" />
     <Compile Include="Attributes\UmbracoEntityAttribute.cs" />
@@ -258,11 +253,9 @@
     <Compile Include="Collections\ExternalIteratorEnumerator.cs" />
     <Compile Include="Extensions\TransformationExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="IUmbracoContextInternals.cs" />
     <Compile Include="Transformations\ITransformation.cs" />
     <Compile Include="Transformations\SuperScriptTransformation.cs" />
     <Compile Include="TypeHandlers\UmbracoEntityTypeHandler.cs" />
-    <Compile Include="TypeHandlers\DataTypeGridTypeHandler.cs" />
     <Compile Include="TypeHandlers\EnumTypeHandler.cs" />
     <Compile Include="TypeHandlers\GenericIListTypeHandler.cs" />
     <Compile Include="TypeHandlers\ITypeHandler.cs" />

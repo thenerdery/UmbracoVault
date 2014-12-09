@@ -1,7 +1,8 @@
 ﻿using System;
-using Nerdery.Umbraco.Vault.TypeHandlers;
+using Nerdery.Umbraco.Vault.Attributes;
+using Nerdery.Umbraco.VaultExtensions.TypeHandlers;
 
-namespace Nerdery.Umbraco.Vault.Attributes
+namespace Nerdery.Umbraco.VaultExtensions.Attributes
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
     public class UmbracoDataTypeGridPropertyAttribute : UmbracoPropertyAttribute

@@ -17,7 +17,7 @@ namespace Nerdery.Umbraco.Vault.Collections
             }
 
             var ids = idValues.Split(',');
-            var loadAsMedia = Vault.InternalContext.IsMediaRequest<T>();
+            var loadAsMedia = Vault.Context.IsMediaRequest<T>();
 
             if (loadAsMedia)
             {

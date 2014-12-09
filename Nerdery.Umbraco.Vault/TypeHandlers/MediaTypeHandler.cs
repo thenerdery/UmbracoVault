@@ -33,7 +33,7 @@ namespace Nerdery.Umbraco.Vault.TypeHandlers
             var mediaObject = Get(input.ToString());
             if (mediaObject != null)
             {
-                Vault.InternalContext.FillClassProperties(result, (alias, recursive) => mediaObject.GetPropertyValue(alias,recursive));
+                Vault.Context.FillClassProperties(result, (alias, recursive) => mediaObject.GetPropertyValue(alias,recursive));
             }
             return result;
         }
