@@ -212,11 +212,13 @@ For a deeper understanding of how Vault determines how to hydrate properties, in
 
 ***A word of caution:** Vault currently has no depth limits for hydrating object graphs. This comes up less often with view models, but keep in mind that deep graphs or recursion could cause performance problems and/or infinite loops.  Future versions of Vault may include limits and opt-outs for such situations.*
 
+### Arrays
+
+Vault directly supports integer (int[]) and string (string[]) arrays. Other collection types are handled in a special way (see below).
 
 ###Collections and Lists
 
-TODO: keep it rolling
-
+Vault expects IEnumerable<T> and IList<T> in models to have T be a type of view model, and will use Umbraco node IDs to populate these. 
 
 ##Handling media
 
@@ -228,15 +230,49 @@ Many of Vault's conventions can be circumvented as needed.
 
 TODO: List the ways
 
-
 ##Meet the Context Methods
 
-TODO: list and describe the context methods
+```T GetCurrent<T>()``` Retrieves a data item for the current node. T is the object type to cast the item to.
+```object GetCurrent(Type type)``` Non-generic retrieval of a data item for the current node.
+```T GetContentById<T>(string idString)``` Retrieves a data item with the specified ID.
+```T GetContentById<T>(int id)``` Retrieves a data item with the specified ID.
+```T GetMediaById<T>(string idString)``` Retrieves a media item with the specified ID.
+```T GetMediaById<T>(int id)``` Retrieves a media item with the specified ID.
+```IEnumerable<T> GetContentByCsv<T>(string csv)``` Retrieves content matching the csv. (TODO: What does the csv look like?)
+```IEnumerable<T> GetByDocumentType<T>()``` Retrieves all documents of the specified type.
+```IEnumerable<string> GetUrlsForDocumentType<T>()``` Retrieves URLs for all documents of the specified type.
+```IEnumerable<T> GetChildren<T>(int? parentNodeId = null)``` Retrieves all children of the specified NodeId (or the root if no parentNodeId specified) that are of type T.```
+```IEnumerable<T> QueryRelative<T>(string query)``` Executes the specified XPath query. (TODO: Example or something)
+
+TODO: describe the context methods in more detail
 
 ##Extending Vault
 
 TODO: the deep stuff, like TypeHandlers, etc
 
-##uComponenets Integration
+##uComponents Integration
 
-TODO: yep, the drill
+Vault does not depend on uComponents. To use uComponents types with Vault, you can reference the VaultExtensions library. 
+
+Some uComponents types will be mapped to the ViewModel automatically, with no additional configuration required. For example, the uComponents UrlPicker:
+
+```
+[UmbracoEntity(AutoMap = true)]
+public class UComponentsUrlModel
+{
+    public UrlPickerState UrlState { get; set; }
+}
+``` 
+
+You can then use the UrlPickerState properties directly from a view by accessing the UrlPickerState properties.
+
+Other uComponents types require a property attribute to be set on the view model, telling Vault to use the specified behaviour. The uComponents DataType Grid has this requirement:
+
+```
+[UmbracoEntity(AutoMap = true)]
+    public class UComponentsDataTypeGridModel
+    {
+        [UmbracoDataTypeGridProperty]
+        public List<UComponentsDataTypeGridItem> DataTypeGrid { get; set; }
+    }
+```

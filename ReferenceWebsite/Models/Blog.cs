@@ -12,5 +12,13 @@ namespace ReferenceWebsite.Models
         [UmbracoRichTextProperty]
         public string Content { get; set; }
     }
+
+    [UmbracoEntity(AutoMap = true)]
+    public class BlogHomeViewModel
+    {
+        public string Title { get; set; }
+        public string SidebarCopy { get; set; }
+        public BlogEntryViewModel FeaturedBlogEntry { get; set; }
+    }
     
 }

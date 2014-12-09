@@ -3,15 +3,19 @@
 
 @{
     Layout = null;
+	var blog = Vault.Context.GetCurrent<ReferenceWebsite.Models.BlogHomeViewModel>();
 	var posts = new List<int>{1105, 1104, 1100};
 }
 
-@Html.Partial("breadcrumbs")
+<h1>@blog.Title</h1>
 
-@foreach(var blogPost in posts)
-{
-	var post = Vault.Context.GetContentById<ReferenceWebsite.Models.BlogEntryViewModel>(blogPost);
-	<h2><a href="@Umbraco.NiceUrl(blogPost)">@post.Title</a></h2>
-    <span>@post.PostDate.ToShortDateString()</span>
-    
-}
+@Html.Partial("breadcrumbs")
+	
+<div class="blog-home-posts">
+	@foreach(var blogPost in posts)
+	{
+		var post = Vault.Context.GetContentById<ReferenceWebsite.Models.BlogEntryViewModel>(blogPost);
+		<h2><a href="@Umbraco.NiceUrl(blogPost)">@post.Title</a></h2>
+    	<span>@post.PostDate.ToShortDateString()</span>    
+	}
+</div>
