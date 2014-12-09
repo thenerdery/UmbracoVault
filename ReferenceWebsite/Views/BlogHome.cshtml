@@ -1,0 +1,17 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using Nerdery.Umbraco.Vault
+
+@{
+    Layout = null;
+	var posts = new List<int>{1105, 1104, 1100};
+}
+
+@Html.Partial("breadcrumbs")
+
+@foreach(var blogPost in posts)
+{
+	var post = Vault.Context.GetContentById<ReferenceWebsite.Models.BlogEntryViewModel>(blogPost);
+	<h2><a href="@Umbraco.NiceUrl(blogPost)">@post.Title</a></h2>
+    <span>@post.PostDate.ToShortDateString()</span>
+    
+}

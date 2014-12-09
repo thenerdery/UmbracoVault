@@ -254,6 +254,8 @@
     <Content Include="Views\Partials\ucomponents-url.cshtml" />
     <Content Include="Views\uComponentTypes.cshtml" />
     <Content Include="Views\Enums.cshtml" />
+    <Content Include="Views\BlogEntry.cshtml" />
+    <Content Include="Views\BlogHome.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -279,6 +281,7 @@
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\GenericContent.cs" />
     <Compile Include="Models\NumericPrimitives.cs" />
+    <Compile Include="Models\Blog.cs" />
     <Compile Include="Models\Objects.cs" />
     <Compile Include="Models\TextPrimitives.cs" />
     <Compile Include="Models\UComponents.cs" />
