@@ -16,7 +16,6 @@
         <tags>C# Umbraco Nerdery Mapping</tags>
         <dependencies>
             <dependency id="UmbracoCms.Core" version="[6.2.1, 6.2.4]" />
-            <dependency id="uComponents" version="[6.0.0]" />
         </dependencies>
     </metadata>
 </package>
