@@ -1,8 +1,10 @@
 ﻿using System;
+using Nerdery.Umbraco.Vault.TypeHandlers;
 using uComponents.DataTypes.UrlPicker.Dto;
 
-namespace Nerdery.Umbraco.Vault.TypeHandlers
+namespace Nerdery.Umbraco.VaultExtensions.TypeHandlers
 {
+    // TODO: This doesn't appear to be needed.
     /// <summary>
     /// Used for binding Url Picker data types from Umbraco to strongly typed objects
     /// </summary>

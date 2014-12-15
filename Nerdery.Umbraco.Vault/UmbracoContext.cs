@@ -21,7 +21,7 @@ namespace Nerdery.Umbraco.Vault
     /// <summary>
     /// Implementation of the IUmbracoContext
     /// </summary>
-    public class UmbracoWebContext : IUmbracoContext, IUmbracoContextInternals
+    public class UmbracoWebContext : IUmbracoContext
     {
         private readonly ClassConstructor _classConstructor;
         private readonly IList<ITransformation> _transformations;

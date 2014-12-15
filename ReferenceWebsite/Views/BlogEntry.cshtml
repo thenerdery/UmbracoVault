@@ -1,0 +1,15 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using Nerdery.Umbraco.Vault
+
+@{
+    Layout = null;
+	var post = Vault.Context.GetContentById<ReferenceWebsite.Models.BlogEntryViewModel>(@CurrentPage.Id);
+}
+
+@Html.Partial("breadcrumbs")
+	
+<h1>@post.Title</h1>
+<div>@post.PostDate.ToShortDateString()</div>
+<div>
+    @Html.Raw(@post.Content)
+</div>	

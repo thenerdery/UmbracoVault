@@ -16,7 +16,7 @@ namespace Nerdery.Umbraco.Vault.TypeHandlers
 			    {
 			        try
 			        {
-			            return Vault.InternalContext.IsMediaRequest<T>()
+			            return Vault.Context.IsMediaRequest<T>()
                             ? Vault.Context.GetMediaById<T>(idString)
                             : Vault.Context.GetContentById<T>(idString);
 			        }

@@ -175,6 +175,10 @@
     <Reference Include="TidyNet">
       <HintPath>..\packages\UmbracoCms.Core.6.2.4\lib\TidyNet.dll</HintPath>
     </Reference>
+    <Reference Include="uComponents.DataTypes, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\uComponents.6.0.0\lib\net40\uComponents.DataTypes.dll</HintPath>
+    </Reference>
     <Reference Include="umbraco">
       <HintPath>..\packages\UmbracoCms.Core.6.2.4\lib\umbraco.dll</HintPath>
     </Reference>
@@ -245,6 +249,12 @@
     <Content Include="Views\Primitives.cshtml" />
     <Content Include="Views\StafferDetail.cshtml" />
     <Content Include="Views\TextTypes.cshtml" />
+    <Content Include="Views\Partials\ucomponents-datatypegrid.cshtml" />
+    <Content Include="Views\Partials\ucomponents-url.cshtml" />
+    <Content Include="Views\uComponentTypes.cshtml" />
+    <Content Include="Views\Enums.cshtml" />
+    <Content Include="Views\BlogEntry.cshtml" />
+    <Content Include="Views\BlogHome.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -266,11 +276,21 @@
     <Content Include="xslt\dummy.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\BasicDataTypes.cs" />
+    <Compile Include="Models\Arrays.cs" />
+    <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\GenericContent.cs" />
+    <Compile Include="Models\NumericPrimitives.cs" />
+    <Compile Include="Models\Blog.cs" />
+    <Compile Include="Models\Objects.cs" />
+    <Compile Include="Models\TextPrimitives.cs" />
+    <Compile Include="Models\UComponents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Nerdery.Umbraco.VaultExtensions\Nerdery.Umbraco.VaultExtensions.csproj">
+      <Project>{1f41da14-c5be-4a3d-bca2-6b2df7512ee2}</Project>
+      <Name>Nerdery.Umbraco.VaultExtensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Nerdery.Umbraco.Vault\Nerdery.Umbraco.Vault.csproj">
       <Project>{7a5c0119-ef41-4b19-88da-35c7b5f7e481}</Project>
       <Name>Nerdery.Umbraco.Vault</Name>
@@ -291,7 +311,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52163</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:52163/</IISUrl>
+          <IISUrl>http://localhost:52164/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

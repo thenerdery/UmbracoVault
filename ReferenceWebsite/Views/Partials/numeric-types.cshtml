@@ -17,11 +17,11 @@
 	<tbody>
 	    @* ReSharper disable once RedundantBoolCompare *@
 		<tr><td>Bool</td><td>True</td><td>@poco.Bool</td><td>@(true==@poco.Bool)</td></tr>
-		<tr><td>Byte</td><td>@(Byte.MaxValue)</td><td>@poco.Byte</td><td>@(Byte.MaxValue==@poco.Byte)</td></tr>
-		<tr><td>Decimal</td><td>@(Decimal.MaxValue)</td><td>@poco.Decimal</td><td>@(Decimal.MaxValue==@poco.Decimal)</td></tr>
-		<tr><td>Double</td><td>@(double.MaxValue)</td><td>@poco.Double</td><td>@(double.MaxValue.ToString()==@poco.Double.ToString())</td></tr>
+		<tr><td>Byte</td><td>@Byte.MaxValue</td><td>@poco.Byte</td><td>@(Byte.MaxValue==@poco.Byte)</td></tr>
+		<tr><td>Decimal</td><td>@Decimal.MaxValue</td><td>@poco.Decimal</td><td>@(Decimal.MaxValue==@poco.Decimal)</td></tr>
+		<tr><td>Double</td><td>1.7976931348</td><td>@poco.Double</td><td>@(1.7976931348==poco.Double)</td></tr>
 		<tr><td>Float</td><td>@(float.MaxValue)</td><td>@poco.Float</td><td>@(float.MaxValue.ToString()==@poco.Float.ToString())</td></tr>
-		<tr><td>Int</td><td>@(Int32.MinValue)</td><td>@poco.Int</td><td>@(Int32.MaxValue==@poco.Int)</td></tr>
+		<tr><td>Int</td><td>@(Int32.MinValue)</td><td>@poco.Int</td><td>@(Int32.MinValue==@poco.Int)</td></tr>
 		<tr><td>Long</td><td>@(long.MaxValue)</td><td>@poco.Long</td><td>@(long.MaxValue==@poco.Long)</td></tr>
 		<tr><td>SByte</td><td>@SByte.MinValue</td><td>@poco.SByte</td><td>@(SByte.MinValue==@poco.SByte)</td></tr>
 		<tr><td>Short</td><td>@short.MinValue</td><td>@poco.Short</td><td>@(short.MinValue==@poco.Short)</td></tr>

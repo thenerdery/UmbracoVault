@@ -36,9 +36,5 @@ namespace Nerdery.Umbraco.Vault
         {
             get { return new UmbracoWebContext(); }
         }
-        internal static IUmbracoContextInternals InternalContext
-        {
-            get { return new UmbracoWebContext(); }
-        }
     }
 }

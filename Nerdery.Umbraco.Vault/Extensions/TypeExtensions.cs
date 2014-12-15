@@ -6,7 +6,7 @@ using Umbraco.Core.Models;
 
 namespace Nerdery.Umbraco.Vault.Extensions
 {
-    internal static class TypeExtensions
+    public static class TypeExtensions
     {
         /// <summary>
         /// Attempts to create T by supplying the IPublishedContent to a constructor (if one exists with that parameter signature)
@@ -27,7 +27,8 @@ namespace Nerdery.Umbraco.Vault.Extensions
         /// Attempts to create T with a parameterless constructor.
         /// Returns null if no appropriate constructor exists.
         /// </summary>
-        internal static T CreateWithNoParams<T>(this Type targetType)
+        /// <remarks>Meant for internal use and use by extensions.</remarks>
+        public static T CreateWithNoParams<T>(this Type targetType)
         {
             
             var nodeConstructor = targetType.GetConstructor(Type.EmptyTypes);

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Nerdery.Umbraco.VaultExtensions</id>
+    <version>0.0.0</version>
+    <title>Umbraco Vault Extensions</title>
+    <authors>Paul Trandem, Ken Sykora, Andrew Morger, Jared Swarts, Phillip Knauss</authors>
+    <owners>thenerdery</owners>
+    <projectUrl>https://github.com/ptrandem/vault</projectUrl>
+    <licenseUrl>https://github.com/ptrandem/vault/blob/master/LICENSE</licenseUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Extension to Vault for Umbraco adding uComponents support.</description>
+    <releaseNotes>Initial implementation moves uComponents dependencies out of the Vault for Umbraco libraries into the new VaultExtensions library.</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>C# Umbraco Nerdery Mapping Extensions</tags>
+    <dependencies>
+            <dependency id="UmbracoCms.Core" version="[6.2.1, 6.2.4]" />
+            <dependency id="uComponents" version="[6.0.0]" />
+            <dependency id="Nerdery.Umbraco.Vault" version="[0.0.0]" />
+        </dependencies>
+  </metadata>
+</package>
