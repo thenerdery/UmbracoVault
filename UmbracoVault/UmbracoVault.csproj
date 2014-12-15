@@ -8,8 +8,8 @@
     <ProjectGuid>{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Nerdery.Umbraco.Vault</RootNamespace>
-    <AssemblyName>Nerdery.Umbraco.Vault</AssemblyName>
+    <RootNamespace>UmbracoVault</RootNamespace>
+    <AssemblyName>UmbracoVault</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
