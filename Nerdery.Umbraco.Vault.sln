@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nerdery.Umbraco.Vault", "Nerdery.Umbraco.Vault\Nerdery.Umbraco.Vault.csproj", "{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}"
 EndProject
@@ -29,8 +29,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{D0CB87C7-7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferenceWebsite", "ReferenceWebsite\ReferenceWebsite.csproj", "{377DB447-576A-48C5-9D87-DFD915BE9732}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nerdery.Umbraco.VaultExtensions", "Nerdery.Umbraco.VaultExtensions\Nerdery.Umbraco.VaultExtensions.csproj", "{1F41DA14-C5BE-4A3D-BCA2-6B2DF7512EE2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,10 +47,6 @@ Global
 		{377DB447-576A-48C5-9D87-DFD915BE9732}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{377DB447-576A-48C5-9D87-DFD915BE9732}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{377DB447-576A-48C5-9D87-DFD915BE9732}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1F41DA14-C5BE-4A3D-BCA2-6B2DF7512EE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1F41DA14-C5BE-4A3D-BCA2-6B2DF7512EE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1F41DA14-C5BE-4A3D-BCA2-6B2DF7512EE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1F41DA14-C5BE-4A3D-BCA2-6B2DF7512EE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

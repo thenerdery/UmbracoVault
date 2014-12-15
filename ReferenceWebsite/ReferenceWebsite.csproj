@@ -251,7 +251,6 @@
     <Content Include="Views\TextTypes.cshtml" />
     <Content Include="Views\Partials\ucomponents-datatypegrid.cshtml" />
     <Content Include="Views\Partials\ucomponents-url.cshtml" />
-    <Content Include="Views\uComponentTypes.cshtml" />
     <Content Include="Views\Enums.cshtml" />
     <Content Include="Views\BlogEntry.cshtml" />
     <Content Include="Views\BlogHome.cshtml" />
@@ -283,14 +282,9 @@
     <Compile Include="Models\Blog.cs" />
     <Compile Include="Models\Objects.cs" />
     <Compile Include="Models\TextPrimitives.cs" />
-    <Compile Include="Models\UComponents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Nerdery.Umbraco.VaultExtensions\Nerdery.Umbraco.VaultExtensions.csproj">
-      <Project>{1f41da14-c5be-4a3d-bca2-6b2df7512ee2}</Project>
-      <Name>Nerdery.Umbraco.VaultExtensions</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Nerdery.Umbraco.Vault\Nerdery.Umbraco.Vault.csproj">
       <Project>{7a5c0119-ef41-4b19-88da-35c7b5f7e481}</Project>
       <Name>Nerdery.Umbraco.Vault</Name>
