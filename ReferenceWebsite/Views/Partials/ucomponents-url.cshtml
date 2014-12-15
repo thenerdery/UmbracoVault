@@ -1,8 +1,0 @@
-﻿@{
-    Layout = null;
-	var poco = Nerdery.Umbraco.Vault.Vault.Context.GetCurrent<ReferenceWebsite.Models.UComponentsUrlModel>();
-	var target = poco.UrlState.NewWindow ? "target=_blank" : "";
-	var targetText = poco.UrlState.NewWindow ? "(Opens in new window)" : "";
-}
-
-<span><a href="@poco.UrlState.Url" @target>@poco.UrlState.Title</a> @targetText
