@@ -4,8 +4,8 @@
 
 | Branch | Status |
 | ------ | ------ |
-| master | [![Build status](https://ci.appveyor.com/api/projects/status/w3u8l7sd6qbvrw59?svg=true)](https://ci.appveyor.com/project/kensykora/vault) |
-| develop | [![Build status](https://ci.appveyor.com/api/projects/status/w3u8l7sd6qbvrw59/branch/develop?svg=true)](https://ci.appveyor.com/project/kensykora/vault/branch/develop) |
+| master | [![Build status](https://ci.appveyor.com/api/projects/status/bqbyg6yevctgm7tl?svg=true)](https://ci.appveyor.com/project/kensykora/umbracovault) |
+| develop | [![Build status](https://ci.appveyor.com/api/projects/status/bqbyg6yevctgm7tl/branch/develop?svg=true)](https://ci.appveyor.com/project/kensykora/umbracovault/branch/develop) |
 
 **Version 0.9, Designed for Umbraco 6.x**
 
@@ -13,23 +13,16 @@
 
 ***Also note**: Vault has a lot of features. We're actively working on documenting all of them, but this may take some time; this document is not yet complete.*
 
-TODO: Mention uComponents requirement here? OR: rip out ucomponents requirement because it's dumb as a dependency? 
-
 ##Overview
 Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your markup.  It allows you to create lightly-decorated classes that Vault will understand how to hydrate. This gives you the full view model-style experience in Umbraco that you are accustomed to in MVC, complete with strongly-typed view properties (no more magic strings in your views).
-
-
-
 
 ##Nuget Installation
 
 TODO: fill in actual nuget package
 
 ```
-PM> Install-Package Nerdery.Vault.Umbraco.6
+PM> Install-Package UmbracoVault -IncludePrerelease -Source https://ci.appveyor.com/nuget/umbracovault-5m6ate96gcwx  -UserName <appveyoremail> -Password <appveyorpassword>
 ```
-
-
 
 ##Basic Usage Example
 
