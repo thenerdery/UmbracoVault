@@ -29,7 +29,7 @@ namespace Nerdery.Umbraco.Vault.Extensions
 
 			Regex ll = new Regex("(/{localLink:)(.*?)}");
 
-			MatchEvaluator myEvaluator = new MatchEvaluator(MatchLocalLinks);
+			var myEvaluator = new MatchEvaluator(MatchLocalLinks);
 
 			var LocalLinksParsed = ll.Replace(richText, myEvaluator);
 			return HttpUtility.HtmlDecode(LocalLinksParsed);
@@ -63,7 +63,9 @@ namespace Nerdery.Umbraco.Vault.Extensions
 
                     var macro = new Macro
                                     {
+                                        // ReSharper disable PossibleNullReferenceException
                                         Alias = macroXmlNode.Attributes["macroAlias"].Value
+                                        // ReSharper restore PossibleNullReferenceException
                                     };
 
                     foreach (XmlAttribute attribute in macroXmlNode.Attributes)

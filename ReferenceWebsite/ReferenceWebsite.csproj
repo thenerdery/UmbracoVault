@@ -234,7 +234,6 @@
     <Content Include="config\BaseRestExtensions.config" />
     <Content Include="config\applications.config" />
     <Content Include="config\404handlers.config" />
-    <Content Include="Views\BasicDataTypes.cshtml" />
     <Content Include="Views\GenericContent.cshtml" />
     <Content Include="Views\Partials\breadcrumbs.cshtml" />
     <Content Include="Views\Partials\numeric-types.cshtml" />

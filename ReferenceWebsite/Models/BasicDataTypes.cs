@@ -2,13 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace ReferenceWebsite.Models
 {
     #region Primitive Examples
 
     [UmbracoEntity(AutoMap = true)]
+    // ReSharper disable ClassNeverInstantiated.Global
     public class NumericPrimitives
     {
         public bool Bool { get; set; }
@@ -73,6 +73,6 @@ namespace ReferenceWebsite.Models
         public string Name { get; set; }
         public Location PrimaryLocation { get; set; }
     }
-
+    // ReSharper restore ClassNeverInstantiated.Global
 #endregion
 }

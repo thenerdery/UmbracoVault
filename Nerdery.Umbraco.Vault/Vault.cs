@@ -6,7 +6,7 @@ namespace Nerdery.Umbraco.Vault
     public static class Vault
     {
         private static readonly List<string> _defaultControllerNamespaces = new List<string>();
-        private static bool _isLocked = false;
+        private static bool _isLocked;
 
         // TODO: add API documentation
         public static void RegisterViewModelNamespace(string ns, string assemblyName)

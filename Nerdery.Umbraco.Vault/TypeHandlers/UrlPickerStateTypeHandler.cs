@@ -1,8 +1,6 @@
 ﻿using System;
 using uComponents.DataTypes.UrlPicker.Dto;
 
-using umbraco.cms.helpers;
-
 namespace Nerdery.Umbraco.Vault.TypeHandlers
 {
     /// <summary>

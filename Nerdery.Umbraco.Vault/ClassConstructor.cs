@@ -3,7 +3,6 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-using Nerdery.Umbraco.Vault.Exceptions;
 using Nerdery.Umbraco.Vault.Extensions;
 
 using Umbraco.Core.Models;

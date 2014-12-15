@@ -15,7 +15,8 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr><td>Bool</td><td>True</td><td>@poco.Bool</td><td>@(true == @poco.Bool)</td></tr>
+	    @* ReSharper disable once RedundantBoolCompare *@
+		<tr><td>Bool</td><td>True</td><td>@poco.Bool</td><td>@(true==@poco.Bool)</td></tr>
 		<tr><td>Byte</td><td>@(Byte.MaxValue)</td><td>@poco.Byte</td><td>@(Byte.MaxValue==@poco.Byte)</td></tr>
 		<tr><td>Decimal</td><td>@(Decimal.MaxValue)</td><td>@poco.Decimal</td><td>@(Decimal.MaxValue==@poco.Decimal)</td></tr>
 		<tr><td>Double</td><td>@(double.MaxValue)</td><td>@poco.Double</td><td>@(double.MaxValue.ToString()==@poco.Double.ToString())</td></tr>

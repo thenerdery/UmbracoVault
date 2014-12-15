@@ -106,6 +106,7 @@ namespace Nerdery.Umbraco.Vault
         /// <returns>A fully-hydrated type (as defined by the Type parameter) containing data mapped from the current umbraco item</returns>
         public object GetCurrent(Type type)
         {
+            // ReSharper disable once PossibleInvalidOperationException
             var id = UmbracoContext.Current.PageId.Value;
             return GetContentById(type, id.ToString());
         }

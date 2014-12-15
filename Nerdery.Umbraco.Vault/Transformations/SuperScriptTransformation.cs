@@ -5,7 +5,7 @@ namespace Nerdery.Umbraco.Vault.Transformations
 {
     public class SuperScriptTransformation : ITransformation
     {
-        private readonly string[] _targetCharacters = null;
+        private readonly string[] _targetCharacters;
 
         public SuperScriptTransformation()
         {

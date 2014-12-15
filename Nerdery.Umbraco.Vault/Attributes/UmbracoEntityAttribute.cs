@@ -1,7 +1,5 @@
 ﻿using System;
 
-using Nerdery.Umbraco.Vault.TypeHandlers;
-
 namespace Nerdery.Umbraco.Vault.Attributes
 {
     /// <summary>

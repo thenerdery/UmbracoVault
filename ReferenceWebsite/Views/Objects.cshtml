@@ -2,11 +2,10 @@
 @using Nerdery.Umbraco.Vault
 
 @{
-    const int PAUL = 1078;
+    const int PAUL_ID = 1078;
     Layout = null;
-    var poco = Vault.Context.GetCurrent<ReferenceWebsite.Models.Objects>();
 
-    var paul = Vault.Context.GetContentById<ReferenceWebsite.Models.StaffMember>(PAUL);
+    var paul = Vault.Context.GetContentById<ReferenceWebsite.Models.StaffMember>(PAUL_ID);
 }
 
 @Html.Partial("breadcrumbs")
@@ -21,5 +20,5 @@
 	</thead>
 	<tbody>
 		<tr><td>Object</td><td>Minneapolis</td><td>@paul.PrimaryLocation.Name</td></tr>
-	</thead>
+	</tbody>
 </table>

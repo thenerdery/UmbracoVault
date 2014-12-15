@@ -3,7 +3,6 @@ using System.Collections.Specialized;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Nerdery.Umbraco.Vault.Tests.Models;
-using Nerdery.Umbraco.Vault;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoMoq;
 
@@ -50,6 +49,7 @@ namespace Nerdery.Umbraco.Vault.Tests
                         var hasSpecialValue = specialCases.AllKeys.Contains(property.Name);
 
                         var value = hasSpecialValue
+                            // ReSharper disable once AssignNullToNotNullAttribute
                             ? specialCases.GetValues(property.Name).First()
                             : property.GetValue(Source).ToString();
 

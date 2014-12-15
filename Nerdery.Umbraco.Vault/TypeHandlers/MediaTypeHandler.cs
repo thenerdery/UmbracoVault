@@ -3,7 +3,6 @@
 using Nerdery.Umbraco.Vault.Exceptions;
 using Nerdery.Umbraco.Vault.Extensions;
 
-using Umbraco.Core;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web.Mvc.Html;
 
 namespace Nerdery.Umbraco.Vault.TypeHandlers.Primitives
 {
