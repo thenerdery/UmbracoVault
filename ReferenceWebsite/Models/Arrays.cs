@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Nerdery.Umbraco.Vault.Attributes;
+using UmbracoVault.Attributes;
 
 namespace ReferenceWebsite.Models
 {

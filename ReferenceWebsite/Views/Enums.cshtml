@@ -1,7 +1,7 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
     Layout = null;
-    var poco = Nerdery.Umbraco.Vault.Vault.Context.GetCurrent<ReferenceWebsite.Models.DateModel>();
+    var poco = UmbracoVault.Vault.Context.GetCurrent<ReferenceWebsite.Models.DateModel>();
 }
 
 @Html.Partial("breadcrumbs")

@@ -1,7 +1,7 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 
 @{
-    var poco = Nerdery.Umbraco.Vault.Vault.Context.GetCurrent<ReferenceWebsite.Models.TextPrimitives>();
+    var poco = UmbracoVault.Vault.Context.GetCurrent<ReferenceWebsite.Models.TextPrimitives>();
 }
 
 <table border=1>

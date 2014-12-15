@@ -20,7 +20,7 @@ configuration:
   - Debug
   - Release
 after_build:
-  - nuget pack Nerdery.Umbraco.Vault/Nerdery.Umbraco.Vault.csproj -Symbols -Version %CURRENT_VERSION%-build%APPVEYOR_BUILD_NUMBER%
-  - nuget pack Nerdery.Umbraco.Vault/Nerdery.Umbraco.Vault.csproj -Version %CURRENT_VERSION%
+  - nuget pack UmbracoVault/UmbracoVault.csproj -Symbols -Version %CURRENT_VERSION%-build%APPVEYOR_BUILD_NUMBER%
+  - nuget pack UmbracoVault/UmbracoVault.csproj -Version %CURRENT_VERSION%
 artifacts:
   - path: "*.nupkg"

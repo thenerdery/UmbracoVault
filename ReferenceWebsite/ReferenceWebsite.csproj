@@ -283,9 +283,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Nerdery.Umbraco.Vault\Nerdery.Umbraco.Vault.csproj">
+    <ProjectReference Include="..\UmbracoVault\UmbracoVault.csproj">
       <Project>{7a5c0119-ef41-4b19-88da-35c7b5f7e481}</Project>
-      <Name>Nerdery.Umbraco.Vault</Name>
+      <Name>UmbracoVault</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

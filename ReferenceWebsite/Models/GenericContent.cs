@@ -1,4 +1,4 @@
-﻿using Nerdery.Umbraco.Vault.Attributes;
+﻿using UmbracoVault.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
