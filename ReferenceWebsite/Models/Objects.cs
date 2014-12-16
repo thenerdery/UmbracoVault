@@ -1,4 +1,5 @@
-﻿using UmbracoVault.Attributes;
+﻿using System;
+using UmbracoVault.Attributes;
 
 namespace ReferenceWebsite.Models
 {
@@ -33,5 +34,12 @@ namespace ReferenceWebsite.Models
     {
         public string Name { get; set; }
         public Location PrimaryLocation { get; set; }
+    }
+
+    [UmbracoEntity(AutoMap = true)]
+    public class DateTimes
+    {
+        public DateTime DateFromPicker { get; set; }
+        public DateTime DateFromText { get; set; }
     }
 }
