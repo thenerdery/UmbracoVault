@@ -1,12 +1,11 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@model ReferenceWebsite.Models.ObjectsViewModel
 @using UmbracoVault
 
 @{
-    const int PAUL_ID = 1078;
+    int PAUL_ID = 1078;
     Layout = null;
 
     var paul = Vault.Context.GetContentById<ReferenceWebsite.Models.StaffMember>(PAUL_ID);
-	var dates = Vault.Context.GetCurrent<ReferenceWebsite.Models.DateTimes>();
 }
 
 @Html.Partial("breadcrumbs")
@@ -35,7 +34,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr><td>DateTime From Date Picker</td><td>7/21/2010 3:43:00 PM</td><td>@dates.DateFromPicker</td></tr>
-		<tr><td>DateTime From Textstring</td><td>7/21/1983 1:33:00 PM</td><td>@dates.DateFromText</td></tr>
+		<tr><td>DateTime From Date Picker</td><td>7/21/2010 3:43:00 PM</td><td>@Model.DateFromPicker</td></tr>
+		<tr><td>DateTime From Textstring</td><td>7/21/1983 1:33:00 PM</td><td>@Model.DateFromText</td></tr>
 	</tbody>
 </table>

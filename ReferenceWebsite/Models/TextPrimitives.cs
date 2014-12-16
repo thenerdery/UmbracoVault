@@ -4,7 +4,7 @@ using UmbracoVault.Attributes;
 namespace ReferenceWebsite.Models
 {
     [UmbracoEntity(AutoMap = true)]
-    public class TextPrimitives
+    public class TextTypesViewModel : CmsViewModelBase
     {
         /// <summary>
         /// A char can hold a single character.

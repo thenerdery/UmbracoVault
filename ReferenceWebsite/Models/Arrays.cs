@@ -4,7 +4,7 @@ using UmbracoVault.Attributes;
 namespace ReferenceWebsite.Models
 {
     [UmbracoEntity(AutoMap = true)]
-    public class Arrays
+    public class ArraysViewModel : CmsViewModelBase
     {
         /// <summary>
         /// Raw integer arrays are supported using a textstring

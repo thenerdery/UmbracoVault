@@ -273,7 +273,12 @@
     <Content Include="xslt\dummy.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Models\Arrays.cs" />
+    <Compile Include="Models\Breadcrumbs.cs" />
+    <Compile Include="Models\CmsViewModelBase.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\GenericContent.cs" />
     <Compile Include="Models\NumericPrimitives.cs" />

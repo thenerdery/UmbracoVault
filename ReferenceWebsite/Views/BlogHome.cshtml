@@ -1,13 +1,12 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@model ReferenceWebsite.Models.BlogHomeViewModel
 @using UmbracoVault
 
 @{
     Layout = null;
-	var blog = Vault.Context.GetCurrent<ReferenceWebsite.Models.BlogHomeViewModel>();
 	var posts = new List<int>{1105, 1104, 1100};
 }
 
-<h1>@blog.Title</h1>
+<h1>@Model.Title</h1>
 
 @Html.Partial("breadcrumbs")
 	
@@ -15,7 +14,7 @@
 	@foreach(var blogPost in posts)
 	{
 		var post = Vault.Context.GetContentById<ReferenceWebsite.Models.BlogEntryViewModel>(blogPost);
-		<h2><a href="@Umbraco.NiceUrl(blogPost)">@post.Title</a></h2>
+		<h2><a href="@umbraco.library.NiceUrl(blogPost)">@post.Title</a></h2>
     	<span>@post.PostDate.ToShortDateString()</span>    
 	}
 </div>

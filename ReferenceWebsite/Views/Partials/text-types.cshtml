@@ -1,8 +1,4 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
-
-@{
-    var poco = UmbracoVault.Vault.Context.GetCurrent<ReferenceWebsite.Models.TextPrimitives>();
-}
+﻿@model ReferenceWebsite.Models.TextTypesViewModel
 
 <table border=1>
 	<thead>
@@ -15,18 +11,18 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr><td>Char</td><td>Z</td><td>@poco.Char</td><td>@('Z'==@poco.Char)</td></tr>
-		<tr><td>String</td><td>string value</td><td>@poco.String</td><td>@("string value"==@poco.String)</td></tr>
+		<tr><td>Char</td><td>Z</td><td>@Model.Char</td><td>@('Z'==@Model.Char)</td></tr>
+		<tr><td>String</td><td>string value</td><td>@Model.String</td><td>@("string value"==@Model.String)</td></tr>
 		<tr>
 			<td>HtmlString</td>
 			<td>
 				<span style="text-decoration: underline">Hello from an HtmlString</span>
 			</td>
-			<td>@Html.Raw(poco.HtmlString)</td>
-			<td>@("<span style=\"text-decoration: underline\">Hello from an HtmlString</span>" == @poco.HtmlString.ToString())</td>
+			<td>@Html.Raw(Model.HtmlString)</td>
+			<td>@("<span style=\"text-decoration: underline\">Hello from an HtmlString</span>" == @Model.HtmlString.ToString())</td>
 		</tr>
 		
-		<tr><td>Rich Text</td><td>Haiku</td><td>@Html.Raw(poco.RichText)</td></tr>
+		<tr><td>Rich Text</td><td>Haiku</td><td>@Html.Raw(Model.RichText)</td></tr>
 	</tbody>
 </table>
 

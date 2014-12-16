@@ -1,7 +1,6 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@model ReferenceWebsite.Models.GenericContentViewModel
 @{
     Layout = null;
-    var poco = UmbracoVault.Vault.Context.GetCurrent<ReferenceWebsite.Models.GenericContent>();
 }
 
-@Html.Raw(poco.Content)
+@Html.Raw(Model.Content)

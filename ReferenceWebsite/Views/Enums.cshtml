@@ -1,9 +1,8 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@model ReferenceWebsite.Models.EnumsViewModel
 @{
     Layout = null;
-    var poco = UmbracoVault.Vault.Context.GetCurrent<ReferenceWebsite.Models.DateModel>();
 }
 
 @Html.Partial("breadcrumbs")
 
-<span>@poco.Month</span>
+<span>@Model.Month</span>

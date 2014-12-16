@@ -25,7 +25,7 @@ namespace ReferenceWebsite.Models
     /// Sample model entry showing an enum property
     /// </summary>
     [UmbracoEntity(AutoMap=true)]
-    public class DateModel
+    public class EnumsViewModel : CmsViewModelBase
     {
         [UmbracoEnumProperty]
         public Month Month { get; set; }

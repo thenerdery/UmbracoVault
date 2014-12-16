@@ -6,7 +6,7 @@ namespace ReferenceWebsite.Models
     /// Vault supports most C# numeric and boolean primitives
     /// </summary>
     [UmbracoEntity(AutoMap = true)]
-    public class NumericPrimitives
+    public class NumericTypesViewModel : CmsViewModelBase
     {
         /// <summary>
         /// Booleans can be represented by the Umbraco true/false type.

@@ -37,7 +37,7 @@ namespace ReferenceWebsite.Models
     }
 
     [UmbracoEntity(AutoMap = true)]
-    public class DateTimes
+    public class ObjectsViewModel : CmsViewModelBase
     {
         public DateTime DateFromPicker { get; set; }
         public DateTime DateFromText { get; set; }

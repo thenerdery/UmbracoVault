@@ -1,9 +1,8 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@model ReferenceWebsite.Models.ArraysViewModel
 @{
 	var KEN = 1077;
 	var PAUL = 1078;
     Layout = null;
-    var poco = UmbracoVault.Vault.Context.GetCurrent<ReferenceWebsite.Models.Arrays>();
 }
 
 @Html.Partial("breadcrumbs")
@@ -21,11 +20,11 @@
 		<tr>
 			<td>IntArray</td>
 			<td>7 , 14, 21</td>
-			<td>@poco.IntArray.GetType().Name</td>
-			<td>@for (var i = 0; i < poco.IntArray.Length; i++)
+			<td>@Model.IntArray.GetType().Name</td>
+			<td>@for (var i = 0; i < Model.IntArray.Length; i++)
 				{
-					<span>@poco.IntArray[i]</span>
-					if (i < poco.IntArray.Length - 1)
+					<span>@Model.IntArray[i]</span>
+					if (i < Model.IntArray.Length - 1)
 					{
 						<span>,</span>
 					}
@@ -35,11 +34,11 @@
 		<tr>
 			<td>StringArray</td>
 			<td>cat , dog , fish</td>
-			<td>@poco.StringArray.GetType().Name</td>
-			<td>@for (var i = 0; i < poco.StringArray.Length; i++)
+			<td>@Model.StringArray.GetType().Name</td>
+			<td>@for (var i = 0; i < Model.StringArray.Length; i++)
 				{
-					<span>@poco.StringArray[i]</span>
-					if (i < poco.StringArray.Length - 1)
+					<span>@Model.StringArray[i]</span>
+					if (i < Model.StringArray.Length - 1)
 					{
 						<span>,</span>
 					}
@@ -49,11 +48,11 @@
 		<tr>
 			<td>StringList</td>
 			<td>Ken Sykora , Paul Trandem</td>
-			<td>@poco.StaffList.GetType().Name</td>
-			<td>@for (var i = 0; i < poco.StaffList.Count; i++)
+			<td>@Model.StaffList.GetType().Name</td>
+			<td>@for (var i = 0; i < Model.StaffList.Count; i++)
 			{
-				<span>@poco.StaffList[i].Name</span>
-				if (i < poco.StaffList.Count - 1)
+				<span>@Model.StaffList[i].Name</span>
+				if (i < Model.StaffList.Count - 1)
 				{
 					<span>,</span>
 				}

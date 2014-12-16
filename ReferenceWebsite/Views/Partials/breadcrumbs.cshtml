@@ -1,9 +1,8 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
-
+﻿@model ReferenceWebsite.Models.ICmsViewModel
 <ul>
-    @foreach (var ancestor in Model.Content.Ancestors().Where(t => t.IsVisible()))
+    @foreach (var ancestor in Model.CmsContent.Ancestors().Where(t => t.IsVisible()))
     {
         <li><a href="@ancestor.Url">@ancestor.Name</a></li>
     }
-    <li>@Model.Content.Name</li>
+    <li>@Model.CmsContent.Name</li>
 </ul>
