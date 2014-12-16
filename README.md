@@ -16,9 +16,50 @@
 ##Overview
 Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your markup.  It allows you to create lightly-decorated classes that Vault will understand how to hydrate. This gives you the full view model-style experience in Umbraco that you are accustomed to in MVC, complete with strongly-typed view properties (no more magic strings in your views).
 
-##Nuget Installation
+##The Idea
 
-TODO: fill in actual nuget package
+let's assume we have a document type with the alias `BlogEntry` set up with the following properties:
+
+Property Name | Alias | Type
+--- | --- | ---
+Title | title | Textstring
+PostedDate | postedDate | Date Picker
+Content | content | Richtext editor
+
+We can create a class for this document type:
+
+```
+[UmbracoEntity(AutoMap = true)]
+public class BlogEntryViewModel
+{
+	public string Title { get; set; }
+	public DateTime PostDate { get; set; }
+
+	[UmbracoRichTextProperty(alias="bodyContent")]
+	public string Content { get; set; }
+	
+	public MediaItem Image { get; set; }	
+}
+```
+
+This model can now get injected into our views with our fancy `VaultDefaultGenericController`. Now our views look like this:
+
+
+```
+  @inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+  <h1>@Model.Title</h1>
+  <img src="@Model.Image.Url" alt="@Model.Image.AltText" />
+  <div>@Model.PostDate.ToShortDateString()</div>
+  <div>@Html.Raw(Model.Content)</div>	
+
+```
+
+Much cleaner, with compile time checking. Reads nicer than the usual `@Umbraco.Field("bodyContent")`
+
+Want to learn more? Check out the wiki!
+
+##Nuget Installation
 
 ```
 PM> Install-Package UmbracoVault -IncludePrerelease -Source https://ci.appveyor.com/nuget/umbracovault-5m6ate96gcwx  -UserName <appveyoremail> -Password <appveyorpassword>
