@@ -1,4 +1,5 @@
-﻿using UmbracoVault.Attributes;
+﻿using System.Web;
+using UmbracoVault.Attributes;
 
 namespace ReferenceWebsite.Models
 {
@@ -20,5 +21,7 @@ namespace ReferenceWebsite.Models
         /// </summary>
         [UmbracoRichTextProperty]
         public string RichText { get; set; }
+
+        public HtmlString HtmlString { get; set; }
     }
 }
