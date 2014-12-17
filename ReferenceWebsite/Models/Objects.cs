@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+
 using UmbracoVault.Attributes;
 
 namespace ReferenceWebsite.Models
@@ -41,5 +44,6 @@ namespace ReferenceWebsite.Models
     {
         public DateTime DateFromPicker { get; set; }
         public DateTime DateFromText { get; set; }
+        public IEnumerable<StaffMember> MultiNodeTreePicker { get; set; }
     }
 }
