@@ -22,6 +22,9 @@ namespace ReferenceWebsite.Models
         [UmbracoRichTextProperty]
         public string RichText { get; set; }
 
+        [UmbracoProperty(Alias="richText")]
+        public HtmlString RichTextAsHtmlString { get; set; }
+
         public HtmlString HtmlString { get; set; }
     }
 }

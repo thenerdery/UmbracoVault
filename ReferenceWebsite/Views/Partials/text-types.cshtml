@@ -22,7 +22,8 @@
 			<td>@("<span style=\"text-decoration: underline\">Hello from an HtmlString</span>" == @Model.HtmlString.ToString())</td>
 		</tr>
 		
-		<tr><td>Rich Text</td><td>Haiku</td><td>@Html.Raw(Model.RichText)</td></tr>
+	    <tr><td>Rich Text</td><td>Haiku</td><td>@Html.Raw(Model.RichText)</td></tr>
+	    <tr><td>Rich Text As HtmlString</td><td>Haiku</td><td>@Model.RichTextAsHtmlString</td></tr>
 	</tbody>
 </table>
 
