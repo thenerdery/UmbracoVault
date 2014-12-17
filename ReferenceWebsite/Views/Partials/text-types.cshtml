@@ -24,6 +24,9 @@
 		
 	    <tr><td>Rich Text</td><td>Haiku</td><td>@Html.Raw(Model.RichText)</td></tr>
 	    <tr><td>Rich Text As HtmlString</td><td>Haiku</td><td>@Model.RichTextAsHtmlString</td></tr>
+	    <tr><td>Dropdown List</td><td>DDL Test 2</td><td>@Model.DropDownList</td><td>@("DDL Test 2" == Model.DropDownList)</td></tr>
+	    <tr><td>Dropdown List Publish Keys (actual)</td><td>65</td><td>@Model.DropDownListPublishKeys</td><td>@(65 == Model.DropDownListPublishKeys)</td></tr>
+        <tr><td>Dropdown List Publish Keys (lookup value)</td><td>DDLPK Test 1</td><td>@umbraco.library.GetPreValueAsString(Model.DropDownListPublishKeys)</td><td>@(umbraco.library.GetPreValueAsString(Model.DropDownListPublishKeys) == "DDLPK Test 1")</td></tr>
 	</tbody>
 </table>
 

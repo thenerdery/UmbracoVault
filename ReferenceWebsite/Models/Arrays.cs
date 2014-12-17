@@ -35,5 +35,10 @@ namespace ReferenceWebsite.Models
         /// List of Integers that correspond to prevalues in the Umbraco DB. Lookup is required to get text values.
         /// </summary>
         public int[] DropDownListMultiplePublishKeys { get; set; }
+
+        /// <summary>
+        /// List of dropdown values. Publishes the string entry so no lookup is required
+        /// </summary>
+        public string[] DropDownListMultiple { get; set; }
     }
 }
