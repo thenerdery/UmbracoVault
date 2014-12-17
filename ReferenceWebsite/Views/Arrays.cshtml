@@ -61,10 +61,23 @@
 	        <td>Checkbox List</td>
 	        <td>Checkbox Option 1 , Checkbox Option 2</td>
 	        <td>@Model.CheckboxList.GetType().Name</td>
-            <td>@for (var i = 0; i < Model.CheckboxList.Length; i++)
+	        <td>@for (var i = 0; i < Model.CheckboxList.Length; i++)
 	            {
 	                <span>@Model.CheckboxList[i]</span>
-                    if (i < Model.CheckboxList.Length - 1)
+	                if (i < Model.CheckboxList.Length - 1)
+	                {
+	                    <span>,</span>
+	                }
+	            }</td>
+	    </tr>
+        <tr>
+	        <td>Dictionary Picker</td>
+	        <td>Apple , Pear</td>
+	        <td>@Model.DictionaryPicker.GetType().Name</td>
+            <td>@for (var i = 0; i < Model.DictionaryPicker.Length; i++)
+	            {
+	                <span>@Model.DictionaryPicker[i]</span>
+                    if (i < Model.DictionaryPicker.Length - 1)
 	                {
 	                    <span>,</span>
 	                }

@@ -25,5 +25,10 @@ namespace ReferenceWebsite.Models
         /// This contains the list of Checkbox Values
         /// </summary>
         public string[] CheckboxList { get; set; }
+
+        /// <summary>
+        /// THis contains the list of Dictionary Picker values
+        /// </summary>
+        public string[] DictionaryPicker { get; set; }
     }
 }
