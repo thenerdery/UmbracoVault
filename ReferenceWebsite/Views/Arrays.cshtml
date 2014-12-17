@@ -70,14 +70,40 @@
 	                }
 	            }</td>
 	    </tr>
-        <tr>
+	    <tr>
 	        <td>Dictionary Picker</td>
 	        <td>Apple , Pear</td>
 	        <td>@Model.DictionaryPicker.GetType().Name</td>
-            <td>@for (var i = 0; i < Model.DictionaryPicker.Length; i++)
+	        <td>@for (var i = 0; i < Model.DictionaryPicker.Length; i++)
 	            {
 	                <span>@Model.DictionaryPicker[i]</span>
-                    if (i < Model.DictionaryPicker.Length - 1)
+	                if (i < Model.DictionaryPicker.Length - 1)
+	                {
+	                    <span>,</span>
+	                }
+	            }</td>
+	    </tr>
+	    <tr>
+	        <td>Dropdown List Multiple Publish Keys (Prevalue IDs)</td>
+	        <td>56 , 57</td>
+	        <td>@Model.DropDownListMultiplePublishKeys.GetType().Name</td>
+	        <td>@for (var i = 0; i < Model.DropDownListMultiplePublishKeys.Length; i++)
+	            {
+	                <span>@Model.DropDownListMultiplePublishKeys[i]</span>
+	                if (i < Model.DropDownListMultiplePublishKeys.Length - 1)
+	                {
+	                    <span>,</span>
+	                }
+	            }</td>
+	    </tr>
+        <tr>
+	        <td>Dropdown List Multiple Publish Keys (Values)</td>
+	        <td>DDLMPK Test 1 , DDLMPK Test 2</td>
+	        <td>@Model.DropDownListMultiplePublishKeys.GetType().Name</td>
+            <td>@for (var i = 0; i < Model.DropDownListMultiplePublishKeys.Length; i++)
+	            {
+	                <span>@umbraco.library.GetPreValueAsString(Model.DropDownListMultiplePublishKeys[i])</span>
+                    if (i < Model.DropDownListMultiplePublishKeys.Length - 1)
 	                {
 	                    <span>,</span>
 	                }

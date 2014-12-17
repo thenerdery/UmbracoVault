@@ -30,5 +30,10 @@ namespace ReferenceWebsite.Models
         /// THis contains the list of Dictionary Picker values
         /// </summary>
         public string[] DictionaryPicker { get; set; }
+
+        /// <summary>
+        /// List of Integers that correspond to prevalues in the Umbraco DB. Lookup is required to get text values.
+        /// </summary>
+        public int[] DropDownListMultiplePublishKeys { get; set; }
     }
 }

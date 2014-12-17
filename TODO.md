@@ -7,3 +7,4 @@ Setup nerdery org account for AppVeyor
 
 Fix support for bins
 Add support for Umbraco 7
+Make it easier to get Umbraco DDL / CBL prevalues into a string array
