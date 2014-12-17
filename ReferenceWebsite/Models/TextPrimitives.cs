@@ -45,5 +45,10 @@ namespace ReferenceWebsite.Models
         /// the string value
         /// </summary>
         public int DropDownListPublishKeys { get; set; }
+
+        /// <summary>
+        /// Text that uses the NoEdit property editor
+        /// </summary>
+        public string NoEdit { get; set; }
     }
 }
