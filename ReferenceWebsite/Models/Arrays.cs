@@ -19,6 +19,11 @@ namespace ReferenceWebsite.Models
         /// <summary>
         /// Generic content lists are supported.
         /// </summary>
-        public IList<StaffMember> StaffList { get; set; } 
+        public IList<StaffMember> StaffList { get; set; }
+
+        /// <summary>
+        /// This contains the list of Checkbox Values
+        /// </summary>
+        public string[] CheckboxList { get; set; }
     }
 }
