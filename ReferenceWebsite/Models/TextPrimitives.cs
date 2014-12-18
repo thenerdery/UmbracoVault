@@ -50,5 +50,10 @@ namespace ReferenceWebsite.Models
         /// Text that uses the NoEdit property editor
         /// </summary>
         public string NoEdit { get; set; }
+
+        /// <summary>
+        /// Radio Button List prevalue ID
+        /// </summary>
+        public int RadioButtonList { get; set; }
     }
 }
