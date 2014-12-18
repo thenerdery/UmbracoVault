@@ -11,3 +11,4 @@ Make it easier to get Umbraco DDL / CBL prevalues into a string array
 Add support for multi node tree picker XML format
 Add support for relatedLinks XML Format
 Add tuple support for slider range values (stores as string)
+Support Media better with upload property editor. Parse the media ID and use that, etc.
