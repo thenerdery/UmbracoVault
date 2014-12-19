@@ -33,9 +33,10 @@ namespace UmbracoVault
         {
             //TODO: fetch classes from configuration and populate this list based on type and assembly strings
             //TODO: Document Default Transformations
+            //TODO: Re-add transformations once there's a way to opt-in to them instead of having it be global
             _transformations = new List<ITransformation>
                                    {
-                                       new SuperScriptTransformation()
+                                       //new SuperScriptTransformation()
                                    };
 
             _classConstructor = new ClassConstructor();
@@ -274,7 +275,6 @@ namespace UmbracoVault
                     UmbracoPropertyAttribute;
 
                 var recursive = GetPropertyRecursion(propertyMetaData);
-
                 var alias = GetPropertyAlias(propertyMetaData, propertyInfo);
 
                 //Retrieve the value -- If it's not there just ignore and move on
