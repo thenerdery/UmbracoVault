@@ -13,4 +13,6 @@ Add support for relatedLinks XML Format
 Add tuple support for slider range values (stores as string)
 Add support for the image cropper
 Add support for the macro container
-//TODO: Document Default Transformations - SuperScript Transformation
+Make transformations not run by default, they should be explicit somehow.
+Document Default Transformations - SuperScript Transformations
+Figure out why bool transforms take so long (100ms vs 1-2ms)

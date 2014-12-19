@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Umbraco.Core;
 using UmbracoVault.Attributes;
 
 namespace UmbracoVault.TypeHandlers
@@ -9,7 +10,7 @@ namespace UmbracoVault.TypeHandlers
     /// <summary>
     /// Loads available TypeHandlers and provides a method to retrieve a handler for a given type
     /// </summary>
-    internal class TypeHandlerFactory
+    public class TypeHandlerFactory
     {
         private static TypeHandlerFactory _instance;
         private readonly Dictionary<Type, ITypeHandler> _typeHandlerDictionary;
@@ -23,12 +24,7 @@ namespace UmbracoVault.TypeHandlers
                         x.GetInterfaces().Contains(typeof (ITypeHandler)) &&
                         x.IsClass &&
                         !x.GetCustomAttributes(typeof (IgnoreAutoLoadAttribute), true).Any())
-                .Select(x =>
-                {
-                    var constructorInfo = x.GetConstructor(Type.EmptyTypes);
-                    return constructorInfo != null ? constructorInfo.Invoke(null) : null;
-                })
-                .Cast<ITypeHandler>();
+                .Select(CreateInstanceOfTypeHandler);
 
             _typeHandlerDictionary = new Dictionary<Type, ITypeHandler>();
 
@@ -64,6 +60,29 @@ namespace UmbracoVault.TypeHandlers
                 return _typeHandlerDictionary[t];
             }
             return null;
+        }
+
+        public void RegisterTypeHandler<T>() where T : ITypeHandler
+        {
+            if (_typeHandlerDictionary.ContainsKey(typeof (T)))
+            {
+                throw new InvalidOperationException(string.Format("Type {0} already exists in Type Handler Dictionary", typeof(T)));
+            }
+        }
+
+        public ITypeHandler CreateInstanceOfTypeHandler<T>() where T : ITypeHandler
+        {
+            return CreateInstanceOfTypeHandler(typeof(T));
+        }
+
+        public ITypeHandler CreateInstanceOfTypeHandler(Type t)
+        {
+            if (!t.Implements<ITypeHandler>())
+                return null;
+
+            var constructorInfo = t.GetConstructor(Type.EmptyTypes);
+            var result = constructorInfo != null ? constructorInfo.Invoke(null) : null;
+            return result as ITypeHandler;
         }
     }
 }
