@@ -32,6 +32,7 @@ namespace UmbracoVault
         public UmbracoWebContext()
         {
             //TODO: fetch classes from configuration and populate this list based on type and assembly strings
+            //TODO: Document Default Transformations
             _transformations = new List<ITransformation>
                                    {
                                        new SuperScriptTransformation()
