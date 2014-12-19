@@ -389,7 +389,7 @@ namespace UmbracoVault
             }
 
             // Attempt to find default handler
-            var factoryHandler = this._typeHandlerFactory.GetHandler(propertyType);
+            var factoryHandler = this._typeHandlerFactory.GetHandlerForType(propertyType);
 
             if (factoryHandler != null)
             {

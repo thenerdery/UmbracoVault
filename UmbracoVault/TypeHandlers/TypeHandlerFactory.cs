@@ -8,7 +8,7 @@ using UmbracoVault.Attributes;
 namespace UmbracoVault.TypeHandlers
 {
     /// <summary>
-    /// Loads available TypeHandlers and provides a method to retrieve a handler for a given type
+    ///     Loads available TypeHandlers and provides a method to retrieve a handler for a given type
     /// </summary>
     public class TypeHandlerFactory
     {
@@ -17,18 +17,12 @@ namespace UmbracoVault.TypeHandlers
 
         private TypeHandlerFactory()
         {
-            //Get the type handlers for the current executing assembly that aren't flagged to Ignore
-            var typeHandlers = Assembly.GetExecutingAssembly().GetTypes()
-                .Where(
-                    x =>
-                        x.GetInterfaces().Contains(typeof (ITypeHandler)) &&
-                        x.IsClass &&
-                        !x.GetCustomAttributes(typeof (IgnoreAutoLoadAttribute), true).Any())
-                .Select(CreateInstanceOfTypeHandler);
+            List<ITypeHandler> typeHandlers = GetBuiltInTypeHandlers();
+            typeHandlers.AddRange(GetExternalTypeHandlers());
 
             _typeHandlerDictionary = new Dictionary<Type, ITypeHandler>();
 
-            foreach (var typeHandler in typeHandlers)
+            foreach (ITypeHandler typeHandler in typeHandlers)
             {
                 _typeHandlerDictionary.Add(typeHandler.TypeSupported, typeHandler);
             }
@@ -36,25 +30,54 @@ namespace UmbracoVault.TypeHandlers
 
         public static TypeHandlerFactory Instance
         {
-            get
+            get { return _instance ?? (_instance = new TypeHandlerFactory()); }
+        }
+
+        private IEnumerable<ITypeHandler> GetExternalTypeHandlers()
+        {
+            var result = new List<ITypeHandler>();
+            IEnumerable<Assembly> externalAssemblies = AppDomain.CurrentDomain.GetAssemblies()
+                .Where(x => x.GetCustomAttributes(typeof (ContainsUmbracoVaultTypeHandlersAttribute), false).Any());
+
+            foreach (Assembly externalAssembly in externalAssemblies)
             {
-            	return _instance ?? (_instance = new TypeHandlerFactory());
+                IEnumerable<ITypeHandler> types = externalAssembly.GetTypes()
+                    .Where(IsTypeHandlerThatIsNotAutoLoadIgnored)
+                    .Select(CreateInstanceOfTypeHandler);
+
+                result.AddRange(types);
             }
+
+            return result;
+        }
+
+        private List<ITypeHandler> GetBuiltInTypeHandlers()
+        {
+            return Assembly.GetExecutingAssembly().GetTypes()
+                .Where(IsTypeHandlerThatIsNotAutoLoadIgnored)
+                .Select(CreateInstanceOfTypeHandler)
+                .ToList();
+        }
+
+        private bool IsTypeHandlerThatIsNotAutoLoadIgnored(Type x)
+        {
+            return x.GetInterfaces().Contains(typeof (ITypeHandler)) && x.IsClass &&
+                   !x.GetCustomAttributes(typeof (IgnoreTypeHandlerAutoRegisterAttribute), true).Any();
         }
 
         /// <summary>
-        /// Retrieves a TypeHandler for a given type. Returns null if the TypeHandler does not exist
+        ///     Retrieves a TypeHandler for a given type. Returns null if the TypeHandler does not exist
         /// </summary>
         /// <param name="t">Type for which to retrieve the TypeHandler for</param>
         /// <returns>A TypeHandler for the given type, or null if one is not available for that type.</returns>
-        public ITypeHandler GetHandler(Type t)
+        public ITypeHandler GetHandlerForType(Type t)
         {
-			if(t.IsGenericType)
-			{
-				// If it's generic, match on the type name, as the exact definition will vary based on the generic type
-				return _typeHandlerDictionary.FirstOrDefault( x => x.Key.Name == t.Name).Value;
-			}
-            var hasType = _typeHandlerDictionary.ContainsKey(t);
+            if (t.IsGenericType)
+            {
+                // If it's generic, match on the type name, as the exact definition will vary based on the generic type
+                return _typeHandlerDictionary.FirstOrDefault(x => x.Key.Name == t.Name).Value;
+            }
+            bool hasType = _typeHandlerDictionary.ContainsKey(t);
             if (hasType)
             {
                 return _typeHandlerDictionary[t];
@@ -64,24 +87,27 @@ namespace UmbracoVault.TypeHandlers
 
         public void RegisterTypeHandler<T>() where T : ITypeHandler
         {
-            if (_typeHandlerDictionary.ContainsKey(typeof (T)))
+            var handler = CreateInstanceOfTypeHandler<T>();
+            if (_typeHandlerDictionary.ContainsKey(handler.TypeSupported))
             {
-                throw new InvalidOperationException(string.Format("Type {0} already exists in Type Handler Dictionary", typeof(T)));
+                return; //Ignore, already exists
             }
+            
+            _typeHandlerDictionary.Add(handler.TypeSupported, handler);
         }
 
-        public ITypeHandler CreateInstanceOfTypeHandler<T>() where T : ITypeHandler
+        private static ITypeHandler CreateInstanceOfTypeHandler<T>() where T : ITypeHandler
         {
-            return CreateInstanceOfTypeHandler(typeof(T));
+            return CreateInstanceOfTypeHandler(typeof (T));
         }
 
-        public ITypeHandler CreateInstanceOfTypeHandler(Type t)
+        private static ITypeHandler CreateInstanceOfTypeHandler(Type t)
         {
             if (!t.Implements<ITypeHandler>())
                 return null;
 
-            var constructorInfo = t.GetConstructor(Type.EmptyTypes);
-            var result = constructorInfo != null ? constructorInfo.Invoke(null) : null;
+            ConstructorInfo constructorInfo = t.GetConstructor(Type.EmptyTypes);
+            object result = constructorInfo != null ? constructorInfo.Invoke(null) : null;
             return result as ITypeHandler;
         }
     }
