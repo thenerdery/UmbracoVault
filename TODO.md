@@ -16,3 +16,4 @@ Add support for the macro container
 Make transformations not run by default, they should be explicit somehow.
 Document Default Transformations - SuperScript Transformations
 Figure out why bool transforms take so long (100ms vs 1-2ms)
+     changes
