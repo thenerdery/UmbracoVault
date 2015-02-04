@@ -286,6 +286,7 @@
     <Compile Include="Models\Objects.cs" />
     <Compile Include="Models\TextPrimitives.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypeHandlers\LocationIdTypeHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UmbracoVault\UmbracoVault.csproj">

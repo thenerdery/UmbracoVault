@@ -8,7 +8,7 @@ namespace UmbracoVault.Attributes
     /// This tells the TypeHandlerFactory to not load this ITypeHandler implementation into the default list.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public class IgnoreTypeHandlerAutoRegisterAttribute : Attribute
+    public class IgnoreTypeHandlerAutoRegistrationAttribute : Attribute
     {
 
     }

@@ -62,7 +62,7 @@ namespace UmbracoVault.TypeHandlers
         private bool IsTypeHandlerThatIsNotAutoLoadIgnored(Type x)
         {
             return x.GetInterfaces().Contains(typeof (ITypeHandler)) && x.IsClass &&
-                   !x.GetCustomAttributes(typeof (IgnoreTypeHandlerAutoRegisterAttribute), true).Any();
+                   !x.GetCustomAttributes(typeof (IgnoreTypeHandlerAutoRegistrationAttribute), true).Any();
         }
 
         /// <summary>

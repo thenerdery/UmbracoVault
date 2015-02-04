@@ -232,7 +232,7 @@
     <Compile Include="Attributes\ContainsUmbracoVaultTypeHandlersAttribute.cs" />
     <Compile Include="Attributes\UmbracoIgnorePropertyAttribute.cs" />
     <Compile Include="Attributes\UmbracoEnumPropertyAttribute.cs" />
-    <Compile Include="Attributes\IgnoreTypeHandlerAutoRegisterAttribute.cs" />
+    <Compile Include="Attributes\IgnoreTypeHandlerAutoRegistrationAttribute.cs" />
     <Compile Include="Attributes\UmbracoEntityAttribute.cs" />
     <Compile Include="Attributes\UmbracoMediaEntityAttribute.cs" />
     <Compile Include="Attributes\UmbracoMediaPropertyAttribute.cs" />

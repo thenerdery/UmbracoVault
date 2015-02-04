@@ -1,7 +1,9 @@
-﻿using Umbraco.Web;
+﻿using ReferenceWebsite.TypeHandlers;
+using Umbraco.Web;
 using Umbraco.Web.Mvc;
 using UmbracoVault;
 using UmbracoVault.Controllers;
+using UmbracoVault.TypeHandlers;
 
 namespace ReferenceWebsite
 {
@@ -14,6 +16,7 @@ namespace ReferenceWebsite
                 .SetDefaultControllerType(typeof(VaultDefaultGenericController));
 
             Vault.RegisterViewModelNamespace("ReferenceWebsite.Models", "ReferenceWebsite");
+            TypeHandlerFactory.Instance.RegisterTypeHandler<LocationIdTypeHandler>();
         }
     }
 }
