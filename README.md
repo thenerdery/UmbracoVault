@@ -62,7 +62,8 @@ Want to learn more? Check out the wiki!
 ##Nuget Installation
 
 ```
-PM> Install-Package UmbracoVault -IncludePrerelease -Source https://ci.appveyor.com/nuget/umbracovault-5m6ate96gcwx  -UserName <appveyoremail> -Password <appveyorpassword>
+PM> Nuget.exe Sources Add -Name UmbracoVaultBuild -Source https://ci.appveyor.com/nuget/umbracovault-5m6ate96gcwx -UserName <appveyoremail> -Password <appveyorpassword>
+PM> Install-Package UmbracoVault -IncludePrerelease -Source UmbracoVaultBuild
 ```
 
 ## Extensibility
