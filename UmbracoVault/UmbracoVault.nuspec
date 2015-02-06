@@ -3,13 +3,13 @@
     <metadata>
         <id>UmbracoVault</id>
         <title>Umbraco Vault</title>
-		<version>0.0.0</version>
-        <authors>Paul Trandem, Ken Sykora, Andrew Morger, Jared Swarts</authors>
+		    <version>0.0.0</version>
+        <authors>The Nerdery</authors>
         <owners>thenerdery</owners>
         <projectUrl>https://github.com/kensykora/UmbracoVault</projectUrl>
-		<licenseUrl>https://github.com/kensykora/UmbracoVault/blob/master/LICENSE</licenseUrl>
+		    <licenseUrl>https://github.com/kensykora/UmbracoVault/blob/master/LICENSE</licenseUrl>
         <requireLicenseAcceptance>true</requireLicenseAcceptance>
-		<summary>Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your views.</summary>
+		    <summary>Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your views.</summary>
         <description>Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your views. It allows you to create lightly-decorated classes that Vault will understand how to hydrate. This gives you the full view model-style experience in Umbraco that you are accustomed to in MVC, complete with strongly-typed view properties (no more magic strings in your views).</description>
         <releaseNotes />
         <copyright>Copyright 2014</copyright>
