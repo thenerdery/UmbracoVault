@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{82B3D9D6-525C-4A7F-A149-EE409ED011E8}"
 	ProjectSection(SolutionItems) = preProject
@@ -13,6 +13,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{699CD1F8-7661-45DB-955D-867AEA80FB2A}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
+		UmbracoVault\UmbracoVault.nuspec = UmbracoVault\UmbracoVault.nuspec
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{D0CB87C7-74CD-4918-9E97-297AA82B3D86}"
