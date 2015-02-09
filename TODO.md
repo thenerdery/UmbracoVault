@@ -2,7 +2,6 @@
 
 Setup environment and conditional deploys for debug / release and tags
 Setup nerdery org account for AppVeyor
-Include symbols on release build
 
 ## Code
 
