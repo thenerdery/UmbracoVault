@@ -303,9 +303,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
     <Compile Include="Models\Arrays.cs" />
     <Compile Include="Models\Breadcrumbs.cs" />
     <Compile Include="Models\CmsViewModelBase.cs" />
@@ -317,6 +314,7 @@
     <Compile Include="Models\TextPrimitives.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeHandlers\LocationIdTypeHandler.cs" />
+    <Compile Include="UmbracoApplicationStart.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UmbracoVault\UmbracoVault.csproj">

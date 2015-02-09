@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{82B3D9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{699CD1F8-7661-45DB-955D-867AEA80FB2A}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		appveyor.yml = appveyor.yml
 		UmbracoVault\UmbracoVault.nuspec = UmbracoVault\UmbracoVault.nuspec
 	EndProjectSection
