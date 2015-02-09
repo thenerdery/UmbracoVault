@@ -83,5 +83,12 @@ namespace ReferenceWebsite.Models
         /// Supported range: 0 to 65,535
         /// </summary>
         public ushort UShort { get; set; }
+
+        /// <summary>
+        /// Slider property editor
+        /// Supported range: 0 to 2,147,483,647
+        /// </summary>
+        /// <remarks>Slider doesn't support negative values</remarks>
+        public int Slider { get; set; }
     }
 }

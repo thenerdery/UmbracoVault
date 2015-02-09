@@ -79,10 +79,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Models\AutoRegisteredTypeHandler.cs" />
+    <Compile Include="Models\IgnoredTypeHandler.cs" />
+    <Compile Include="Models\CustomTypeHandler.cs" />
     <Compile Include="Models\ExampleEnum.cs" />
     <Compile Include="Models\ExampleModelAllTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UmbracoContextTests.cs" />
+    <Compile Include="TypeHandlerFactoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

@@ -3,6 +3,10 @@ using System.Configuration;
 
 namespace UmbracoVault.Transformations
 {
+    /// <summary>
+    /// Takes in an object of type <see cref="System.String"/> and will wrap specific characters with
+    /// &lt;sup&gt; tags such that they have superscript around them.
+    /// </summary>
     public class SuperScriptTransformation : ITransformation
     {
         private readonly string[] _targetCharacters;

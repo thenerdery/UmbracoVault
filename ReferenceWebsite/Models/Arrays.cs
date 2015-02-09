@@ -19,6 +19,26 @@ namespace ReferenceWebsite.Models
         /// <summary>
         /// Generic content lists are supported.
         /// </summary>
-        public IList<StaffMember> StaffList { get; set; } 
+        public IList<StaffMember> StaffList { get; set; }
+
+        /// <summary>
+        /// This contains the list of Checkbox Values
+        /// </summary>
+        public string[] CheckboxList { get; set; }
+
+        /// <summary>
+        /// THis contains the list of Dictionary Picker values
+        /// </summary>
+        public string[] DictionaryPicker { get; set; }
+
+        /// <summary>
+        /// List of Integers that correspond to prevalues in the Umbraco DB. Lookup is required to get text values.
+        /// </summary>
+        public int[] DropDownListMultiplePublishKeys { get; set; }
+
+        /// <summary>
+        /// List of dropdown values. Publishes the string entry so no lookup is required
+        /// </summary>
+        public string[] DropDownListMultiple { get; set; }
     }
 }

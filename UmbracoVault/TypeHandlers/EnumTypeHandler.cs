@@ -7,7 +7,7 @@ namespace UmbracoVault.TypeHandlers
     /// <summary>
     /// Used for binding WYSIWYG fields in Umbraco. Executes Macros within Rich Text Fields.
     /// </summary>
-    [IgnoreAutoLoad]
+    [IgnoreTypeHandlerAutoRegistration]
     public class EnumTypeHandler : ITypeHandler
     {
         public object GetAsType<T>(object input)

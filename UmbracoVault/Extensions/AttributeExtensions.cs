@@ -38,7 +38,7 @@ namespace UmbracoVault.Extensions
 
         public static ITypeHandler GetTypeHander(this UmbracoPropertyAttribute attribute, Type propertyType)
         {
-            var typeHandler = attribute.TypeHandler ?? TypeHandlerFactory.Instance.GetHandler(propertyType);
+            var typeHandler = attribute.TypeHandler ?? TypeHandlerFactory.Instance.GetHandlerForType(propertyType);
 
             if (typeHandler == null)
             {

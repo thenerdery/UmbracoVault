@@ -11,6 +11,9 @@ namespace ReferenceWebsite.Models
         
         [UmbracoRichTextProperty]
         public string Content { get; set; }
+
+        [UmbracoProperty(Alias = "image")]
+        public Image PostImage { get; set; }
     }
 
     [UmbracoEntity(AutoMap = true)]

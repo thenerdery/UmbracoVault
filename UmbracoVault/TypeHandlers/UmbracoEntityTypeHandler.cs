@@ -6,7 +6,7 @@ using UmbracoVault.Attributes;
 
 namespace UmbracoVault.TypeHandlers
 {
-    [IgnoreAutoLoad]
+    [IgnoreTypeHandlerAutoRegistration]
     public class UmbracoEntityTypeHandler : ITypeHandler
     {
         public object GetAsType<T>(object input)
