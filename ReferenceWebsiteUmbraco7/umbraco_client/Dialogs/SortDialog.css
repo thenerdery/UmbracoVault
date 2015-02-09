@@ -1,8 +1,7 @@
 ﻿#sortableFrame
 {
-    height: 270px;
+    height: auto;
     overflow: auto;
-    border: 1px solid #ccc;
 }
 
 #sortableNodes

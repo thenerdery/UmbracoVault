@@ -12,8 +12,8 @@
 <head runat="server">
     <title></title>
     <cc1:UmbracoClientDependencyLoader runat="server" ID="ClientLoader" />
-    <umb:CssInclude ID="CssInclude1" runat="server" FilePath="ui/default.css" PathNameAlias="UmbracoClient" />
-    <umb:CssInclude ID="CssInclude2" runat="server" FilePath="modal/style.css" PathNameAlias="UmbracoClient" />
+
+    <umb:CssInclude ID="CssInclude1" runat="server" FilePath="assets/css/umbraco.css" PathNameAlias="UmbracoRoot" />
     
     <umbClient:JsApplicationLib runat="server"/>
     <umbClient:JsJQueryCore runat="server"/>
@@ -23,6 +23,10 @@
     <umb:JsInclude ID="JsInclude7" runat="server" FilePath="modal/modal.js" PathNameAlias="UmbracoClient" Priority="10" />
     <umb:JsInclude ID="JsInclude3" runat="server" FilePath="ui/default.js" PathNameAlias="UmbracoClient" Priority="10" />
     <umb:JsInclude ID="JsIncludeHotkeys" runat="server" FilePath="Application/jQuery/jquery.hotkeys.js" PathNameAlias="UmbracoClient" Priority="10" />
+    
+    <umb:JsInclude runat="server" FilePath="lib/bootstrap/js/bootstrap.2.3.2.min.js" PathNameAlias="UmbracoRoot" Priority="10" />
+    <umb:JsInclude runat="server" FilePath="lib/umbraco/compat.js" PathNameAlias="UmbracoRoot" Priority="10" />
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>

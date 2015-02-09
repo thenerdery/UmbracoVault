@@ -15,6 +15,12 @@
     
     #propertyMapping tbody tr td{border-bottom:1px solid #efefef}
     #propertyMapping td{padding: 4px; ;}  
+    body.umbracoDialog { overflow: auto; }
+    .umb-dialog .umb-control-group .umb-el-wrap { overflow: hidden; }
+    .umb-dialog .umb-control-group .umb-el-wrap label { float: left; width: 140px; font-weight: bold; }
+    .umb-dialog .umb-control-group .umb-el-wrap label:after { content:":"; }
+    .umb-dialog .umb-control-group .umb-el-wrap .controls-row { float: left; width: 280px; padding-top: 8px; }
+    .umb-dialog .umb-control-group .umb-el-wrap .controls-row select { width: auto; }
     </style>
 
 </asp:Content>
@@ -73,7 +79,7 @@
                         <%# DataBinder.Eval(Container, "DataItem.Name") %>
                         <asp:HiddenField ID="Alias" runat="server" Value='<%#DataBinder.Eval(Container, "DataItem.Alias")%>' />
                         <asp:HiddenField ID="Name" runat="server" Value='<%#DataBinder.Eval(Container, "DataItem.Name")%>' />
-                        <asp:HiddenField ID="DataTypeId" runat="server" Value='<%#DataBinder.Eval(Container, "DataItem.DataTypeId")%>' />
+                        <asp:HiddenField ID="PropertyEditorAlias" runat="server" Value='<%#DataBinder.Eval(Container, "DataItem.PropertyEditorAlias")%>' />
                     </td>
                     <td><asp:DropDownList id="DestinationProperty" runat="server" /></td>
                 </tr>

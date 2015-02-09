@@ -15,26 +15,24 @@
     <cc1:UmbracoClientDependencyLoader runat="server" ID="ClientLoader" />
 
     <!-- Default script and style -->
-    <umb:CssInclude ID="CssInclude1" runat="server" FilePath="ui/default.css" PathNameAlias="UmbracoClient" />
+    <umb:CssInclude ID="CssInclude1" runat="server" FilePath="assets/css/umbraco.css" PathNameAlias="UmbracoRoot" />
 
     <umbClient:JsApplicationLib runat="server" />
     <umbClient:JsJQueryCore runat="server" />
     <umbClient:JsUmbracoApplicationCore runat="server" />
+
 
     <umb:JsInclude ID="JsInclude2" runat="server" FilePath="ui/default.js" PathNameAlias="UmbracoClient" Priority="5" />
 
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
 </head>
 
-<body class="umbracoDialog" style="margin: 15px 10px 0px 10px;">
-
-
+<body class="umbracoDialog umb-dialog">
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager1" EnablePartialRendering="true" runat="server"></asp:ScriptManager>
         <asp:ContentPlaceHolder ID="body" runat="server">
         </asp:ContentPlaceHolder>
     </form>
-
     <asp:ContentPlaceHolder ID="footer" runat="server"></asp:ContentPlaceHolder>
 </body>
 </html>

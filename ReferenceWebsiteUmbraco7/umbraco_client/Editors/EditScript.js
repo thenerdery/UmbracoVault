@@ -21,7 +21,8 @@
             var self = this;
 
             //bind to the save event
-            this._opts.saveButton.click(function () {
+            this._opts.saveButton.click(function (event) {
+                event.preventDefault();
                 self.doSubmit();
             });
         },
@@ -43,20 +44,45 @@
         },
 
         submitSucces: function(t) {
+
             if (t != 'true') {
                 top.UmbSpeechBubble.ShowMessage('error', unescape(this._opts.text.fileErrorHeader), unescape(this._opts.text.fileErrorText));
             }
-            else {
-                top.UmbSpeechBubble.ShowMessage('save', unescape(this._opts.text.fileSavedHeader), unescape(this._opts.text.fileSavedText));
-            }
-
 
             var newFilePath = this._opts.nameTxtBox.val();
-            UmbClientMgr.mainTree().setActiveTreeType('scripts');
-            //we need to pass in the newId parameter so it knows which node to resync after retreival from the server
-            UmbClientMgr.mainTree().syncTree("-1,init," + this._opts.originalFileName, true, null, newFilePath);
-            //set the original file path to the new one
-            this._opts.originalFileName = newFilePath;
+            
+            //if the filename changes, we need to redirect since the file name is used in the url
+            if (this._opts.originalFileName != newFilePath) {                
+                var newLocation = window.location.pathname + "?" + "&file=" + newFilePath;
+
+                UmbClientMgr.contentFrame(newLocation);
+
+                //we need to do this after we navigate otherwise the navigation will wait unti lthe message timeout is done!
+                top.UmbSpeechBubble.ShowMessage('save', unescape(this._opts.text.fileSavedHeader), unescape(this._opts.text.fileSavedText));
+            }
+            else {
+
+                top.UmbSpeechBubble.ShowMessage('save', unescape(this._opts.text.fileSavedHeader), unescape(this._opts.text.fileSavedText));
+                UmbClientMgr.mainTree().setActiveTreeType('scripts');
+
+                //we need to create a list of ids for each folder/file. Each folder/file's id is it's full path so we need to build each one.
+                var paths = [];
+                var parts = this._opts.originalFileName.split('/');
+                for (var i = 0;i < parts.length;i++) {
+                    if (paths.length > 0) {
+                        paths.push(paths[i - 1] + "/" + parts[i]);
+                    }
+                    else {
+                        paths.push(parts[i]);
+                    }
+                }
+
+                //we need to pass in the newId parameter so it knows which node to resync after retreival from the server
+                UmbClientMgr.mainTree().syncTree("-1,init," + paths.join(','), true, null, newFilePath);
+                //set the original file path to the new one
+                this._opts.originalFileName = newFilePath;
+            }
+            
         },
 
         submitFailure: function(t) {

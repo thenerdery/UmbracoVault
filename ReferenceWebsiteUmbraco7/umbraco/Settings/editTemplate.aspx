@@ -4,6 +4,7 @@
 <%@ OutputCache Location="None" %>
 
 <%@ Import Namespace="Umbraco.Core" %>
+<%@ Import Namespace="Umbraco.Core.Configuration" %>
 <%@ Import Namespace="Umbraco.Core.IO" %>
 <%@ Register TagPrefix="cc1" Namespace="umbraco.uicontrols" Assembly="controls" %>
 <%@ Register TagPrefix="umb" Namespace="ClientDependency.Core.Controls" Assembly="ClientDependency.Core" %>
@@ -17,16 +18,17 @@
     <umb:JsInclude ID="JsInclude" runat="server" FilePath="splitbutton/jquery.splitbutton.js" PathNameAlias="UmbracoClient" />
     <umb:JsInclude ID="JsInclude1" runat="server" FilePath="Editors/EditTemplate.js" PathNameAlias="UmbracoClient" />
     <script type="text/javascript">
-        //this needs to be a global object for the doSubmit() to work
-        var editor;
-
+        
         jQuery(document).ready(function() {
             //create the editor
-            editor = new Umbraco.Editors.EditTemplate({
+            var editor = new Umbraco.Editors.EditTemplate({
+                templateAliasClientId: '<%= AliasTxt.ClientID %>',
+                templateNameClientId: '<%= NameTxt.ClientID %>',
+                saveButton: $("#<%= ((Control)SaveButton).ClientID %>"),
                 restServiceLocation: "<%= Url.GetSaveFileServicePath() %>",                    
                 umbracoPath: '<%= IOHelper.ResolveUrl(SystemDirectories.Umbraco) %>',
                 editorClientId: '<%= editorSource.ClientID %>',
-                useMasterPages: <%=umbraco.UmbracoSettings.UseAspNetMasterPages.ToString().ToLower()%>,
+                useMasterPages: <%=UmbracoConfig.For.UmbracoSettings().Templates.UseAspNetMasterPages.ToString().ToLower()%>,
                 templateId: <%= Request.QueryString["templateID"] %>,
                 masterTemplateId: jQuery('#<%= MasterTemplate.ClientID %>').val(),
                 masterPageDropDown: $("#<%= MasterTemplate.ClientID %>"),
@@ -41,12 +43,7 @@
 
             editor.init();
         });
-
-        function doSubmit() {
-            //this is called when the save button is clicked or invoked            
-            editor.save(jQuery('#<%= NameTxt.ClientID %>').val(), jQuery('#<%= AliasTxt.ClientID %>').val(), UmbEditor.GetCode());
-        }
-
+        
         //TODO: the below should be refactored into being part of the EditTemplate.js class but have left it here for now since i don't have time.
 
         function umbracoTemplateInsertMasterPageContentContainer() {
@@ -106,24 +103,30 @@
 
     </script>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
-    <cc1:UmbracoPanel ID="Panel1" runat="server" Width="608px" Height="336px" hasMenu="true">
-        <cc1:Pane ID="Pane7" runat="server" Height="44px" Width="528px">
+    <cc1:TabView ID="Panel1" runat="server" hasMenu="true">
+        
+        <cc1:Pane ID="Pane7" runat="server">
             <cc1:PropertyPanel ID="pp_name" runat="server">
-                <asp:TextBox ID="NameTxt" Width="350px" runat="server"></asp:TextBox>
+                <asp:TextBox ID="NameTxt" runat="server"></asp:TextBox>
             </cc1:PropertyPanel>
             <cc1:PropertyPanel ID="pp_alias" runat="server">
-                <asp:TextBox ID="AliasTxt" Width="350px" runat="server"></asp:TextBox>
+                <asp:TextBox ID="AliasTxt" runat="server"></asp:TextBox>
             </cc1:PropertyPanel>
             <cc1:PropertyPanel ID="pp_masterTemplate" runat="server">
-                <asp:DropDownList ID="MasterTemplate" Width="350px" runat="server" />
+                <asp:DropDownList ID="MasterTemplate" runat="server" />
             </cc1:PropertyPanel>
+        </cc1:Pane>    
+        
+        <cc1:Pane ID="Pane8" runat="server">
             <cc1:PropertyPanel ID="pp_source" runat="server">
                 <cc1:CodeArea ID="editorSource" runat="server" CodeBase="HtmlMixed" EditorMimeType="text/html" ClientSaveMethod="doSubmit"
-                    AutoResize="true" OffSetX="37" OffSetY="54"/>
+                    AutoResize="false" />
             </cc1:PropertyPanel>
         </cc1:Pane>
-    </cc1:UmbracoPanel>
+
+    </cc1:TabView>
     <div id="splitButton" style="display: inline; height: 23px; vertical-align: top;">
         <a href="#" id="sb" class="sbLink">
             <img alt="Insert Inline Razor Macro" src="../images/editor/insRazorMacro.png" title="Insert Inline Razor Macro"
