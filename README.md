@@ -28,7 +28,7 @@ Content | content | Richtext editor
 
 We can create a class for this document type:
 
-```
+```csharp
 [UmbracoEntity(AutoMap = true)]
 public class BlogEntryViewModel
 {
@@ -61,9 +61,9 @@ Want to learn more? Check out the wiki!
 
 ##Nuget Installation
 
-```
+```PowerShell
 PM> Nuget.exe Sources Add -Name UmbracoVaultBuild -Source https://ci.appveyor.com/nuget/umbracovault-5m6ate96gcwx -UserName <appveyoremail> -Password <appveyorpassword>
-PM> Install-Package UmbracoVault -IncludePrerelease -Source UmbracoVaultBuild
+PM> Install-Package UmbracoVault -Source UmbracoVaultBuild
 ```
 
 ## Extensibility
