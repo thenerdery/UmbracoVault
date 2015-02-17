@@ -175,10 +175,6 @@
     <Reference Include="TidyNet">
       <HintPath>..\packages\UmbracoCms.Core.6.2.4\lib\TidyNet.dll</HintPath>
     </Reference>
-    <Reference Include="uComponents.DataTypes, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\uComponents.6.0.0\lib\net40\uComponents.DataTypes.dll</HintPath>
-    </Reference>
     <Reference Include="umbraco">
       <HintPath>..\packages\UmbracoCms.Core.6.2.4\lib\umbraco.dll</HintPath>
     </Reference>
