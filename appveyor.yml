@@ -11,11 +11,11 @@ os: Windows Server 2012
 assembly_info:
   patch: true
   file: AssemblyInfo.*
-  assembly_version: "$(CURRENT_VERSION).{build}"
-  assembly_file_version: "$(CURRENT_VERSION).{build}"
-  assembly_informational_version: "$(CURRENT_VERSION).{build}"
+  assembly_version: "$(CURRENT_VERSION).0"
+  assembly_file_version: "$(CURRENT_VERSION).0"
+  assembly_informational_version: "$(CURRENT_VERSION).0"
 cache:
-  - packages
+  - packages -> **\packages.config 
 configuration:
   - Release
 after_build:
