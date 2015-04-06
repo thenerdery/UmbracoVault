@@ -1,0 +1,13 @@
+﻿@model ReferenceWebsite.Models.BlogEntryViewModel
+
+@{
+    Layout = null;
+}
+
+@Html.Partial("breadcrumbs")
+	
+<h1>@Model.Title</h1>
+<div>@Model.PostDate.ToShortDateString()</div>
+<div>
+    @Html.Raw(Model.Content)
+</div>	

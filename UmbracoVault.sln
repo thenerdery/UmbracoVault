@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{82B3D9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{699CD1F8-7661-45DB-955D-867AEA80FB2A}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		appveyor.yml = appveyor.yml
 		UmbracoVault\UmbracoVault.nuspec = UmbracoVault\UmbracoVault.nuspec
 	EndProjectSection
@@ -30,52 +31,30 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UmbracoVault", "UmbracoVaul
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UmbracoVault.Tests", "UmbracoVault.Tests\UmbracoVault.Tests.csproj", "{E6C4F958-10BE-4641-8531-32270AA6EFBD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferenceWebsiteUmbraco7", "ReferenceWebsiteUmbraco7\ReferenceWebsiteUmbraco7.csproj", "{EDE642F7-5692-4C37-A431-7457E3252F8B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		NugetPrerelease|Any CPU = NugetPrerelease|Any CPU
-		NugetRelease|Any CPU = NugetRelease|Any CPU
-		QA|Any CPU = QA|Any CPU
 		Release|Any CPU = Release|Any CPU
-		Review|Any CPU = Review|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{377DB447-576A-48C5-9D87-DFD915BE9732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{377DB447-576A-48C5-9D87-DFD915BE9732}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{377DB447-576A-48C5-9D87-DFD915BE9732}.NugetPrerelease|Any CPU.ActiveCfg = Release|Any CPU
-		{377DB447-576A-48C5-9D87-DFD915BE9732}.NugetPrerelease|Any CPU.Build.0 = Release|Any CPU
-		{377DB447-576A-48C5-9D87-DFD915BE9732}.NugetRelease|Any CPU.ActiveCfg = Release|Any CPU
-		{377DB447-576A-48C5-9D87-DFD915BE9732}.NugetRelease|Any CPU.Build.0 = Release|Any CPU
-		{377DB447-576A-48C5-9D87-DFD915BE9732}.QA|Any CPU.ActiveCfg = Release|Any CPU
-		{377DB447-576A-48C5-9D87-DFD915BE9732}.QA|Any CPU.Build.0 = Release|Any CPU
 		{377DB447-576A-48C5-9D87-DFD915BE9732}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{377DB447-576A-48C5-9D87-DFD915BE9732}.Release|Any CPU.Build.0 = Release|Any CPU
-		{377DB447-576A-48C5-9D87-DFD915BE9732}.Review|Any CPU.ActiveCfg = Release|Any CPU
-		{377DB447-576A-48C5-9D87-DFD915BE9732}.Review|Any CPU.Build.0 = Release|Any CPU
 		{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}.NugetPrerelease|Any CPU.ActiveCfg = QA|Any CPU
-		{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}.NugetPrerelease|Any CPU.Build.0 = QA|Any CPU
-		{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}.NugetRelease|Any CPU.ActiveCfg = Release|Any CPU
-		{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}.NugetRelease|Any CPU.Build.0 = Release|Any CPU
-		{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}.QA|Any CPU.ActiveCfg = QA|Any CPU
-		{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}.QA|Any CPU.Build.0 = QA|Any CPU
 		{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}.Review|Any CPU.ActiveCfg = Review|Any CPU
-		{7A5C0119-EF41-4B19-88DA-35C7B5F7E481}.Review|Any CPU.Build.0 = Review|Any CPU
 		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.NugetPrerelease|Any CPU.ActiveCfg = NugetPrerelease|Any CPU
-		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.NugetPrerelease|Any CPU.Build.0 = NugetPrerelease|Any CPU
-		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.NugetRelease|Any CPU.ActiveCfg = NugetRelease|Any CPU
-		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.NugetRelease|Any CPU.Build.0 = NugetRelease|Any CPU
-		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.QA|Any CPU.ActiveCfg = NugetRelease|Any CPU
-		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.QA|Any CPU.Build.0 = NugetRelease|Any CPU
 		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.Review|Any CPU.ActiveCfg = Release|Any CPU
-		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.Review|Any CPU.Build.0 = Release|Any CPU
+		{EDE642F7-5692-4C37-A431-7457E3252F8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDE642F7-5692-4C37-A431-7457E3252F8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDE642F7-5692-4C37-A431-7457E3252F8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDE642F7-5692-4C37-A431-7457E3252F8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

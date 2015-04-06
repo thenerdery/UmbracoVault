@@ -1,4 +1,4 @@
-#Vault for Umbraco 6
+#Vault for Umbraco 6 and 7
 
 ### Build Status:
 
@@ -7,16 +7,10 @@
 | master | [![Build status](https://ci.appveyor.com/api/projects/status/bqbyg6yevctgm7tl?svg=true)](https://ci.appveyor.com/project/kensykora/umbracovault) |
 | develop | [![Build status](https://ci.appveyor.com/api/projects/status/bqbyg6yevctgm7tl/branch/develop?svg=true)](https://ci.appveyor.com/project/kensykora/umbracovault/branch/develop) |
 
-**Version 0.9, Designed for Umbraco 6.x**
-
-***Note**: We're already hard at work developing and testing a more refined version of Vault designed to support Umbraco 7. Some features identified in this document may not apply to newer versions of Umbraco Vault. But don't worry, the good stuff will stick around.*
-
-***Also note**: Vault has a lot of features. We're actively working on documenting all of them, but this may take some time; this document is not yet complete.*
-
-##Overview
+## Overview
 Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your markup.  It allows you to create lightly-decorated classes that Vault will understand how to hydrate. This gives you the full view model-style experience in Umbraco that you are accustomed to in MVC, complete with strongly-typed view properties (no more magic strings in your views).
 
-##The Idea
+## The Idea
 
 let's assume we have a document type with the alias `BlogEntry` set up with the following properties:
 
@@ -59,7 +53,7 @@ Much cleaner, with compile time checking. Reads nicer than the usual `@Umbraco.F
 
 Want to learn more? Check out the wiki!
 
-##Nuget Installation
+## Nuget Installation
 
 ```PowerShell
 PM> Nuget.exe Sources Add -Name UmbracoVaultBuild -Source https://ci.appveyor.com/nuget/umbracovault-5m6ate96gcwx -UserName <appveyoremail> -Password <appveyorpassword>

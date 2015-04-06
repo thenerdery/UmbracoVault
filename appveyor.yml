@@ -1,6 +1,6 @@
 environment:
-  CURRENT_VERSION: 0.9.0
-version: 0.9.0-{build}
+  CURRENT_VERSION: 1.0.1
+version: 1.0.1-{build}
 branches:
   only:
     - master
@@ -11,14 +11,15 @@ os: Windows Server 2012
 assembly_info:
   patch: true
   file: AssemblyInfo.*
-  assembly_version: "$(CURRENT_VERSION).{build}"
-  assembly_file_version: "$(CURRENT_VERSION).{build}"
-  assembly_informational_version: "$(CURRENT_VERSION).{build}"
+  assembly_version: "$(CURRENT_VERSION).0"
+  assembly_file_version: "$(CURRENT_VERSION).0"
+  assembly_informational_version: "$(CURRENT_VERSION).0"
+cache:
+  - packages -> **\packages.config 
 configuration:
-  - Debug
   - Release
 after_build:
   - nuget pack UmbracoVault/UmbracoVault.csproj -Symbols -Version %CURRENT_VERSION%-build%APPVEYOR_BUILD_NUMBER%
-  - nuget pack UmbracoVault/UmbracoVault.csproj -Version %CURRENT_VERSION%
+  - nuget pack UmbracoVault/UmbracoVault.csproj -Symbols -Version %CURRENT_VERSION%
 artifacts:
   - path: '*.nupkg'
