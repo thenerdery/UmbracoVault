@@ -1,0 +1,38 @@
+﻿@using ReferenceWebsite.Models
+@using UmbracoVault
+@model ReferenceWebsite.Models.MembersViewModel
+@{
+    Layout = null;
+    var me = Vault.Context.GetMemberById<WebsiteUser>(1130);
+}
+
+@Html.Partial("breadcrumbs")
+<table>
+    <tr>
+        <th>Property</th>
+        <th>Value</th>
+        <th>Expected</th>
+        <th>Correct</th>
+    </tr>
+    <tr>
+        <td>FirstName</td>
+        <td>@me.FirstName</td>
+        <td>Matt</td>
+        <td>@(me.FirstName == "Matt")</td>
+    </tr>
+    <tr>
+        <td>Last Name</td>
+        <td>@me.LastName</td>
+        <td>Burke</td>
+        <td>@(me.LastName == "Burke")</td>
+    </tr>
+    <tr>
+        <td>Age</td>
+        <td>@me.Age</td>
+        <td>27</td>
+        <td>@(me.Age == 27)</td>
+    </tr>
+</table>
+
+Hardcoded load by id is same as from ViewModel: 
+@(me.FirstName == Model.User.FirstName && me.LastName == Model.User.LastName && me.Age == Model.User.Age)
