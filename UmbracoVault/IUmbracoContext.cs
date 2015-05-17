@@ -128,5 +128,19 @@ namespace UmbracoVault
         /// <typeparam name="T">The type to be hydrated</typeparam>
         /// <returns>True if Media, false if Content</returns>
         bool IsMediaRequest<T>();
+
+        /// <summary>
+        /// Retrieves a member for the given ID
+        /// </summary>
+        /// <typeparam name="T">The object type to cast the member to</typeparam>
+        /// <returns>a strongly typed version (T) of the requested umbraco member.</returns>
+        T GetMemberById<T>(int id);
+
+        /// <summary>
+        /// Retrieves a member for the given ID
+        /// </summary>
+        /// <typeparam name="T">The object type to cast the member to</typeparam>
+        /// <returns>a strongly typed version (T) of the requested umbraco member.</returns>
+        T GetMemberById<T>(string idString);
     }
 }
