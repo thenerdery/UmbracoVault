@@ -168,7 +168,7 @@ namespace UmbracoVault
         public T GetMemberById<T>(string idString)
         {
             var id = GetIdFromString(idString);
-            return GetMediaById<T>(id);
+            return GetMemberById<T>(id);
         }
 
         public T GetMemberById<T>(int id)
