@@ -294,6 +294,7 @@
     <Compile Include="Models\CmsViewModelBase.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\GenericContent.cs" />
+    <Compile Include="Models\MembersViewModel.cs" />
     <Compile Include="Models\NumericPrimitives.cs" />
     <Compile Include="Models\Blog.cs" />
     <Compile Include="Models\Objects.cs" />
