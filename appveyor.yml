@@ -1,6 +1,6 @@
 environment:
-  CURRENT_VERSION: 1.0.1
-version: 1.0.1-{build}
+  CURRENT_VERSION: 1.1.0
+version: 1.1.0-{build}
 branches:
   only:
     - master
