@@ -78,6 +78,12 @@ namespace UmbracoVault
             return mediaItem;
         }
 
+        private IMember GetUmbracoMember(int id)
+        {
+            var member = ApplicationContext.Current.Services.MemberService.GetById(id);
+            return member;
+        }
+
         #region IUmbracoContext Members
 
         /// <summary>
@@ -157,6 +163,25 @@ namespace UmbracoVault
             }
 
             return GetMediaItem<T>(umbracoItem);
+        }
+
+        public T GetMemberById<T>(string idString)
+        {
+            var id = GetIdFromString(idString);
+            return GetMemberById<T>(id);
+        }
+
+        public T GetMemberById<T>(int id)
+        {
+            var umbracoItem = GetUmbracoMember(id);
+
+            if (umbracoItem == null || umbracoItem.Id <= 0)
+            {
+                LogHelper.Error<T>(string.Format("Could not locate umbraco member with Id of '{0}'.", id), null);
+                return default(T);
+            }
+
+            return GetMemberItem<T>(umbracoItem);
         }
 
         public IEnumerable<T> GetContentByCsv<T>(string csv)
@@ -351,6 +376,19 @@ namespace UmbracoVault
             FillClassProperties(result, (alias, recursive) =>
             {
                 // recursive is ignored in this case
+                var value = m.GetValue(alias);
+                return value;
+            });
+
+            return result;
+        }
+
+        private T GetMemberItem<T>(IMember m)
+        {
+            var result = typeof(T).CreateWithNoParams<T>();
+
+            FillClassProperties(result, (alias, recursive) =>
+            {
                 var value = m.GetValue(alias);
                 return value;
             });
