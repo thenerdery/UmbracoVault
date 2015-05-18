@@ -177,7 +177,7 @@ namespace UmbracoVault
 
             if (umbracoItem == null || umbracoItem.Id <= 0)
             {
-                LogHelper.Error<T>(string.Format("Could not locate umbraco media item with Id of '{0}'.", id), null);
+                LogHelper.Error<T>(string.Format("Could not locate umbraco member with Id of '{0}'.", id), null);
                 return default(T);
             }
 
