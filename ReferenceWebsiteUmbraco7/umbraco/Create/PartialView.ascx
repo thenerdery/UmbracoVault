@@ -1,23 +1,31 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PartialView.ascx.cs" Inherits="Umbraco.Web.UI.Umbraco.Create.PartialView" %>
 <%@ Import Namespace="umbraco" %>
-<%@ Register TagPrefix="umb" Namespace="ClientDependency.Core.Controls" Assembly="ClientDependency.Core" %>
+<%@ Register TagPrefix="cc1" Namespace="umbraco.uicontrols" Assembly="controls" %>
 
-<umb:CssInclude runat="server" FilePath="Dialogs/CreateDialog.css" PathNameAlias="UmbracoClient" />
+<cc1:Pane runat="server">
+    <cc1:PropertyPanel runat="server" Text="Filename (without .cshtml, use / to make folders)">
+        <asp:TextBox ID="FileName" runat="server" CssClass="bigInput input-large-type input-block-level"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" 
+            CssClass="text-error" Display="Dynamic"
+            ErrorMessage="*" ControlToValidate="FileName" runat="server">*</asp:RequiredFieldValidator>
+        <asp:RegularExpressionValidator runat="server" ID="EndsWithValidator" 
+            CssClass="text-error" Display="Dynamic"
+            ErrorMessage="Cannot end with '/'" ControlToValidate="FileName" ValidationExpression=".*[^/\.]$">
+            Cannot end with '/' or '.'
+        </asp:RegularExpressionValidator>
+    </cc1:PropertyPanel>
 
-Filename (without .cshtml):
-<asp:RequiredFieldValidator ID="RequiredFieldValidator1" ErrorMessage="*" ControlToValidate="FileName" runat="server">*</asp:RequiredFieldValidator>
+    <cc1:PropertyPanel runat="server" Text="Choose a snippet:">
+        <asp:ListBox ID="PartialViewTemplate" runat="server" CssClass="bigInput input-large-type input-block-level" Rows="1" SelectionMode="Single"/>
+    </cc1:PropertyPanel>
+</cc1:Pane>
 
-<%--<input type="hidden" name="nodeType" value="-1">--%>
-<div>
-    <asp:TextBox ID="FileName" runat="server" CssClass="bigInput"></asp:TextBox>
-</div>
-<div>
-    Choose a snippet:<br />
-    <asp:ListBox ID="PartialViewTemplate" runat="server" Width="350" CssClass="bigInput" Rows="1"  SelectionMode="Single" />
-</div>
+<!-- added to support missing postback on enter in IE -->
+<asp:TextBox runat="server" Style="visibility: hidden; display: none;" ID="Textbox1" />
+<input type="hidden" name="nodeType" value="-1">
 
-<div class="submit-footer">
-    <asp:Button ID="SubmitButton" runat="server" OnClick="SubmitButton_Click" Text='<%#ui.Text("create") %>'></asp:Button>
-    &nbsp; <em><%= umbraco.ui.Text("or") %></em> &nbsp;
-    <a href="#" onclick="UmbClientMgr.closeModalWindow()"><%=umbraco.ui.Text("cancel")%></a>
-</div>
+
+<cc1:Pane runat="server" CssClass="btn-toolbar umb-btn-toolbar">
+    <a href="#" class="btn btn-link" onclick="UmbClientMgr.closeModalWindow()"><%=umbraco.ui.Text("cancel")%></a>
+    <asp:Button ID="sbmt" runat="server" CssClass="btn btn-primary" Text="Create" OnClick="SubmitButton_Click"></asp:Button>
+</cc1:Pane>
