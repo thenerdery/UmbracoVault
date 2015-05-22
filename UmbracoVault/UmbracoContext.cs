@@ -385,7 +385,7 @@ namespace UmbracoVault
 
         private T GetMemberItem<T>(IMember m)
         {
-            var result = typeof(T).CreateWithNoParams<T>();
+            var result = _classConstructor.CreateWithMember<T>(m);
 
             FillClassProperties(result, (alias, recursive) =>
             {

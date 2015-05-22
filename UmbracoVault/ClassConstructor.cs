@@ -42,7 +42,7 @@ namespace UmbracoVault
 
             return result;
         }
-        
+
         /// <summary>
         /// If the target type inhereits from UmbracoContentModel, this sets the Content property
         /// </summary>
@@ -53,6 +53,23 @@ namespace UmbracoVault
             {
                 model.Content = content;
             }
+        }
+
+        public T CreateWithMember<T>(IMember member)
+        {
+            var targetType = typeof(T);
+            var memberModel = targetType.CreateWithNoParams<T>();
+
+            var memberProperty = typeof(T).GetProperties(BindingFlags.SetProperty | BindingFlags.Public | BindingFlags.Instance)
+                .FirstOrDefault(x => x.PropertyType.IsAssignableFrom(typeof(IMember)) && x.CanWrite);
+
+            if (memberProperty != null)
+            {
+                memberProperty.SetValue(memberModel, member);
+            }
+
+            return memberModel;
+
         }
 
     }
