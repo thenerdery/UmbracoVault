@@ -239,7 +239,7 @@ namespace UmbracoVault
             return items.Select(GetItem<T>);
         }
 
-        //TODO: what is the real purpose of this method? 
+        //TODO: what is the real purpose of this method?
         ///// <summary>
         ///// Given an XPath Query, it returns an object of a specific type.
         ///// </summary>
@@ -389,6 +389,9 @@ namespace UmbracoVault
 
             FillClassProperties(result, (alias, recursive) =>
             {
+                if (!m.HasProperty(alias))
+                    return null;
+
                 var value = m.GetValue(alias);
                 return value;
             });
@@ -470,7 +473,7 @@ namespace UmbracoVault
         }
 
         /// <summary>
-        /// Gets properties that are NOT decorated with [UmbracoIgnoreProperty] (opt-out mode) 
+        /// Gets properties that are NOT decorated with [UmbracoIgnoreProperty] (opt-out mode)
         /// </summary>
         private static IEnumerable<PropertyInfo> GetAllPropertiesExceptOptedOut<T>()
         {
