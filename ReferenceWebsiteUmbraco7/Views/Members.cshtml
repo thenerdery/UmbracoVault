@@ -32,6 +32,12 @@
         <td>27</td>
         <td>@(me.Age == 27)</td>
     </tr>
+    <tr>
+        <td>Approved (Uses IMember Property)</td>
+        <td>@me.Approved</td>
+        <td>True</td>
+        <td>@(me.Approved == true)</td>
+    </tr>
 </table>
 Hardcoded load by id is same as from ViewModel:
 @(me.FirstName == Model.User.FirstName && me.LastName == Model.User.LastName && me.Age == Model.User.Age)
