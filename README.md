@@ -8,7 +8,10 @@
 | develop | [![Build status](https://ci.appveyor.com/api/projects/status/bqbyg6yevctgm7tl/branch/develop?svg=true)](https://ci.appveyor.com/project/kensykora/umbracovault/branch/develop) |
 
 ## Overview
-Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your markup.  It allows you to create lightly-decorated classes that Vault will understand how to hydrate. This gives you the full view model-style experience in Umbraco that you are accustomed to in MVC, complete with strongly-typed view properties (no more magic strings in your views).
+Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your
+ markup.  It allows you to create lightly-decorated classes that Vault will understand how to hydrate. This gives you
+ the full view model-style experience in Umbraco that you are accustomed to in MVC, complete with strongly-typed view
+ properties (no more magic strings in your views).
 
 ## The Idea
 
@@ -62,11 +65,14 @@ PM> Install-Package UmbracoVault -Source UmbracoVaultBuild
 
 ## Extensibility
 
-UmbracoVault was built to be extensible to other Umbraco package developers. What good is an ORM if it doesn't support other native object types? Please see our documentation on [how to extend Vault](https://github.com/kensykora/UmbracoVault/wiki/Extending-Vault) for your own Umbraco packages.
+UmbracoVault was built to be extensible to other Umbraco package developers. What good is an ORM if it doesn't support
+ other native object types? Please see our documentation on 
+ [how to extend Vault](https://github.com/kensykora/UmbracoVault/wiki/Extending-Vault) for your own Umbraco packages.
 
 ## Credits
 
-Huge thanks to The Nerdery for supporting the development effort of this ORM. Additionally, thanks to project contributors for their effort in building this library:
+Huge thanks to The Nerdery for supporting the development effort of this ORM. Additionally, thanks to project
+ contributors for their effort in building this library:
 
  * Paul Trandem
  * Andrew Morger

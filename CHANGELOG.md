@@ -1,3 +1,9 @@
+## v1.1.0
+
+ * Added support for Member types in the CMS (thanks @akatakritos) [#2][#3][#4]
+ * Fixed issue with running reference site for Umbraco v7 [#1]
+ * Fixed issue with rendering rich text fields that contained macros when there is no current page context (e.g., surface controller) (thanks @NerderyMGlanzer) [#5]
+
 ## v1.0.1
 
  * Fixed issue with nuget spec incorrectly depending on Umbraco v6 only
