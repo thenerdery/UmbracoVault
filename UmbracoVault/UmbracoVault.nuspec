@@ -2,16 +2,18 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>UmbracoVault</id>
+        <version>0.0.0</version>
         <title>Umbraco Vault</title>
-		    <version>0.0.0</version>
         <authors>The Nerdery</authors>
         <owners>thenerdery</owners>
+        <licenseUrl>https://github.com/kensykora/UmbracoVault/blob/master/LICENSE</licenseUrl>
         <projectUrl>https://github.com/kensykora/UmbracoVault</projectUrl>
-		    <licenseUrl>https://github.com/kensykora/UmbracoVault/blob/master/LICENSE</licenseUrl>
         <requireLicenseAcceptance>true</requireLicenseAcceptance>
-		    <summary>Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your views.</summary>
         <description>Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your views. It allows you to create lightly-decorated classes that Vault will understand how to hydrate. This gives you the full view model-style experience in Umbraco that you are accustomed to in MVC, complete with strongly-typed view properties (no more magic strings in your views).</description>
-        <releaseNotes />
+        <summary>Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your views.</summary>
+        <releaseNotes>* Added support for Member types in the CMS (thanks @akatakritos)
+ * Fixed issue with running reference site for Umbraco v7
+ * Fixed issue with rendering rich text fields that contained macros when there is no current page context (e.g., surface controller) (thanks @NerderyMGlanzer)</releaseNotes>
         <copyright>Copyright 2014</copyright>
         <tags>C# Umbraco Nerdery Mapping ObjectMapper ORM CMS</tags>
         <dependencies>
