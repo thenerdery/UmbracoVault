@@ -303,8 +303,9 @@ namespace UmbracoVault
                 var alias = GetPropertyAlias(propertyMetaData, propertyInfo);
 
                 //Retrieve the value -- If it's not there just ignore and move on
-                var value = getPropertyValue(alias, recursive);
-                if (value == null) continue;
+                object value;
+                if (!TryGetValue(getPropertyValue, alias, recursive, out value))
+                    continue;
 
                 var transformations = _transformations.Where(x => x.TypeSupported == propertyType);
                 var transformedValue = transformations.Aggregate(value,
@@ -346,6 +347,23 @@ namespace UmbracoVault
                     propertyInfo.SetValue(instance, valueObject, null);
                 }
             }
+        }
+
+        private static bool TryGetValue(Func<string, bool, object> getPropertyValue, string alias, bool recursive, out object value)
+        {
+            try
+            {
+                value = getPropertyValue(alias, recursive);
+            }
+            catch (InvalidOperationException)
+            {
+                // This exception may be thrown by Umbraco 6 when attempting to read a rich text property containing macros without
+                // an UmbracoContext.PageId as is the case in a SurfaceController action.
+                // Opting to behave as if field is not found.
+                value = null;
+            }
+
+            return value != null;
         }
 
         #endregion
