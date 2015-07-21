@@ -239,7 +239,7 @@ namespace UmbracoVault
             return items.Select(GetItem<T>);
         }
 
-        //TODO: what is the real purpose of this method? 
+        //TODO: what is the real purpose of this method?
         ///// <summary>
         ///// Given an XPath Query, it returns an object of a specific type.
         ///// </summary>
@@ -303,8 +303,9 @@ namespace UmbracoVault
                 var alias = GetPropertyAlias(propertyMetaData, propertyInfo);
 
                 //Retrieve the value -- If it's not there just ignore and move on
-                var value = getPropertyValue(alias, recursive);
-                if (value == null) continue;
+                object value;
+                if (!TryGetValue(getPropertyValue, alias, recursive, out value))
+                    continue;
 
                 var transformations = _transformations.Where(x => x.TypeSupported == propertyType);
                 var transformedValue = transformations.Aggregate(value,
@@ -348,6 +349,23 @@ namespace UmbracoVault
             }
         }
 
+        private static bool TryGetValue(Func<string, bool, object> getPropertyValue, string alias, bool recursive, out object value)
+        {
+            try
+            {
+                value = getPropertyValue(alias, recursive);
+            }
+            catch (InvalidOperationException)
+            {
+                // This exception may be thrown by Umbraco 6 when attempting to read a rich text property containing macros without
+                // an UmbracoContext.PageId as is the case in a SurfaceController action.
+                // Opting to behave as if field is not found.
+                value = null;
+            }
+
+            return value != null;
+        }
+
         #endregion
 
         private T GetItem<T>(IPublishedContent n)
@@ -385,10 +403,13 @@ namespace UmbracoVault
 
         private T GetMemberItem<T>(IMember m)
         {
-            var result = typeof(T).CreateWithNoParams<T>();
+            var result = _classConstructor.CreateWithMember<T>(m);
 
             FillClassProperties(result, (alias, recursive) =>
             {
+                if (!m.HasProperty(alias))
+                    return null;
+
                 var value = m.GetValue(alias);
                 return value;
             });
@@ -470,7 +491,7 @@ namespace UmbracoVault
         }
 
         /// <summary>
-        /// Gets properties that are NOT decorated with [UmbracoIgnoreProperty] (opt-out mode) 
+        /// Gets properties that are NOT decorated with [UmbracoIgnoreProperty] (opt-out mode)
         /// </summary>
         private static IEnumerable<PropertyInfo> GetAllPropertiesExceptOptedOut<T>()
         {

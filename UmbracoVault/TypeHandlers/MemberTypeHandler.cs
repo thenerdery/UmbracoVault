@@ -24,7 +24,13 @@ namespace UmbracoVault.TypeHandlers
 
             var member = GetMember(input.ToString());
             if (member != null)
-                Vault.Context.FillClassProperties(result, (alias, recursive) => member.GetValue(alias));
+                Vault.Context.FillClassProperties(result, (alias, recursive) =>
+                {
+                    if (!member.HasProperty(alias))
+                        return null;
+
+                    return member.GetValue(alias);
+                });
 
             return result;
         }
