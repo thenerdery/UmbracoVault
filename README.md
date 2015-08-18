@@ -4,8 +4,8 @@
 
 | Branch | Status |
 | ------ | ------ |
-| master | [![Build status](https://ci.appveyor.com/api/projects/status/bqbyg6yevctgm7tl?svg=true)](https://ci.appveyor.com/project/kensykora/umbracovault) |
-| develop | [![Build status](https://ci.appveyor.com/api/projects/status/bqbyg6yevctgm7tl/branch/develop?svg=true)](https://ci.appveyor.com/project/kensykora/umbracovault/branch/develop) |
+| master | [![Build status](https://ci.appveyor.com/api/projects/status/4lmny3neenc4hibj?svg=true)](https://ci.appveyor.com/project/TheNerdery/umbracovault) |
+| develop | [![Build status](https://ci.appveyor.com/api/projects/status/4lmny3neenc4hibj/branch/develop?svg=true)](https://ci.appveyor.com/project/TheNerdery/umbracovault/branch/develop) |
 
 ## Overview
 Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your
