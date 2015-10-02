@@ -221,6 +221,7 @@
     <Compile Include="Collections\VaultItemCollection.cs" />
     <Compile Include="Controllers\VaultDefaultRenderController.cs" />
     <Compile Include="Controllers\VaultDefaultGenericController.cs" />
+    <Compile Include="Reflection\DefaultInstanceFactory.cs" />
     <Compile Include="Exceptions\ConstructorUnavailableException.cs" />
     <Compile Include="Exceptions\TemplateFileNotFoundException.cs" />
     <Compile Include="Exceptions\ViewModelNotFoundException.cs" />
@@ -233,6 +234,7 @@
     <Compile Include="Collections\ExternalIteratorEnumerator.cs" />
     <Compile Include="Extensions\TransformationExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Reflection\IInstanceFactory.cs" />
     <Compile Include="Transformations\ITransformation.cs" />
     <Compile Include="Transformations\SuperScriptTransformation.cs" />
     <Compile Include="TypeHandlers\MemberTypeHandler.cs" />

@@ -10,7 +10,7 @@ namespace UmbracoVault.TypeHandlers
     [IgnoreTypeHandlerAutoRegistration]
     public class EnumTypeHandler : ITypeHandler
     {
-        public object GetAsType<T>(object input)
+        public object GetAsType<T>(object input) where T : class
         {
             // Due to the current constraint of "where T : class", this doesn't actually support enums
             // This should be revisited in a future version, but for now, the GetAsEnum is a workaround.

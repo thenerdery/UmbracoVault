@@ -6,7 +6,7 @@ namespace UmbracoVault.Collections
     /// Will Eager-load a collection; This should be used with care; For lazy-loading, use IEnumerable.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class VaultItemCollection<T> : List<T>
+    public class VaultItemCollection<T> : List<T> where T : class
     {
         public VaultItemCollection(string commaDelimitedIds)
         {

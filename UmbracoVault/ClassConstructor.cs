@@ -7,6 +7,8 @@ using UmbracoVault.Extensions;
 
 using Umbraco.Core.Models;
 
+using UmbracoVault.Reflection;
+
 namespace UmbracoVault
 {
     /// <summary>
@@ -14,22 +16,31 @@ namespace UmbracoVault
     /// </summary>
     internal class ClassConstructor
     {
+        private static IInstanceFactory _instanceFactory = new DefaultInstanceFactory();
+
+        /// <summary>
+        /// Set new instance factory, enables proxy class hook
+        /// </summary>
+        public static void SetInstanceFactory(IInstanceFactory instanceFactory)
+        {
+            _instanceFactory = instanceFactory;
+        }
 
         public T CreateDefault<T>() where T : class, new()
         {
             return new T();
         }
 
-        public T CreateWithNode<T>(IPublishedContent content)
+        public static T CreateWithNode<T>(IPublishedContent content) where T : class
         {
-            var targetType = typeof(T);
-            var result = targetType.CreateWithContentConstructor<T>(content);
+            var result = _instanceFactory.CreateInstance<T>(content);
+            SetPublishedContent(content, result);
 
-            if (result == null)
-            {
-                result = targetType.CreateWithNoParams<T>();
-            }
+            return result;
+        }
 
+        internal static void SetPublishedContent<T>(IPublishedContent content, T result)
+        {
             var contentProperty = typeof(T).GetProperties(BindingFlags.SetProperty | BindingFlags.Public | BindingFlags.Instance)
                 .FirstOrDefault(x => x.PropertyType.IsAssignableFrom(typeof(IPublishedContent)) && x.CanWrite);
 
@@ -39,8 +50,6 @@ namespace UmbracoVault
             }
 
             SetContentProperty(content, result);
-
-            return result;
         }
 
         /// <summary>
@@ -55,12 +64,12 @@ namespace UmbracoVault
             }
         }
 
-        public T CreateWithMember<T>(IMember member)
+        public T CreateWithMember<T>(IMember member) where T : class
         {
-            var targetType = typeof(T);
-            var memberModel = targetType.CreateWithNoParams<T>();
+            var memberModel = _instanceFactory.CreateInstance<T>(null);
 
-            var memberProperty = typeof(T).GetProperties(BindingFlags.SetProperty | BindingFlags.Public | BindingFlags.Instance)
+            var targetType = typeof(T);
+            var memberProperty = targetType.GetProperties(BindingFlags.SetProperty | BindingFlags.Public | BindingFlags.Instance)
                 .FirstOrDefault(x => x.PropertyType.IsAssignableFrom(typeof(IMember)) && x.CanWrite);
 
             if (memberProperty != null)

@@ -19,7 +19,7 @@ namespace UmbracoVault.Extensions
             {
                 var result = (T)nodeConstructor.Invoke(new object[] { content });
                 return result;
-            }
+            }   
             return default(T);
         }
 

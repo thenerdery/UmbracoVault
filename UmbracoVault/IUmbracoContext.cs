@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace UmbracoVault
 {
@@ -13,7 +14,7 @@ namespace UmbracoVault
         /// </summary>
         /// <typeparam name="T">The object type to cast the item to</typeparam>
         /// <returns>a strongly typed version (T) of the current umbraco item.</returns>
-        T GetCurrent<T>();
+        T GetCurrent<T>() where T : class;
 
         /// <summary>
         /// Retrieves a data item for the current node, instantiating and hydrating a type as defined by the passed-in type parameter.
@@ -39,7 +40,7 @@ namespace UmbracoVault
         /// </summary>
         /// <typeparam name="T">The object type to cast the item to</typeparam>
         /// <returns>a strongly typed version (T) of the requested umbraco item.</returns>
-        T GetContentById<T>(int id);
+        T GetContentById<T>(int id) where T : class;
         
         
         /// <summary>
@@ -47,7 +48,7 @@ namespace UmbracoVault
         /// </summary>
         /// <typeparam name="T">The object type to cast the item to</typeparam>
         /// <returns>a strongly typed version (T) of the requested umbraco item.</returns>
-        T GetContentById<T>(string idString);
+        T GetContentById<T>(string idString) where T : class;
 
         /// <summary>
         /// Retrieves a media item for the given ID
@@ -70,7 +71,7 @@ namespace UmbracoVault
         /// <param name="csv">A comma separated list of Node Ids</param>
         /// <typeparam name="T">The object type to cast the item to</typeparam>
         /// <returns>a strongly typed version (T) of the current umbraco item.</returns>
-		IEnumerable<T> GetContentByCsv<T>(string csv);
+		IEnumerable<T> GetContentByCsv<T>(string csv) where T : class;
 		
         /// <summary>
         /// Creates and returns an IEnumerable of {T} as mapped to Umbraco items. 
@@ -79,7 +80,7 @@ namespace UmbracoVault
         /// </summary>
         /// <typeparam name="T">The core type to hydrate and return, and the type that informs which Umbraco aliases to map</typeparam>
         /// <returns>An IEnumerable of {T} as mapped to Umbraco items</returns>
-		IEnumerable<T> GetByDocumentType<T>();
+		IEnumerable<T> GetByDocumentType<T>() where T : class;
 
         /// <summary>
         /// Returns a list of URLs, given a type
@@ -95,7 +96,7 @@ namespace UmbracoVault
         /// <param name="parentNodeId">Optional. If omitted or null, will use the Context's CurrentNode as the parent, 
         /// otherwise the method will look up the parent by ID</param>
         /// <returns>A collection of strongly typed version (T) of children of the current node.</returns>
-        IEnumerable<T> GetChildren<T>(int? parentNodeId = null);
+        IEnumerable<T> GetChildren<T>(int? parentNodeId = null) where T : class;
         
         /// <summary>
         /// Given an XPath Query, it returns objects of a specific type.
@@ -103,7 +104,7 @@ namespace UmbracoVault
         /// <typeparam name="T">Type of object to return</typeparam>
         /// <param name="query">XPath query for objects which are relative to the root</param>
         /// <returns>A list of objects that match</returns>
-        IEnumerable<T> QueryRelative<T>(string query);
+        IEnumerable<T> QueryRelative<T>(string query) where T : class;
 
         ///// <summary>
         ///// Given an XPath Query, it returns objects of a specific type.
@@ -123,6 +124,15 @@ namespace UmbracoVault
         void FillClassProperties<T>(T instance, Func<string, bool, object> getPropertyValue);
 
         /// <summary>
+        /// Uses Vault context to try to resolve value for a single property
+        /// </summary>
+        /// <param name="getPropertyValue">Func to return raw value for the property</param>
+        /// <param name="propertyInfo">Property for which to return a value</param>
+        /// <param name="value">If found value will be set</param>
+        /// <returns>True if able to resolve value, false if not</returns>
+        bool TryGetValueForProperty(Func<string, bool, object> getPropertyValue, PropertyInfo propertyInfo, out object value);
+
+        /// <summary>
         /// Given a class, will return true if the class is intended to be hydrated as a Media object instead of a Content object
         /// </summary>
         /// <typeparam name="T">The type to be hydrated</typeparam>
@@ -134,13 +144,13 @@ namespace UmbracoVault
         /// </summary>
         /// <typeparam name="T">The object type to cast the member to</typeparam>
         /// <returns>a strongly typed version (T) of the requested umbraco member.</returns>
-        T GetMemberById<T>(int id);
+        T GetMemberById<T>(int id) where T : class;
 
         /// <summary>
         /// Retrieves a member for the given ID
         /// </summary>
         /// <typeparam name="T">The object type to cast the member to</typeparam>
         /// <returns>a strongly typed version (T) of the requested umbraco member.</returns>
-        T GetMemberById<T>(string idString);
+        T GetMemberById<T>(string idString) where T : class;
     }
 }
