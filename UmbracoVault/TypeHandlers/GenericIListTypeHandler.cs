@@ -6,7 +6,7 @@ namespace UmbracoVault.TypeHandlers
 {
     public class GenericIListTypeHandler : ITypeHandler
     {
-        public object GetAsType<T>(object input) where T : class
+        public object GetAsType<T>(object input)
         {
             var collection = new VaultItemCollection<T>(input.ToString());
             return collection;

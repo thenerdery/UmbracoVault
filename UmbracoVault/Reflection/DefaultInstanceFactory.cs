@@ -10,7 +10,7 @@ namespace UmbracoVault.Reflection
 {
     internal class DefaultInstanceFactory : IInstanceFactory
     {
-        public T CreateInstance<T>(IPublishedContent content) where T : class
+        public T CreateInstance<T>(IPublishedContent content)
         {
             var targetType = typeof(T);
             var result = targetType.CreateWithContentConstructor<T>(content);

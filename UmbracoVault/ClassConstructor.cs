@@ -1,9 +1,7 @@
-﻿
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-
-using UmbracoVault.Extensions;
 
 using Umbraco.Core.Models;
 
@@ -12,14 +10,14 @@ using UmbracoVault.Reflection;
 namespace UmbracoVault
 {
     /// <summary>
-    /// Invokes constructors for a given class
+    ///     Invokes constructors for a given class
     /// </summary>
     internal class ClassConstructor
     {
         private static IInstanceFactory _instanceFactory = new DefaultInstanceFactory();
 
         /// <summary>
-        /// Set new instance factory, enables proxy class hook
+        ///     Set new instance factory, enables proxy class hook
         /// </summary>
         public static void SetInstanceFactory(IInstanceFactory instanceFactory)
         {
@@ -31,7 +29,7 @@ namespace UmbracoVault
             return new T();
         }
 
-        public static T CreateWithNode<T>(IPublishedContent content) where T : class
+        public static T CreateWithNode<T>(IPublishedContent content)
         {
             var result = _instanceFactory.CreateInstance<T>(content);
             SetPublishedContent(content, result);
@@ -53,7 +51,7 @@ namespace UmbracoVault
         }
 
         /// <summary>
-        /// If the target type inhereits from UmbracoContentModel, this sets the Content property
+        ///     If the target type inhereits from UmbracoContentModel, this sets the Content property
         /// </summary>
         private static void SetContentProperty<T>(IPublishedContent content, T result)
         {
@@ -64,7 +62,7 @@ namespace UmbracoVault
             }
         }
 
-        public T CreateWithMember<T>(IMember member) where T : class
+        public T CreateWithMember<T>(IMember member)
         {
             var memberModel = _instanceFactory.CreateInstance<T>(null);
 
@@ -78,8 +76,6 @@ namespace UmbracoVault
             }
 
             return memberModel;
-
         }
-
     }
 }

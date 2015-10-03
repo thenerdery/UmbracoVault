@@ -7,6 +7,6 @@ namespace UmbracoVault.Proxy
 {
     public interface ILazyResolverMixin
     {
-        T GetOrResolve<T>(string alias, PropertyInfo propertyInfo);
+        object GetOrResolve(string alias, PropertyInfo propertyInfo);
     }
 }

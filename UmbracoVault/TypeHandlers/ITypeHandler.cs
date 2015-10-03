@@ -12,7 +12,7 @@ namespace UmbracoVault.TypeHandlers
         /// <typeparam name="T">The expected type to be returned</typeparam>
         /// <param name="input">The object representation of the desired value</param>
         /// <returns>A strongly-typed representation of the value</returns>
-        object GetAsType<T>(object input) where T : class;
+        object GetAsType<T>(object input);
         
         /// <summary>
         /// Returns the type supported by this TypeHandler

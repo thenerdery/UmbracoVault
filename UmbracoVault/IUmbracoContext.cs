@@ -40,7 +40,7 @@ namespace UmbracoVault
         /// </summary>
         /// <typeparam name="T">The object type to cast the item to</typeparam>
         /// <returns>a strongly typed version (T) of the requested umbraco item.</returns>
-        T GetContentById<T>(int id) where T : class;
+        T GetContentById<T>(int id);
         
         
         /// <summary>
@@ -48,7 +48,7 @@ namespace UmbracoVault
         /// </summary>
         /// <typeparam name="T">The object type to cast the item to</typeparam>
         /// <returns>a strongly typed version (T) of the requested umbraco item.</returns>
-        T GetContentById<T>(string idString) where T : class;
+        T GetContentById<T>(string idString);
 
         /// <summary>
         /// Retrieves a media item for the given ID
@@ -71,7 +71,7 @@ namespace UmbracoVault
         /// <param name="csv">A comma separated list of Node Ids</param>
         /// <typeparam name="T">The object type to cast the item to</typeparam>
         /// <returns>a strongly typed version (T) of the current umbraco item.</returns>
-		IEnumerable<T> GetContentByCsv<T>(string csv) where T : class;
+		IEnumerable<T> GetContentByCsv<T>(string csv);
 		
         /// <summary>
         /// Creates and returns an IEnumerable of {T} as mapped to Umbraco items. 
@@ -80,7 +80,7 @@ namespace UmbracoVault
         /// </summary>
         /// <typeparam name="T">The core type to hydrate and return, and the type that informs which Umbraco aliases to map</typeparam>
         /// <returns>An IEnumerable of {T} as mapped to Umbraco items</returns>
-		IEnumerable<T> GetByDocumentType<T>() where T : class;
+		IEnumerable<T> GetByDocumentType<T>();
 
         /// <summary>
         /// Returns a list of URLs, given a type
@@ -96,7 +96,7 @@ namespace UmbracoVault
         /// <param name="parentNodeId">Optional. If omitted or null, will use the Context's CurrentNode as the parent, 
         /// otherwise the method will look up the parent by ID</param>
         /// <returns>A collection of strongly typed version (T) of children of the current node.</returns>
-        IEnumerable<T> GetChildren<T>(int? parentNodeId = null) where T : class;
+        IEnumerable<T> GetChildren<T>(int? parentNodeId = null);
         
         /// <summary>
         /// Given an XPath Query, it returns objects of a specific type.
@@ -104,7 +104,7 @@ namespace UmbracoVault
         /// <typeparam name="T">Type of object to return</typeparam>
         /// <param name="query">XPath query for objects which are relative to the root</param>
         /// <returns>A list of objects that match</returns>
-        IEnumerable<T> QueryRelative<T>(string query) where T : class;
+        IEnumerable<T> QueryRelative<T>(string query);
 
         ///// <summary>
         ///// Given an XPath Query, it returns objects of a specific type.
@@ -144,13 +144,13 @@ namespace UmbracoVault
         /// </summary>
         /// <typeparam name="T">The object type to cast the member to</typeparam>
         /// <returns>a strongly typed version (T) of the requested umbraco member.</returns>
-        T GetMemberById<T>(int id) where T : class;
+        T GetMemberById<T>(int id);
 
         /// <summary>
         /// Retrieves a member for the given ID
         /// </summary>
         /// <typeparam name="T">The object type to cast the member to</typeparam>
         /// <returns>a strongly typed version (T) of the requested umbraco member.</returns>
-        T GetMemberById<T>(string idString) where T : class;
+        T GetMemberById<T>(string idString);
     }
 }

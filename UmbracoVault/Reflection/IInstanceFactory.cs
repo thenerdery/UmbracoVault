@@ -12,6 +12,6 @@ namespace UmbracoVault.Reflection
         /// Creates a new instance of type T.  If content is provided a constructor on the type taking 
         /// IPublishedContent will be attempted first.
         /// </summary>
-        T CreateInstance<T>(IPublishedContent content) where T : class;
+        T CreateInstance<T>(IPublishedContent content);
     }
 }

@@ -16,26 +16,21 @@ namespace UmbracoVault.Proxy.Concrete
         private static readonly ProxyGenerator _generator = new ProxyGenerator();
         private static readonly ProxyInterceptor _interceptor = new ProxyInterceptor();
 
-        /// <summary>
-        ///     Creates a proxy object T using the provided content node for data
-        /// </summary>
-        /// <typeparam name="T">Model to proxy</typeparam>
-        /// <param name="node">Data used to back virtual properties on the model</param>
-        /// <returns>Dynamic proxy for provided type</returns>
-        private static T BuildProxy<T>(IPublishedContent node) where T : class
+        private static object BuildProxy<T>(Type targetType, IPublishedContent node)
         {
-            var targetType = typeof(T);
-            var t = targetType.CreateWithContentConstructor<T>(node) ?? targetType.CreateWithNoParams<T>();
+            var t = ((object)targetType.CreateWithContentConstructor<T>(node)) ?? targetType.CreateWithNoParams<T>();
 
             var ops = new ProxyGenerationOptions();
             ops.AddMixinInstance(new LazyResolverMixin(node));
 
-            return (T)_generator.CreateInterfaceProxyWithTarget(targetType, t, ops, _interceptor);
+            // There are generic overloads for the ProxyGenerator but they would cause generic type constraings of where : class
+            // to propagate all over the codebase.  The downside is all the casting being done in this class.
+            return _generator.CreateInterfaceProxyWithTarget(targetType, t, ops, _interceptor);
         }
 
-        public T CreateInstance<T>(IPublishedContent content) where T : class
+        public T CreateInstance<T>(IPublishedContent content)
         {
-            return BuildProxy<T>(content);
+            return (T)BuildProxy<T>(typeof(T), content);
         }
     }
 }

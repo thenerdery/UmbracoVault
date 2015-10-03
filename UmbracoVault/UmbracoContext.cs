@@ -125,7 +125,7 @@ namespace UmbracoVault
             return result;
         }
 
-        public T GetContentById<T>(string idString) where T : class
+        public T GetContentById<T>(string idString)
         {
             var id = GetIdFromString(idString);
             return GetContentById<T>(id);
@@ -137,7 +137,7 @@ namespace UmbracoVault
             return GetMediaById<T>(id);
         }
 
-        public T GetContentById<T>(int id) where T : class
+        public T GetContentById<T>(int id)
         {
             var umbracoItem = GetUmbracoContent(id);
 
@@ -163,13 +163,13 @@ namespace UmbracoVault
             return GetMediaItem<T>(umbracoItem);
         }
 
-        public T GetMemberById<T>(string idString) where T : class
+        public T GetMemberById<T>(string idString)
         {
             var id = GetIdFromString(idString);
             return GetMemberById<T>(id);
         }
 
-        public T GetMemberById<T>(int id) where T : class
+        public T GetMemberById<T>(int id)
         {
             var umbracoItem = GetUmbracoMember(id);
 
@@ -182,12 +182,12 @@ namespace UmbracoVault
             return GetMemberItem<T>(umbracoItem);
         }   
 
-        public IEnumerable<T> GetContentByCsv<T>(string csv) where T : class
+        public IEnumerable<T> GetContentByCsv<T>(string csv)
         {
             return Helper.GetTypedContentByCsv(csv).Select(GetItem<T>);
         }
 
-        public IEnumerable<T> GetByDocumentType<T>() where T : class
+        public IEnumerable<T> GetByDocumentType<T>()
         {
             var items = new List<T>();
             var type = typeof(T);
@@ -215,7 +215,7 @@ namespace UmbracoVault
             return urls;
         }
 
-        public IEnumerable<T> GetChildren<T>(int? parentNodeId = null) where T : class
+        public IEnumerable<T> GetChildren<T>(int? parentNodeId = null)
         {
             var parentNode = parentNodeId.HasValue ? GetUmbracoContent(parentNodeId.Value) : GetCurrentUmbracoContent();
 
@@ -231,7 +231,7 @@ namespace UmbracoVault
         /// <typeparam name="T">Type of object to return</typeparam>
         /// <param name="query">XPath query for objects which are relative to the root</param>
         /// <returns>A list of objects that match</returns>
-        public IEnumerable<T> QueryRelative<T>(string query) where T : class
+        public IEnumerable<T> QueryRelative<T>(string query)
         {
             var items = Helper.TypedContentAtXPath(query);
             return items.Select(GetItem<T>);
@@ -379,7 +379,7 @@ namespace UmbracoVault
 
         #endregion
 
-        private T GetItem<T>(IPublishedContent n) where T : class
+        private T GetItem<T>(IPublishedContent n)
         {
             var cachedItem = _cacheManager.GetItem<T>(n.Id);
             if (cachedItem != null)
@@ -412,7 +412,7 @@ namespace UmbracoVault
             return result;
         }
 
-        private T GetMemberItem<T>(IMember m) where T : class
+        private T GetMemberItem<T>(IMember m)
         {
             var result = _classConstructor.CreateWithMember<T>(m);
 

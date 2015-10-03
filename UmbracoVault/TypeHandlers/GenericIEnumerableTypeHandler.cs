@@ -10,7 +10,7 @@ namespace UmbracoVault.TypeHandlers
 	/// </summary>
 	public class GenericIEnumerableTypeHandler : ITypeHandler
 	{
-		public object GetAsType<T>(object input) where T : class
+		public object GetAsType<T>(object input)
         {
 			var collection = new ExternalIteratorEnumerable<T>(input.ToString(), idString =>
 			    {

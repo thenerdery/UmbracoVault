@@ -21,7 +21,7 @@ namespace UmbracoVault.Proxy.Concrete
             _node = node;
         }
 
-        public T GetOrResolve<T>(string alias, PropertyInfo propertyInfo)
+        public object GetOrResolve(string alias, PropertyInfo propertyInfo)
         {
             object value;
             if (!_valueCache.TryGetValue(alias, out value))
@@ -38,7 +38,7 @@ namespace UmbracoVault.Proxy.Concrete
                 Console.WriteLine("From cache");
             }
 
-            return (T)value;
+            return value;
         }
 
         private object ResolveValue(string alias, bool recursive, IPublishedContent node)

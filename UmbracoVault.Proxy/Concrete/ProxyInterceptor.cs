@@ -27,7 +27,7 @@ namespace UmbracoVault.Proxy.Concrete
             var alias = PropertyAlias(invocation);
             var property = GetPropertyInfo(invocation.TargetType, invocation.Method);
 
-            invocation.ReturnValue = lazyResolverMixin.GetOrResolve<object>(alias, property);
+            invocation.ReturnValue = lazyResolverMixin.GetOrResolve(alias, property);
         }
 
         private PropertyInfo GetPropertyInfo(Type targetType, MethodInfo method)
