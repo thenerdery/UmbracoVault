@@ -12,7 +12,7 @@ namespace UmbracoVault
     /// <summary>
     ///     Invokes constructors for a given class
     /// </summary>
-    internal class ClassConstructor
+    public class ClassConstructor
     {
         private static IInstanceFactory _instanceFactory = new DefaultInstanceFactory();
 
@@ -29,9 +29,9 @@ namespace UmbracoVault
             return new T();
         }
 
-        public static T CreateWithNode<T>(IPublishedContent content)
+        public static T CreateWithNode<T>(IPublishedContent content, out bool fillProperties)
         {
-            var result = _instanceFactory.CreateInstance<T>(content);
+            var result = _instanceFactory.CreateInstance<T>(content, out fillProperties);
             SetPublishedContent(content, result);
 
             return result;
@@ -64,15 +64,19 @@ namespace UmbracoVault
 
         public T CreateWithMember<T>(IMember member)
         {
-            var memberModel = _instanceFactory.CreateInstance<T>(null);
+            bool fillProperties;
+            var memberModel = _instanceFactory.CreateInstance<T>(null, out fillProperties);
 
-            var targetType = typeof(T);
-            var memberProperty = targetType.GetProperties(BindingFlags.SetProperty | BindingFlags.Public | BindingFlags.Instance)
-                .FirstOrDefault(x => x.PropertyType.IsAssignableFrom(typeof(IMember)) && x.CanWrite);
-
-            if (memberProperty != null)
+            if (fillProperties)
             {
-                memberProperty.SetValue(memberModel, member);
+                var targetType = typeof(T);
+                var memberProperty = targetType.GetProperties(BindingFlags.SetProperty | BindingFlags.Public | BindingFlags.Instance)
+                    .FirstOrDefault(x => x.PropertyType.IsAssignableFrom(typeof(IMember)) && x.CanWrite);
+
+                if (memberProperty != null)
+                {
+                    memberProperty.SetValue(memberModel, member);
+                }
             }
 
             return memberModel;

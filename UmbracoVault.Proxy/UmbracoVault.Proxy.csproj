@@ -190,7 +190,6 @@
     <Compile Include="ILazyResolverMixin.cs" />
     <Compile Include="Concrete\LazyResolverMixin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProxyConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

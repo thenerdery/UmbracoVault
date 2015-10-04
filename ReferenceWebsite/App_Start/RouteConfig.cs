@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using System.Web.Routing;
+
+namespace ReferenceWebsite
+{
+    public class RouteConfig
+    {
+        /// <summary>
+        ///     Register Umbraco application routes.
+        /// </summary>
+        /// <param name="routes"></param>
+        public static void RegisterRoutes(RouteCollection routes)
+        {
+            routes.MapRoute(
+                "Performance Route",
+                "Performance/{action}",
+                new { controller = "Performance", action = "RunProxyPerfTests" }
+                );
+        }
+    }
+}

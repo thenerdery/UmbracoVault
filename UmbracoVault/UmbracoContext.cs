@@ -386,13 +386,17 @@ namespace UmbracoVault
             {
                 return (T)cachedItem;
             }
-            var result = ClassConstructor.CreateWithNode<T>(n);
+            bool fillProperties;
+            var result = ClassConstructor.CreateWithNode<T>(n, out fillProperties);
 
-            FillClassProperties(result, (alias, recursive) =>
+            if (fillProperties)
+            {
+                FillClassProperties(result, (alias, recursive) =>
                 {
                     var value = n.GetPropertyValue(alias, recursive);
                     return value;
                 });
+            }
 
             _cacheManager.AddItem(n.Id, result);
             return result;

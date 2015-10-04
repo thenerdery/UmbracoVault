@@ -8,9 +8,9 @@ using UmbracoVault.Extensions;
 
 namespace UmbracoVault.Reflection
 {
-    internal class DefaultInstanceFactory : IInstanceFactory
+    public class DefaultInstanceFactory : IInstanceFactory
     {
-        public T CreateInstance<T>(IPublishedContent content)
+        public T CreateInstance<T>(IPublishedContent content, out bool fillProperties)
         {
             var targetType = typeof(T);
             var result = targetType.CreateWithContentConstructor<T>(content);
@@ -19,6 +19,8 @@ namespace UmbracoVault.Reflection
             {
                 result = targetType.CreateWithNoParams<T>();
             }
+
+            fillProperties = true;
             return result;
         }
     }

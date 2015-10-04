@@ -3,20 +3,20 @@ using UmbracoVault.Attributes;
 
 namespace ReferenceWebsite.Models
 {
-    [UmbracoMediaEntity(AutoMap = true)]
+    [UmbracoMediaEntity(AutoMap = true, Alias = "BlogEntry")]
     public class BlogEntryViewModel : CmsViewModelBase
     {
-        public string Title { get; set; }
-        public DateTime PostDate { get; set; }
+        public virtual string Title { get; set; }
+        public virtual DateTime PostDate { get; set; }
         
         [UmbracoRichTextProperty]
-        public string Content { get; set; }
+        public virtual string Content { get; set; }
 
         [UmbracoProperty(Alias = "image")]
-        public Image PostImage { get; set; }
+        public virtual Image PostImage { get; set; }
     }
 
-    [UmbracoEntity(AutoMap = true)]
+    [UmbracoEntity(AutoMap = true, Alias = "BlogHome")]
     public class BlogHomeViewModel : CmsViewModelBase
     {
         public string Title { get; set; }

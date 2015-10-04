@@ -15,10 +15,12 @@ namespace UmbracoVault.Proxy.Concrete
     {
         private readonly IPublishedContent _node;
         private readonly Dictionary<string, object> _valueCache = new Dictionary<string, object>();
+        private readonly IUmbracoContext _umbracoContext;
 
         public LazyResolverMixin(IPublishedContent node)
         {
             _node = node;
+            _umbracoContext = Vault.Context;
         }
 
         public object GetOrResolve(string alias, PropertyInfo propertyInfo)
@@ -26,7 +28,7 @@ namespace UmbracoVault.Proxy.Concrete
             object value;
             if (!_valueCache.TryGetValue(alias, out value))
             {
-                Vault.Context.TryGetValueForProperty(
+                _umbracoContext.TryGetValueForProperty(
                     (propAlias, recursive) => ResolveValue(propAlias, recursive, _node),
                     propertyInfo,
                     out value);
