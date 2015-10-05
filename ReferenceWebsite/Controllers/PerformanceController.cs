@@ -16,7 +16,10 @@ namespace ReferenceWebsite.Controllers
 {
     public class PerformanceController : VaultDefaultGenericController
     {
+        // Maintains load times by property type
         private static Dictionary<Type, List<long>> _paramLoadTimes;
+
+        // Used to ensure only proxy-loaded properties are included in param load times
         private static bool _currentIsProxy;
 
         public PerformanceController()
@@ -34,40 +37,69 @@ namespace ReferenceWebsite.Controllers
             GC.Collect();
             GC.WaitForPendingFinalizers();
 
-            // Blog Post default loader
-            _currentIsProxy = false;
-            RunIterations(LoadPosts, _blogPostReaders, iterations, output, "default", blogReferences);
-            output.AddRange(new[] { string.Empty, string.Empty });
+            RunDefaultBlogLoad(iterations, output, blogReferences);
+            AddEmptyLines(output, 2);
 
-            // Blog Post proxy Loader
-            ClassConstructor.SetInstanceFactory(new ProxyFactory());
-            _currentIsProxy = true;
-            RunIterations(LoadPosts, _blogPostReaders, iterations, output, "proxy", blogReferences);
-            ClassConstructor.SetInstanceFactory(new DefaultInstanceFactory());
-            output.AddRange(new[] { string.Empty, string.Empty, string.Empty });
+            RunProxyBlogLoad(iterations, output, blogReferences);
+            AddEmptyLines(output, 4);
 
-            // Large docs default loader
-            _currentIsProxy = false;
-            RunIterations(LoadLargeDocs, _largeDocumentReaders, iterations, output, "default", largeDocReference);
-            output.AddRange(new[] { string.Empty, string.Empty });
+            RunDefaultLargeDocLoad(iterations, output, largeDocReference);
+            AddEmptyLines(output, 2);
 
-            // Large docs proxy loader
-            ClassConstructor.SetInstanceFactory(new ProxyFactory());
-            _currentIsProxy = true;
-            RunIterations(LoadLargeDocs, _largeDocumentReaders, iterations, output, "proxy", largeDocReference);
-            ClassConstructor.SetInstanceFactory(new DefaultInstanceFactory());
+            RunProxyLargeDocLoad(iterations, output, largeDocReference);
+            AddEmptyLines(output, 4);
 
-            output.AddRange(new[] { string.Empty, string.Empty, string.Empty });
-            foreach (var time in _paramLoadTimes)
-            {
-                output.Add($"Type {time.Key.Name} loaded in average time {time.Value.Average()} ticks");
-            }
+            AddPropertyLoadTimes(output);
 
             return new ContentResult
             {
                 Content = string.Join("<br/>", output.ToArray()),
                 ContentType = "text/html"
             };
+        }
+
+        private static void AddPropertyLoadTimes(List<string> output)
+        {
+            foreach (var time in _paramLoadTimes)
+            {
+                output.Add($"Type {time.Key.Name} loaded in average time {time.Value.Average()} ticks");
+            }
+        }
+
+        private static void AddEmptyLines(List<string> output, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+               output.Add(string.Empty);
+            }
+        }
+
+        private static void RunProxyLargeDocLoad(int iterations, List<string> output, List<LargeDocumentViewModel> largeDocReference)
+        {
+            ClassConstructor.SetInstanceFactory(new ProxyFactory());
+            _currentIsProxy = true;
+            RunIterations(LoadLargeDocs, _largeDocumentReaders, iterations, output, "proxy", largeDocReference);
+            ClassConstructor.SetInstanceFactory(new DefaultInstanceFactory());
+        }
+
+        private static void RunDefaultLargeDocLoad(int iterations, List<string> output, List<LargeDocumentViewModel> largeDocReference)
+        {
+            _currentIsProxy = false;
+            RunIterations(LoadLargeDocs, _largeDocumentReaders, iterations, output, "default", largeDocReference);
+        }
+
+        private static void RunProxyBlogLoad(int iterations, List<string> output, List<BlogEntryViewModel> blogReferences)
+        {
+            ClassConstructor.SetInstanceFactory(new ProxyFactory());
+            _currentIsProxy = true;
+            RunIterations(LoadPosts, _blogPostReaders, iterations, output, "proxy", blogReferences);
+            ClassConstructor.SetInstanceFactory(new DefaultInstanceFactory());
+        }
+
+        private static void RunDefaultBlogLoad(int iterations, List<string> output, List<BlogEntryViewModel> blogReferences)
+        {
+            _currentIsProxy = false;
+            RunIterations(LoadPosts, _blogPostReaders, iterations, output, "default", blogReferences);
         }
 
         private static void RunIterations<T>(Func<List<T>> loader, Dictionary<string, Action<List<T>, T>> readers,  int iterations, ICollection<string> content, string proxyLabel, List<T> referenceContent)
