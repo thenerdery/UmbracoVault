@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using Umbraco.Core.Models;
-
 using UmbracoVault.Attributes;
 
 namespace ReferenceWebsite.Models
 {
-    [UmbracoEntity(AutoMap = true, Alias = "largedocument")]
+    [UmbracoEntity(AutoMap = true, Alias = "Largedocument")]
     public class LargeDocumentViewModel : CmsViewModelBase
     {
         public virtual string Text { get; set; }
@@ -16,8 +14,8 @@ namespace ReferenceWebsite.Models
         public virtual string Text3 { get; set; }
         public virtual string Text4 { get; set; }
         public virtual string Text5 { get; set; }
-        public virtual CmsViewModelBase ContentPicker { get; set; }
-        public virtual CmsViewModelBase ContentPicker2 { get; set; }
+        public virtual int ContentPicker { get; set; }
+        public virtual int ContentPicker2 { get; set; }
         public virtual Image MediaPicker { get; set; }
         public virtual string[] CustomColorSelect { get; set; }
         public virtual string[] CustomColorSelect2 { get; set; }

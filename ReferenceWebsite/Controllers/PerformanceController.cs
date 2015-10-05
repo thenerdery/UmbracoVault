@@ -10,96 +10,23 @@ using UmbracoVault;
 using UmbracoVault.Controllers;
 using UmbracoVault.Proxy.Concrete;
 using UmbracoVault.Reflection;
+// ReSharper disable All
 
 namespace ReferenceWebsite.Controllers
 {
     public class PerformanceController : VaultDefaultGenericController
     {
-        #region Content readers - vary how much content is read
-        private static readonly Dictionary<string, Action<List<BlogEntryViewModel>, BlogEntryViewModel>> _blogPostReaders =
-            new Dictionary<string, Action<List<BlogEntryViewModel>, BlogEntryViewModel>>
-            {
-                { "none", (r, b) => { } },
-                {
-                    "title", (r, b) =>
-                    {
-                        var refPost = r.First(o => o.CmsContent.Id == b.CmsContent.Id);
-                        Debug.Assert(refPost.Title.Equals(b.Title));
-                    }
-                },
-                {
-                    "titleContent", (r, b) =>
-                    {
-                        var refPost = r.First(o => o.CmsContent.Id == b.CmsContent.Id);
-                        Debug.Assert(refPost.Title.Equals(b.Title));
-                        Debug.Assert(refPost.Content.Equals(b.Content));
-                    }
-                },
-                {
-                    "all", (r, b) =>
-                    {
-                        var refPost = r.First(o => o.CmsContent.Id == b.CmsContent.Id);
-                        Debug.Assert(refPost.Title.Equals(b.Title));
-                        Debug.Assert(refPost.Content.Equals(b.Content));
-                        Debug.Assert(refPost.PostDate.Equals(b.PostDate));
-                        Debug.Assert(
-                            (refPost.PostImage == null && b.PostImage == null) ||
-                            (refPost.PostImage.Url.Equals(b.PostImage.Url)));
-                    }
-                }
-            };
+        private static Dictionary<Type, List<long>> _paramLoadTimes;
+        private static bool _currentIsProxy;
 
-        private static readonly Dictionary<string, Action<List<LargeDocumentViewModel>, LargeDocumentViewModel>> _largeDocumentReaders =
-           new Dictionary<string, Action<List<LargeDocumentViewModel>, LargeDocumentViewModel>>
-           {
-                { "none", (r, b) => { } },
-                {
-                    "one", (r, b) =>
-                    {
-                        var refPost = r.First(o => o.CmsContent.Id == b.CmsContent.Id);
-                        Debug.Assert(refPost.Text.Equals(b.Text));
-                    }
-                },
-                {
-                    "six", (r, b) =>
-                    {
-                        var refPost = r.First(o => o.CmsContent.Id == b.CmsContent.Id);
-                        Debug.Assert(refPost.Text.Equals(b.Text));
-                        Debug.Assert(refPost.Text2.Equals(b.Text2));
-                        Debug.Assert(refPost.Text3.Equals(b.Text3));
-                        Debug.Assert(refPost.ContentPicker.CmsContent.Id.Equals(b.ContentPicker.CmsContent.Id));
-                        Debug.Assert(refPost.DictionaryPicker.Length.Equals(b.DictionaryPicker.Length));
-                        Debug.Assert(refPost.CustomColorSelect.SequenceEqual(b.CustomColorSelect));
-                    }
-                },
-                {
-                    "all", (r, b) =>
-                    {
-                        var refPost = r.First(o => o.CmsContent.Id == b.CmsContent.Id);
-                        Debug.Assert(refPost.Text.Equals(b.Text));
-                        Debug.Assert(refPost.Text2.Equals(b.Text2));
-                        Debug.Assert(refPost.Text3.Equals(b.Text3));
-                        Debug.Assert(refPost.Text4.Equals(b.Text4));
-                        Debug.Assert(refPost.Text5.Equals(b.Text5));
-                        Debug.Assert(refPost.ContentPicker.CmsContent.Id.Equals(b.ContentPicker.CmsContent.Id));
-                        Debug.Assert(refPost.ContentPicker2.CmsContent.Id.Equals(b.ContentPicker2.CmsContent.Id));
-                        Debug.Assert(refPost.DictionaryPicker.Length.Equals(b.DictionaryPicker.Length));
-                        Debug.Assert(refPost.CustomColorSelect.SequenceEqual(b.CustomColorSelect));
-                        Debug.Assert(refPost.IntArray.SequenceEqual(b.IntArray));
-                        Debug.Assert(refPost.StringArray.SequenceEqual(b.StringArray));
-                        Debug.Assert(refPost.CheckboxList.SequenceEqual(b.CheckboxList));
-                        Debug.Assert(refPost.DropDownListMultiple.SequenceEqual(b.DropDownListMultiple));
-                        Debug.Assert(refPost.DropDownListMultiplePublishKeys.Equals(b.DropDownListMultiplePublishKeys));
-                        Debug.Assert(refPost.StringArray.SequenceEqual(b.StringArray));
-                        Debug.Assert(refPost.StaffList.Select(m => m.Name).SequenceEqual(b.StaffList.Select(m => m.Name)));
-                    }
-                }
-           };
-        #endregion
+        public PerformanceController()
+        {
+            _paramLoadTimes = new Dictionary<Type, List<long>>();
+        }
 
         public ActionResult RunProxyPerfTests(int iterations = 500)
         {
-            var content = new List<string>();
+            var output = new List<string>();
 
             var blogReferences = LoadPosts();
             var largeDocReference = LoadLargeDocs();
@@ -108,27 +35,37 @@ namespace ReferenceWebsite.Controllers
             GC.WaitForPendingFinalizers();
 
             // Blog Post default loader
-            RunIterations(LoadPosts, _blogPostReaders, iterations, content, "default", blogReferences);
-            content.AddRange(new[] { string.Empty, string.Empty });
+            _currentIsProxy = false;
+            RunIterations(LoadPosts, _blogPostReaders, iterations, output, "default", blogReferences);
+            output.AddRange(new[] { string.Empty, string.Empty });
 
             // Blog Post proxy Loader
             ClassConstructor.SetInstanceFactory(new ProxyFactory());
-            RunIterations(LoadPosts, _blogPostReaders, iterations, content, "proxy", blogReferences);
+            _currentIsProxy = true;
+            RunIterations(LoadPosts, _blogPostReaders, iterations, output, "proxy", blogReferences);
             ClassConstructor.SetInstanceFactory(new DefaultInstanceFactory());
-            content.AddRange(new[] { string.Empty, string.Empty, string.Empty });
+            output.AddRange(new[] { string.Empty, string.Empty, string.Empty });
 
             // Large docs default loader
-            RunIterations(LoadLargeDocs, _largeDocumentReaders, iterations, content, "default", largeDocReference);
-            content.AddRange(new[] { string.Empty, string.Empty });
+            _currentIsProxy = false;
+            RunIterations(LoadLargeDocs, _largeDocumentReaders, iterations, output, "default", largeDocReference);
+            output.AddRange(new[] { string.Empty, string.Empty });
 
             // Large docs proxy loader
             ClassConstructor.SetInstanceFactory(new ProxyFactory());
-            RunIterations(LoadLargeDocs, _largeDocumentReaders, iterations, content, "proxy", largeDocReference);
+            _currentIsProxy = true;
+            RunIterations(LoadLargeDocs, _largeDocumentReaders, iterations, output, "proxy", largeDocReference);
             ClassConstructor.SetInstanceFactory(new DefaultInstanceFactory());
+
+            output.AddRange(new[] { string.Empty, string.Empty, string.Empty });
+            foreach (var time in _paramLoadTimes)
+            {
+                output.Add($"Type {time.Key.Name} loaded in average time {time.Value.Average()} ticks");
+            }
 
             return new ContentResult
             {
-                Content = string.Join("<br/>", content.ToArray()),
+                Content = string.Join("<br/>", output.ToArray()),
                 ContentType = "text/html"
             };
         }
@@ -165,5 +102,113 @@ namespace ReferenceWebsite.Controllers
         {
             return Vault.Context.GetByDocumentType<BlogEntryViewModel>().ToList();
         }
+
+
+        #region Content readers - vary how much content is read
+
+        private static void LoadAndTime(Type paramType, Func<bool> paramReadAction)
+        {
+            if (!_currentIsProxy)
+            {
+                return;
+            }
+
+            if (!_paramLoadTimes.ContainsKey(paramType))
+            {
+                _paramLoadTimes.Add(paramType, new List<long>());
+            }
+
+            var watch = Stopwatch.StartNew();
+            Debug.Assert(paramReadAction());
+            watch.Stop();
+
+            _paramLoadTimes[paramType].Add(watch.ElapsedTicks);
+        }
+
+        private static readonly Dictionary<string, Action<List<BlogEntryViewModel>, BlogEntryViewModel>> _blogPostReaders =
+            new Dictionary<string, Action<List<BlogEntryViewModel>, BlogEntryViewModel>>
+            {
+                { "none", (r, b) => { } },
+                {
+                    "title", (r, b) =>
+                    {
+                        var refPost = r.First(o => o.CmsContent.Id == b.CmsContent.Id);
+                        LoadAndTime(refPost.Title.GetType(), () => refPost.Title.Equals(b.Title));
+                    }
+                },
+                {
+                    "titleContent", (r, b) =>
+                    {
+                        var refPost = r.First(o => o.CmsContent.Id == b.CmsContent.Id);
+                        LoadAndTime(refPost.Title.GetType(), () => refPost.Title.Equals(b.Title));
+                        LoadAndTime(refPost.Content.GetType(), () => refPost.Content.Equals(b.Content));
+                    }
+                },
+                {
+                    "all", (r, b) =>
+                    {
+                        var refPost = r.First(o => o.CmsContent.Id == b.CmsContent.Id);
+                        LoadAndTime(refPost.Title.GetType(), () => refPost.Title.Equals(b.Title));
+                        LoadAndTime(refPost.Content.GetType(), () => refPost.Content.Equals(b.Content));
+                        LoadAndTime(refPost.PostDate.GetType(), () => refPost.PostDate.Equals(b.PostDate));
+                        LoadAndTime(typeof(Image), () =>
+                        {
+                            return (refPost.PostImage == null && b.PostImage == null) ||
+                            // ReSharper disable once PossibleNullReferenceException
+                            (refPost.PostImage.Url.Equals(b.PostImage.Url));
+                        });
+                    }
+                }
+            };
+
+        private static readonly Dictionary<string, Action<List<LargeDocumentViewModel>, LargeDocumentViewModel>> _largeDocumentReaders =
+           new Dictionary<string, Action<List<LargeDocumentViewModel>, LargeDocumentViewModel>>
+           {
+                { "none", (r, b) => { } },
+                {
+                    "one", (r, b) =>
+                    {
+                        var refPost = r.First(o => o.CmsContent.Id == b.CmsContent.Id);
+                        LoadAndTime(refPost.Text.GetType(), () => refPost.Text.Equals(b.Text));
+                    }
+                },
+                {
+                    "six", (r, b) =>
+                    {
+                        var refPost = r.First(o => o.CmsContent.Id == b.CmsContent.Id);
+                        LoadAndTime(refPost.Text.GetType(), () => refPost.Text.Equals(b.Text));
+                        LoadAndTime(refPost.Text2.GetType(), () => refPost.Text2.Equals(b.Text2));
+                        LoadAndTime(refPost.Text3.GetType(), () => refPost.Text3.Equals(b.Text3));
+                        LoadAndTime(refPost.ContentPicker.GetType(), () => refPost.ContentPicker.Equals(b.ContentPicker));
+                        LoadAndTime(refPost.DictionaryPicker.GetType(), () => refPost.DictionaryPicker.Length.Equals(b.DictionaryPicker.Length));
+                        LoadAndTime(refPost.CustomColorSelect.GetType(), () => refPost.CustomColorSelect.SequenceEqual(b.CustomColorSelect));
+                    }
+                },
+                {
+                    "all", (r, b) =>
+                    {
+                        var refPost = r.First(o => o.CmsContent.Id == b.CmsContent.Id);
+                        LoadAndTime(refPost.Text.GetType(), () => refPost.Text.Equals(b.Text));
+                        LoadAndTime(refPost.Text2.GetType(), () => refPost.Text2.Equals(b.Text2));
+                        LoadAndTime(refPost.Text3.GetType(), () => refPost.Text3.Equals(b.Text3));
+                        LoadAndTime(refPost.Text4.GetType(), () => refPost.Text4.Equals(b.Text4));
+                        LoadAndTime(refPost.Text5.GetType(), () => refPost.Text5.Equals(b.Text5));
+
+                        LoadAndTime(refPost.ContentPicker.GetType(), () => refPost.ContentPicker.Equals(b.ContentPicker));
+                        LoadAndTime(refPost.ContentPicker2.GetType(), () => refPost.ContentPicker2.Equals(b.ContentPicker2));
+                        LoadAndTime(refPost.DictionaryPicker.GetType(), () => refPost.DictionaryPicker.Length.Equals(b.DictionaryPicker.Length));
+                        LoadAndTime(refPost.CustomColorSelect.GetType(), () => refPost.CustomColorSelect.SequenceEqual(b.CustomColorSelect));
+                        LoadAndTime(refPost.IntArray.GetType(), () => refPost.IntArray.SequenceEqual(b.IntArray));
+                        LoadAndTime(refPost.StringArray.GetType(), () => refPost.StringArray.SequenceEqual(b.StringArray));
+                        LoadAndTime(refPost.CheckboxList.GetType(), () => refPost.CheckboxList.SequenceEqual(b.CheckboxList));
+                        LoadAndTime(refPost.DropDownListMultiple.GetType(), () => refPost.DropDownListMultiple.SequenceEqual(b.DropDownListMultiple));
+                        LoadAndTime(refPost.DropDownListMultiplePublishKeys.GetType(), () => refPost.DropDownListMultiplePublishKeys.Equals(b.DropDownListMultiplePublishKeys));
+                        LoadAndTime(refPost.StaffList.GetType(), () => refPost.StaffList.Select(m => m.Name).SequenceEqual(b.StaffList.Select(m => m.Name)));
+                    }
+                }
+           };
+
+        #endregion
+
     }
 }
