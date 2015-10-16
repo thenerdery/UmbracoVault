@@ -76,7 +76,7 @@ namespace ReferenceWebsite.Controllers
 
         private static void RunProxyLargeDocLoad(int iterations, List<string> output, List<LargeDocumentViewModel> largeDocReference)
         {
-            ClassConstructor.SetInstanceFactory(new ProxyFactory());
+            ClassConstructor.SetInstanceFactory(new ProxyInstanceFactory());
             _currentIsProxy = true;
             RunIterations(LoadLargeDocs, _largeDocumentReaders, iterations, output, "proxy", largeDocReference);
             ClassConstructor.SetInstanceFactory(new DefaultInstanceFactory());
@@ -90,7 +90,7 @@ namespace ReferenceWebsite.Controllers
 
         private static void RunProxyBlogLoad(int iterations, List<string> output, List<BlogEntryViewModel> blogReferences)
         {
-            ClassConstructor.SetInstanceFactory(new ProxyFactory());
+            ClassConstructor.SetInstanceFactory(new ProxyInstanceFactory());
             _currentIsProxy = true;
             RunIterations(LoadPosts, _blogPostReaders, iterations, output, "proxy", blogReferences);
             ClassConstructor.SetInstanceFactory(new DefaultInstanceFactory());

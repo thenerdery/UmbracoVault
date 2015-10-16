@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 using Castle.DynamicProxy;
@@ -10,7 +9,7 @@ using UmbracoVault.Reflection;
 
 namespace UmbracoVault.Proxy.Concrete
 {
-    public class ProxyFactory : IInstanceFactory
+    public class ProxyInstanceFactory : IInstanceFactory
     {
         private static readonly ProxyGenerator _generator = new ProxyGenerator();
         private static readonly ProxyInterceptor _interceptor = new ProxyInterceptor();
@@ -20,7 +19,14 @@ namespace UmbracoVault.Proxy.Concrete
             var ops = new ProxyGenerationOptions();
             ops.AddMixinInstance(new LazyResolverMixin(node));
 
-            return _generator.CreateClassProxy(typeof(T), ops, _interceptor);
+            var classToProxy = typeof(T);
+
+            // Determine whether to use constructor that takes IPublishedContent
+            var useContentConstructor = classToProxy.GetConstructors().Any(c => c.GetParameters().Any(p => p.ParameterType == typeof(IPublishedContent)));
+
+            return useContentConstructor
+                ? _generator.CreateClassProxy(classToProxy, ops, new[] { node }, _interceptor)
+                : _generator.CreateClassProxy(classToProxy, ops, _interceptor);
         }
 
         public T CreateInstance<T>(IPublishedContent content, out bool enableFillProperties)

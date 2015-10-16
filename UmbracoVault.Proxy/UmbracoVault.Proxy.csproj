@@ -185,7 +185,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Concrete\ProxyFactory.cs" />
+    <Compile Include="Concrete\ProxyInstanceFactory.cs" />
     <Compile Include="Concrete\ProxyInterceptor.cs" />
     <Compile Include="ILazyResolverMixin.cs" />
     <Compile Include="Concrete\LazyResolverMixin.cs" />
