@@ -535,7 +535,8 @@ namespace UmbracoVault
                     var alias = attribute.Alias;
                     if (string.IsNullOrWhiteSpace(alias))
                     {
-                        alias = type.Name;
+                        //assumes doc type models use naming convention of [DocumentTypeAlias]ViewModel
+                        alias = type.Name.TrimEnd("ViewModel");
                     }
                     results.Add(alias);
                 }

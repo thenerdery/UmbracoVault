@@ -1,9 +1,10 @@
 ﻿@model ReferenceWebsite.Models.BlogHomeViewModel
+@using ReferenceWebsite.Models
 @using UmbracoVault
 
 @{
     Layout = null;
-	var posts = new List<int>{1105, 1104, 1100};
+    var posts = Vault.Context.GetByDocumentType<BlogEntryViewModel>().ToList();
 }
 
 <h1>@Model.Title</h1>
@@ -11,10 +12,9 @@
 @Html.Partial("breadcrumbs")
 	
 <div class="blog-home-posts">
-	@foreach(var blogPost in posts)
+	@foreach(var post in posts)
 	{
-		var post = Vault.Context.GetContentById<ReferenceWebsite.Models.BlogEntryViewModel>(blogPost);
-		<h2><a href="@umbraco.library.NiceUrl(blogPost)">@post.Title</a></h2>
+		<h2><a href="@post.CmsContent.Url">@post.Title</a></h2>
     	<span>@post.PostDate.ToShortDateString()</span>    
 	}
 </div>
