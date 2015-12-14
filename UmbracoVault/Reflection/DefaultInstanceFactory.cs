@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 using Umbraco.Core.Models;
 
@@ -10,7 +11,7 @@ namespace UmbracoVault.Reflection
 {
     public class DefaultInstanceFactory : IInstanceFactory
     {
-        public T CreateInstance<T>(IPublishedContent content, out bool fillProperties)
+        public T CreateInstance<T>(IPublishedContent content)
         {
             var targetType = typeof(T);
             var result = targetType.CreateWithContentConstructor<T>(content);
@@ -20,8 +21,17 @@ namespace UmbracoVault.Reflection
                 result = targetType.CreateWithNoParams<T>();
             }
 
-            fillProperties = true;
             return result;
+        }
+
+        public IList<PropertyInfo> GetPropertiesToFill<T>()
+        {
+            return GetPropertiesToFill(typeof(T));
+        }
+
+        public IList<PropertyInfo> GetPropertiesToFill(Type type)
+        {
+            return type.GetDefaultPropertiesToFill();
         }
     }
 }

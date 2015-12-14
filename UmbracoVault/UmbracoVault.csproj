@@ -228,7 +228,6 @@
     <Compile Include="Extensions\AttributeExtensions.cs" />
     <Compile Include="Extensions\ContentExtensions.cs" />
     <Compile Include="Extensions\ControlExtensions.cs" />
-    <Compile Include="Extensions\PropertyInfoExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Collections\ExternalIteratorEnumerable.cs" />
     <Compile Include="Collections\ExternalIteratorEnumerator.cs" />

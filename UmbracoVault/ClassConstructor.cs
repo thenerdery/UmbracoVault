@@ -5,6 +5,7 @@ using System.Reflection;
 
 using Umbraco.Core.Models;
 
+using UmbracoVault.Extensions;
 using UmbracoVault.Reflection;
 
 namespace UmbracoVault
@@ -24,14 +25,32 @@ namespace UmbracoVault
             _instanceFactory = instanceFactory;
         }
 
+        /// <summary>
+        ///     Gets the properties that need to be filled on an instance
+        /// </summary>
+        /// <typeparam name="T">Type of instance</typeparam>
+        public static IList<PropertyInfo> GetPropertiesToFill<T>()
+        {
+            return _instanceFactory.GetPropertiesToFill<T>();
+        }
+
+        /// <summary>
+        ///     Gets the properties that need to be filled on an instance
+        /// </summary>
+        /// <param name="type">Type of instance</param>
+        public static IList<PropertyInfo> GetPropertiesToFill(Type type)
+        {
+            return _instanceFactory.GetPropertiesToFill(type);
+        }
+
         public T CreateDefault<T>() where T : class, new()
         {
             return new T();
         }
 
-        public static T CreateWithNode<T>(IPublishedContent content, out bool fillProperties)
+        public static T CreateWithNode<T>(IPublishedContent content)
         {
-            var result = _instanceFactory.CreateInstance<T>(content, out fillProperties);
+            var result = _instanceFactory.CreateInstance<T>(content);
             SetPublishedContent(content, result);
 
             return result;
@@ -39,7 +58,7 @@ namespace UmbracoVault
 
         internal static void SetPublishedContent<T>(IPublishedContent content, T result)
         {
-            var contentProperty = typeof(T).GetProperties(BindingFlags.SetProperty | BindingFlags.Public | BindingFlags.Instance)
+            var contentProperty = typeof(T).GetPublicSettableProperties()
                 .FirstOrDefault(x => x.PropertyType.IsAssignableFrom(typeof(IPublishedContent)) && x.CanWrite);
 
             if (contentProperty != null)
@@ -64,19 +83,15 @@ namespace UmbracoVault
 
         public T CreateWithMember<T>(IMember member)
         {
-            bool fillProperties;
-            var memberModel = _instanceFactory.CreateInstance<T>(null, out fillProperties);
+            var memberModel = _instanceFactory.CreateInstance<T>(null);
 
-            if (fillProperties)
+            var targetType = typeof(T);
+            var memberProperty = targetType.GetPublicSettableProperties()
+                .FirstOrDefault(x => x.PropertyType.IsAssignableFrom(typeof(IMember)) && x.CanWrite);
+
+            if (memberProperty != null)
             {
-                var targetType = typeof(T);
-                var memberProperty = targetType.GetProperties(BindingFlags.SetProperty | BindingFlags.Public | BindingFlags.Instance)
-                    .FirstOrDefault(x => x.PropertyType.IsAssignableFrom(typeof(IMember)) && x.CanWrite);
-
-                if (memberProperty != null)
-                {
-                    memberProperty.SetValue(memberModel, member);
-                }
+                memberProperty.SetValue(memberModel, member);
             }
 
             return memberModel;

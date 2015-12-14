@@ -277,17 +277,8 @@ namespace UmbracoVault
         /// <param name="getPropertyValue">A func that, provided a property alias, will return a raw value to be processed by the TypeHandler system</param>
         public void FillClassProperties<T>(T instance, Func<string, bool, object> getPropertyValue)
         {
-            IEnumerable<PropertyInfo> properties;
-            var optionAttribute = GetUmbracoEntityAttributes(typeof(T)).FirstOrDefault();
-            if (optionAttribute != null && optionAttribute.AutoMap)
-            {
-                properties = GetAllPropertiesExceptOptedOut<T>();
-            }
-            else
-            {
-                properties = GetPropertiesOptedInForMapping<T>();
-            }
-
+            IList<PropertyInfo> properties = ClassConstructor.GetPropertiesToFill<T>();
+            
             foreach (var propertyInfo in properties)
             {
                 object value;
@@ -386,17 +377,13 @@ namespace UmbracoVault
             {
                 return (T)cachedItem;
             }
-            bool fillProperties;
-            var result = ClassConstructor.CreateWithNode<T>(n, out fillProperties);
-
-            if (fillProperties)
+            
+            var result = ClassConstructor.CreateWithNode<T>(n);
+            FillClassProperties(result, (alias, recursive) =>
             {
-                FillClassProperties(result, (alias, recursive) =>
-                {
-                    var value = n.GetPropertyValue(alias, recursive);
-                    return value;
-                });
-            }
+                var value = n.GetPropertyValue(alias, recursive);
+                return value;
+            });
 
             _cacheManager.AddItem(n.Id, result);
             return result;
@@ -492,33 +479,6 @@ namespace UmbracoVault
                 propertyInfo.Name.Substring(1));
         }
 
-        /// <summary>
-        /// Gets properties that are decorated with [UmbracoProperty] (opt-in mode)
-        /// </summary>
-        private static IEnumerable<PropertyInfo> GetPropertiesOptedInForMapping<T>()
-        {
-            return typeof(T).GetProperties(BindingFlags.SetProperty |
-                                           BindingFlags.Public | BindingFlags.Instance)
-                .Where(
-                    x =>
-                        x.GetCustomAttributes(typeof(UmbracoPropertyAttribute), true)
-                            .Any() && x.CanWrite);
-        }
-
-        /// <summary>
-        /// Gets properties that are NOT decorated with [UmbracoIgnoreProperty] (opt-out mode)
-        /// </summary>
-        private static IEnumerable<PropertyInfo> GetAllPropertiesExceptOptedOut<T>()
-        {
-            return typeof(T).GetProperties(BindingFlags.SetProperty |
-                                           BindingFlags.Public | BindingFlags.Instance)
-                .Where(
-                    x =>
-                        !x.GetCustomAttributes(typeof(UmbracoIgnorePropertyAttribute), true)
-                            .Any() && x.CanWrite
-                            && x.PropertyType != typeof(IPublishedContent));
-        }
-
         private static int GetIdFromString(string stringValue)
         {
             int result;
@@ -528,21 +488,10 @@ namespace UmbracoVault
             return result;
         }
 
-        private static ReadOnlyCollection<UmbracoEntityAttribute> GetUmbracoEntityAttributes(Type type)
-        {
-            var result = new List<UmbracoEntityAttribute>();
-            var attributes = type.GetCustomAttributes(typeof(UmbracoEntityAttribute), true) as UmbracoEntityAttribute[];
-            if (attributes != null)
-            {
-                result.AddRange(attributes);
-            }
-            return result.AsReadOnly();
-        }
-
         private static ReadOnlyCollection<string> GetUmbracoEntityAliasesFromType(Type type)
         {
             var results = new List<string>();
-            var attributes = GetUmbracoEntityAttributes(type).ToList();
+            var attributes = type.GetUmbracoEntityAttributes().ToList();
             if (attributes.Any())
             {
                 foreach (var attribute in attributes)

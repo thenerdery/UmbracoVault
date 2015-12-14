@@ -6,6 +6,7 @@ using System.Reflection;
 using Castle.DynamicProxy;
 
 using UmbracoVault.Attributes;
+using UmbracoVault.Extensions;
 
 namespace UmbracoVault.Proxy.Concrete
 {
@@ -15,18 +16,16 @@ namespace UmbracoVault.Proxy.Concrete
 
         public void Intercept(IInvocation invocation)
         {
+            PropertyInfo property;
             ILazyResolverMixin lazyResolverMixin;
 
-            if (!ShouldInterceptMethod(invocation) ||
-                !ShouldInterceptClass(invocation, out lazyResolverMixin))
+            if (!ShouldInterceptMethod(invocation, out property) || !ShouldInterceptClass(invocation, out lazyResolverMixin))
             {
                 invocation.Proceed();
                 return;
             }
 
             var alias = PropertyAlias(invocation);
-            var property = GetPropertyInfo(invocation.TargetType, invocation.Method);
-
             var value = lazyResolverMixin.GetOrResolve(alias, property);
             invocation.ReturnValue = value;
         }
@@ -57,11 +56,25 @@ namespace UmbracoVault.Proxy.Concrete
             return lazyResolverMixin != null;
         }
 
-        private static bool ShouldInterceptMethod(IInvocation invocation)
+        private bool ShouldInterceptMethod(IInvocation invocation, out PropertyInfo property)
         {
-            // Only intercepting property getters
-            return invocation.Method.IsSpecialName &&
-                   invocation.Method.Name.StartsWith(GetterMethodPrefix, StringComparison.Ordinal);
+            property = GetPropertyInfo(invocation.TargetType, invocation.Method);
+            if (property == null || !PropertyIsOptedIn(property) || property.GetCustomAttribute<UmbracoIgnorePropertyAttribute>() != null)
+            {
+                return false;
+            }
+
+            var getter = property.GetMethod;
+            var isGetter = getter != null && getter.Name == invocation.Method.Name;
+            var isVirtual = getter != null && getter.IsVirtual && !getter.IsFinal;
+
+            return isGetter && isVirtual;
+        }
+
+        private static bool PropertyIsOptedIn(PropertyInfo property)
+        {
+            var entityAttribute = property.DeclaringType.GetUmbracoEntityAttributes().FirstOrDefault();
+            return entityAttribute.AutoMap || property.GetCustomAttribute<UmbracoPropertyAttribute>() != null;
         }
     }
 }

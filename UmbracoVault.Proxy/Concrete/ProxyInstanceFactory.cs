@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 using Castle.DynamicProxy;
 
 using Umbraco.Core.Models;
 
+using UmbracoVault.Extensions;
 using UmbracoVault.Reflection;
 
 namespace UmbracoVault.Proxy.Concrete
@@ -29,10 +32,19 @@ namespace UmbracoVault.Proxy.Concrete
                 : _generator.CreateClassProxy(classToProxy, ops, _interceptor);
         }
 
-        public T CreateInstance<T>(IPublishedContent content, out bool enableFillProperties)
+        public T CreateInstance<T>(IPublishedContent content)
         {
-            enableFillProperties = false;
             return (T)BuildProxy<T>(content);
+        }
+
+        public IList<PropertyInfo> GetPropertiesToFill<T>()
+        {
+            return GetPropertiesToFill(typeof(T));
+        }
+
+        public IList<PropertyInfo> GetPropertiesToFill(Type type)
+        {
+            return type.GetDefaultPropertiesToFill().Where(p => p.GetMethod != null && !p.GetMethod.IsVirtual).ToList();
         }
     }
 }
