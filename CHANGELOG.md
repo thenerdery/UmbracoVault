@@ -1,3 +1,9 @@
+## UNRELEASED
+
+ * The new base controller expected to be uesd with Umbraco has been renamed from `VaultDefaultGenericController` to `VaultRenderMvcController` in order to more closely
+   Umbraco conventions
+ * VaultDefaultGenericController and VaultDefaultRenderController have been marked as obsolete.
+
 ## v1.1.0
 
  * Added support for Member types in the CMS (thanks @akatakritos) [#2][#3][#4]

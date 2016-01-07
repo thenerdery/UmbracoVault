@@ -72,10 +72,15 @@ UmbracoVault was built to be extensible to other Umbraco package developers. Wha
 ## Credits
 
 Huge thanks to The Nerdery for supporting the development effort of this ORM. Additionally, thanks to project
- contributors for their effort in building this library:
+contributors for their effort in building this library:
 
- * Paul Trandem
- * Andrew Morger
- * Ken Sykora
- * Jared Swarts
- * Phillip Allen Knauss
+ * Paul Trandem (@ptrandem)
+ * Andrew Morger (@asmorger)
+ * Wade Kallhoff (@wkallhof)
+ * Ken Sykora (@kensykora)
+ * Jared Swarts (@jaredswarts55)
+ * Marshall Glanzer (@NerderyMGlanzer)
+ * Kaleb Luhman (@kluhman)
+ * Matt Burke (@akatakritos)
+ * Allison Knauss (@phillipknauss)
+ * Erik Weiss (@technicallyerik)
