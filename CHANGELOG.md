@@ -1,4 +1,4 @@
-## UNRELEASED
+## v1.1.1
 
  * The new base controller expected to be uesd with Umbraco has been renamed from `VaultDefaultGenericController` to `VaultRenderMvcController` in order to more closely
    Umbraco conventions
