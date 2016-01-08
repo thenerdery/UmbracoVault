@@ -19,7 +19,7 @@ namespace ReferenceWebsite
         {
             DefaultRenderMvcControllerResolver
                 .Current
-                .SetDefaultControllerType(typeof(VaultDefaultGenericController));
+                .SetDefaultControllerType(typeof(VaultRenderMvcController));
 
             Vault.RegisterViewModelNamespace("ReferenceWebsite.Models", "ReferenceWebsite");
             TypeHandlerFactory.Instance.RegisterTypeHandler<LocationIdTypeHandler>();
