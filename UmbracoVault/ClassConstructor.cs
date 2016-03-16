@@ -1,36 +1,64 @@
-﻿
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-using UmbracoVault.Extensions;
-
 using Umbraco.Core.Models;
+
+using UmbracoVault.Extensions;
+using UmbracoVault.Reflection;
 
 namespace UmbracoVault
 {
     /// <summary>
-    /// Invokes constructors for a given class
+    ///     Invokes constructors for a given class
     /// </summary>
-    internal class ClassConstructor
+    public class ClassConstructor
     {
+        private static IInstanceFactory _instanceFactory = new DefaultInstanceFactory();
+
+        /// <summary>
+        ///     Set new instance factory, enables proxy class hook
+        /// </summary>
+        public static void SetInstanceFactory(IInstanceFactory instanceFactory)
+        {
+            _instanceFactory = instanceFactory;
+        }
+
+        /// <summary>
+        ///     Gets the properties that need to be filled on an instance
+        /// </summary>
+        /// <typeparam name="T">Type of instance</typeparam>
+        public static IList<PropertyInfo> GetPropertiesToFill<T>()
+        {
+            return _instanceFactory.GetPropertiesToFill<T>();
+        }
+
+        /// <summary>
+        ///     Gets the properties that need to be filled on an instance
+        /// </summary>
+        /// <param name="type">Type of instance</param>
+        public static IList<PropertyInfo> GetPropertiesToFill(Type type)
+        {
+            return _instanceFactory.GetPropertiesToFill(type);
+        }
 
         public T CreateDefault<T>() where T : class, new()
         {
             return new T();
         }
 
-        public T CreateWithNode<T>(IPublishedContent content)
+        public static T CreateWithNode<T>(IPublishedContent content)
         {
-            var targetType = typeof(T);
-            var result = targetType.CreateWithContentConstructor<T>(content);
+            var result = _instanceFactory.CreateInstance<T>(content);
+            SetPublishedContent(content, result);
 
-            if (result == null)
-            {
-                result = targetType.CreateWithNoParams<T>();
-            }
+            return result;
+        }
 
-            var contentProperty = typeof(T).GetProperties(BindingFlags.SetProperty | BindingFlags.Public | BindingFlags.Instance)
+        internal static void SetPublishedContent<T>(IPublishedContent content, T result)
+        {
+            var contentProperty = typeof(T).GetPublicSettableProperties()
                 .FirstOrDefault(x => x.PropertyType.IsAssignableFrom(typeof(IPublishedContent)) && x.CanWrite);
 
             if (contentProperty != null)
@@ -39,12 +67,10 @@ namespace UmbracoVault
             }
 
             SetContentProperty(content, result);
-
-            return result;
         }
 
         /// <summary>
-        /// If the target type inhereits from UmbracoContentModel, this sets the Content property
+        ///     If the target type inhereits from UmbracoContentModel, this sets the Content property
         /// </summary>
         private static void SetContentProperty<T>(IPublishedContent content, T result)
         {
@@ -57,10 +83,10 @@ namespace UmbracoVault
 
         public T CreateWithMember<T>(IMember member)
         {
-            var targetType = typeof(T);
-            var memberModel = targetType.CreateWithNoParams<T>();
+            var memberModel = _instanceFactory.CreateInstance<T>(null);
 
-            var memberProperty = typeof(T).GetProperties(BindingFlags.SetProperty | BindingFlags.Public | BindingFlags.Instance)
+            var targetType = typeof(T);
+            var memberProperty = targetType.GetPublicSettableProperties()
                 .FirstOrDefault(x => x.PropertyType.IsAssignableFrom(typeof(IMember)) && x.CanWrite);
 
             if (memberProperty != null)
@@ -69,8 +95,6 @@ namespace UmbracoVault
             }
 
             return memberModel;
-
         }
-
     }
 }

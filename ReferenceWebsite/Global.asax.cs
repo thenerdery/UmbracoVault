@@ -1,4 +1,6 @@
-﻿using ReferenceWebsite.TypeHandlers;
+﻿using System.Web.Routing;
+
+using ReferenceWebsite.TypeHandlers;
 using Umbraco.Web;
 using Umbraco.Web.Mvc;
 using UmbracoVault;
@@ -11,6 +13,8 @@ namespace ReferenceWebsite
     {
         protected override void OnApplicationStarting(object sender, System.EventArgs e)
         {
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+
             DefaultRenderMvcControllerResolver
                 .Current
                 .SetDefaultControllerType(typeof(VaultRenderMvcController));

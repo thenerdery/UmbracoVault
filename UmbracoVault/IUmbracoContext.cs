@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace UmbracoVault
 {
@@ -13,7 +14,7 @@ namespace UmbracoVault
         /// </summary>
         /// <typeparam name="T">The object type to cast the item to</typeparam>
         /// <returns>a strongly typed version (T) of the current umbraco item.</returns>
-        T GetCurrent<T>();
+        T GetCurrent<T>() where T : class;
 
         /// <summary>
         /// Retrieves a data item for the current node, instantiating and hydrating a type as defined by the passed-in type parameter.
@@ -121,6 +122,15 @@ namespace UmbracoVault
         /// <param name="instance">An newed-up instance of T</param>
         /// <param name="getPropertyValue">A func that, provided a property alias and a boolean to indicate recursion, will return a raw value to be processed by the TypeHandler system</param>
         void FillClassProperties<T>(T instance, Func<string, bool, object> getPropertyValue);
+
+        /// <summary>
+        /// Uses Vault context to try to resolve value for a single property
+        /// </summary>
+        /// <param name="getPropertyValue">Func to return raw value for the property</param>
+        /// <param name="propertyInfo">Property for which to return a value</param>
+        /// <param name="value">If found value will be set</param>
+        /// <returns>True if able to resolve value, false if not</returns>
+        bool TryGetValueForProperty(Func<string, bool, object> getPropertyValue, PropertyInfo propertyInfo, out object value);
 
         /// <summary>
         /// Given a class, will return true if the class is intended to be hydrated as a Media object instead of a Content object

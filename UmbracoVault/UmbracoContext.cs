@@ -91,16 +91,14 @@ namespace UmbracoVault
         /// </summary>
         /// <typeparam name="T">The object type to cast the item to</typeparam>
         /// <returns>a strongly typed version (T) of the current umbraco item.</returns>
-        public T GetCurrent<T>()
+        public T GetCurrent<T>() where T : class
         {
-
             var umbracoItem = GetCurrentUmbracoContent();
             if (umbracoItem == null || umbracoItem.Id <= 0)
             {
                 LogHelper.Error<T>("Could not retrieve current umbraco item.", null);
                 return default(T);
             }
-
 
             return GetItem<T>(umbracoItem);
         }
@@ -182,7 +180,7 @@ namespace UmbracoVault
             }
 
             return GetMemberItem<T>(umbracoItem);
-        }
+        }   
 
         public IEnumerable<T> GetContentByCsv<T>(string csv)
         {
@@ -279,74 +277,78 @@ namespace UmbracoVault
         /// <param name="getPropertyValue">A func that, provided a property alias, will return a raw value to be processed by the TypeHandler system</param>
         public void FillClassProperties<T>(T instance, Func<string, bool, object> getPropertyValue)
         {
-            IEnumerable<PropertyInfo> properties;
-            var optionAttribute = GetUmbracoEntityAttributes(typeof(T)).FirstOrDefault();
-            if (optionAttribute != null && optionAttribute.AutoMap)
+            IList<PropertyInfo> properties = ClassConstructor.GetPropertiesToFill<T>();
+            
+            foreach (var propertyInfo in properties)
             {
-                properties = GetAllPropertiesExceptOptedOut<T>();
+                object value;
+                if (TryGetValueForProperty(getPropertyValue, propertyInfo, out value))
+                {
+                    propertyInfo.SetValue(instance, value, null);
+                }
+            }
+        }
+
+        public bool TryGetValueForProperty(Func<string, bool, object> getPropertyValue, PropertyInfo propertyInfo, out object value)
+        {
+            var propertyType = propertyInfo.PropertyType;
+
+            //Get the attribute's property name value
+            var propertyMetaData =
+                propertyInfo.GetCustomAttributes(typeof(UmbracoPropertyAttribute), true).FirstOrDefault() as
+                    UmbracoPropertyAttribute;
+
+            var recursive = GetPropertyRecursion(propertyMetaData);
+            var alias = GetPropertyAlias(propertyMetaData, propertyInfo);
+
+            //Retrieve the value -- If it's not there just ignore and move on
+            if (!TryGetValue(getPropertyValue, alias, recursive, out value))
+            {
+                return false;
+            }
+
+            var transformations = _transformations.Where(x => x.TypeSupported == propertyType);
+            var transformedValue = transformations.Aggregate(value,
+                (current, transform) => transform.Transform(current));
+
+            if (value.GetType() == propertyType)
+            {
+                value = transformedValue;
+                return true;
+            }
+
+            var typeHandler = GetTypeHandler(propertyType, propertyMetaData);
+
+            if (typeHandler == null)
+            {
+                throw new NotSupportedException(
+                    string.Format("The property type {0} is not supported by Umbraco Vault.", propertyType));
+            }
+
+            if (typeHandler is EnumTypeHandler)
+            {
+                // Unfortunately, the EnumTypeHandler currently requires special attention because the GetAsType has a "where T : class" constraint.
+                // TODO: refactor this architecture so this workaround isn't necessary
+                var method = typeHandler.GetType().GetMethod("GetAsEnum");
+                var generic = method.MakeGenericMethod(propertyInfo.PropertyType);
+
+                value = generic.Invoke((typeHandler), new[] { transformedValue });
+                return true;
+            }
+
+            if (propertyInfo.PropertyType.IsGenericType)
+            {
+                var method = typeHandler.GetType().GetMethod("GetAsType");
+                var generic = method.MakeGenericMethod(propertyInfo.PropertyType.GetGenericArguments()[0]);
+                value = generic.Invoke(typeHandler, new[] { transformedValue });
             }
             else
             {
-                properties = GetPropertiesOptedInForMapping<T>();
+                var method = typeHandler.GetType().GetMethod("GetAsType");
+                var generic = method.MakeGenericMethod(propertyInfo.PropertyType);
+                value = generic.Invoke(typeHandler, new[] { transformedValue });
             }
-
-            foreach (var propertyInfo in properties)
-            {
-                var propertyType = propertyInfo.PropertyType;
-
-                //Get the attribute's property name value
-                var propertyMetaData =
-                    propertyInfo.GetCustomAttributes(typeof(UmbracoPropertyAttribute), true).FirstOrDefault() as
-                    UmbracoPropertyAttribute;
-
-                var recursive = GetPropertyRecursion(propertyMetaData);
-                var alias = GetPropertyAlias(propertyMetaData, propertyInfo);
-
-                //Retrieve the value -- If it's not there just ignore and move on
-                object value;
-                if (!TryGetValue(getPropertyValue, alias, recursive, out value))
-                    continue;
-
-                var transformations = _transformations.Where(x => x.TypeSupported == propertyType);
-                var transformedValue = transformations.Aggregate(value,
-                                                               (current, transform) => transform.Transform(current));
-
-                if (value.GetType() == propertyType)
-                {
-                    propertyInfo.SetValue(instance, transformedValue, null);
-                    continue;
-                }
-
-                var typeHandler = GetTypeHandler(propertyType, propertyMetaData);
-
-                if (typeHandler == null)
-                    throw new NotSupportedException(
-                        string.Format("The property type {0} is not supported by Umbraco Vault.", propertyType));
-
-                if (typeHandler is EnumTypeHandler)
-                {
-                    // Unfortunately, the EnumTypeHandler currently requires special attention because the GetAsType has a "where T : class" constraint.
-                    // TODO: refactor this architecture so this workaround isn't necessary
-                    var method = typeHandler.GetType().GetMethod("GetAsEnum");
-                    var generic = method.MakeGenericMethod(propertyInfo.PropertyType);
-                    var valueObject = generic.Invoke((typeHandler), new[] { transformedValue });
-                    propertyInfo.SetValue(instance, valueObject, null);
-                }
-                else if (propertyInfo.PropertyType.IsGenericType)
-                {
-                    var method = typeHandler.GetType().GetMethod("GetAsType");
-                    var generic = method.MakeGenericMethod(propertyInfo.PropertyType.GetGenericArguments()[0]);
-                    var valueObject = generic.Invoke(typeHandler, new[] { transformedValue });
-                    propertyInfo.SetValue(instance, valueObject, null);
-                }
-                else
-                {
-                    var method = typeHandler.GetType().GetMethod("GetAsType");
-                    var generic = method.MakeGenericMethod(propertyInfo.PropertyType);
-                    var valueObject = generic.Invoke(typeHandler, new[] { transformedValue });
-                    propertyInfo.SetValue(instance, valueObject, null);
-                }
-            }
+            return true;
         }
 
         private static bool TryGetValue(Func<string, bool, object> getPropertyValue, string alias, bool recursive, out object value)
@@ -375,13 +377,13 @@ namespace UmbracoVault
             {
                 return (T)cachedItem;
             }
-            var result = _classConstructor.CreateWithNode<T>(n);
-
+            
+            var result = ClassConstructor.CreateWithNode<T>(n);
             FillClassProperties(result, (alias, recursive) =>
-                {
-                    var value = n.GetPropertyValue(alias, recursive);
-                    return value;
-                });
+            {
+                var value = n.GetPropertyValue(alias, recursive);
+                return value;
+            });
 
             _cacheManager.AddItem(n.Id, result);
             return result;
@@ -477,33 +479,6 @@ namespace UmbracoVault
                 propertyInfo.Name.Substring(1));
         }
 
-        /// <summary>
-        /// Gets properties that are decorated with [UmbracoProperty] (opt-in mode)
-        /// </summary>
-        private static IEnumerable<PropertyInfo> GetPropertiesOptedInForMapping<T>()
-        {
-            return typeof(T).GetProperties(BindingFlags.SetProperty |
-                                           BindingFlags.Public | BindingFlags.Instance)
-                .Where(
-                    x =>
-                        x.GetCustomAttributes(typeof(UmbracoPropertyAttribute), true)
-                            .Any() && x.CanWrite);
-        }
-
-        /// <summary>
-        /// Gets properties that are NOT decorated with [UmbracoIgnoreProperty] (opt-out mode)
-        /// </summary>
-        private static IEnumerable<PropertyInfo> GetAllPropertiesExceptOptedOut<T>()
-        {
-            return typeof(T).GetProperties(BindingFlags.SetProperty |
-                                           BindingFlags.Public | BindingFlags.Instance)
-                .Where(
-                    x =>
-                        !x.GetCustomAttributes(typeof(UmbracoIgnorePropertyAttribute), true)
-                            .Any() && x.CanWrite
-                            && x.PropertyType != typeof(IPublishedContent));
-        }
-
         private static int GetIdFromString(string stringValue)
         {
             int result;
@@ -513,21 +488,10 @@ namespace UmbracoVault
             return result;
         }
 
-        private static ReadOnlyCollection<UmbracoEntityAttribute> GetUmbracoEntityAttributes(Type type)
-        {
-            var result = new List<UmbracoEntityAttribute>();
-            var attributes = type.GetCustomAttributes(typeof(UmbracoEntityAttribute), true) as UmbracoEntityAttribute[];
-            if (attributes != null)
-            {
-                result.AddRange(attributes);
-            }
-            return result.AsReadOnly();
-        }
-
         private static ReadOnlyCollection<string> GetUmbracoEntityAliasesFromType(Type type)
         {
             var results = new List<string>();
-            var attributes = GetUmbracoEntityAttributes(type).ToList();
+            var attributes = type.GetUmbracoEntityAttributes().ToList();
             if (attributes.Any())
             {
                 foreach (var attribute in attributes)
