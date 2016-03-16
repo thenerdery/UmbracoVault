@@ -17,7 +17,7 @@
         <copyright>Copyright 2014</copyright>
         <tags>C# Umbraco Nerdery Mapping ObjectMapper ORM CMS</tags>
         <dependencies>
-            <dependency id="UmbracoCms.Core" version="6.2.1" />
+            <dependency id="UmbracoCms.Core" version="6.2.0" />
         </dependencies>
     </metadata>
 </package>
