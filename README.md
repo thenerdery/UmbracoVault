@@ -72,7 +72,7 @@ public class CustomApplicationEventHandler : ApplicationEventHandler
 {
     protected override void ApplicationStarting(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
     {
-        Vault.RegisterViewModelNamespace("Kallista.ViewModels", "Kallista");
+        Vault.RegisterViewModelNamespace("MyProject.ViewModels", "MyProject");
         DefaultRenderMvcControllerResolver.Current.SetDefaultControllerType(typeof(VaultRenderMvcController));
     }
 }
