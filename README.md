@@ -43,7 +43,7 @@ This model can now get injected into our views with our fancy `VaultDefaultGener
 
 
 ```
-  @inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+  @model BlogEntryViewModel
 
   <h1>@Model.Title</h1>
   <img src="@Model.Image.Url" alt="@Model.Image.AltText" />
