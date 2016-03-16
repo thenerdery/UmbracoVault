@@ -14,7 +14,7 @@ using UmbracoVault.Reflection;
 
 namespace ReferenceWebsite.Controllers
 {
-    public class PerformanceController : VaultDefaultGenericController
+    public class PerformanceController : VaultRenderMvcController
     {
         // Maintains load times by property type
         private static Dictionary<Type, List<long>> _paramLoadTimes;

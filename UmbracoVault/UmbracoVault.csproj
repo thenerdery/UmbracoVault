@@ -221,6 +221,7 @@
     <Compile Include="Collections\VaultItemCollection.cs" />
     <Compile Include="Controllers\VaultDefaultRenderController.cs" />
     <Compile Include="Controllers\VaultDefaultGenericController.cs" />
+    <Compile Include="Controllers\VaultRenderMvcController.cs" />
     <Compile Include="Reflection\DefaultInstanceFactory.cs" />
     <Compile Include="Exceptions\ConstructorUnavailableException.cs" />
     <Compile Include="Exceptions\TemplateFileNotFoundException.cs" />

@@ -86,9 +86,6 @@
     <Reference Include="Microsoft.Web.Helpers">
       <HintPath>..\packages\UmbracoCms.Core.6.2.4\lib\Microsoft.Web.Helpers.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.1\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
     </Reference>
