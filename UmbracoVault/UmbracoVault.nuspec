@@ -11,9 +11,20 @@
         <requireLicenseAcceptance>true</requireLicenseAcceptance>
         <description>Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your views. It allows you to create lightly-decorated classes that Vault will understand how to hydrate. This gives you the full view model-style experience in Umbraco that you are accustomed to in MVC, complete with strongly-typed view properties (no more magic strings in your views).</description>
         <summary>Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your views.</summary>
-        <releaseNotes>* Added support for Member types in the CMS (thanks @akatakritos)
- * Fixed issue with running reference site for Umbraco v7
- * Fixed issue with rendering rich text fields that contained macros when there is no current page context (e.g., surface controller) (thanks @NerderyMGlanzer)</releaseNotes>
+        <releaseNotes>
+          *New Feature: Lazy Loading*
+
+          Umbraco Vault now includes support for lazy loading of properties. Properties that are expensive to hydrate,
+          such as collections, can be marked as `virtual` and they will be loaded when accessed. See <TBD> article
+for more detail on this feature.
+
+*Other*
+
+ * Codebase has been updated to build against VS 2015 and C# 6
+ * Reference sites for testing builds have been updated to the latest v6 and v7 versions, including ASP.Net MVC5
+ * Various internal accessiblity changes have been made to limit exposure of the API
+ * Various code cleanup
+        </releaseNotes>
         <copyright>Copyright 2014</copyright>
         <tags>C# Umbraco Nerdery Mapping ObjectMapper ORM CMS</tags>
         <dependencies>

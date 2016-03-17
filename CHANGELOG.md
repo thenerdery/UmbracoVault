@@ -1,7 +1,17 @@
 ## v1.2.0 (UNRELEASED)
  
+*New Feature: Lazy Loading*
+ 
 Umbraco Vault now includes support for lazy loading of properties. Properties that are expensive to hydrate,
-such as collections, can be marked as `virtual` and they will be loaded when accessed.
+such as collections, can be marked as `virtual` and they will be loaded when accessed. See <TBD> article
+for more detail on this feature.
+
+*Other*
+
+ * Codebase has been updated to build against VS 2015 and C# 6
+ * Reference sites for testing builds have been updated to the latest v6 and v7 versions, including ASP.Net MVC5
+ * Various internal accessiblity changes have been made to limit exposure of the API
+ * Various code cleanup
  
 ## v1.1.1
 
