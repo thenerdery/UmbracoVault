@@ -18,6 +18,8 @@ cache:
   - packages -> **\packages.config 
 configuration:
   - Release
+before_build:
+  - nuget restore
 after_build:
   - nuget pack UmbracoVault/UmbracoVault.csproj -Symbols -Version %CURRENT_VERSION%-build%APPVEYOR_BUILD_NUMBER%
   - nuget pack UmbracoVault/UmbracoVault.csproj -Symbols -Version %CURRENT_VERSION%-alpha1
