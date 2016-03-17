@@ -6,7 +6,7 @@ using System.Web.Routing;
 
 namespace ReferenceWebsite
 {
-    public class RouteConfig
+    internal class RouteConfig
     {
         /// <summary>
         ///     Register Umbraco application routes.

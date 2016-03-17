@@ -39,6 +39,7 @@ namespace UmbracoVault.Tests
         }
 
         [UmbracoEntity(AutoMap = true)]
+        // ReSharper disable once ClassNeverInstantiated.Local - Implemented by Framework
         private class DocumentModel
         {
             public string Introduction { get; set; }
@@ -57,6 +58,7 @@ namespace UmbracoVault.Tests
         }
 
         [UmbracoEntity(AutoMap = false)]
+        // ReSharper disable once ClassNeverInstantiated.Local - Implemented by Framework
         private class NoAutoMapDocumentModel
         {
             [UmbracoProperty]

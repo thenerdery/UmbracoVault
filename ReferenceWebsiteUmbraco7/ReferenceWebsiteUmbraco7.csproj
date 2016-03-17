@@ -340,6 +340,9 @@
     <Content Include="Views\Primitives.cshtml" />
     <Content Include="Views\StafferDetail.cshtml" />
     <Content Include="Views\TextTypes.cshtml" />
+    <Content Include="Views\Partials\breadcrumbs.cshtml" />
+    <Content Include="Views\Partials\numeric-types.cshtml" />
+    <Content Include="Views\Partials\text-types.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -372,7 +375,9 @@
     <Content Include="Config\Lang\zh-CN.user.xml" />
     <Content Include="default.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Arrays.cs" />

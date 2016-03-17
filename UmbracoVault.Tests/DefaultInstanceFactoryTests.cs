@@ -41,6 +41,7 @@ namespace UmbracoVault.Tests
         }
 
         [UmbracoEntity(AutoMap = true)]
+        // ReSharper disable once ClassNeverInstantiated.Local - OK Here, used by framework.
         private class DocumentModel
         {
             public string Introduction { get; set; }
@@ -56,6 +57,7 @@ namespace UmbracoVault.Tests
         }
 
         [UmbracoEntity(AutoMap = false)]
+        // ReSharper disable once ClassNeverInstantiated.Local - Implemented by framework
         private class NoAutoMapDocumentModel
         {
             [UmbracoProperty]

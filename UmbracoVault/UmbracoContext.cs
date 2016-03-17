@@ -23,23 +23,21 @@ namespace UmbracoVault
     /// </summary>
     public class UmbracoWebContext : IUmbracoContext
     {
-        private readonly ClassConstructor _classConstructor;
-        private readonly IList<ITransformation> _transformations;
+        //TODO: fetch classes from configuration and populate this list based on type and assembly strings
+        //TODO: Document Default Transformations
+        //TODO: Re-add transformations once there's a way to opt-in to them instead of having it be global
+        // ReSharper disable once CollectionNeverUpdated.Local
+        // ReSharper disable once RedundantEmptyObjectOrCollectionInitializer
+        private readonly IList<ITransformation> _transformations = new List<ITransformation>
+        {
+            //new SuperScriptTransformation()
+        };
         private readonly CacheManager _cacheManager;
 
         private readonly TypeHandlerFactory _typeHandlerFactory;
 
         public UmbracoWebContext()
         {
-            //TODO: fetch classes from configuration and populate this list based on type and assembly strings
-            //TODO: Document Default Transformations
-            //TODO: Re-add transformations once there's a way to opt-in to them instead of having it be global
-            _transformations = new List<ITransformation>
-                                   {
-                                       //new SuperScriptTransformation()
-                                   };
-
-            _classConstructor = new ClassConstructor();
             _typeHandlerFactory = TypeHandlerFactory.Instance;
             _cacheManager = new CacheManager();
         }
@@ -84,8 +82,6 @@ namespace UmbracoVault
             return member;
         }
 
-        #region IUmbracoContext Members
-
         /// <summary>
         /// Retrieves a data item for the current node.
         /// </summary>
@@ -120,8 +116,8 @@ namespace UmbracoVault
         public object GetContentById(Type type, string idString)
         {
             var methodInfo = typeof(UmbracoWebContext).GetMethod("GetContentById", new[]{typeof(string)});
-            var genericMethod = methodInfo.MakeGenericMethod(new[] { type });
-            var result = genericMethod.Invoke(Vault.Context, new[] { idString });
+            var genericMethod = methodInfo.MakeGenericMethod(type);
+            var result = genericMethod.Invoke(Vault.Context, new object[] { idString });
             return result;
         }
 
@@ -143,7 +139,7 @@ namespace UmbracoVault
 
             if (umbracoItem == null || umbracoItem.Id <= 0)
             {
-                LogHelper.Error<T>(string.Format("Could not locate umbraco item with Id of '{0}'.", id), null);
+                LogHelper.Error<T>($"Could not locate umbraco item with Id of '{id}'.", null);
                 return default(T);
             }
 
@@ -156,7 +152,7 @@ namespace UmbracoVault
 
             if (umbracoItem == null || umbracoItem.Id <= 0)
             {
-                LogHelper.Error<T>(string.Format("Could not locate umbraco media item with Id of '{0}'.", id), null);
+                LogHelper.Error<T>($"Could not locate umbraco media item with Id of '{id}'.", null);
                 return default(T);
             }
 
@@ -175,7 +171,7 @@ namespace UmbracoVault
 
             if (umbracoItem == null || umbracoItem.Id <= 0)
             {
-                LogHelper.Error<T>(string.Format("Could not locate umbraco member with Id of '{0}'.", id), null);
+                LogHelper.Error<T>($"Could not locate umbraco member with Id of '{id}'.", null);
                 return default(T);
             }
 
@@ -237,22 +233,6 @@ namespace UmbracoVault
             return items.Select(GetItem<T>);
         }
 
-        //TODO: what is the real purpose of this method?
-        ///// <summary>
-        ///// Given an XPath Query, it returns an object of a specific type.
-        ///// </summary>
-        ///// <typeparam name="T">Type of object to return</typeparam>
-        ///// <param name="query">XPath query for objects which are relative to the root</param>
-        ///// <returns>A list of objects that match</returns>
-        //public T QueryByUrl<T>(string query)
-        //{
-        //    return GetItem<T>(Helper.GetTypedContentByUrl(query));
-        //}
-
-        #endregion
-
-        #region IUmbracoContextInternals
-
         /// <summary>
         /// Given a class, will return true if the class is intended to be hydrated as a Media object instead of a Content object
         /// </summary>
@@ -277,7 +257,7 @@ namespace UmbracoVault
         /// <param name="getPropertyValue">A func that, provided a property alias, will return a raw value to be processed by the TypeHandler system</param>
         public void FillClassProperties<T>(T instance, Func<string, bool, object> getPropertyValue)
         {
-            IList<PropertyInfo> properties = ClassConstructor.GetPropertiesToFill<T>();
+            var properties = ClassConstructor.GetPropertiesToFill<T>();
             
             foreach (var propertyInfo in properties)
             {
@@ -368,8 +348,6 @@ namespace UmbracoVault
             return value != null;
         }
 
-        #endregion
-
         private T GetItem<T>(IPublishedContent n)
         {
             var cachedItem = _cacheManager.GetItem<T>(n.Id);
@@ -389,6 +367,7 @@ namespace UmbracoVault
             return result;
         }
 
+        // ReSharper disable once SuggestBaseTypeForParameter - OK Here
         private T GetMediaItem<T>(IMedia m)
         {
             var result = typeof(T).CreateWithNoParams<T>();
@@ -405,7 +384,7 @@ namespace UmbracoVault
 
         private T GetMemberItem<T>(IMember m)
         {
-            var result = _classConstructor.CreateWithMember<T>(m);
+            var result = ClassConstructor.CreateWithMember<T>(m);
 
             FillClassProperties(result, (alias, recursive) =>
             {
@@ -437,27 +416,27 @@ namespace UmbracoVault
             var classMetaData = propertyType.GetCustomAttributes(typeof(UmbracoEntityAttribute), true).FirstOrDefault() as
                 UmbracoEntityAttribute;
 
-            if (classMetaData != null && classMetaData.TypeHandlerOverride != null)
+            if (classMetaData?.TypeHandlerOverride != null)
             {
                 // Check for type-level override
                 return classMetaData.TypeHandlerOverride.CreateWithNoParams<ITypeHandler>();
             }
 
-            if (propertyMetaData != null && propertyMetaData.TypeHandler != null)
+            if (propertyMetaData?.TypeHandler != null)
             {
                 // Check for property-level override
                 return propertyMetaData.TypeHandler;
             }
 
             // Attempt to find default handler
-            var factoryHandler = this._typeHandlerFactory.GetHandlerForType(propertyType);
+            var factoryHandler = _typeHandlerFactory.GetHandlerForType(propertyType);
 
             if (factoryHandler != null)
             {
                 return factoryHandler;
             }
 
-            if (classMetaData != null && classMetaData.GetType() == typeof(UmbracoEntityAttribute))
+            if (classMetaData?.GetType() == typeof(UmbracoEntityAttribute))
             {
                 // Finally, if no other handler has been found yet, AND the target type is an Entity
                 // then let's attempt to recursively get the content

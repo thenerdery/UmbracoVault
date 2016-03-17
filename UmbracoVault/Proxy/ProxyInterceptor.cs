@@ -71,10 +71,10 @@ namespace UmbracoVault.Proxy
             return isGetter && isVirtual;
         }
 
-        private static bool PropertyIsOptedIn(PropertyInfo property)
+        private static bool PropertyIsOptedIn(MemberInfo property)
         {
             var entityAttribute = property.DeclaringType.GetUmbracoEntityAttributes().FirstOrDefault();
-            return entityAttribute.AutoMap || property.GetCustomAttribute<UmbracoPropertyAttribute>() != null;
+            return entityAttribute != null && (entityAttribute.AutoMap || property.GetCustomAttribute<UmbracoPropertyAttribute>() != null);
         }
     }
 }

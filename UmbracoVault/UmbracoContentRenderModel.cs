@@ -9,6 +9,8 @@ namespace UmbracoVault
 {
     public class UmbracoContentRenderModel : RenderModel
     {
-        public UmbracoContentRenderModel(IPublishedContent content) : base(content) { }
+        public UmbracoContentRenderModel(IPublishedContent content) : base(content)
+        {
+        }
     }
 }
