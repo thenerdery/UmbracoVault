@@ -10,7 +10,6 @@ using Umbraco.Web.Mvc;
 
 namespace UmbracoVault.Controllers
 {
-    // TODO: update comments to further reflect functionality
     /// <summary>
     /// A controller to render front-end requests which completely bypasses the Umbraco RenderModel convention.
     /// </summary>

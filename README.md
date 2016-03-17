@@ -39,7 +39,7 @@ public class BlogEntryViewModel
 }
 ```
 
-This model can now get injected into our views with our fancy `VaultDefaultGenericController`. Your `BlogEntry` view  can now look like this:
+This model can now get injected into our views with our fancy `VaultRenderMvcController`. Your `BlogEntry` view  can now look like this:
 
 
 ```html
