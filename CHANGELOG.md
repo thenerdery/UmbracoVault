@@ -1,3 +1,8 @@
+## v1.2.0 (UNRELEASED)
+ 
+Umbraco Vault now includes support for lazy loading of properties. Properties that are expensive to hydrate,
+such as collections, can be marked as `virtual` and they will be loaded when accessed.
+ 
 ## v1.1.1
 
  * The new base controller expected to be uesd with Umbraco has been renamed from `VaultDefaultGenericController` to `VaultRenderMvcController` in order to more closely
