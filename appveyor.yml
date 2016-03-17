@@ -7,7 +7,6 @@ branches:
     - develop
     - /release\/.*/
     - /feature\/.*/
-os: Windows Server 2012
 assembly_info:
   patch: true
   file: AssemblyInfo.*
