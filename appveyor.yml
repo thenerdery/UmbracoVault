@@ -1,6 +1,6 @@
 environment:
-  CURRENT_VERSION: 1.1.1
-version: 1.1.1-{build}
+  CURRENT_VERSION: 1.2.0
+version: 1.2.0-{build}
 branches:
   only:
     - master
@@ -20,6 +20,7 @@ configuration:
   - Release
 after_build:
   - nuget pack UmbracoVault/UmbracoVault.csproj -Symbols -Version %CURRENT_VERSION%-build%APPVEYOR_BUILD_NUMBER%
+  - nuget pack UmbracoVault/UmbracoVault.csproj -Symbols -Version %CURRENT_VERSION%-alpha1
   - nuget pack UmbracoVault/UmbracoVault.csproj -Symbols -Version %CURRENT_VERSION%
 artifacts:
   - path: '*.nupkg'
