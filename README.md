@@ -4,7 +4,7 @@
 
 | Branch | Status |
 | ------ | ------ |
-| master | [![Build status](https://ci.appveyor.com/api/projects/status/4lmny3neenc4hibj?svg=true)](https://ci.appveyor.com/project/TheNerdery/umbracovault) |
+| master | [![Build status](https://ci.appveyor.com/api/projects/status/4lmny3neenc4hibj/branch/master?svg=true)](https://ci.appveyor.com/project/TheNerdery/umbracovault/branch/master) |
 | develop | [![Build status](https://ci.appveyor.com/api/projects/status/4lmny3neenc4hibj/branch/develop?svg=true)](https://ci.appveyor.com/project/TheNerdery/umbracovault/branch/develop) |
 
 ## Overview
