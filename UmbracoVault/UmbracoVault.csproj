@@ -145,6 +145,10 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
       <Private>True</Private>
@@ -170,41 +174,53 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml" />
-    <Reference Include="TidyNet">
+    <Reference Include="TidyNet, Version=1.0.0.0, Culture=neutral">
       <HintPath>..\packages\UmbracoCms.Core.6.2.1\lib\TidyNet.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="umbraco">
+    <Reference Include="umbraco, Version=1.0.5261.29001, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.6.2.1\lib\umbraco.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Umbraco.Core">
+    <Reference Include="Umbraco.Core, Version=1.0.5261.28997, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.6.2.1\lib\Umbraco.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="umbraco.DataLayer">
+    <Reference Include="umbraco.DataLayer, Version=1.0.5261.28998, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.6.2.1\lib\umbraco.DataLayer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="umbraco.editorControls">
+    <Reference Include="umbraco.editorControls, Version=1.0.5261.29004, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.6.2.1\lib\umbraco.editorControls.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="umbraco.MacroEngines">
+    <Reference Include="umbraco.MacroEngines, Version=1.0.5261.29004, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.6.2.1\lib\umbraco.MacroEngines.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="umbraco.macroRenderings">
+    <Reference Include="umbraco.macroRenderings, Version=1.0.5261.29000, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.6.2.1\lib\umbraco.macroRenderings.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="umbraco.providers">
+    <Reference Include="umbraco.providers, Version=1.0.5261.29000, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.6.2.1\lib\umbraco.providers.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Umbraco.Web.UI">
+    <Reference Include="Umbraco.Web.UI, Version=1.0.5261.29004, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.6.2.1\lib\Umbraco.Web.UI.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="umbraco.XmlSerializers">
+    <Reference Include="umbraco.XmlSerializers, Version=1.0.5261.29001, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.6.2.1\lib\umbraco.XmlSerializers.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="UmbracoExamine">
+    <Reference Include="UmbracoExamine, Version=0.6.0.28999, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.6.2.1\lib\UmbracoExamine.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="UrlRewritingNet.UrlRewriter">
+    <Reference Include="UrlRewritingNet.UrlRewriter, Version=2.0.60829.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.6.2.1\lib\UrlRewritingNet.UrlRewriter.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
