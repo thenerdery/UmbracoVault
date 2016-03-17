@@ -15,7 +15,7 @@
           *New Feature: Lazy Loading*
 
           Umbraco Vault now includes support for lazy loading of properties. Properties that are expensive to hydrate,
-          such as collections, can be marked as `virtual` and they will be loaded when accessed. See <TBD> article
+          such as collections, can be marked as `virtual` and they will be loaded when accessed. See &lt;TBD&gt; article
 for more detail on this feature.
 
 *Other*
