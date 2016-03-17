@@ -6,7 +6,7 @@ using UmbracoVault.TypeHandlers;
 
 namespace UmbracoVault.Attributes
 {
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class UmbracoMemberPropertyAttribute : UmbracoPropertyAttribute
     {
         public UmbracoMemberPropertyAttribute()

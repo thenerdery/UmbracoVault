@@ -15,9 +15,6 @@ namespace UmbracoVault.Tests.Models
             throw new NotImplementedException();
         }
 
-        public Type TypeSupported
-        {
-            get { return typeof(ExampleModelAllTypes); }
-        }
+        public Type TypeSupported => typeof(ExampleModelAllTypes);
     }
 }

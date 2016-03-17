@@ -16,8 +16,6 @@ namespace UmbracoVault.TypeHandlers
             return content;
         }
 
-        public Type TypeSupported {
-            get { return null; }
-        }
+        public Type TypeSupported => null;
     }
 }

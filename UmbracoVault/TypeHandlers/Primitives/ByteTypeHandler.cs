@@ -4,7 +4,7 @@ namespace UmbracoVault.TypeHandlers.Primitives
 {
     public class ByteTypeHandler : ITypeHandler
     {
-        private object Get(string stringValue)
+        private static object Get(string stringValue)
         {
             byte result;
 
@@ -18,9 +18,6 @@ namespace UmbracoVault.TypeHandlers.Primitives
 			return Get(input.ToString());
     	}
 
-    	public Type TypeSupported
-        {
-            get { return typeof(byte); }
-        }
+    	public Type TypeSupported => typeof(byte);
     }
 }

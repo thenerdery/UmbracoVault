@@ -43,17 +43,7 @@ namespace UmbracoVault
         }
 
         private UmbracoHelper _helper;
-        protected UmbracoHelper Helper
-        {
-            get
-            {
-                if (_helper == null)
-                {
-                    _helper = new UmbracoHelper(UmbracoContext.Current);
-                }
-                return _helper;
-            }
-        }
+        protected UmbracoHelper Helper => _helper ?? (_helper = new UmbracoHelper(UmbracoContext.Current));
 
         private IPublishedContent GetCurrentUmbracoContent()
         {
@@ -70,13 +60,13 @@ namespace UmbracoVault
             return umbracoItem;
         }
 
-        private IMedia GetUmbracoMedia(int id)
+        private static IMedia GetUmbracoMedia(int id)
         {
             var mediaItem = ApplicationContext.Current.Services.MediaService.GetById(id);
             return mediaItem;
         }
 
-        private IMember GetUmbracoMember(int id)
+        private static IMember GetUmbracoMember(int id)
         {
             var member = ApplicationContext.Current.Services.MemberService.GetById(id);
             return member;
@@ -302,7 +292,7 @@ namespace UmbracoVault
             if (typeHandler == null)
             {
                 throw new NotSupportedException(
-                    string.Format("The property type {0} is not supported by Umbraco Vault.", propertyType));
+                    $"The property type {propertyType} is not supported by Umbraco Vault.");
             }
 
             if (typeHandler is EnumTypeHandler)
@@ -312,7 +302,7 @@ namespace UmbracoVault
                 var method = typeHandler.GetType().GetMethod("GetAsEnum");
                 var generic = method.MakeGenericMethod(propertyInfo.PropertyType);
 
-                value = generic.Invoke((typeHandler), new[] { transformedValue });
+                value = generic.Invoke(typeHandler, new[] { transformedValue });
                 return true;
             }
 
@@ -398,7 +388,7 @@ namespace UmbracoVault
             return result;
         }
 
-        private bool GetPropertyRecursion(UmbracoPropertyAttribute umbracoPropertyBinding)
+        private static bool GetPropertyRecursion(UmbracoPropertyAttribute umbracoPropertyBinding)
         {
             if (umbracoPropertyBinding != null)
             {
@@ -449,13 +439,12 @@ namespace UmbracoVault
 
         private static string GetPropertyAlias(UmbracoPropertyAttribute umbracoPropertyBinding, PropertyInfo propertyInfo)
         {
-            if(umbracoPropertyBinding != null && !string.IsNullOrWhiteSpace(umbracoPropertyBinding.Alias))
+            if(!string.IsNullOrWhiteSpace(umbracoPropertyBinding?.Alias))
             {
                 return umbracoPropertyBinding.Alias;
             }
 
-            return string.Format("{0}{1}", propertyInfo.Name[0].ToString(CultureInfo.InvariantCulture).ToLower(),
-                propertyInfo.Name.Substring(1));
+            return $"{propertyInfo.Name[0].ToString(CultureInfo.InvariantCulture).ToLower()}{propertyInfo.Name.Substring(1)}";
         }
 
         private static int GetIdFromString(string stringValue)

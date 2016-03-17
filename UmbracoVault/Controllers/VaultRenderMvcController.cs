@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using log4net;
+
 using Umbraco.Web;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
+
 using UmbracoVault.Exceptions;
 
 namespace UmbracoVault.Controllers
 {
     public class VaultRenderMvcController : RenderMvcController
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof (VaultRenderMvcController));
-
         public VaultRenderMvcController()
         {
         }

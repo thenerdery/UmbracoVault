@@ -16,7 +16,7 @@ namespace UmbracoVault.Tests
         {
             public ExampleModelAllTypes Source { get; set; }
             public ExampleModelAllTypes Destination { get; set; }
-            public UmbracoVault.UmbracoWebContext Context { get; set; }
+            public UmbracoWebContext Context { get; set; }
 
             [TestInitialize]
             public void Initialize()

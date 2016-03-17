@@ -4,7 +4,7 @@ namespace UmbracoVault.TypeHandlers.Primitives
 {
     public class LongTypeHandler : ITypeHandler
     {
-        private object Get(string stringValue)
+        private static object Get(string stringValue)
         {
             long result;
 
@@ -18,9 +18,6 @@ namespace UmbracoVault.TypeHandlers.Primitives
 			return Get(input.ToString());
     	}
 
-        public Type TypeSupported
-        {
-            get { return typeof (long); }
-        }
+        public Type TypeSupported => typeof (long);
     }
 }

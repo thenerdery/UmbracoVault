@@ -28,12 +28,6 @@ namespace UmbracoVault.TypeHandlers
 			return collection;
 		}
 
-		public Type TypeSupported
-		{
-			get
-			{
-				return typeof(IEnumerable<>);
-			}
-		}
+		public Type TypeSupported => typeof(IEnumerable<>);
 	}
 }

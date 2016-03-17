@@ -2,9 +2,9 @@
 
 namespace UmbracoVault.TypeHandlers.Primitives
 {
-    public class ushortTypeHandler : ITypeHandler
+    public class UshortTypeHandler : ITypeHandler
     {
-        private object Get(string stringValue)
+        private static object Get(string stringValue)
         {
             ushort result;
 
@@ -18,9 +18,6 @@ namespace UmbracoVault.TypeHandlers.Primitives
 			return Get(input.ToString());
     	}
         
-        public Type TypeSupported
-        {
-            get { return typeof (ushort); }
-        }
+        public Type TypeSupported => typeof (ushort);
     }
 }

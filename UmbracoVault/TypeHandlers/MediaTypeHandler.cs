@@ -14,7 +14,7 @@ namespace UmbracoVault.TypeHandlers
     public class MediaTypeHandler : ITypeHandler
     {
 
-        private IPublishedContent Get(string stringValue)
+        private static IPublishedContent Get(string stringValue)
         {
             var helper = new UmbracoHelper(UmbracoContext.Current);
             return helper.TypedMedia(stringValue);
@@ -37,9 +37,6 @@ namespace UmbracoVault.TypeHandlers
             return result;
         }
 
-        public Type TypeSupported
-        {
-            get { return typeof (Media); }
-        }
+        public Type TypeSupported => typeof (Media);
     }
 }

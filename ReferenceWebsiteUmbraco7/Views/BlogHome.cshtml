@@ -14,7 +14,7 @@
 	@foreach(var blogPost in posts)
 	{
 		var post = Vault.Context.GetContentById<ReferenceWebsite.Models.BlogEntryViewModel>(blogPost);
-		<h2><a href="@umbraco.library.NiceUrl(blogPost)">@post.Title</a></h2>
+		<h2><a href="@library.NiceUrl(blogPost)">@post.Title</a></h2>
     	<span>@post.PostDate.ToShortDateString()</span>    
 	}
 </div>

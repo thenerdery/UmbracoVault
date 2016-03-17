@@ -9,7 +9,7 @@ namespace UmbracoVault.Attributes
     /// <summary>
     /// Directs Vault to hydrate a target type from a Media object instead of a Content object 
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class UmbracoMediaPropertyAttribute : UmbracoPropertyAttribute
     {
         public UmbracoMediaPropertyAttribute()

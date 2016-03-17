@@ -6,7 +6,7 @@ using UmbracoVault.TypeHandlers;
 
 namespace UmbracoVault.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Class)]
     public class UmbracoMemberEntityAttribute : UmbracoEntityAttribute
     {
         public override Type TypeHandlerOverride

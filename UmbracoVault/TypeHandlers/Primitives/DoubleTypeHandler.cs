@@ -4,7 +4,7 @@ namespace UmbracoVault.TypeHandlers.Primitives
 {
     public class DoubleTypeHandler : ITypeHandler
     {
-        private object Get(string stringValue)
+        private static object Get(string stringValue)
         {
             double result;
 
@@ -18,9 +18,6 @@ namespace UmbracoVault.TypeHandlers.Primitives
 			return Get(input.ToString());
     	}
 
-    	public Type TypeSupported
-        {
-            get { return typeof (double); }
-        }
+    	public Type TypeSupported => typeof (double);
     }
 }

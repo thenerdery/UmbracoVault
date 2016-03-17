@@ -8,7 +8,7 @@ namespace UmbracoVault.TypeHandlers.Primitives
 	/// </summary>
 	public class StringArrayTypeHandler : ITypeHandler
 	{
-		private object Get(string stringValue)
+		private static object Get(string stringValue)
 		{
 			return stringValue.Split(',');
 		}
@@ -18,12 +18,6 @@ namespace UmbracoVault.TypeHandlers.Primitives
 			return Get(input.ToString());
 		}
 
-		public Type TypeSupported
-		{
-			get
-			{
-				return typeof(string[]);
-			}
-		}
+		public Type TypeSupported => typeof(string[]);
 	}
 }

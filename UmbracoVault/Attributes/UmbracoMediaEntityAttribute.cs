@@ -10,7 +10,7 @@ namespace UmbracoVault.Attributes
     /// Denotes an entity represents an Umbraco Media type.
     /// Exposes the same options as [UmbracoEntity], including AutoMap.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Class)]
     public class UmbracoMediaEntityAttribute : UmbracoEntityAttribute
     {
         public override Type TypeHandlerOverride

@@ -9,7 +9,7 @@ namespace ReferenceWebsite
 {
     public class Global : UmbracoApplication
     {
-        protected override void OnApplicationStarting(object sender, System.EventArgs e)
+        protected override void OnApplicationStarting(object sender, EventArgs e)
         {
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }

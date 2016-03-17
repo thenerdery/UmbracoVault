@@ -28,7 +28,7 @@ namespace UmbracoVault.Proxy
             var useContentConstructor = classToProxy.GetConstructors().Any(c => c.GetParameters().Any(p => p.ParameterType == typeof(IPublishedContent)));
 
             return useContentConstructor
-                ? _generator.CreateClassProxy(classToProxy, ops, new[] { node }, _interceptor)
+                ? _generator.CreateClassProxy(classToProxy, ops, new object[] { node }, _interceptor)
                 : _generator.CreateClassProxy(classToProxy, ops, _interceptor);
         }
 

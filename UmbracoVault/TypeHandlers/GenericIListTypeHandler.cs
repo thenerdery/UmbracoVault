@@ -12,12 +12,6 @@ namespace UmbracoVault.TypeHandlers
             return collection;
         }
 
-        public Type TypeSupported
-        {
-            get
-            {
-                return typeof(IList<>);
-            }
-        }
+        public Type TypeSupported => typeof(IList<>);
     }
 }

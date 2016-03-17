@@ -8,7 +8,7 @@ namespace UmbracoVault.TypeHandlers
     /// </summary>
     public class HtmlStringTypeHandler : ITypeHandler
     {
-        private HtmlString Get(string stringValue)
+        private static HtmlString Get(string stringValue)
         {
             return new HtmlString(stringValue);
         }
@@ -18,9 +18,6 @@ namespace UmbracoVault.TypeHandlers
 			return Get(input.ToString());
     	}
 
-        public Type TypeSupported
-        {
-            get { return typeof (HtmlString); }
-        }
+        public Type TypeSupported => typeof (HtmlString);
     }
 }

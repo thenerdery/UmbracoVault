@@ -10,7 +10,7 @@ namespace UmbracoVault.Exceptions
         public ViewModelNotFoundException(string templateName, IEnumerable<string> typesChecked)
         {
             var sb = new StringBuilder();
-            sb.Append(string.Format("The view model inferred from the template ({0}) could not be found in the following namespaces:\n", templateName));
+            sb.Append($"The view model inferred from the template ({templateName}) could not be found in the following namespaces:\n");
             foreach (var type in typesChecked)
             {
                 sb.AppendLine(type);
@@ -20,9 +20,6 @@ namespace UmbracoVault.Exceptions
 
         private readonly string _message;
 
-        public override string Message
-        {
-            get { return _message; }
-        }
+        public override string Message => _message;
     }
 }

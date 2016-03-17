@@ -10,18 +10,18 @@ namespace UmbracoVault.Tests
     [TestClass]
     public class ProxyInstanceFactoryTests
     {
-        private ProxyInstanceFactory factory;
+        private ProxyInstanceFactory _factory;
 
         [TestInitialize]
         public void InitializeTest()
         {
-            factory = new ProxyInstanceFactory();
+            _factory = new ProxyInstanceFactory();
         }
 
         [TestMethod]
         public void GetPropertiesToFill_ShouldReturnCorrectProperties_WithAutomap()
         {
-            var properties = factory.GetPropertiesToFill<DocumentModel>();
+            var properties = _factory.GetPropertiesToFill<DocumentModel>();
             Assert.AreEqual(3, properties.Count);
             Assert.IsNotNull(properties.FirstOrDefault(p => p.Name == "Introduction"));
             Assert.IsNotNull(properties.FirstOrDefault(p => p.Name == "Body"));
@@ -31,7 +31,7 @@ namespace UmbracoVault.Tests
         [TestMethod]
         public void GetPropertiesToFill_ShouldReturnCorrectProperties_WithoutAutomap()
         {
-            var properties = factory.GetPropertiesToFill<NoAutoMapDocumentModel>();
+            var properties = _factory.GetPropertiesToFill<NoAutoMapDocumentModel>();
             Assert.AreEqual(3, properties.Count);
             Assert.IsNotNull(properties.FirstOrDefault(p => p.Name == "Introduction"));
             Assert.IsNotNull(properties.FirstOrDefault(p => p.Name == "Body"));

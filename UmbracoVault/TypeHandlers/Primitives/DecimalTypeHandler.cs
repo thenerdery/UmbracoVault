@@ -4,7 +4,7 @@ namespace UmbracoVault.TypeHandlers.Primitives
 {
     public class DecimalTypeHandler : ITypeHandler
     {
-        private object Get(string stringValue)
+        private static object Get(string stringValue)
         {
             decimal result;
 
@@ -18,10 +18,6 @@ namespace UmbracoVault.TypeHandlers.Primitives
 			return Get(input.ToString());
     	}
         
-        public Type TypeSupported
-        {
-            get { return typeof (decimal); }
-        }
-
+        public Type TypeSupported => typeof (decimal);
     }
 }

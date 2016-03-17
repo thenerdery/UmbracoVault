@@ -11,19 +11,19 @@ namespace UmbracoVault.Caching
     {
         public virtual object GetItem<T>(int id)
         {
-            var cacheKey = string.Format("{0}_{1}", typeof(T).Name, id);
+            var cacheKey = $"{typeof(T).Name}_{id}";
             var item = HttpContext.Current.Cache.Get(cacheKey);
             return item;
         }
 
         public virtual void AddItem<T>(int id, T value)
         {
-            var cacheKey = string.Format("{0}_{1}", typeof(T).Name, id);
+            var cacheKey = $"{typeof(T).Name}_{id}";
             var expiration = DateTime.Now.AddSeconds(GetCacheSeconds());
             HttpContext.Current.Cache.Insert(cacheKey, value, null, expiration, Cache.NoSlidingExpiration);
         }
 
-        private int GetCacheSeconds()
+        private static int GetCacheSeconds()
         {
             var configValue = ConfigurationManager.AppSettings.Get("Vault.ObjectCacheSeconds");
             int result;

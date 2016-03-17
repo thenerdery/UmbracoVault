@@ -25,12 +25,6 @@ namespace UmbracoVault.TypeHandlers
             return stringValue.ConvertToEnum<T>();
         }
     	
-        public Type TypeSupported
-        {
-            get { return typeof (Enum); }
-        }
-
-		
-
-	}
+        public Type TypeSupported => typeof (Enum);
+    }
 }

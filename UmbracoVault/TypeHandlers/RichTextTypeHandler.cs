@@ -10,7 +10,7 @@ namespace UmbracoVault.TypeHandlers
     [IgnoreTypeHandlerAutoRegistration]
     public class RichTextTypeHandler : ITypeHandler
     {
-        private object Get(string stringValue)
+        private static object Get(string stringValue)
         {
             if (string.IsNullOrWhiteSpace(stringValue)) return stringValue;
 
@@ -22,9 +22,6 @@ namespace UmbracoVault.TypeHandlers
 			return Get(input.ToString());
     	}
 
-        public Type TypeSupported
-        {
-            get { return typeof (string); }
-        }
+        public Type TypeSupported => typeof (string);
     }
 }

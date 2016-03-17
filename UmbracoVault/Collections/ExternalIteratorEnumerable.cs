@@ -10,11 +10,9 @@ namespace UmbracoVault.Collections
 	/// <typeparam name="T">The desired target type</typeparam>
 	public class ExternalIteratorEnumerable<T> : IEnumerable<T>
 	{
-		internal string[] Ids;
+		internal readonly string[] Ids;
 
-		public Func<string, T> IterationAction = null;
-
-		private readonly string _idValues;
+		public readonly Func<string, T> IterationAction;
 
 		/// <summary>
 		/// Allows for a comma-delimited string of IDs to be expanded into a type based on a passed-in iteration action function
@@ -23,10 +21,9 @@ namespace UmbracoVault.Collections
 		/// <param name="iterationAction">The function that will take in a string ID and return a new type T.</param>
 		public ExternalIteratorEnumerable(string commaDelimitedIds, Func<string, T> iterationAction)
 		{
-			this._idValues = commaDelimitedIds;
-			if(!string.IsNullOrWhiteSpace(_idValues))
+			if(!string.IsNullOrWhiteSpace(commaDelimitedIds))
 			{
-				this.Ids = _idValues.Split(',');
+				Ids = commaDelimitedIds.Split(',');
 			}
 			IterationAction = iterationAction;
 		}

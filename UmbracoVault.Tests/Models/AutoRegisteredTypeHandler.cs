@@ -13,10 +13,7 @@ namespace UmbracoVault.Tests.Models
             throw new NotImplementedException();
         }
 
-        public Type TypeSupported
-        {
-            get { return typeof(AutoRegisteredType); }
-        }
+        public Type TypeSupported => typeof(AutoRegisteredType);
     }
 
     public class AutoRegisteredType

@@ -28,8 +28,7 @@ namespace UmbracoVault.Collections
 		/// <returns>Returns false if we cannot advance the internal index (you have iterated through all the items)</returns>
 		public bool MoveNext()
 		{
-			if (_source.Ids == null) return false;
-			if(_source.Ids.Count() > _index + 1)
+		    if(_source.Ids?.Length > _index + 1)
 			{
 				_index++;
 				return true;
@@ -53,7 +52,7 @@ namespace UmbracoVault.Collections
 			get
 			{
 				// If we've already loaded an item at or beyond that index, then just return it. 
-				if (_items.Count() > _index + 1)
+				if (_items.Count > _index + 1)
 				{
 					return _items[_index];
 				}
@@ -71,12 +70,6 @@ namespace UmbracoVault.Collections
 			}
 		}
 
-		object IEnumerator.Current
-		{
-			get
-			{
-				return Current;
-			}
-		}
+		object IEnumerator.Current => Current;
 	}
 }

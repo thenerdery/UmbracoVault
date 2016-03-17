@@ -5,7 +5,7 @@ namespace UmbracoVault.TypeHandlers.Primitives
 {
     public class IntArrayTypeHandler : ITypeHandler
     {
-        private object Get(string stringValue)
+        private static object Get(string stringValue)
         {
             var intList = new List<int>();
             var stringArray = stringValue.Split(',');
@@ -25,12 +25,6 @@ namespace UmbracoVault.TypeHandlers.Primitives
             return Get(input.ToString());
         }
 
-        public Type TypeSupported
-        {
-            get
-            {
-                return typeof(int[]);
-            }
-        }
+        public Type TypeSupported => typeof(int[]);
     }
 }

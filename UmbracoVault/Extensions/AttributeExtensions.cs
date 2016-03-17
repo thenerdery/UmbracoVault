@@ -29,8 +29,7 @@ namespace UmbracoVault.Extensions
             }
 
             string propertyName = string.IsNullOrWhiteSpace(attribute.Alias)
-                                          ? string.Format("{0}{1}", propertyInfo.Name[0].ToString().ToLower(),
-                                                          propertyInfo.Name.Substring(1)) //camel case the property name
+                                          ? $"{propertyInfo.Name[0].ToString().ToLower()}{propertyInfo.Name.Substring(1)}" //camel case the property name
                                           : attribute.Alias;
 
             return propertyName;
@@ -42,8 +41,7 @@ namespace UmbracoVault.Extensions
 
             if (typeHandler == null)
             {
-                throw new NotSupportedException(
-                    string.Format("The property type {0} is not supported by Umbraco.Vault.", propertyType));
+                throw new NotSupportedException($"The property type {propertyType} is not supported by Umbraco.Vault.");
             }
 
             return typeHandler;

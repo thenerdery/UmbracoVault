@@ -15,10 +15,7 @@ namespace UmbracoVault.Tests.Models
             throw new NotImplementedException();
         }
 
-        public Type TypeSupported
-        {
-            get { return typeof(IgnoredType); }
-        }
+        public Type TypeSupported => typeof(IgnoredType);
     }
 
     public class IgnoredType

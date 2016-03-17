@@ -23,9 +23,6 @@ namespace ReferenceWebsite.Models
         public int Age { get; set; }
         public IMember MemberContent { get; set; }
 
-        public bool Approved
-        {
-            get { return MemberContent.IsApproved; }
-        }
+        public bool Approved => MemberContent.IsApproved;
     }
 }

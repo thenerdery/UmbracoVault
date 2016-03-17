@@ -35,14 +35,11 @@ namespace UmbracoVault.TypeHandlers
             return result;
         }
 
-        private IMember GetMember(string idString)
+        private static IMember GetMember(string idString)
         {
             return UmbracoContext.Current.Application.Services.MemberService.GetById(int.Parse(idString));
         }
 
-        public Type TypeSupported
-        {
-            get { return typeof(Member); }
-        }
+        public Type TypeSupported => typeof(Member);
     }
 }

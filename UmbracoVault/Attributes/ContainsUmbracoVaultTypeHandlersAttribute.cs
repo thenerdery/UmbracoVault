@@ -6,7 +6,7 @@ namespace UmbracoVault.Attributes
     /// Attribute that signifies that this assembly contains UmbracoVault type handlers. 
     /// Vault should attempt to register them.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Assembly)]
     public class ContainsUmbracoVaultTypeHandlersAttribute : Attribute
     {
 

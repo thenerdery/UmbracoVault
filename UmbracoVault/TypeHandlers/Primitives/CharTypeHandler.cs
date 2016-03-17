@@ -4,8 +4,6 @@ namespace UmbracoVault.TypeHandlers.Primitives
 {
     public class CharTypeHandler : ITypeHandler
     {
-        #region ITypeHandler Members
-
         public object Get(string stringValue)
         {
             char result;
@@ -20,11 +18,6 @@ namespace UmbracoVault.TypeHandlers.Primitives
 			return Get(input.ToString());
     	}
 
-    	public Type TypeSupported
-        {
-            get { return typeof(char); }
-        }
-
-        #endregion
+    	public Type TypeSupported => typeof(char);
     }
 }

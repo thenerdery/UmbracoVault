@@ -1,31 +1,61 @@
-﻿@model ReferenceWebsite.Models.NumericTypesViewModel
+﻿@using System
+@using System.Collections.Generic
+@using System.Globalization
+@using System.Linq
+@model ReferenceWebsite.Models.NumericTypesViewModel
 
-<table border=1>
-	<thead>
-		<tr>
-		<th colspan=4>Numeric Types</th>
-		<tr>
-			<th>Type</th>
-			<th>Expected</th>
-			<th>Actual</th>
-			<th>Correct?</th>
-		</tr>
-	</thead>
-	<tbody>
-	    @* ReSharper disable once RedundantBoolCompare *@
-		<tr><td>Bool</td><td>True</td><td>@Model.Bool</td><td>@(true==@Model.Bool)</td></tr>
-		<tr><td>Byte</td><td>@Byte.MaxValue</td><td>@Model.Byte</td><td>@(Byte.MaxValue==@Model.Byte)</td></tr>
-		<tr><td>Decimal</td><td>@Decimal.MaxValue</td><td>@Model.Decimal</td><td>@(Decimal.MaxValue==@Model.Decimal)</td></tr>
-		<tr><td>Double</td><td>1.7976931348</td><td>@Model.Double</td><td>@(1.7976931348==Model.Double)</td></tr>
-		<tr><td>Float</td><td>@(float.MaxValue)</td><td>@Model.Float</td><td>@(float.MaxValue.ToString()==@Model.Float.ToString())</td></tr>
-		<tr><td>Int</td><td>@(Int32.MinValue)</td><td>@Model.Int</td><td>@(Int32.MinValue==@Model.Int)</td></tr>
-		<tr><td>Long</td><td>@(long.MaxValue)</td><td>@Model.Long</td><td>@(long.MaxValue==@Model.Long)</td></tr>
-		<tr><td>SByte</td><td>@SByte.MinValue</td><td>@Model.SByte</td><td>@(SByte.MinValue==@Model.SByte)</td></tr>
-		<tr><td>Short</td><td>@short.MinValue</td><td>@Model.Short</td><td>@(short.MinValue==@Model.Short)</td></tr>
-		<tr><td>UInt</td><td>@uint.MaxValue</td><td>@Model.UInt</td><td>@(uint.MaxValue==@Model.UInt)</td></tr>
-		<tr><td>ULong</td><td>@ulong.MaxValue</td><td>@Model.ULong</td><td>@(ulong.MaxValue==Model.ULong)</td></tr>
-	    <tr><td>UShort</td><td>@ushort.MaxValue</td><td>@Model.UShort</td><td>@(ushort.MaxValue==Model.UShort)</td></tr>
-        <tr><td>Slider</td><td>@int.MaxValue</td><td>@Model.Slider</td><td>@(int.MaxValue == Model.Slider)</td></tr>
-	</tbody>
+<table border="1">
+    <thead>
+    <tr>
+    <th colspan="4">Numeric Types</th>
+    <tr>
+        <th>Type</th>
+        <th>Expected</th>
+        <th>Actual</th>
+        <th>Correct?</th>
+    </tr>
+    </thead>
+    <tbody>
+    @* ReSharper disable once RedundantBoolCompare *@
+    <tr>
+        <td>Bool</td><td>True</td><td>@Model.Bool</td><td>@(true == @Model.Bool)</td>
+    </tr>
+    <tr>
+        <td>Byte</td><td>@Byte.MaxValue</td><td>@Model.Byte</td><td>@(Byte.MaxValue == @Model.Byte)</td>
+    </tr>
+    <tr>
+        <td>Decimal</td><td>@Decimal.MaxValue</td><td>@Model.Decimal</td><td>@(Decimal.MaxValue == @Model.Decimal)</td>
+    </tr>
+    <tr>
+        <td>Double</td><td>1.7976931348</td><td>@Model.Double</td><td>@(Math.Abs(1.7976931348 - Model.Double) < 0.001) </td>
+    </tr>
+    <tr>
+        <td>Float</td><td>@(float.MaxValue)</td><td>@Model.Float</td><td>@(float.MaxValue.ToString(CultureInfo.InvariantCulture) == @Model.Float.ToString(CultureInfo.InvariantCulture))</td>
+    </tr>
+    <tr>
+        <td>Int</td><td>@(Int32.MinValue)</td><td>@Model.Int</td><td>@(Int32.MinValue == @Model.Int)</td>
+    </tr>
+    <tr>
+        <td>Long</td><td>@(long.MaxValue)</td><td>@Model.Long</td><td>@(long.MaxValue == @Model.Long)</td>
+    </tr>
+    <tr>
+        <td>SByte</td><td>@SByte.MinValue</td><td>@Model.SByte</td><td>@(SByte.MinValue == @Model.SByte)</td>
+    </tr>
+    <tr>
+        <td>Short</td><td>@short.MinValue</td><td>@Model.Short</td><td>@(short.MinValue == @Model.Short)</td>
+    </tr>
+    <tr>
+        <td>UInt</td><td>@uint.MaxValue</td><td>@Model.UInt</td><td>@(uint.MaxValue == @Model.UInt)</td>
+    </tr>
+    <tr>
+        <td>ULong</td><td>@ulong.MaxValue</td><td>@Model.ULong</td><td>@(ulong.MaxValue == Model.ULong)</td>
+    </tr>
+    <tr>
+        <td>UShort</td><td>@ushort.MaxValue</td><td>@Model.UShort</td><td>@(ushort.MaxValue == Model.UShort)</td>
+    </tr>
+    <tr>
+        <td>Slider</td><td>@int.MaxValue</td><td>@Model.Slider</td><td>@(int.MaxValue == Model.Slider)</td>
+    </tr>
+    </tbody>
 </table>
 

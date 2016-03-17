@@ -20,10 +20,7 @@ namespace UmbracoVault.Transformations
             }
         }
 
-        public Type TypeSupported
-        {
-            get { return typeof (string); }
-        }
+        public Type TypeSupported => typeof (string);
 
         public object Transform(object input)
         {
@@ -32,7 +29,7 @@ namespace UmbracoVault.Transformations
             var output = input.ToString();
             foreach(var character in _targetCharacters)
             {
-                output = output.Replace(character, string.Format("<sup>{0}</sup>", character));
+                output = output.Replace(character, $"<sup>{character}</sup>");
             }
 
             return output;

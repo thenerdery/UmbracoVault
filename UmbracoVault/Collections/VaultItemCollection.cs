@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace UmbracoVault.Collections
 {
@@ -21,24 +22,16 @@ namespace UmbracoVault.Collections
 
             if (loadAsMedia)
             {
-                foreach (var id in ids)
+                foreach (var item in ids.Select(id => Vault.Context.GetMediaById<T>(id)).Where(item => item != null))
                 {
-                    var item = Vault.Context.GetMediaById<T>(id);
-                    if (item != null)
-                    {
-                        Add(item);
-                    }
+                    Add(item);
                 }
             }
             else
             {
-                foreach (var id in ids)
+                foreach (var item in ids.Select(id => Vault.Context.GetContentById<T>(id)).Where(item => item != null))
                 {
-                    var item = Vault.Context.GetContentById<T>(id);
-                    if (item != null)
-                    {
-                        Add(item);
-                    }
+                    Add(item);
                 }
             }
         }

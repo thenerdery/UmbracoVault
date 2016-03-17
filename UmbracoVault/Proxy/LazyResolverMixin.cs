@@ -43,7 +43,7 @@ namespace UmbracoVault.Proxy
             return value;
         }
 
-        private object ResolveValue(string alias, bool recursive, IPublishedContent node)
+        private static object ResolveValue(string alias, bool recursive, IPublishedContent node)
         {
             return node.GetPropertyValue(alias, recursive);
         }

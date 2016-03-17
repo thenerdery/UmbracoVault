@@ -17,7 +17,7 @@ namespace UmbracoVault.Extensions
         /// <returns></returns>
         public static IEnumerable<IPublishedContent> GetContentByAlias(this UmbracoHelper helper, string alias)
         {
-            return helper.TypedContentAtXPath(String.Format("//{0}", alias));
+            return helper.TypedContentAtXPath($"//{alias}");
         }
 
         /// <summary>
@@ -45,7 +45,6 @@ namespace UmbracoVault.Extensions
         /// Returns the strongly typed content item based on the item's URL.
         /// Uses the home node to traverse descendants to find matching URL.
         /// </summary>
-        /// <param name="url">URL to return content for</param>
         /// <returns>Published content based on provided URL</returns>
         public static IPublishedContent GetTypedContentByUrl(this UmbracoHelper helper, string url)
         {
@@ -57,7 +56,6 @@ namespace UmbracoVault.Extensions
         /// Returns the strongly typed content item based on the item's URL.
         /// Uses the home node to traverse descendants to find matching URL.
         /// </summary>
-        /// <param name="url">URL to return content for</param>
         /// <returns>Published content based on provided URL</returns>
         public static IEnumerable<IPublishedContent> GetTypedContentByCsv(this UmbracoHelper helper, string csv)
         {

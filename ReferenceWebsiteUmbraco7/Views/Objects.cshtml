@@ -2,15 +2,15 @@
 @using UmbracoVault
 
 @{
-    const int PAUL_ID = 1078;
+    const int paulId = 1078;
     Layout = null;
 
-    var paul = Vault.Context.GetContentById<ReferenceWebsite.Models.StaffMember>(PAUL_ID);
+    var paul = Vault.Context.GetContentById<ReferenceWebsite.Models.StaffMember>(paulId);
 }
 
 @Html.Partial("breadcrumbs")
 
-<table border=1>
+<table border="1">
 	<thead>
 		<tr><th colspan=3>Arbitrary Objects</th></tr>
 		<tr>

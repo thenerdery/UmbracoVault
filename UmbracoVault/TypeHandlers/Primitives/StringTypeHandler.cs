@@ -7,7 +7,7 @@ namespace UmbracoVault.TypeHandlers.Primitives
     /// </summary>
     public class StringTypeHandler : ITypeHandler
     {
-        private string Get(string stringValue)
+        private static string Get(string stringValue)
         {
             return stringValue;
         }
@@ -17,9 +17,6 @@ namespace UmbracoVault.TypeHandlers.Primitives
 			return Get(input.ToString());
     	}
 
-        public Type TypeSupported
-        {
-            get { return typeof (string); }
-        }
+        public Type TypeSupported => typeof (string);
     }
 }

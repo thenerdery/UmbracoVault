@@ -10,18 +10,18 @@ namespace UmbracoVault.Tests
     [TestClass]
     public class DefaultInstanceFactoryTests
     {
-        private DefaultInstanceFactory factory;
+        private DefaultInstanceFactory _factory;
 
         [TestInitialize]
         public void InitializeTest()
         {
-            factory = new DefaultInstanceFactory();
+            _factory = new DefaultInstanceFactory();
         }
 
         [TestMethod]
         public void GetPropertiesToFill_ShouldReturnCorrectProperties_WithAutomap()
         {
-            var properties = factory.GetPropertiesToFill<DocumentModel>();
+            var properties = _factory.GetPropertiesToFill<DocumentModel>();
             Assert.AreEqual(4, properties.Count);
             Assert.IsNotNull(properties.FirstOrDefault(p => p.Name == "Introduction"));
             Assert.IsNotNull(properties.FirstOrDefault(p => p.Name == "Body"));
@@ -32,7 +32,7 @@ namespace UmbracoVault.Tests
         [TestMethod]
         public void GetPropertiesToFill_ShouldReturnCorrectProperties_WithoutAutomap()
         {
-            var properties = factory.GetPropertiesToFill<NoAutoMapDocumentModel>();
+            var properties = _factory.GetPropertiesToFill<NoAutoMapDocumentModel>();
             Assert.AreEqual(4, properties.Count);
             Assert.IsNotNull(properties.FirstOrDefault(p => p.Name == "Introduction"));
             Assert.IsNotNull(properties.FirstOrDefault(p => p.Name == "Body"));

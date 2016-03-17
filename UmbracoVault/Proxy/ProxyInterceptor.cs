@@ -30,13 +30,13 @@ namespace UmbracoVault.Proxy
             invocation.ReturnValue = value;
         }
 
-        private PropertyInfo GetPropertyInfo(Type targetType, MethodInfo method)
+        private static PropertyInfo GetPropertyInfo(Type targetType, MethodInfo method)
         {
             return targetType.GetProperty(method.Name.Substring(GetterMethodPrefix.Length),
                 BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
         }
 
-        private string PropertyAlias(IInvocation invocation)
+        public static string PropertyAlias(IInvocation invocation)
         {
             var umbracoProperty = invocation.Method.GetCustomAttributes(true)
                 .FirstOrDefault(o => o is UmbracoPropertyAttribute) as UmbracoPropertyAttribute;
@@ -56,7 +56,7 @@ namespace UmbracoVault.Proxy
             return lazyResolverMixin != null;
         }
 
-        private bool ShouldInterceptMethod(IInvocation invocation, out PropertyInfo property)
+        private static bool ShouldInterceptMethod(IInvocation invocation, out PropertyInfo property)
         {
             property = GetPropertyInfo(invocation.TargetType, invocation.Method);
             if (property == null || !PropertyIsOptedIn(property) || property.GetCustomAttribute<UmbracoIgnorePropertyAttribute>() != null)

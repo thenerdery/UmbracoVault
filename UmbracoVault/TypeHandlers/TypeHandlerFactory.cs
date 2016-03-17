@@ -28,20 +28,17 @@ namespace UmbracoVault.TypeHandlers
             }
         }
 
-        public static TypeHandlerFactory Instance
-        {
-            get { return _instance ?? (_instance = new TypeHandlerFactory()); }
-        }
+        public static TypeHandlerFactory Instance => _instance ?? (_instance = new TypeHandlerFactory());
 
         private IEnumerable<ITypeHandler> GetExternalTypeHandlers()
         {
             var result = new List<ITypeHandler>();
-            IEnumerable<Assembly> externalAssemblies = AppDomain.CurrentDomain.GetAssemblies()
+            var externalAssemblies = AppDomain.CurrentDomain.GetAssemblies()
                 .Where(x => x.GetCustomAttributes(typeof (ContainsUmbracoVaultTypeHandlersAttribute), false).Any());
 
-            foreach (Assembly externalAssembly in externalAssemblies)
+            foreach (var externalAssembly in externalAssemblies)
             {
-                IEnumerable<ITypeHandler> types = externalAssembly.GetTypes()
+                var types = externalAssembly.GetTypes()
                     .Where(IsTypeHandlerThatIsNotAutoLoadIgnored)
                     .Select(CreateInstanceOfTypeHandler);
 
@@ -59,7 +56,7 @@ namespace UmbracoVault.TypeHandlers
                 .ToList();
         }
 
-        private bool IsTypeHandlerThatIsNotAutoLoadIgnored(Type x)
+        private static bool IsTypeHandlerThatIsNotAutoLoadIgnored(Type x)
         {
             return x.GetInterfaces().Contains(typeof (ITypeHandler)) && x.IsClass &&
                    !x.GetCustomAttributes(typeof (IgnoreTypeHandlerAutoRegistrationAttribute), true).Any();
@@ -106,8 +103,8 @@ namespace UmbracoVault.TypeHandlers
             if (!t.Implements<ITypeHandler>())
                 return null;
 
-            ConstructorInfo constructorInfo = t.GetConstructor(Type.EmptyTypes);
-            object result = constructorInfo != null ? constructorInfo.Invoke(null) : null;
+            var constructorInfo = t.GetConstructor(Type.EmptyTypes);
+            var result = constructorInfo?.Invoke(null);
             return result as ITypeHandler;
         }
     }

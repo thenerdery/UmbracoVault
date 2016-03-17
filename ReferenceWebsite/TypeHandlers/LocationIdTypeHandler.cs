@@ -26,10 +26,7 @@ namespace ReferenceWebsite.TypeHandlers
             return result;
         }
 
-        public Type TypeSupported
-        {
-            get { return typeof(int); }
-        }
+        public Type TypeSupported => typeof(int);
     }
 
     public class LocationIdUmbracoPropertyAttribute : UmbracoPropertyAttribute

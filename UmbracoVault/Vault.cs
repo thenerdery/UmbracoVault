@@ -15,7 +15,7 @@ namespace UmbracoVault
             {
                 throw new InvalidOperationException("You cannot make changes to Umbraco Vault configuration after application startup has occurred.");
             }
-            var t = string.Format("{0}.{{0}}ViewModel,{1}", ns, assemblyName);
+            var t = $"{ns}.{{0}}ViewModel,{assemblyName}";
             _defaultControllerNamespaces.Add(t);
         }
 
@@ -32,9 +32,6 @@ namespace UmbracoVault
         /// <summary>
         /// Retrieves an Umbraco Context to be used to generate Vault objects
         /// </summary>
-        public static IUmbracoContext Context
-        {
-            get { return new UmbracoWebContext(); }
-        }
+        public static IUmbracoContext Context => new UmbracoWebContext();
     }
 }

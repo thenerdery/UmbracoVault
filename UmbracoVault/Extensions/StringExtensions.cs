@@ -27,17 +27,17 @@ namespace UmbracoVault.Extensions
 		{
 			// take a rich text string, parse the local links
 
-			Regex ll = new Regex("(/{localLink:)(.*?)}");
+			var ll = new Regex("(/{localLink:)(.*?)}");
 
 			var myEvaluator = new MatchEvaluator(MatchLocalLinks);
 
-			var LocalLinksParsed = ll.Replace(richText, myEvaluator);
-			return HttpUtility.HtmlDecode(LocalLinksParsed);
+			var localLinksParsed = ll.Replace(richText, myEvaluator);
+			return HttpUtility.HtmlDecode(localLinksParsed);
 		}
 
 		private static string MatchLocalLinks(Match m)
 		{
-			var noHome = Regex.Replace(umbraco.library.NiceUrl(int.Parse(m.Result("$2"))), ".*/home(.*)", "$2");
+			var noHome = Regex.Replace(library.NiceUrl(int.Parse(m.Result("$2"))), ".*/home(.*)", "$2");
 			return noHome;
 		}
         /// <summary>
