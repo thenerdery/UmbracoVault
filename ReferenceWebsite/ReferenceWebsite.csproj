@@ -318,10 +318,6 @@
     <Compile Include="TypeHandlers\LocationIdTypeHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UmbracoVault.Proxy\UmbracoVault.Proxy.csproj">
-      <Project>{7fa3a950-c6df-424a-9888-1729ae460f0d}</Project>
-      <Name>UmbracoVault.Proxy</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UmbracoVault\UmbracoVault.csproj">
       <Project>{7a5c0119-ef41-4b19-88da-35c7b5f7e481}</Project>
       <Name>UmbracoVault</Name>

@@ -8,7 +8,7 @@ using ReferenceWebsite.Models;
 
 using UmbracoVault;
 using UmbracoVault.Controllers;
-using UmbracoVault.Proxy.Concrete;
+using UmbracoVault.Proxy;
 using UmbracoVault.Reflection;
 // ReSharper disable All
 

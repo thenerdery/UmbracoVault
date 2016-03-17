@@ -8,7 +8,7 @@ using Castle.DynamicProxy;
 using UmbracoVault.Attributes;
 using UmbracoVault.Extensions;
 
-namespace UmbracoVault.Proxy.Concrete
+namespace UmbracoVault.Proxy
 {
     public class ProxyInterceptor : IInterceptor
     {

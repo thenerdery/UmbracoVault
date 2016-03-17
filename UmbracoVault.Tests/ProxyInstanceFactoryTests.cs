@@ -3,7 +3,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using UmbracoVault.Attributes;
-using UmbracoVault.Proxy.Concrete;
+using UmbracoVault.Proxy;
 
 namespace UmbracoVault.Tests
 {

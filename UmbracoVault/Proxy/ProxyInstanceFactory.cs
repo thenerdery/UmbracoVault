@@ -10,7 +10,7 @@ using Umbraco.Core.Models;
 using UmbracoVault.Extensions;
 using UmbracoVault.Reflection;
 
-namespace UmbracoVault.Proxy.Concrete
+namespace UmbracoVault.Proxy
 {
     public class ProxyInstanceFactory : IInstanceFactory
     {

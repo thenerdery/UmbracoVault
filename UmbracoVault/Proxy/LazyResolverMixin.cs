@@ -6,7 +6,7 @@ using System.Reflection;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 
-namespace UmbracoVault.Proxy.Concrete
+namespace UmbracoVault.Proxy
 {
     /// <summary>
     ///     Mixed into proxy object to provide lazy loading of values based on data provided by IPublishedContent node
