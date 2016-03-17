@@ -1,0 +1,20 @@
+﻿@model ReferenceWebsite.Models.BlogHomeViewModel
+@using UmbracoVault
+
+@{
+    Layout = null;
+	var posts = new List<int>{1105, 1104, 1100};
+}
+
+<h1>@Model.Title</h1>
+
+@Html.Partial("breadcrumbs")
+	
+<div class="blog-home-posts">
+	@foreach(var blogPost in posts)
+	{
+		var post = Vault.Context.GetContentById<ReferenceWebsite.Models.BlogEntryViewModel>(blogPost);
+		<h2><a href="@umbraco.library.NiceUrl(blogPost)">@post.Title</a></h2>
+    	<span>@post.PostDate.ToShortDateString()</span>    
+	}
+</div>

@@ -31,7 +31,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UmbracoVault", "UmbracoVaul
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UmbracoVault.Tests", "UmbracoVault.Tests\UmbracoVault.Tests.csproj", "{E6C4F958-10BE-4641-8531-32270AA6EFBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferenceWebsiteUmbraco7", "ReferenceWebsiteUmbraco7\ReferenceWebsiteUmbraco7.csproj", "{EDE642F7-5692-4C37-A431-7457E3252F8B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferenceWebsiteUmbraco7", "ReferenceWebsiteUmbraco7\ReferenceWebsiteUmbraco7.csproj", "{27DECA8F-8C8E-411C-8F3E-49F7F51DACB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,10 +51,10 @@ Global
 		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6C4F958-10BE-4641-8531-32270AA6EFBD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EDE642F7-5692-4C37-A431-7457E3252F8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EDE642F7-5692-4C37-A431-7457E3252F8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EDE642F7-5692-4C37-A431-7457E3252F8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EDE642F7-5692-4C37-A431-7457E3252F8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27DECA8F-8C8E-411C-8F3E-49F7F51DACB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27DECA8F-8C8E-411C-8F3E-49F7F51DACB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27DECA8F-8C8E-411C-8F3E-49F7F51DACB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27DECA8F-8C8E-411C-8F3E-49F7F51DACB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
