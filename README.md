@@ -13,9 +13,9 @@ Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get st
  the full view model-style experience in Umbraco that you are accustomed to in MVC, complete with strongly-typed view
  properties (no more magic strings in your views).
 
-## The Idea
+## Crash Course
 
-let's assume we have a document type with the alias `BlogEntry` set up with the following properties:
+Let's assume we have a document type with the alias `BlogEntry` set up with the following properties:
 
 Property Name | Alias | Type
 --- | --- | ---
@@ -39,11 +39,11 @@ public class BlogEntryViewModel
 }
 ```
 
-This model can now get injected into our views with our fancy `VaultDefaultGenericController`. Now our views look like this:
+This model can now get injected into our views with our fancy `VaultDefaultGenericController`. Your `BlogEntry` view  can now look like this:
 
 
-```
-  @inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+```html
+  @model BlogEntryViewModel
 
   <h1>@Model.Title</h1>
   <img src="@Model.Image.Url" alt="@Model.Image.AltText" />
@@ -61,6 +61,21 @@ Want to learn more? Check out the wiki!
 ```PowerShell
 PM> Nuget.exe Sources Add -Name UmbracoVaultBuild -Source https://ci.appveyor.com/nuget/umbracovault-5m6ate96gcwx -UserName <appveyoremail> -Password <appveyorpassword>
 PM> Install-Package UmbracoVault -Source UmbracoVaultBuild
+```
+
+## Setup
+
+Create the following class to register your view model namespace, and set the default render MVC controller for Umbraco to Umbraco Vault's default controller.
+
+```csharp
+public class CustomApplicationEventHandler : ApplicationEventHandler
+{
+    protected override void ApplicationStarting(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+    {
+        Vault.RegisterViewModelNamespace("MyProject.ViewModels", "MyProject");
+        DefaultRenderMvcControllerResolver.Current.SetDefaultControllerType(typeof(VaultRenderMvcController));
+    }
+}
 ```
 
 ## Extensibility
