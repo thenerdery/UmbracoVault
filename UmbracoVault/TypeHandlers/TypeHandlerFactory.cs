@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using Umbraco.Core;
@@ -33,16 +34,38 @@ namespace UmbracoVault.TypeHandlers
         private IEnumerable<ITypeHandler> GetExternalTypeHandlers()
         {
             var result = new List<ITypeHandler>();
-            var externalAssemblies = AppDomain.CurrentDomain.GetAssemblies()
-                .Where(x => x.GetCustomAttributes(typeof (ContainsUmbracoVaultTypeHandlersAttribute), false).Any());
+            var flaggedAssemblies = new List<Assembly>();
 
-            foreach (var externalAssembly in externalAssemblies)
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                var types = externalAssembly.GetTypes()
-                    .Where(IsTypeHandlerThatIsNotAutoLoadIgnored)
-                    .Select(CreateInstanceOfTypeHandler);
+                try
+                {
+                    if (assembly.GetCustomAttributes(typeof(ContainsUmbracoVaultTypeHandlersAttribute), false).Any())
+                    {
+                        flaggedAssemblies.Add(assembly);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Trace.TraceError($"Unable to check assembly {assembly} for ContainsUmbracoVaultTypeHandlersAttribute.\n{e.Message}\n{e.StackTrace}");
+                }
+            }
 
-                result.AddRange(types);
+            foreach (var externalAssembly in flaggedAssemblies)
+            {
+                try
+                {
+                    var types = externalAssembly.GetTypes()
+                        .Where(IsTypeHandlerThatIsNotAutoLoadIgnored)
+                        .Select(CreateInstanceOfTypeHandler);
+
+                    result.AddRange(types);
+                }
+                catch (Exception e)
+                {
+                    Trace.TraceError($"Unable to load TypeHandlers from assembly {externalAssembly}.\n{e.Message}\n{e.StackTrace}");
+                }
+
             }
 
             return result;
