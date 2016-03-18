@@ -14,8 +14,6 @@ assembly_info:
   assembly_version: "$(CURRENT_VERSION).0"
   assembly_file_version: "$(CURRENT_VERSION).0"
   assembly_informational_version: "$(CURRENT_VERSION).0"
-cache:
-  - packages -> **\packages.config 
 configuration:
   - Release
 before_build:
