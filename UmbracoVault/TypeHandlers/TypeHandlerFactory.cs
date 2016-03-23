@@ -25,7 +25,18 @@ namespace UmbracoVault.TypeHandlers
 
             foreach (ITypeHandler typeHandler in typeHandlers)
             {
-                _typeHandlerDictionary.Add(typeHandler.TypeSupported, typeHandler);
+                if (!_typeHandlerDictionary.ContainsKey(typeHandler.TypeSupported))
+                {
+                    _typeHandlerDictionary.Add(typeHandler.TypeSupported, typeHandler);
+                }
+                else
+                {
+                    Trace.TraceWarning(
+                        "TypeHandler {0} for data type {1} cannot be registered bceause type {1} already has a registration for typehandler {2}", 
+                        typeHandler, 
+                        typeHandler.TypeSupported, 
+                        _typeHandlerDictionary[typeHandler.TypeSupported]);
+                }
             }
         }
 
