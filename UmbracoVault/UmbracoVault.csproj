@@ -100,6 +100,7 @@
     <Compile Include="Transformations\ITransformation.cs" />
     <Compile Include="Transformations\SuperScriptTransformation.cs" />
     <Compile Include="TypeHandlers\MemberTypeHandler.cs" />
+    <Compile Include="TypeHandlers\NullableTypeHandler.cs" />
     <Compile Include="TypeHandlers\Primitives\DateTimeTypeHandler.cs" />
     <Compile Include="TypeHandlers\HtmlStringTypeHandler.cs" />
     <Compile Include="TypeHandlers\UmbracoEntityTypeHandler.cs" />

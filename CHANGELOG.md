@@ -6,6 +6,10 @@ Umbraco Vault now includes support for lazy loading of properties. Properties th
 such as collections, can be marked as `virtual` and they will be loaded when accessed. See <TBD> article
 for more detail on this feature.
 
+**New Nullable Type Handlers**
+
+Vault now supports nullable types for primitives and structs.
+
 **Issues**
  
  * Fixed issue where exception would be thrown if loading an assembly threw an error. Added try/catch around logic and tracing any issues identified. (#11)

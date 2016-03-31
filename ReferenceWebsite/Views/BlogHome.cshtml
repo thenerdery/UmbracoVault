@@ -14,7 +14,11 @@
 <div class="blog-home-posts">
 	@foreach(var post in posts)
 	{
-		<h2><a href="@post.CmsContent.Url">@post.Title</a></h2>
-    	<span>@post.PostDate.ToShortDateString()</span>    
+	    <h2><a href="@post.CmsContent.Url">@post.Title</a>
+	    </h2>
+        if (post.PostDate.HasValue)
+         {
+             <span>@post.PostDate.Value.ToShortDateString()</span>
+         }
 	}
 </div>

@@ -7,7 +7,7 @@ namespace ReferenceWebsite.Models
     public class BlogEntryViewModel : CmsViewModelBase
     {
         public virtual string Title { get; set; }
-        public virtual DateTime PostDate { get; set; }
+        public virtual DateTime? PostDate { get; set; }
         
         [UmbracoRichTextProperty]
         public virtual string Content { get; set; }

@@ -5,10 +5,14 @@
 }
 
 @Html.Partial("breadcrumbs")
-	
+
 <h1>@Model.Title</h1>
-<div>@Model.PostDate.ToShortDateString()</div>
+@if (Model.PostDate.HasValue)
+{
+    <div>@Model.PostDate.Value.ToShortDateString()</div>
+}
 <div>
     @Html.Raw(Model.Content)
 </div>	
+
 A Recursive Value: @Model.SomeRecursiveValue

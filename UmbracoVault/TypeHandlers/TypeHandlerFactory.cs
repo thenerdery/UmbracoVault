@@ -87,6 +87,7 @@ namespace UmbracoVault.TypeHandlers
             return Assembly.GetExecutingAssembly().GetTypes()
                 .Where(IsTypeHandlerThatIsNotAutoLoadIgnored)
                 .Select(CreateInstanceOfTypeHandler)
+                .Where(x => x != null)
                 .ToList();
         }
 

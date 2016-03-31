@@ -419,8 +419,21 @@ namespace UmbracoVault
             }
 
             // Attempt to find default handler
-            var factoryHandler = _typeHandlerFactory.GetHandlerForType(propertyType);
 
+            // If it's generic, get the underlying type and return it as a nullable with a value, otherwise null.
+            if (propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+                var innerType = Nullable.GetUnderlyingType(propertyType);
+                var innerTypeHandler = _typeHandlerFactory.GetHandlerForType(innerType);
+                if (innerTypeHandler != null)
+                {
+                    var nullableTypeHandlerType = typeof(NullableTypeHandler<>);
+                    return (ITypeHandler)nullableTypeHandlerType.MakeGenericType(innerType).GetConstructor(new[] { typeof(ITypeHandler) }).Invoke(new object[] { innerTypeHandler});
+                }
+            }
+
+            // Check for a default handler for this type.
+            var factoryHandler = _typeHandlerFactory.GetHandlerForType(propertyType);
             if (factoryHandler != null)
             {
                 return factoryHandler;
