@@ -27,6 +27,18 @@
         <td>Decimal</td><td>@Decimal.MaxValue</td><td>@Model.Decimal</td><td>@(Decimal.MaxValue == @Model.Decimal)</td>
     </tr>
     <tr>
+        <td>Decimal?</td>
+        <td>@Decimal.MaxValue</td>
+        <td>@Model.DecimalNullable</td>
+        <td>@(@Model.DecimalNullable.HasValue && Decimal.MaxValue == @Model.DecimalNullable.Value)</td>
+    </tr>
+        <tr>
+            <td>Missing Nullable</td>
+            <td></td>
+            <td>@Model.MissingNullable</td>
+            <td>@(!@Model.MissingNullable.HasValue)</td>
+        </tr>
+    <tr>
         <td>Double</td><td>1.7976931348</td><td>@Model.Double</td><td>@(Math.Abs(1.7976931348 - Model.Double) < 0.001) </td>
     </tr>
     <tr>

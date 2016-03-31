@@ -26,6 +26,11 @@ namespace ReferenceWebsite.Models
         /// <remarks>Exceeds Umbraco numeric type</remarks>
         public decimal Decimal { get; set; }
 
+        [UmbracoProperty("decimal")]
+        public decimal? DecimalNullable { get; set; }
+
+        public decimal? MissingNullable { get; set; }
+
         /// <summary>
         /// Doubles
         /// Supported range: -1.79769313486232e308 to 1.79769313486232e308
