@@ -1,5 +1,5 @@
 ## v1.2.0 (UNRELEASED)
- 
+
 **New Feature: Lazy Loading (#6)**
  
 Umbraco Vault now includes support for lazy loading of properties. Properties that are expensive to hydrate,
@@ -13,7 +13,7 @@ for more detail on this feature.
 
 **Issues**
  
- * Fixed issue where exception would be thrown if loading an assembly threw an error. Added try/catch around logic and tracing any issues identified. (#11)
+ * Fixed issue where exception would be thrown if loading an assembly threw an error. Added try/catch around logic and tracing any issues identified. [#11]
  * Fixed issue if an external assembly attempts to register a type already handled, that an exception would be thrown. A trace warning is now written instead.
 
 **Other**
@@ -22,12 +22,14 @@ for more detail on this feature.
  * Reference sites for testing builds have been updated to the latest v6 and v7 versions, including ASP.Net MVC5
  * Various internal accessiblity changes have been made to limit exposure of the API
  * Various code cleanup
+
+This is a pretty significant release! Thanks to @NerderyMGlanzer, @technicallyerik, and @jesse-black for their contributions!
  
 ## v1.1.1
 
  * The new base controller expected to be uesd with Umbraco has been renamed from `VaultDefaultGenericController` to `VaultRenderMvcController` in order to more closely
    Umbraco conventions
- * VaultDefaultGenericController and VaultDefaultRenderController have been marked as obsolete.
+ * `VaultDefaultGenericController` and `VaultDefaultRenderController` have been marked as obsolete.
 
 ## v1.1.0
 
