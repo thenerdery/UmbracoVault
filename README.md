@@ -14,7 +14,7 @@ Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get st
 
 Let's assume we have a document type with the alias `BlogEntry` set up with the following properties:
 
-Property Name | Alias | Type
+Property Name | Alias | Umbraco Property Editor Type
 --- | --- | ---
 Title | title | Textstring
 PostedDate | postedDate | Date Picker
@@ -49,18 +49,17 @@ This model can now get injected into our views with our fancy `VaultRenderMvcCon
 
 ```
 
-Much cleaner, with compile time checking. Reads nicer than the usual `@Umbraco.Field("bodyContent")`
+Much cleaner, with compile time checking! Reads nicer than the usual `@Umbraco.Field("content")`
 
 Want to learn more? Check out the wiki!
 
 ## Nuget Installation
 
 ```PowerShell
-PM> Nuget.exe Sources Add -Name UmbracoVaultBuild -Source https://ci.appveyor.com/nuget/umbracovault-5m6ate96gcwx -UserName <appveyoremail> -Password <appveyorpassword>
 PM> Install-Package UmbracoVault -Source UmbracoVaultBuild
 ```
 
-## Setup
+## Configuration
 
 Create the following class to register your view model namespace, and set the default render MVC controller for Umbraco to Umbraco Vault's default controller.
 
@@ -78,8 +77,10 @@ public class CustomApplicationEventHandler : ApplicationEventHandler
 ## Extensibility
 
 UmbracoVault was built to be extensible to other Umbraco package developers. What good is an ORM if it doesn't support
- other native object types? Please see our documentation on 
- [how to extend Vault](https://github.com/kensykora/UmbracoVault/wiki/Extending-Vault) for your own Umbraco packages.
+other native object types? Please see our documentation on
+[how to extend Vault](https://github.com/thenerdery/UmbracoVault/wiki/Extending-Vault) for your own Umbraco packages.
+
+Check out the uComponents extension for an example: <https://github.com/thenerdery/UmbracoVault.uComponents>
 
 ## Credits
 
