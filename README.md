@@ -1,6 +1,8 @@
 #Vault for Umbraco 6 and 7
 
-[![NuGet](https://img.shields.io/nuget/v/UmbracoVault.svg)](nuget.org/packages/UmbracoVault) [![Build status](https://ci.appveyor.com/api/projects/status/4lmny3neenc4hibj/branch/master?svg=true)](https://ci.appveyor.com/project/TheNerdery/umbracovault/branch/master) [![License](https://img.shields.io/github/license/thenerdery/UmbracoVault.svg)](https://github.com/thenerdery/UmbracoVault/blob/master/LICENSE) 
+[![NuGet](https://img.shields.io/nuget/v/UmbracoVault.svg?style=flat-square)](https://www.nuget.org/packages/UmbracoVault)
+[![Build status](https://img.shields.io/appveyor/ci/gruntjs/grunt.svg?style=flat-square)](https://ci.appveyor.com/project/TheNerdery/umbracovault/branch/master)
+[![License](https://img.shields.io/github/license/thenerdery/UmbracoVault.svg?style=flat-square)](https://github.com/thenerdery/UmbracoVault/blob/master/LICENSE)
 
 ## Overview
 Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your
