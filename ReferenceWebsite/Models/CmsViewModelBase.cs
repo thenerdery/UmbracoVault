@@ -1,5 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 using Umbraco.Core.Models;
-using Umbraco.Web.Models;
+
 using UmbracoVault.Attributes;
 
 namespace ReferenceWebsite.Models
@@ -10,12 +14,13 @@ namespace ReferenceWebsite.Models
     }
 
     /// <summary>
-    /// Base class for view models, provides Umbraco node information
+    ///     Base class for view models, provides Umbraco node information
     /// </summary>
     public class CmsViewModelBase : ICmsViewModel
     {
         [UmbracoProperty(Recursive = true)]
         public virtual string SomeRecursiveValue { get; set; }
+
         public IPublishedContent CmsContent { get; set; }
     }
 }

@@ -428,6 +428,7 @@ namespace UmbracoVault
                 if (innerTypeHandler != null)
                 {
                     var nullableTypeHandlerType = typeof(NullableTypeHandler<>);
+                    // ReSharper disable once PossibleNullReferenceException - Shouldn't happen (KMS 31 MAR 2016)
                     return (ITypeHandler)nullableTypeHandlerType.MakeGenericType(innerType).GetConstructor(new[] { typeof(ITypeHandler) }).Invoke(new object[] { innerTypeHandler});
                 }
             }
