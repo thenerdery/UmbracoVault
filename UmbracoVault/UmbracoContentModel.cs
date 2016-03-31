@@ -6,7 +6,7 @@ using Umbraco.Core.Models;
 
 namespace UmbracoVault
 {
-    internal class UmbracoContentModel
+    public class UmbracoContentModel
     {
         public IPublishedContent Content { get; internal set; }
     }

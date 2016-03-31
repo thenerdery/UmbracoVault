@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace UmbracoVault.Proxy
 {
-    internal interface ILazyResolverMixin
+    public interface ILazyResolverMixin
     {
         object GetOrResolve(string alias, PropertyInfo propertyInfo);
     }
