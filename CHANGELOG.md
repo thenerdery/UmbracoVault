@@ -6,9 +6,10 @@ Umbraco Vault now includes support for lazy loading of properties. Properties th
 such as collections, can be marked as `virtual` and they will be loaded when accessed. See <TBD> article
 for more detail on this feature.
 
-**New Nullable Type Handlers**
+**New Type Handlers**
 
-Vault now supports nullable types for primitives and structs.
+ * Vault now supports nullable types for primitives and structs. See <https://github.com/thenerdery/UmbracoVault/wiki/Umbraco-Data-Type---C%23-Data-Type-Grid#nullable-data-types> for more detail.
+ * Vault now supports mapping from JSON data stored within properties. See <https://github.com/thenerdery/UmbracoVault/wiki/Umbraco-Data-Type---C%23-Data-Type-Grid#json-data> for more detail.
 
 **Issues**
  
