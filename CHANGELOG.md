@@ -3,7 +3,7 @@
 **New Feature: Lazy Loading (#6)**
  
 Umbraco Vault now includes support for lazy loading of properties. Properties that are expensive to hydrate,
-such as collections, can be marked as `virtual` and they will be loaded when accessed. See <TBD> article
+such as collections, can be marked as `virtual` and they will be loaded when accessed. See <https://github.com/thenerdery/UmbracoVault/wiki/Lazy-property-loading> article
 for more detail on this feature.
 
 **New Type Handlers**
@@ -20,7 +20,6 @@ for more detail on this feature.
 
  * Codebase has been updated to build against VS 2015 and C# 6
  * Reference sites for testing builds have been updated to the latest v6 and v7 versions, including ASP.Net MVC5
- * Various internal accessiblity changes have been made to limit exposure of the API
  * Various code cleanup
 
 This is a pretty significant release! Thanks to @NerderyMGlanzer, @technicallyerik, and @jesse-black for their contributions!
