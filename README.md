@@ -1,6 +1,6 @@
 #Vault for Umbraco 6 and 7
 
-[![Build status](https://ci.appveyor.com/api/projects/status/4lmny3neenc4hibj/branch/master?svg=true)](https://ci.appveyor.com/project/TheNerdery/umbracovault/branch/master)
+[![NuGet](https://img.shields.io/nuget/v/Nerdery.CSharpCodeStyle.svg)][![Build status](https://ci.appveyor.com/api/projects/status/4lmny3neenc4hibj/branch/master?svg=true)](https://ci.appveyor.com/project/TheNerdery/umbracovault/branch/master) 
 
 ## Overview
 Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your
