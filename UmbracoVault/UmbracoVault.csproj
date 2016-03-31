@@ -45,6 +45,10 @@
       <HintPath>..\packages\UmbracoCms.Core.6.2.5\lib\interfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -74,6 +78,7 @@
     <Compile Include="Attributes\UmbracoMemberEntityAttribute.cs" />
     <Compile Include="Attributes\UmbracoMemberPropertyAttribute.cs" />
     <Compile Include="Attributes\UmbracoPropertyAttribute.cs" />
+    <Compile Include="Attributes\UmbracoJsonPropertyAttribute.cs" />
     <Compile Include="Attributes\UmbracoRichTextPropertyAttribute.cs" />
     <Compile Include="Caching\CacheManager.cs" />
     <Compile Include="Collections\VaultItemCollection.cs" />
@@ -99,6 +104,7 @@
     <Compile Include="Reflection\IInstanceFactory.cs" />
     <Compile Include="Transformations\ITransformation.cs" />
     <Compile Include="Transformations\SuperScriptTransformation.cs" />
+    <Compile Include="TypeHandlers\JsonTypeHandler.cs" />
     <Compile Include="TypeHandlers\MemberTypeHandler.cs" />
     <Compile Include="TypeHandlers\NullableTypeHandler.cs" />
     <Compile Include="TypeHandlers\Primitives\DateTimeTypeHandler.cs" />

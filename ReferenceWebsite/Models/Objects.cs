@@ -27,6 +27,16 @@ namespace ReferenceWebsite.Models
     public class Location
     {
         public string Name { get; set; }
+
+        [UmbracoJsonProperty(typeof(LatLngCoordinates))]
+        public LatLngCoordinates LatLng { get; set; }
+    }
+
+    public class LatLngCoordinates
+    {
+        public double Latitude { get; set; }
+
+        public double Longitude { get; set; }
     }
 
     /// <summary>

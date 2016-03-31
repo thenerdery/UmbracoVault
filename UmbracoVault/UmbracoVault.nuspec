@@ -28,8 +28,9 @@ for more detail on this feature.
         <copyright>Copyright 2014</copyright>
         <tags>C# Umbraco Nerdery Mapping ObjectMapper ORM CMS</tags>
         <dependencies>
-            <dependency id="UmbracoCms.Core" version="6.2.0" />
-			<dependency id="Castle.Core" version="3.3.3" />
+          <dependency id="UmbracoCms.Core" version="6.2.0" />
+			    <dependency id="Castle.Core" version="3.3.3" />
+          <dependency id="Newtonsoft.Json" version="4.5.11" />
         </dependencies>
     </metadata>
 </package>

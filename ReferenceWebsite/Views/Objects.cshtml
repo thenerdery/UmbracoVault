@@ -5,7 +5,9 @@
     const int paulId = 1078;
     Layout = null;
 
-    var paul = Vault.Context.GetContentById<ReferenceWebsite.Models.StaffMember>(paulId);
+    var paul = Vault.Context.GetContentById<ReferenceWebsite.Models.StaffMember>(1078);
+    var badJson = Vault.Context.GetContentById<ReferenceWebsite.Models.StaffMember>(1150);
+    var incorrectJson = Vault.Context.GetContentById<ReferenceWebsite.Models.StaffMember>(1151);
 }
 
 @Html.Partial("breadcrumbs")
@@ -20,7 +22,9 @@
 		</tr>
 	</thead>
     <tbody>
-        <tr><td>Object</td><td>Minneapolis</td><td>@paul.PrimaryLocation.Name</td></tr>
+        <tr><td>Object</td><td>Minneapolis (44.986656, -93.258133)</td><td>@paul.PrimaryLocation.Name (@paul.PrimaryLocation.LatLng.Latitude, @paul.PrimaryLocation.LatLng.Longitude)</td></tr>
+        <tr><td>Object (Bad JSON)</td><td>Minneapolis (0, 0)</td><td>@badJson.PrimaryLocation.Name (@badJson.PrimaryLocation.LatLng.Latitude, @badJson.PrimaryLocation.LatLng.Longitude)</td></tr>
+        <tr><td>Object (JSON Doesn't Map)</td><td>Minneapolis (0, 0)</td><td>@incorrectJson.PrimaryLocation.Name (@incorrectJson.PrimaryLocation.LatLng.Latitude, @incorrectJson.PrimaryLocation.LatLng.Longitude)</td></tr>
         <tr><td>Multi Node Tree Picker</td><td>Ken Sykora<br/>Paul Trandem</td>
             <td>
                 @foreach (var staffMember in Model.MultiNodeTreePicker)

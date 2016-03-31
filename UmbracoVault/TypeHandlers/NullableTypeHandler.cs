@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using UmbracoVault.Attributes;
+
 namespace UmbracoVault.TypeHandlers
 {
+    [IgnoreTypeHandlerAutoRegistration]
     public class NullableTypeHandler<TInnerType> : ITypeHandler where TInnerType : struct
     {
         private readonly ITypeHandler _innerHandler;
