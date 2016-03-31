@@ -1,6 +1,6 @@
 # Contributing
 
-Pull requests welcomed. Please ensure you create your edits in a branch off of the `develop` branch, not the `master` branch.
+Pull requests welcomed. Please use [Github Flow](https://guides.github.com/introduction/flow/) for branching strategy
 
 ## Reference Website
 
