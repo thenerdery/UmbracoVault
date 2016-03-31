@@ -35,8 +35,8 @@
 
             This is a pretty significant release! Thanks to @NerderyMGlanzer, @technicallyerik, and @jesse-black for their contributions!
           </releaseNotes>
-        <copyright>Copyright 2014</copyright>
-        <tags>C# Umbraco Nerdery Mapping ObjectMapper ORM CMS</tags>
+      <copyright>(c) The Nerdery LLC 2016. All Rights Reserved.</copyright>
+      <tags>Umbraco UmbracoVault Mapping ObjectMapper ORM CMS</tags>
         <dependencies>
           <dependency id="UmbracoCms.Core" version="6.2.0" />
 			    <dependency id="Castle.Core" version="3.3.3" />
