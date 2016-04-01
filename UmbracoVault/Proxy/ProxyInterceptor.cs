@@ -59,7 +59,7 @@ namespace UmbracoVault.Proxy
         private static bool ShouldInterceptMethod(IInvocation invocation, out PropertyInfo property)
         {
             property = GetPropertyInfo(invocation.TargetType, invocation.Method);
-            if (property == null || !PropertyIsOptedIn(property) || property.GetCustomAttribute<UmbracoIgnorePropertyAttribute>() != null)
+            if (property == null || !PropertyIsOptedIn(property, invocation.TargetType) || property.GetCustomAttribute<UmbracoIgnorePropertyAttribute>() != null)
             {
                 return false;
             }
@@ -71,9 +71,10 @@ namespace UmbracoVault.Proxy
             return isGetter && isVirtual;
         }
 
-        private static bool PropertyIsOptedIn(MemberInfo property)
+        private static bool PropertyIsOptedIn(MemberInfo property, Type topmostType)
         {
-            var entityAttribute = property.DeclaringType.GetUmbracoEntityAttributes().FirstOrDefault();
+            var entityAttribute = topmostType.GetUmbracoEntityAttributes().FirstOrDefault();
+
             return entityAttribute != null && (entityAttribute.AutoMap || property.GetCustomAttribute<UmbracoPropertyAttribute>() != null);
         }
     }
