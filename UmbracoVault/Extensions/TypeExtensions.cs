@@ -47,7 +47,7 @@ namespace UmbracoVault.Extensions
         public static ReadOnlyCollection<UmbracoEntityAttribute> GetUmbracoEntityAttributes(this Type type)
         {
             var result = new List<UmbracoEntityAttribute>();
-            var attributes = type.GetCustomAttributes(typeof(UmbracoEntityAttribute), true) as UmbracoEntityAttribute[];
+            var attributes = type.GetCustomAttributes(typeof(UmbracoEntityAttribute), inherit: true) as UmbracoEntityAttribute[];
             if (attributes != null)
             {
                 result.AddRange(attributes);
