@@ -259,15 +259,24 @@ namespace UmbracoVault
             }
         }
 
+        public void FillClassProperties<T>(T instance, Func<string, PropertyInfo, bool, object> getPropertyValue)
+        {
+            var properties = ClassConstructor.GetPropertiesToFill<T>();
+
+            foreach (var propertyInfo in properties)
+            {
+                object value;
+                if (TryGetValueForProperty(getPropertyValue, propertyInfo, out value))
+                {
+                    propertyInfo.SetValue(instance, value, null);
+                }
+            }
+        }
+
         public bool TryGetValueForProperty(Func<string, bool, object> getPropertyValue, PropertyInfo propertyInfo, out object value)
         {
-            var propertyType = propertyInfo.PropertyType;
-
             //Get the attribute's property name value
-            var propertyMetaData =
-                propertyInfo.GetCustomAttributes(typeof(UmbracoPropertyAttribute), true).FirstOrDefault() as
-                    UmbracoPropertyAttribute;
-
+            var propertyMetaData = GetUmbracoPropertyAttribute(propertyInfo);
             var recursive = GetPropertyRecursion(propertyMetaData);
             var alias = GetPropertyAlias(propertyMetaData, propertyInfo);
 
@@ -277,6 +286,70 @@ namespace UmbracoVault
                 return false;
             }
 
+            value = TransformParsedValue(propertyInfo, propertyMetaData, value);
+
+            var result = value != null;
+            return result;
+        }
+
+        public bool TryGetValueForProperty(Func<string, PropertyInfo, bool, object> getPropertyValue, PropertyInfo propertyInfo, out object value)
+        {
+            //Get the attribute's property name value
+            var propertyMetaData = GetUmbracoPropertyAttribute(propertyInfo);
+            var recursive = GetPropertyRecursion(propertyMetaData);
+            var alias = GetPropertyAlias(propertyMetaData, propertyInfo);
+
+            //Retrieve the value -- If it's not there just ignore and move on
+            if (!TryGetValue(getPropertyValue, alias, propertyInfo, recursive, out value))
+            {
+                return false;
+            }
+
+            value = TransformParsedValue(propertyInfo, propertyMetaData, value);
+
+            var result = value != null;
+            return result;
+        }
+
+        private static bool TryGetValue(Func<string, bool, object> getPropertyValue, string alias, bool recursive, out object value)
+        {
+            try
+            {
+                value = getPropertyValue(alias, recursive);
+            }
+            catch (InvalidOperationException)
+            {
+                // This exception may be thrown by Umbraco 6 when attempting to read a rich text property containing macros without
+                // an UmbracoContext.PageId as is the case in a SurfaceController action.
+                // Opting to behave as if field is not found.
+                value = null;
+            }
+
+            return value != null;
+        }
+
+        private static bool TryGetValue(Func<string, PropertyInfo, bool, object> getPropertyValue, string alias, PropertyInfo propertyInfo, bool recursive, out object value)
+        {
+            try
+            {
+                value = getPropertyValue(alias, propertyInfo, recursive);
+            }
+            catch (InvalidOperationException)
+            {
+                // This exception may be thrown by Umbraco 6 when attempting to read a rich text property containing macros without
+                // an UmbracoContext.PageId as is the case in a SurfaceController action.
+                // Opting to behave as if field is not found.
+                value = null;
+            }
+
+            return value != null;
+        }
+
+        private object TransformParsedValue(PropertyInfo propertyInfo, UmbracoPropertyAttribute propertyMetaData, object parsedValue)
+        {
+            object value = parsedValue;
+            var propertyType = propertyInfo.PropertyType;
+
             var transformations = _transformations.Where(x => x.TypeSupported == propertyType);
             var transformedValue = transformations.Aggregate(value,
                 (current, transform) => transform.Transform(current));
@@ -284,7 +357,7 @@ namespace UmbracoVault
             if (value.GetType() == propertyType)
             {
                 value = transformedValue;
-                return true;
+                return value;
             }
 
             var typeHandler = GetTypeHandler(propertyType, propertyMetaData);
@@ -303,7 +376,7 @@ namespace UmbracoVault
                 var generic = method.MakeGenericMethod(propertyInfo.PropertyType);
 
                 value = generic.Invoke(typeHandler, new[] { transformedValue });
-                return true;
+                return value;
             }
 
             if (propertyInfo.PropertyType.IsGenericType)
@@ -318,24 +391,8 @@ namespace UmbracoVault
                 var generic = method.MakeGenericMethod(propertyInfo.PropertyType);
                 value = generic.Invoke(typeHandler, new[] { transformedValue });
             }
-            return true;
-        }
 
-        private static bool TryGetValue(Func<string, bool, object> getPropertyValue, string alias, bool recursive, out object value)
-        {
-            try
-            {
-                value = getPropertyValue(alias, recursive);
-            }
-            catch (InvalidOperationException)
-            {
-                // This exception may be thrown by Umbraco 6 when attempting to read a rich text property containing macros without
-                // an UmbracoContext.PageId as is the case in a SurfaceController action.
-                // Opting to behave as if field is not found.
-                value = null;
-            }
-
-            return value != null;
+            return value;
         }
 
         private T GetItem<T>(IPublishedContent n)
@@ -396,6 +453,13 @@ namespace UmbracoVault
             }
 
             return false;
+        }
+
+        private static UmbracoPropertyAttribute GetUmbracoPropertyAttribute(PropertyInfo propertyInfo)
+        {
+            var attribute = propertyInfo.GetCustomAttributes(typeof(UmbracoPropertyAttribute), true)
+                                        .FirstOrDefault() as UmbracoPropertyAttribute;
+            return attribute;
         }
 
         private ITypeHandler GetTypeHandler(Type propertyType, UmbracoPropertyAttribute propertyMetaData)

@@ -123,6 +123,8 @@ namespace UmbracoVault
         /// <param name="getPropertyValue">A func that, provided a property alias and a boolean to indicate recursion, will return a raw value to be processed by the TypeHandler system</param>
         void FillClassProperties<T>(T instance, Func<string, bool, object> getPropertyValue);
 
+        void FillClassProperties<T>(T instance, Func<string, PropertyInfo, bool, object> getPropertyValue);
+
         /// <summary>
         /// Uses Vault context to try to resolve value for a single property
         /// </summary>
@@ -131,6 +133,8 @@ namespace UmbracoVault
         /// <param name="value">If found value will be set</param>
         /// <returns>True if able to resolve value, false if not</returns>
         bool TryGetValueForProperty(Func<string, bool, object> getPropertyValue, PropertyInfo propertyInfo, out object value);
+
+        bool TryGetValueForProperty(Func<string, PropertyInfo, bool, object> getPropertyValue, PropertyInfo propertyInfo, out object value);
 
         /// <summary>
         /// Given a class, will return true if the class is intended to be hydrated as a Media object instead of a Content object
