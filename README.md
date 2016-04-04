@@ -56,7 +56,7 @@ Want to learn more? Check out the wiki!
 ## Nuget Installation
 
 ```PowerShell
-PM> Install-Package UmbracoVault -Source UmbracoVaultBuild
+PM> Install-Package UmbracoVault
 ```
 
 ## Configuration
