@@ -259,6 +259,12 @@ namespace UmbracoVault
             }
         }
 
+        /// <summary>
+        /// Fills out class properties based on a provided, instantiated class and a Func instructing it how to get the raw property data based on alias
+        /// </summary>
+        /// <typeparam name="T">Type of instantiated class</typeparam>
+        /// <param name="instance">An newed-up instance of T</param>
+        /// <param name="getPropertyValue">A func that, provided a property alias, a PropertyInfo, and a recursion indicator, will return a raw value to be processed by the TypeHandler system</param>
         public void FillClassProperties<T>(T instance, Func<string, PropertyInfo, bool, object> getPropertyValue)
         {
             var properties = ClassConstructor.GetPropertiesToFill<T>();
