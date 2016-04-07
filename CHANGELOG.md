@@ -2,7 +2,7 @@
 
 **Other**
  
- * Added `PropertyInfo` parameter to `FillClassProperties` to support additional behavior for libraries that extend Vault.
+ * Added `PropertyInfo` parameter to `FillClassProperties` to support additional behavior for libraries that extend Vault. 
 
 ## v1.2.0 (UNRELEASED)
 
