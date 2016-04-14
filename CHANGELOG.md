@@ -1,4 +1,4 @@
-## v1.2.0 (UNRELEASED)
+## v1.2.0
 
 **New Feature: Lazy Loading (#6)**
  
