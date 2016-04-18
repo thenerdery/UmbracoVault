@@ -55,6 +55,16 @@ namespace ReferenceApiWeblessUmbraco.Controllers
             return GetById<EnumsViewModel>(UmbracoId.Enums);
         }
 
+        [HttpGet]
+        [Route("members")]
+        public HttpResponseMessage Members()
+        {
+            var viewModel = Vault.Context.GetMemberById<WebsiteUser>((int)UmbracoId.SingleUser);
+
+            var response = Request.CreateResponse(HttpStatusCode.OK, viewModel);
+            return response;
+        }
+
         protected HttpResponseMessage GetById<TEntity>(UmbracoId id)
         {
             var viewModel = Vault.Context.GetContentById<TEntity>((int)id);

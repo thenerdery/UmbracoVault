@@ -7,7 +7,8 @@
 		"ff6854fb-8783-213d-6fb4-1abbd37c618d",
 		"4226dff4-1828-5642-0713-bcdad29eb6b5",
 		"3bab442e-d963-a5fc-e43f-f8a87fa3127b",
-		"addb77ab-73e1-223b-bbe9-148ecf00f190"
+		"addb77ab-73e1-223b-bbe9-148ecf00f190",
+		"530f3a69-aeb1-2eb9-abb6-2e0f79cb32bf"
 	],
 	"folders": [],
 	"timestamp": 1460992243258,
@@ -73,6 +74,25 @@
 			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\n\n\nvar jsonData = JSON.parse(responseBody);\ntests[\"Bool Value Property Set\"] = jsonData.Bool === true;\ntests[\"Byte Value Property Set\"] = jsonData.Byte === 255;\ntests[\"Decimal Value Property Set\"] = jsonData.Decimal === 79228162514264337593543950335;\ntests[\"Double Value Property Set\"] = jsonData.Double === 1.7976931348;\ntests[\"Float Value Property Set\"] = jsonData.Float === 3.402823e+38;\ntests[\"Int Value Property Set\"] = jsonData.Int === -2147483648;\ntests[\"Long Value Property Set\"] = jsonData.Long === 9223372036854775807;\ntests[\"SByte Value Property Set\"] = jsonData.SByte === -128;\ntests[\"Short Value Property Set\"] = jsonData.Short === -32768;\ntests[\"UInt Value Property Set\"] = jsonData.UInt === 4294967295;\ntests[\"ULong Value Property Set\"] = jsonData.ULong === 18446744073709551615;\ntests[\"UShort Value Property Set\"] = jsonData.UShort === 65535;\ntests[\"Slider Value Property Set\"] = jsonData.Slider === 2147483647;\n",
 			"currentHelper": "normal",
 			"helperAttributes": {}
+		},
+		{
+			"id": "530f3a69-aeb1-2eb9-abb6-2e0f79cb32bf",
+			"headers": "",
+			"url": "http://localhost:4298/api/vault/members",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar jsonData = JSON.parse(responseBody);\ntests[\"FirstName Value\"] = jsonData.FirstName === \"Matt\";\ntests[\"LastName Value\"] = jsonData.LastName === \"Burke\";\ntests[\"Age Value\"] = jsonData.Age === 27;\ntests[\"Approved Value\"] = jsonData.Approved === true;\n\n\n",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1461004976654,
+			"name": "Members",
+			"description": "",
+			"collectionId": "9e12552e-3885-b340-7c18-a841da2ed441",
+			"responses": []
 		},
 		{
 			"id": "addb77ab-73e1-223b-bbe9-148ecf00f190",

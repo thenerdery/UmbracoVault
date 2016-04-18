@@ -7,6 +7,8 @@
         Objects  = 1067,
         Arrays = 1066,
         Enums = 1091,
-        Blog = 1103
+        Members = 1135,
+        Blog = 1103,
+        SingleUser = 1130
     }
 }

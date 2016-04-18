@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 using Umbraco.Core.Models;
 using UmbracoVault.Attributes;
 
@@ -18,6 +19,8 @@ namespace ReferenceApiWeblessUmbraco.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Age { get; set; }
+
+        [JsonIgnore]
         public IMember MemberContent { get; set; }
 
         public bool Approved => MemberContent.IsApproved;
