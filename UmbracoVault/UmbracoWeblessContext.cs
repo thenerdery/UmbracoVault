@@ -5,6 +5,8 @@ using Umbraco.Core;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
 using UmbracoVault.Exceptions;
+using UmbracoVault.Extensions;
+using UmbracoVault.Models;
 
 namespace UmbracoVault
 {
@@ -87,10 +89,28 @@ namespace UmbracoVault
             }
 
             var result = ClassConstructor.CreateWithContent<T>(n);
-            FillClassProperties(result, (alias, recursive) =>
+            FillClassProperties(result, (alias, propertyInfo, recursive) =>
             {
-                var value = n.GetValue(alias);
-                return value;
+                var targetType = propertyInfo.PropertyType;
+
+                var containsProperty = n.HasProperty(alias);
+
+                if (containsProperty)
+                {
+                    var property = n.Properties.First(p => string.Equals(p.Alias, alias, StringComparison.InvariantCultureIgnoreCase));
+
+                    // the IPublishedNode.GetPropertyValue() will fetch the prevalue of the numeric item if 
+                    // the target is a string.  This emulates that functionality.
+                    if (targetType == typeof(string) && property.Value.IsNumeric())
+                    {
+                        var name = n.GetPrevalues(ApplicationContext.Current.Services.DataTypeService, alias);
+                        return name;
+                    }
+
+                    return property.Value;
+                }
+
+                return null;
             });
 
             _cacheManager.AddItem(n.Id, result);
