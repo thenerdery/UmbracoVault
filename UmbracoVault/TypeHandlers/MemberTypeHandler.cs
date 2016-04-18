@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Umbraco.Core;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 
@@ -37,7 +37,7 @@ namespace UmbracoVault.TypeHandlers
 
         private static IMember GetMember(string idString)
         {
-            return UmbracoContext.Current.Application.Services.MemberService.GetById(int.Parse(idString));
+            return ApplicationContext.Current.Services.MemberService.GetById(int.Parse(idString));
         }
 
         public Type TypeSupported => typeof(Member);
