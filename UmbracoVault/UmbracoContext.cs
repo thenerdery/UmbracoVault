@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -472,7 +472,7 @@ namespace UmbracoVault
 
         public static ReadOnlyCollection<string> GetUmbracoEntityAliasesFromType(Type type)
         {
-            var results = new List<string>();
+            var results = new HashSet<string>();
             var attributes = type.GetUmbracoEntityAttributes().ToList();
             if (attributes.Any())
             {
@@ -488,7 +488,7 @@ namespace UmbracoVault
                 }
             }
 
-            return results.AsReadOnly();
+            return results.ToList().AsReadOnly();
         }
     }
 }
