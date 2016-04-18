@@ -3,6 +3,7 @@ using Microsoft.Owin;
 using Owin;
 using ReferenceApiWeblessUmbraco.Application;
 using ReferenceApiWeblessUmbraco.App_Start;
+using UmbracoVault;
 
 [assembly: OwinStartup(typeof(OwinStartup))]
 
@@ -19,6 +20,8 @@ namespace ReferenceApiWeblessUmbraco.App_Start
         {
             var application = new ReferenceApiApplicationBase();
             application.Start(application, new EventArgs());
+
+            Vault.SetOverrideContext(new UmbracoWeblessContext());
         }
     }
 }
