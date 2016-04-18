@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Web.Http;
 using Microsoft.Owin;
 using Owin;
 using ReferenceApiWeblessUmbraco.Application;
 using ReferenceApiWeblessUmbraco.App_Start;
+using umbraco.presentation.channels.businesslogic;
 using UmbracoVault;
 
 [assembly: OwinStartup(typeof(OwinStartup))]
@@ -13,7 +15,11 @@ namespace ReferenceApiWeblessUmbraco.App_Start
     {
         public void Configuration(IAppBuilder app)
         {
+            var config = new HttpConfiguration();
+
             StartUmbracoContext();
+
+            app.UseWebApi(config);
         }
 
         private void StartUmbracoContext()
