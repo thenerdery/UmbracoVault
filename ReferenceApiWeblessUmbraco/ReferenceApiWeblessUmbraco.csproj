@@ -295,6 +295,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\ReferenceApiApplicationBase.cs" />
@@ -332,9 +333,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\Base\UmbracoDataController.cs" />
+    <Compile Include="Controllers\UmbracoDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\NumericTypesController.cs" />
     <Compile Include="Enums\UmbracoId.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

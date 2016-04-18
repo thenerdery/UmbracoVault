@@ -39,7 +39,10 @@ namespace ReferenceApiWeblessUmbraco.Models
         /// <summary>
         /// Gets the value from a drop down list (the actual text from it)
         /// </summary>
-        public string DropDownList { get; set; }
+        public int DropDownList { get; set; }
+
+        [UmbracoProperty(Alias = "DropDownList")]
+        public string DropDownListAsString { get; set; }
 
         /// <summary>
         /// Uses a drop down list but for this type Umbraco publishes an ID key which
@@ -57,5 +60,12 @@ namespace ReferenceApiWeblessUmbraco.Models
         /// Radio Button List prevalue ID
         /// </summary>
         public int RadioButtonList { get; set; }
+
+        /// <summary>
+        /// Radio Button List prevalue
+        /// </summary>
+        [UmbracoProperty(Alias = "RadioButtonList")]
+        public string RadioButtonListAsString { get; set; }
+
     }
 }
