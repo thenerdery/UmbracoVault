@@ -1,6 +1,3 @@
-## v1.3.0 (UNRELEASED)
-Extended the current UmbracoContext implementation to include a secondary implementation that removes any dependency on `IPublishedContext`, `UmbracoHelper`, and the Umbraco WebContext.  Instead of using the WebContext as a vehicle for retrieving data from Umbraco, the [ServiceContext](https://our.umbraco.org/documentation/Reference/Management/Services/) is used. [#13]
-
 ## v1.2.1
  * Fixes an issue where classes that used type inheritance would cause duplicate results to return in calls to `GetUmbracoEntityAliasesFromType` [#12]
 
