@@ -1,4 +1,6 @@
-﻿using System.Web.Http;
+﻿using System.Net;
+using System.Net.Http;
+using System.Web.Http;
 using ReferenceApiWeblessUmbraco.Enums;
 using ReferenceApiWeblessUmbraco.Models;
 using umbraco;
@@ -20,33 +22,38 @@ namespace ReferenceApiWeblessUmbraco.Controllers
 
         [HttpGet]
         [Route("numeric")]
-        public NumericTypesViewModel NumericTypes()
+        public HttpResponseMessage NumericTypes()
         {
-            var item = GetById<NumericTypesViewModel>(UmbracoId.NumericTypes);
-            return item;
+            return GetById<NumericTypesViewModel>(UmbracoId.NumericTypes);
         }
 
         [HttpGet]
         [Route("text")]
-        public TextTypesViewModel TextTypes()
+        public HttpResponseMessage TextTypes()
         {
-            var item = GetById<TextTypesViewModel>(UmbracoId.TextTypes);
-            return item;
+            return GetById<TextTypesViewModel>(UmbracoId.TextTypes);
         }
 
         [HttpGet]
         [Route("arrays")]
-        public ArraysViewModel Arrays()
+        public HttpResponseMessage Arrays()
         {
-            var item = GetById<ArraysViewModel>(UmbracoId.Arrays);
-            return item;
+            return GetById<ArraysViewModel>(UmbracoId.Arrays);
         }
 
-        protected TEntity GetById<TEntity>(UmbracoId id)
+        [HttpGet]
+        [Route("objects")]
+        public HttpResponseMessage Objects()
+        {
+            return GetById<ObjectsViewModel>(UmbracoId.Objects);
+        }
+
+        protected HttpResponseMessage GetById<TEntity>(UmbracoId id)
         {
             var viewModel = Vault.Context.GetContentById<TEntity>((int)id);
 
-            return viewModel;
+            var response = Request.CreateResponse(HttpStatusCode.OK, viewModel);
+            return response;
         }
     }
 }

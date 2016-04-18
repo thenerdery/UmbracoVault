@@ -5,7 +5,8 @@
 	"order": [
 		"52a17527-bc1b-487b-b229-f3ca6817bf1f",
 		"ff6854fb-8783-213d-6fb4-1abbd37c618d",
-		"4226dff4-1828-5642-0713-bcdad29eb6b5"
+		"4226dff4-1828-5642-0713-bcdad29eb6b5",
+		"3bab442e-d963-a5fc-e43f-f8a87fa3127b"
 	],
 	"folders": [],
 	"timestamp": 1460992243258,
@@ -13,6 +14,26 @@
 	"remoteLink": "",
 	"public": false,
 	"requests": [
+		{
+			"id": "3bab442e-d963-a5fc-e43f-f8a87fa3127b",
+			"headers": "",
+			"url": "http://localhost:4298/api/vault/arrays",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "9e12552e-3885-b340-7c18-a841da2ed441",
+			"data": null,
+			"dataMode": "params",
+			"name": "Objects",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1461000860663,
+			"version": 2,
+			"responses": [],
+			"tests": "//taken from: http://stackoverflow.com/questions/7837456/how-to-compare-arrays-in-javascript\n// Warn if overriding existing method\nif(Array.prototype.equals)\n    console.warn(\"Overriding existing Array.prototype.equals. Possible causes: New API defines the method, there's a framework conflict or you've got double inclusions in your code.\");\n// attach the .equals method to Array's prototype to call it on any array\nArray.prototype.equals = function (array) {\n    // if the other array is a falsy value, return\n    if (!array)\n        return false;\n\n    // compare lengths - can save a lot of time \n    if (this.length != array.length)\n        return false;\n\n    for (var i = 0, l=this.length; i < l; i++) {\n        // Check if we have nested arrays\n        if (this[i] instanceof Array && array[i] instanceof Array) {\n            // recurse into the nested arrays\n            if (!this[i].equals(array[i]))\n                return false;       \n        }           \n        else if (JSON.stringify(this[i]) != JSON.stringify(array[i])) { \n            // Warning - two different object instances will never be equal: {x:20} != {x:20}\n            return false;   \n        }           \n    }       \n    return true;\n}\n// Hide method from for-in loops\nObject.defineProperty(Array.prototype, \"equals\", {enumerable: false});\n\n\n\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\n\nvar jsonData = JSON.parse(responseBody);\ntests[\"IntArray Value\"] = jsonData.IntArray.equals([ 7, 14, 21 ]);\ntests[\"StringArray Value\"] = jsonData.StringArray.equals([ \"cat \", \" dog \", \" fish\" ]);\ntests[\"StaffList Value\"] = jsonData.StaffList.equals([\n    {\n      \"Name\": \"Ken Sykora\",\n      \"PrimaryLocation\": {\n        \"Name\": \"Minneapolis\"\n      },\n      \"LocationId\": 0\n    },\n    {\n      \"Name\": \"Paul Trandem\",\n      \"PrimaryLocation\": {\n        \"Name\": \"Minneapolis\"\n      },\n      \"LocationId\": 0\n    }\n  ]);\n\ntests[\"CheckboxList Value\"] = jsonData.CheckboxList.equals([ \"50\", \"51\" ]);\ntests[\"DictionaryPicker Value\"] = jsonData.DictionaryPicker.equals([ \"Apple\", \"Pear\" ]);\ntests[\"DropDownListMultiplePublishKeys Value\"] = jsonData.DropDownListMultiplePublishKeys.equals([ 56, 57 ]);\ntests[\"DropDownListMultiple Value\"] = jsonData.DropDownListMultiple.equals([ \"60\", \"61\" ]);\n",
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
 		{
 			"id": "4226dff4-1828-5642-0713-bcdad29eb6b5",
 			"headers": "",
