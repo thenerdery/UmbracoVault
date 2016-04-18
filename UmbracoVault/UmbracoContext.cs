@@ -32,15 +32,6 @@ namespace UmbracoVault
         {
             //new SuperScriptTransformation()
         };
-        private readonly CacheManager _cacheManager;
-
-        private readonly TypeHandlerFactory _typeHandlerFactory;
-
-        public UmbracoWebContext()
-        {
-            _typeHandlerFactory = TypeHandlerFactory.Instance;
-            _cacheManager = new CacheManager();
-        }
 
         private UmbracoHelper _helper;
         protected UmbracoHelper Helper => _helper ?? (_helper = new UmbracoHelper(UmbracoContext.Current));

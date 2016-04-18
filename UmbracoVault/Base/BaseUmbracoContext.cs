@@ -11,6 +11,8 @@ using UmbracoVault.Caching;
 using UmbracoVault.Extensions;
 using UmbracoVault.TypeHandlers;
 
+
+// ReSharper disable once CheckNamespace
 namespace UmbracoVault
 {
     public abstract class BaseUmbracoContext : IUmbracoContext

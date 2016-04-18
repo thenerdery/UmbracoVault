@@ -15,12 +15,12 @@ namespace UmbracoVault
     {
         public override T GetCurrent<T>()
         {
-            throw new VaultNotImplementedException();
+            throw new VaultNotImplementedException("Since we aren't running under the Umbraco Web Context, there is no 'current' in this context");
         }
 
         public override object GetCurrent(Type type)
         {
-            throw new VaultNotImplementedException();
+            throw new VaultNotImplementedException("Since we aren't running under the Umbraco Web Context, there is no 'current' in this context");
         }
 
         public override T GetContentById<T>(int id)
@@ -38,8 +38,7 @@ namespace UmbracoVault
 
         public override IEnumerable<T> GetContentByCsv<T>(string csv)
         {
-            // note, this is different than the UmbracoWebContext which uses the UmbracoHelper
-
+            // note, this is different than the UmbracoWebContext implementation which uses the UmbracoHelper
             var ids = csv.Split(',');
             var items = ids.Select(GetContentById<T>);
             return items;
@@ -70,7 +69,7 @@ namespace UmbracoVault
 
         public override IEnumerable<T> QueryRelative<T>(string query)
         {
-            throw new VaultNotImplementedException("The Umbraco Content service does not support relative searches.");
+            throw new VaultNotImplementedException("The Umbraco Content service does not support relative searches due to lack of XPath support.");
         }
 
         protected IContent GetUmbracoContent(int id)
@@ -87,7 +86,7 @@ namespace UmbracoVault
                 return (T)cachedItem;
             }
 
-            var result = ClassConstructor.CreateWithNode<T>(n);
+            var result = ClassConstructor.CreateWithContent<T>(n);
             FillClassProperties(result, (alias, recursive) =>
             {
                 var value = n.GetValue(alias);
