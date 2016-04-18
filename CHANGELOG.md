@@ -1,3 +1,6 @@
+## v1.2.1 (Unreleased)
+ * Fixes an issue where classes that used type inheritance would cause duplicate results to return in calls to `GetUmbracoEntityAliasesFromType` [#12]
+
 ## v1.2.0
 
 **New Feature: Lazy Loading (#6)**
