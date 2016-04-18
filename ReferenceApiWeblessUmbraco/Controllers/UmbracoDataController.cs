@@ -34,6 +34,14 @@ namespace ReferenceApiWeblessUmbraco.Controllers
             return item;
         }
 
+        [HttpGet]
+        [Route("arrays")]
+        public ArraysViewModel Arrays()
+        {
+            var item = GetById<ArraysViewModel>(UmbracoId.Arrays);
+            return item;
+        }
+
         protected TEntity GetById<TEntity>(UmbracoId id)
         {
             var viewModel = Vault.Context.GetContentById<TEntity>((int)id);
