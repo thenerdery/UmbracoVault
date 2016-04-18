@@ -470,9 +470,9 @@ namespace UmbracoVault
             return result;
         }
 
-        private static ReadOnlyCollection<string> GetUmbracoEntityAliasesFromType(Type type)
+        public static ReadOnlyCollection<string> GetUmbracoEntityAliasesFromType(Type type)
         {
-            var results = new List<string>();
+            var results = new HashSet<string>();
             var attributes = type.GetUmbracoEntityAttributes().ToList();
             if (attributes.Any())
             {
@@ -488,7 +488,7 @@ namespace UmbracoVault
                 }
             }
 
-            return results.AsReadOnly();
+            return results.ToList().AsReadOnly();
         }
     }
 }

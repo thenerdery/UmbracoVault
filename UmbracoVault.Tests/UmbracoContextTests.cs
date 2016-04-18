@@ -196,6 +196,13 @@ namespace UmbracoVault.Tests
             {
                 Assert.AreEqual(Source.ExampleEnum, Destination.ExampleEnum);
             }
+
+            [TestMethod]
+            public void GetUmbracoEntityAliasesFromType_ShouldBeDistinct()
+            {
+                var aliases = UmbracoWebContext.GetUmbracoEntityAliasesFromType(typeof(ExampleRecursiveAttributesViewModel)).OrderBy(x => x);
+                Assert.IsTrue(aliases.SequenceEqual(aliases.Distinct()));
+            }
         }
     }
 }
