@@ -2,11 +2,11 @@
 
 **New Feature: Independence from Web Context**
 
-Extended the current UmbracoContext implementation to include a secondary implementation that removes any dependency on `IPublishedContext`, `UmbracoHelper`, and the Umbraco WebContext.  Instead of using the WebContext as a vehicle for retrieving data from Umbraco, the [ServiceContext](https://our.umbraco.org/documentation/Reference/Management/Services/) is used. [#13]
+Extended the current UmbracoContext implementation to include a secondary implementation that removes any dependency on `IPublishedContext`, `UmbracoHelper`, and the Umbraco WebContext.  Instead of using the WebContext as a vehicle for retrieving data from Umbraco, the [ServiceContext](https://our.umbraco.org/documentation/Reference/Management/Services/) is used. [#27]
 
 **Other**
  
- * Added `PropertyInfo` parameter to `FillClassProperties` to support additional behavior for libraries that extend Vault. 
+ * Added `PropertyInfo` parameter to `FillClassProperties` to support additional behavior for libraries that extend Vault.  [#25]
 
 ## v1.2.0 (UNRELEASED)
 
