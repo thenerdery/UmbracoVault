@@ -9,6 +9,7 @@ using Umbraco.Core.Models;
 using UmbracoVault.Attributes;
 using UmbracoVault.Caching;
 using UmbracoVault.Extensions;
+using UmbracoVault.Models;
 using UmbracoVault.TypeHandlers;
 
 
@@ -19,6 +20,24 @@ namespace UmbracoVault
     {
         protected readonly TypeHandlerFactory _typeHandlerFactory;
         protected readonly CacheManager _cacheManager;
+
+        private static List<VaultEntity> _vaultEntities;
+
+        internal List<VaultEntity> VaultEntities
+        {
+            get
+            {
+                if (_vaultEntities == null)
+                {
+                    _vaultEntities = VaultEntityExtensions.GetValutEntities();
+                }
+                return _vaultEntities;
+            }
+            set
+            {
+                _vaultEntities = value;
+            }
+        }
 
         protected BaseUmbracoContext()
         {
