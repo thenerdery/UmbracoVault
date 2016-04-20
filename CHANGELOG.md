@@ -8,7 +8,11 @@ Extended the current UmbracoContext implementation to include a secondary implem
  
  * Added `PropertyInfo` parameter to `FillClassProperties` to support additional behavior for libraries that extend Vault.  [#25]
 
-## v1.2.0 (UNRELEASED)
+## v1.2.1
+
+ * Fixes an issue where classes that used type inheritance would cause duplicate results to return in calls to `GetUmbracoEntityAliasesFromType` [#12]
+
+## v1.2.0
 
 **New Feature: Lazy Loading (#6)**
  
