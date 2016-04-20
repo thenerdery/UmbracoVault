@@ -12,7 +12,8 @@ namespace UmbracoVault.Attributes
 	{
 		public UmbracoEntityAttribute()
 		{
-		}
+            ReturnStronglyTypedChildren = true;
+        }
 
 		/// <summary>
 		/// Only needed if the name of the Entity is not the same as the umbraco Doc Type alias
@@ -21,7 +22,8 @@ namespace UmbracoVault.Attributes
 		public UmbracoEntityAttribute(string alias)
 		{
 			Alias = alias;
-		}
+            ReturnStronglyTypedChildren = true;
+        }
 
         /// <summary>
         /// When false (default), you must manually opt in all properties to be mapped with the [UmbracoProperty] attribute.
@@ -39,5 +41,7 @@ namespace UmbracoVault.Attributes
         /// Typehandler must implement ITypeHandler
         /// </summary>
         public virtual Type TypeHandlerOverride { get; set; }
-	}
+
+        public bool ReturnStronglyTypedChildren { get; set; }
+    }
 }

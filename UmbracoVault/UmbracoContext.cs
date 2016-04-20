@@ -152,6 +152,25 @@ namespace UmbracoVault
 
         protected T GetItem<T>(IPublishedContent n)
         {
+            var typesMetaData = this.VaultEntities.FirstOrDefault(x => x.Type == typeof(T));
+            var explicitType = this.VaultEntities.FirstOrDefault(x =>
+                                    typeof(T).IsAssignableFrom(x.Type)
+                                        && (x.Type.Name.Equals(n.ContentType.Alias, StringComparison.CurrentCultureIgnoreCase)
+                                            || (x.MetaData.Alias != null && x.MetaData.Alias.Equals(n.ContentType.Alias, StringComparison.CurrentCultureIgnoreCase))));
+
+            var useExplicitType = explicitType != null && typesMetaData != null && typesMetaData.MetaData.ReturnStronglyTypedChildren;
+            var typeToUse = useExplicitType ? explicitType.Type : typeof(T);
+
+            var getItemMethod = this.GetType()
+                                    .GetMethod(nameof(GetItemForExplicitType), BindingFlags.Instance | BindingFlags.NonPublic)
+                                    .MakeGenericMethod(typeToUse);
+
+            var result = getItemMethod.Invoke(this, new object[] { n });
+            return (T)result;
+        }
+
+        protected T GetItemForExplicitType<T>(IPublishedContent n)
+        {
             var cachedItem = _cacheManager.GetItem<T>(n.Id);
             if (cachedItem != null)
             {

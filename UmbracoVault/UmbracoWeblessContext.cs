@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Umbraco.Core;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
@@ -82,6 +83,25 @@ namespace UmbracoVault
 
         protected T GetItem<T>(IContent n)
         {
+            var typesMetaData = this.VaultEntities.FirstOrDefault(x => x.Type == typeof(T));
+            var explicitType = this.VaultEntities.FirstOrDefault(x =>
+                                    typeof(T).IsAssignableFrom(x.Type)
+                                        && (x.Type.Name.Equals(n.ContentType.Alias, StringComparison.CurrentCultureIgnoreCase)
+                                            || (x.MetaData.Alias != null && x.MetaData.Alias.Equals(n.ContentType.Alias, StringComparison.CurrentCultureIgnoreCase))));
+
+            var useExplicitType = explicitType != null && typesMetaData != null && typesMetaData.MetaData.ReturnStronglyTypedChildren;
+            var typeToUse = useExplicitType ? explicitType.Type : typeof(T);
+
+            var getItemMethod = this.GetType()
+                                    .GetMethod(nameof(GetItemForExplicitType), BindingFlags.Instance | BindingFlags.NonPublic)
+                                    .MakeGenericMethod(typeToUse);
+
+            var result = getItemMethod.Invoke(this, new object[] { n });
+            return (T)result;
+        }
+
+        private T GetItemForExplicitType<T>(IContent n)
+        {
             var cachedItem = _cacheManager.GetItem<T>(n.Id);
             if (cachedItem != null)
             {
@@ -108,6 +128,13 @@ namespace UmbracoVault
                     }
 
                     return property.Value;
+                }
+                else
+                {
+                    if (string.Equals("name", propertyInfo.Name, StringComparison.CurrentCultureIgnoreCase) && propertyInfo.PropertyType == typeof(string))
+                    {
+                        return n.Name;
+                    }
                 }
 
                 return null;
