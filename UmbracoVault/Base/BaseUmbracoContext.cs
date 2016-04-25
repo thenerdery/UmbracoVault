@@ -98,6 +98,29 @@ namespace UmbracoVault
             return GetMediaById<T>(id);
         }
 
+        protected T GetItem<T>(TUmbracoInterface n)
+        {
+            var typesMetaData = this.VaultEntities.FirstOrDefault(x => x.Type == typeof(T));
+            var explicitType = this.VaultEntities.FirstOrDefault(x =>
+                                    typeof(T).IsAssignableFrom(x.Type)
+                                        && (x.Type.Name.Equals(GetAlias(n), StringComparison.CurrentCultureIgnoreCase)
+                                            || (x.MetaData.Alias != null && x.MetaData.Alias.Equals(GetAlias(n), StringComparison.CurrentCultureIgnoreCase))));
+
+            var useExplicitType = explicitType != null && typesMetaData != null && typesMetaData.MetaData.ReturnStronglyTypedChildren;
+            var typeToUse = useExplicitType ? explicitType.Type : typeof(T);
+
+            var getItemMethod = this.GetType()
+                                    .GetMethod(nameof(GetItemForExplicitType), BindingFlags.Instance | BindingFlags.NonPublic)
+                                    .MakeGenericMethod(typeToUse);
+
+            var result = getItemMethod.Invoke(this, new object[] { n });
+            return (T)result;
+        }
+
+        protected abstract T GetItemForExplicitType<T>(TUmbracoInterface n);
+
+        protected abstract string GetAlias(TUmbracoInterface n);
+
         public abstract IEnumerable<T> GetContentByCsv<T>(string csv);
 
         public abstract IEnumerable<T> GetByDocumentType<T>();
@@ -107,8 +130,6 @@ namespace UmbracoVault
         public abstract IEnumerable<T> GetChildren<T>(int? parentNodeId = null);
 
         public abstract IEnumerable<T> QueryRelative<T>(string query);
-
-        protected abstract T GetItem<T>(TUmbracoInterface n);
 
         protected abstract TUmbracoInterface GetUmbracoContent(int id);
 
