@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Umbraco.Core.Models;
+using Umbraco.Core.Services;
 using Umbraco.Web;
 
 namespace UmbracoVault.Extensions
@@ -62,6 +63,13 @@ namespace UmbracoVault.Extensions
             var ids = csv.Split(',');
             var contents = helper.TypedContent(ids);
             return contents;
+        }
+
+        public static string GetPrevalues(this IContent content, IDataTypeService ds, string alias)
+        {
+            var ids = content.GetValue<string>(alias).Split(',').ToList();
+            var list = ids.Select(x => ds.GetPreValueAsString(int.Parse(x)));
+            return string.Join(",", list);
         }
     }
 }

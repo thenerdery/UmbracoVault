@@ -32,7 +32,27 @@ namespace UmbracoVault.Proxy
                 : _generator.CreateClassProxy(classToProxy, ops, _interceptor);
         }
 
+        private static object BuildProxy<T>(IContent node)
+        {
+            var ops = new ProxyGenerationOptions();
+            ops.AddMixinInstance(new LazyContentResolverMixin(node));
+
+            var classToProxy = typeof(T);
+
+            // Determine whether to use constructor that takes IPublishedContent
+            var useContentConstructor = classToProxy.GetConstructors().Any(c => c.GetParameters().Any(p => p.ParameterType == typeof(IContent)));
+
+            return useContentConstructor
+                ? _generator.CreateClassProxy(classToProxy, ops, new object[] { node }, _interceptor)
+                : _generator.CreateClassProxy(classToProxy, ops, _interceptor);
+        }
+
         public T CreateInstance<T>(IPublishedContent content)
+        {
+            return (T)BuildProxy<T>(content);
+        }
+
+        public T CreateInstance<T>(IContent content)
         {
             return (T)BuildProxy<T>(content);
         }

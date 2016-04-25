@@ -28,6 +28,21 @@ namespace UmbracoVault.Extensions
         }
 
         /// <summary>
+        /// Attempts to create T by supplying the IContent to a constructor (if one exists with that parameter signature)
+        /// Returns null if no appropriate constructor exists.
+        /// </summary>
+        internal static T CreateWithContentConstructor<T>(this Type targetType, IContent content)
+        {
+            var nodeConstructor = targetType.GetConstructor(new[] { typeof(IContent) });
+            if (nodeConstructor != null)
+            {
+                var result = (T)nodeConstructor.Invoke(new object[] { content });
+                return result;
+            }
+            return default(T);
+        }
+
+        /// <summary>
         /// Attempts to create T with a parameterless constructor.
         /// Returns null if no appropriate constructor exists.
         /// </summary>

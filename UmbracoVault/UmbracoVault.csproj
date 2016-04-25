@@ -80,12 +80,19 @@
     <Compile Include="Attributes\UmbracoPropertyAttribute.cs" />
     <Compile Include="Attributes\UmbracoJsonPropertyAttribute.cs" />
     <Compile Include="Attributes\UmbracoRichTextPropertyAttribute.cs" />
+    <Compile Include="Base\BaseUmbracoContext.cs" />
     <Compile Include="Caching\CacheManager.cs" />
     <Compile Include="Collections\VaultItemCollection.cs" />
     <Compile Include="Controllers\VaultDefaultRenderController.cs" />
     <Compile Include="Controllers\VaultDefaultGenericController.cs" />
     <Compile Include="Controllers\VaultRenderMvcController.cs" />
+    <Compile Include="Exceptions\VaultNotImplementedException.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\VaultEntityExtensions.cs" />
+    <Compile Include="Models\NamedItem.cs" />
+    <Compile Include="Models\VaultEntity.cs" />
     <Compile Include="Proxy\ILazyResolverMixin.cs" />
+    <Compile Include="Proxy\LazyContentResolverMixin.cs" />
     <Compile Include="Proxy\LazyResolverMixin.cs" />
     <Compile Include="Proxy\ProxyInstanceFactory.cs" />
     <Compile Include="Proxy\ProxyInterceptor.cs" />
@@ -101,6 +108,7 @@
     <Compile Include="Collections\ExternalIteratorEnumerator.cs" />
     <Compile Include="Extensions\TransformationExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Reflection\IContentInstanceFactory.cs" />
     <Compile Include="Reflection\IInstanceFactory.cs" />
     <Compile Include="Transformations\ITransformation.cs" />
     <Compile Include="Transformations\SuperScriptTransformation.cs" />
@@ -141,6 +149,7 @@
     <Compile Include="UmbracoContext.cs" />
     <Compile Include="IUmbracoContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UmbracoWeblessContext.cs" />
     <Compile Include="Vault.cs" />
   </ItemGroup>
   <ItemGroup>
