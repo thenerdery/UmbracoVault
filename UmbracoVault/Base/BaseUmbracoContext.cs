@@ -49,6 +49,24 @@ namespace UmbracoVault
 
         public abstract object GetCurrent(Type type);
 
+        protected abstract string GetAlias(TUmbracoInterface n);
+
+        protected abstract T CreateAndHydrateItem<T>(TUmbracoInterface n);
+
+        public abstract IEnumerable<T> GetContentByCsv<T>(string csv);
+
+        public abstract IEnumerable<T> GetByDocumentType<T>();
+
+        public abstract IEnumerable<string> GetUrlsForDocumentType<T>();
+
+        public abstract IEnumerable<T> GetChildren<T>(int? parentNodeId = null);
+
+        public abstract IEnumerable<T> QueryRelative<T>(string query);
+
+        protected abstract TUmbracoInterface GetUmbracoContent(int id);
+
+        protected abstract int GetId(TUmbracoInterface n);
+
         public object GetContentById(Type type, string idString)
         {
             var methodInfo = typeof(UmbracoWebContext).GetMethod("GetContentById", new[] { typeof(string) });
@@ -70,8 +88,6 @@ namespace UmbracoVault
 
             return GetItem<T>(umbracoItem);
         }
-
-        protected abstract int GetId(TUmbracoInterface n);
 
         public T GetContentById<T>(string idString)
         {
@@ -116,22 +132,6 @@ namespace UmbracoVault
             var result = getItemMethod.Invoke(this, new object[] { n });
             return (T)result;
         }
-
-        protected abstract string GetAlias(TUmbracoInterface n);
-
-        protected abstract T CreateAndHydrateItem<T>(TUmbracoInterface n);
-
-        public abstract IEnumerable<T> GetContentByCsv<T>(string csv);
-
-        public abstract IEnumerable<T> GetByDocumentType<T>();
-
-        public abstract IEnumerable<string> GetUrlsForDocumentType<T>();
-
-        public abstract IEnumerable<T> GetChildren<T>(int? parentNodeId = null);
-
-        public abstract IEnumerable<T> QueryRelative<T>(string query);
-
-        protected abstract TUmbracoInterface GetUmbracoContent(int id);
 
         protected T GetItemForExplicitType<T>(TUmbracoInterface n)
         {
