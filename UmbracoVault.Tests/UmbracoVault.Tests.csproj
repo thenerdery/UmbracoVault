@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="DefaultInstanceFactoryTests.cs" />
     <Compile Include="Models\AutoRegisteredTypeHandler.cs" />
+    <Compile Include="Models\ExampleRecursiveAttributesViewModel.cs" />
     <Compile Include="Models\IgnoredTypeHandler.cs" />
     <Compile Include="Models\CustomTypeHandler.cs" />
     <Compile Include="Models\ExampleEnum.cs" />
