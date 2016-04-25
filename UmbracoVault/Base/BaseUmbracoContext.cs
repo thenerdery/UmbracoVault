@@ -117,9 +117,9 @@ namespace UmbracoVault
             return (T)result;
         }
 
-        protected abstract T GetItemForExplicitType<T>(TUmbracoInterface n);
-
         protected abstract string GetAlias(TUmbracoInterface n);
+
+        protected abstract T CreateAndHydrateItem<T>(TUmbracoInterface n);
 
         public abstract IEnumerable<T> GetContentByCsv<T>(string csv);
 
@@ -132,6 +132,22 @@ namespace UmbracoVault
         public abstract IEnumerable<T> QueryRelative<T>(string query);
 
         protected abstract TUmbracoInterface GetUmbracoContent(int id);
+
+        protected T GetItemForExplicitType<T>(TUmbracoInterface n)
+        {
+            var sourceId = GetId(n);
+
+            var cachedItem = _cacheManager.GetItem<T>(sourceId);
+            if (cachedItem != null)
+            {
+                return (T)cachedItem;
+            }
+
+            var result = CreateAndHydrateItem<T>(n);
+
+            _cacheManager.AddItem(sourceId, result);
+            return result;
+        }
 
         /// <summary>
         /// Fills out class properties based on a provided, instantiated class and a Func instructing it how to get the raw property data based on alias

@@ -35,6 +35,43 @@ namespace UmbracoVault
             return n.ContentType.Alias;
         }
 
+        protected override T CreateAndHydrateItem<T>(IContent n)
+        {
+            var result = ClassConstructor.CreateWithContent<T>(n);
+            FillClassProperties(result, (alias, propertyInfo, recursive) =>
+            {
+                var targetType = propertyInfo.PropertyType;
+
+                var containsProperty = n.HasProperty(alias);
+
+                if (containsProperty)
+                {
+                    var property = n.Properties.First(p => string.Equals(p.Alias, alias, StringComparison.InvariantCultureIgnoreCase));
+
+                    // the IPublishedNode.GetPropertyValue() will fetch the prevalue of the numeric item if 
+                    // the target is a string.  This emulates that functionality.
+                    if (targetType == typeof(string) && property.Value.IsNumeric())
+                    {
+                        var name = n.GetPrevalues(ApplicationContext.Current.Services.DataTypeService, alias);
+                        return name;
+                    }
+
+                    return property.Value;
+                }
+                else
+                {
+                    if (string.Equals("name", propertyInfo.Name, StringComparison.CurrentCultureIgnoreCase) && propertyInfo.PropertyType == typeof(string))
+                    {
+                        return n.Name;
+                    }
+                }
+
+                return null;
+            });
+
+            return result;
+        }
+
         public override IEnumerable<T> GetContentByCsv<T>(string csv)
         {
             // note, this is different than the UmbracoWebContext implementation which uses the UmbracoHelper
@@ -75,50 +112,6 @@ namespace UmbracoVault
         {
             var umbracoItem = ApplicationContext.Current.Services.ContentService.GetById(id);
             return umbracoItem;
-        }
-
-        protected override T GetItemForExplicitType<T>(IContent n)
-        {
-            var cachedItem = _cacheManager.GetItem<T>(n.Id);
-            if (cachedItem != null)
-            {
-                return (T)cachedItem;
-            }
-
-            var result = ClassConstructor.CreateWithContent<T>(n);
-            FillClassProperties(result, (alias, propertyInfo, recursive) =>
-            {
-                var targetType = propertyInfo.PropertyType;
-
-                var containsProperty = n.HasProperty(alias);
-
-                if (containsProperty)
-                {
-                    var property = n.Properties.First(p => string.Equals(p.Alias, alias, StringComparison.InvariantCultureIgnoreCase));
-
-                    // the IPublishedNode.GetPropertyValue() will fetch the prevalue of the numeric item if 
-                    // the target is a string.  This emulates that functionality.
-                    if (targetType == typeof(string) && property.Value.IsNumeric())
-                    {
-                        var name = n.GetPrevalues(ApplicationContext.Current.Services.DataTypeService, alias);
-                        return name;
-                    }
-
-                    return property.Value;
-                }
-                else
-                {
-                    if (string.Equals("name", propertyInfo.Name, StringComparison.CurrentCultureIgnoreCase) && propertyInfo.PropertyType == typeof(string))
-                    {
-                        return n.Name;
-                    }
-                }
-
-                return null;
-            });
-
-            _cacheManager.AddItem(n.Id, result);
-            return result;
         }
     }
 }

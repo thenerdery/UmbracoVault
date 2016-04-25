@@ -86,6 +86,18 @@ namespace UmbracoVault
             return n.DocumentTypeAlias;
         }
 
+        protected override T CreateAndHydrateItem<T>(IPublishedContent n)
+        {
+            var result = ClassConstructor.CreateWithNode<T>(n);
+            FillClassProperties(result, (alias, recursive) =>
+            {
+                var value = n.GetPropertyValue(alias, recursive);
+                return value;
+            });
+
+            return result;
+        }
+
         public override IEnumerable<T> GetContentByCsv<T>(string csv)
         {
             return Helper.GetTypedContentByCsv(csv).Select(GetItem<T>);
@@ -145,25 +157,6 @@ namespace UmbracoVault
         {
             var umbracoItem = Helper.TypedContent(id);
             return umbracoItem;
-        }
-
-        protected override T GetItemForExplicitType<T>(IPublishedContent n)
-        {
-            var cachedItem = _cacheManager.GetItem<T>(n.Id);
-            if (cachedItem != null)
-            {
-                return (T)cachedItem;
-            }
-
-            var result = ClassConstructor.CreateWithNode<T>(n);
-            FillClassProperties(result, (alias, recursive) =>
-            {
-                var value = n.GetPropertyValue(alias, recursive);
-                return value;
-            });
-
-            _cacheManager.AddItem(n.Id, result);
-            return result;
         }
 
         public static ReadOnlyCollection<string> GetUmbracoEntityAliasesFromType(Type type)
