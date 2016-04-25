@@ -7,14 +7,13 @@ using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
 using UmbracoVault.Exceptions;
 using UmbracoVault.Extensions;
-using UmbracoVault.Models;
 
 namespace UmbracoVault
 {
     /// <summary>
     /// Implementation of the IUmbracoContext for running completely independently of the WebContext.
     /// </summary>
-    public class UmbracoWeblessContext : BaseUmbracoContext
+    public class UmbracoWeblessContext : BaseUmbracoContext<IContent>
     {
         public override T GetCurrent<T>()
         {
@@ -75,13 +74,13 @@ namespace UmbracoVault
             throw new VaultNotImplementedException("The Umbraco Content service does not support relative searches due to lack of XPath support.");
         }
 
-        protected IContent GetUmbracoContent(int id)
+        protected override IContent GetUmbracoContent(int id)
         {
             var umbracoItem = ApplicationContext.Current.Services.ContentService.GetById(id);
             return umbracoItem;
         }
 
-        protected T GetItem<T>(IContent n)
+        protected override T GetItem<T>(IContent n)
         {
             var typesMetaData = this.VaultEntities.FirstOrDefault(x => x.Type == typeof(T));
             var explicitType = this.VaultEntities.FirstOrDefault(x =>

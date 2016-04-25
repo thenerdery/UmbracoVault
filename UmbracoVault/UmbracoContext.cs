@@ -21,7 +21,7 @@ namespace UmbracoVault
     /// <summary>
     /// Implementation of the IUmbracoContext
     /// </summary>
-    public class UmbracoWebContext : BaseUmbracoContext, IUmbracoContext
+    public class UmbracoWebContext : BaseUmbracoContext<IPublishedContent>, IUmbracoContext
     {
         //TODO: fetch classes from configuration and populate this list based on type and assembly strings
         //TODO: Document Default Transformations
@@ -43,12 +43,6 @@ namespace UmbracoVault
                 return GetUmbracoContent(UmbracoContext.Current.PageId.Value);
             }
             return null;
-        }
-
-        private IPublishedContent GetUmbracoContent(int id)
-        {
-            var umbracoItem = Helper.TypedContent(id);
-            return umbracoItem;
         }
 
         /// <summary>
@@ -150,7 +144,7 @@ namespace UmbracoVault
             return items.Select(GetItem<T>);
         }
 
-        protected T GetItem<T>(IPublishedContent n)
+        protected override T GetItem<T>(IPublishedContent n)
         {
             var typesMetaData = this.VaultEntities.FirstOrDefault(x => x.Type == typeof(T));
             var explicitType = this.VaultEntities.FirstOrDefault(x =>
@@ -167,6 +161,12 @@ namespace UmbracoVault
 
             var result = getItemMethod.Invoke(this, new object[] { n });
             return (T)result;
+        }
+
+        protected override IPublishedContent GetUmbracoContent(int id)
+        {
+            var umbracoItem = Helper.TypedContent(id);
+            return umbracoItem;
         }
 
         protected T GetItemForExplicitType<T>(IPublishedContent n)

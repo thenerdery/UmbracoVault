@@ -16,7 +16,7 @@ using UmbracoVault.TypeHandlers;
 // ReSharper disable once CheckNamespace
 namespace UmbracoVault
 {
-    public abstract class BaseUmbracoContext : IUmbracoContext
+    public abstract class BaseUmbracoContext<TUmbracoInterface> : IUmbracoContext
     {
         protected readonly TypeHandlerFactory _typeHandlerFactory;
         protected readonly CacheManager _cacheManager;
@@ -93,6 +93,10 @@ namespace UmbracoVault
         public abstract IEnumerable<T> GetChildren<T>(int? parentNodeId = null);
 
         public abstract IEnumerable<T> QueryRelative<T>(string query);
+
+        protected abstract T GetItem<T>(TUmbracoInterface n);
+
+        protected abstract TUmbracoInterface GetUmbracoContent(int id);
 
         /// <summary>
         /// Fills out class properties based on a provided, instantiated class and a Func instructing it how to get the raw property data based on alias
