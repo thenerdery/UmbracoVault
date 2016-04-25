@@ -76,17 +76,9 @@ namespace UmbracoVault
             return GetContentById(type, id.ToString());
         }
 
-        public override T GetContentById<T>(int id)
+        protected override int GetId(IPublishedContent n)
         {
-            var umbracoItem = GetUmbracoContent(id);
-
-            if (umbracoItem == null || umbracoItem.Id <= 0)
-            {
-                LogHelper.Error<T>($"Could not locate umbraco item with Id of '{id}'.", null);
-                return default(T);
-            }
-
-            return GetItem<T>(umbracoItem);
+            return n?.Id ?? int.MinValue;
         }
 
         public override IEnumerable<T> GetContentByCsv<T>(string csv)

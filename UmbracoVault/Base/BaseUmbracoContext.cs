@@ -57,7 +57,21 @@ namespace UmbracoVault
             return result;
         }
 
-        public abstract T GetContentById<T>(int id);
+        public T GetContentById<T>(int id)
+        {
+            var umbracoItem = GetUmbracoContent(id);
+            var itemId = GetId(umbracoItem);
+
+            if (umbracoItem == null || itemId <= 0)
+            {
+                LogHelper.Error<T>($"Could not locate umbraco item with Id of '{id}'.", null);
+                return default(T);
+            }
+
+            return GetItem<T>(umbracoItem);
+        }
+
+        protected abstract int GetId(TUmbracoInterface n);
 
         public T GetContentById<T>(string idString)
         {
