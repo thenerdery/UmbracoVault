@@ -59,5 +59,31 @@ namespace UmbracoVault.Tests
 
             string Ignore { get; set; }
         }
+
+
+        [TestMethod]
+        public void GetPropertiesToFillOnExplicitInterfaceImplementation_ShouldReturnCorrectProperties_WithAutomap()
+        {
+            var properties = _factory.GetPropertiesToFill<ExplicitInterfaceDocumentModel>();
+            Assert.AreEqual(4, properties.Count);
+
+            Assert.IsNotNull(properties.FirstOrDefault(p => p.Name == "UmbracoVault.Tests.DefaultInstanceInterfaceFactoryTests.IDocumentModel.Introduction"));
+            Assert.IsNotNull(properties.FirstOrDefault(p => p.Name == "UmbracoVault.Tests.DefaultInstanceInterfaceFactoryTests.IDocumentModel.Body"));
+            Assert.IsNotNull(properties.FirstOrDefault(p => p.Name == "UmbracoVault.Tests.DefaultInstanceInterfaceFactoryTests.IDocumentModel.ImageUrl"));
+            Assert.IsNotNull(properties.FirstOrDefault(p => p.Name == "UmbracoVault.Tests.DefaultInstanceInterfaceFactoryTests.IDocumentModel.ButtonText"));
+        }
+
+        [UmbracoEntity(AutoMap = true)]
+        // ReSharper disable once ClassNeverInstantiated.Local - OK Here, used by framework.
+        private class ExplicitInterfaceDocumentModel : IDocumentModel
+        {
+            string IDocumentModel.Introduction { get; set; }
+            string IDocumentModel.Body { get; set; }
+            string IDocumentModel.ImageUrl { get; set; }
+            string IDocumentModel.ButtonText { get; set; }
+
+            [UmbracoIgnoreProperty]
+            string IDocumentModel.Ignore { get; set; }
+        }
     }
 }
