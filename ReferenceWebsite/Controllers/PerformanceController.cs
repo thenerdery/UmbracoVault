@@ -173,7 +173,7 @@ namespace ReferenceWebsite.Controllers
                     {
                         var refPost = r.First(o => o.CmsContent.Id == b.CmsContent.Id);
                         LoadAndTime(refPost.Title.GetType(), () => refPost.Title.Equals(b.Title));
-                        LoadAndTime(refPost.Content.GetType(), () => refPost.Content.Equals(b.Content));
+                        LoadAndTime(((IBlogEntryViewModel)refPost).Content.GetType(), () => ((IBlogEntryViewModel)refPost).Content.Equals(((IBlogEntryViewModel)b).Content));
                     }
                 },
                 {
@@ -181,7 +181,7 @@ namespace ReferenceWebsite.Controllers
                     {
                         var refPost = r.First(o => o.CmsContent.Id == b.CmsContent.Id);
                         LoadAndTime(refPost.Title.GetType(), () => refPost.Title.Equals(b.Title));
-                        LoadAndTime(refPost.Content.GetType(), () => refPost.Content.Equals(b.Content));
+                        LoadAndTime(((IBlogEntryViewModel)refPost).Content.GetType(), () => ((IBlogEntryViewModel)refPost).Content.Equals(((IBlogEntryViewModel)b).Content));
                         LoadAndTime(refPost.PostDate.GetType(), () => refPost.PostDate.Equals(b.PostDate));
                         LoadAndTime(typeof(Image), () =>
                         {

@@ -458,7 +458,14 @@ namespace UmbracoVault
                 return umbracoPropertyBinding.Alias;
             }
 
-            return $"{propertyInfo.Name[0].ToString(CultureInfo.InvariantCulture).ToLower()}{propertyInfo.Name.Substring(1)}";
+            var name = propertyInfo.Name;
+            var interfaceIndex = name.LastIndexOf('.'); // Properties that explicitly implement an interface will have the fully qualified type name returned.
+            if (interfaceIndex >= 0)
+            {
+                name = name.Substring(interfaceIndex + 1);
+            }
+
+            return $"{name[0].ToString().ToLower()}{name.Substring(1)}";
         }
 
         private static int GetIdFromString(string stringValue)

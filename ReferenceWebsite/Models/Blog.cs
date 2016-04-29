@@ -4,14 +4,12 @@ using UmbracoVault.Attributes;
 namespace ReferenceWebsite.Models
 {
     [UmbracoMediaEntity(AutoMap = true, Alias = "BlogEntry")]
-    public class BlogEntryViewModel : CmsViewModelBase
+    public class BlogEntryViewModel : CmsViewModelBase, IBlogEntryViewModel
     {
         public virtual string Title { get; set; }
         public virtual DateTime? PostDate { get; set; }
-        
         [UmbracoRichTextProperty]
-        public virtual string Content { get; set; }
-
+        string IBlogEntryViewModel.Content { get; set; }
         [UmbracoProperty(Alias = "image")]
         public virtual Image PostImage { get; set; }
     }
@@ -23,5 +21,12 @@ namespace ReferenceWebsite.Models
         public string SidebarCopy { get; set; }
         public BlogEntryViewModel FeaturedBlogEntry { get; set; }
     }
-    
+
+    public interface IBlogEntryViewModel
+    {
+        string Title { get; set; }
+        DateTime? PostDate { get; set; }
+        string Content { get; set; }
+    }
+
 }
