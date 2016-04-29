@@ -44,7 +44,14 @@ namespace UmbracoVault.Proxy
 
         public IList<PropertyInfo> GetPropertiesToFill(Type type)
         {
-            return type.GetDefaultPropertiesToFill().Where(p => p.GetMethod != null && !p.GetMethod.IsVirtual).ToList();
+            // Interface properties will be virtual and also final without having a virtual keyword on them.
+            // We don't want to return properties that are virtual but NOT final because
+            // these will be properties that are actually flagged as virtual, so the proxy can handle it
+            // http://stackoverflow.com/a/17298167/53001
+            return type.GetDefaultPropertiesToFill().Where(p => 
+                                                            p.GetMethod != null 
+                                                            && (!p.GetMethod.IsVirtual || 
+                                                                (p.GetMethod.IsVirtual && p.GetMethod.IsFinal))).ToList();
         }
     }
 }
