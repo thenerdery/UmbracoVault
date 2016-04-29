@@ -11,29 +11,8 @@
         <requireLicenseAcceptance>true</requireLicenseAcceptance>
         <description>Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your views. It allows you to create lightly-decorated classes that Vault will understand how to hydrate. This gives you the full view model-style experience in Umbraco that you are accustomed to in MVC, complete with strongly-typed view properties (no more magic strings in your views).</description>
         <summary>Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your views.</summary>
-        <releaseNotes>**New Feature: Lazy Loading**
-
-          Umbraco Vault now includes support for lazy loading of properties. Properties that are expensive to hydrate,
-          such as collections, can be marked as `virtual` and they will be loaded when accessed. See https://github.com/thenerdery/UmbracoVault/wiki/Lazy-property-loading
-          article for more detail on this feature.
-
-          **New Type Handlers**
-
-            * Vault now supports nullable types for primitives and structs. See https://github.com/thenerdery/UmbracoVault/wiki/Umbraco-Data-Type---C%23-Data-Type-Grid#nullable-data-types for more detail.
-            * Vault now supports mapping from JSON data stored within properties. See https://github.com/thenerdery/UmbracoVault/wiki/Umbraco-Data-Type---C%23-Data-Type-Grid#json-data for more detail.
-
-          **Issues**
-
-            * Fixed issue where exception would be thrown if loading an assembly threw an error. Added try/catch around logic and tracing any issues identified.
-            * Fixed issue if an external assembly attempts to register a type already handled, that an exception would be thrown. A trace warning is now written instead.
-
-          **Other**
-
-            * Codebase has been updated to build against VS 2015 and C# 6
-            * Reference sites for testing builds have been updated to the latest v6 and v7 versions, including ASP.Net MVC5
-            * Various code cleanup
-
-            This is a pretty significant release! Thanks to @NerderyMGlanzer, @technicallyerik, and @jesse-black for their contributions!
+        <releaseNotes> * Fixes an issue where models implementing an interface would not properly have their values set [#29]
+ * Fixes an issue where explicit interface implementations would not properly have their values set [#29]
           </releaseNotes>
       <copyright>(c) The Nerdery LLC 2016. All Rights Reserved.</copyright>
       <tags>Umbraco UmbracoVault Mapping ObjectMapper ORM CMS</tags>
