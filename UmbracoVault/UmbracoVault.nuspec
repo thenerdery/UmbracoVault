@@ -11,7 +11,8 @@
         <requireLicenseAcceptance>true</requireLicenseAcceptance>
         <description>Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your views. It allows you to create lightly-decorated classes that Vault will understand how to hydrate. This gives you the full view model-style experience in Umbraco that you are accustomed to in MVC, complete with strongly-typed view properties (no more magic strings in your views).</description>
         <summary>Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your views.</summary>
-        <releaseNotes> * Fixes an issue where models implementing an interface would not properly have their values set [#29]
+        <releaseNotes> *Fixes issue where high concurrency causes multiple cache entries with same key
+        * Fixes an issue where models implementing an interface would not properly have their values set [#29]
  * Fixes an issue where explicit interface implementations would not properly have their values set [#29]
           </releaseNotes>
       <copyright>(c) The Nerdery LLC 2016. All Rights Reserved.</copyright>

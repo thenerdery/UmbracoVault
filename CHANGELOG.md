@@ -1,5 +1,5 @@
 ## v1.2.3
- * Fixes an issue where high amount of concurrent threads would cause multiple entries with same key to proxy property cache [#31]
+ * Fixes an issue where high amount of concurrent threads would cause multiple entries with same key to proxy property cache
 
 ## v1.2.2
  * Fixes an issue where models implementing an interface would not properly have their values set [#29]
