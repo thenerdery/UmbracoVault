@@ -14,8 +14,9 @@ namespace UmbracoVault.Proxy
     public class LazyResolverMixin : ILazyResolverMixin
     {
         private readonly IPublishedContent _node;
-        private readonly Dictionary<string, object> _valueCache = new Dictionary<string, object>();
         private readonly IUmbracoContext _umbracoContext;
+        private readonly object _cacheLock = new object();
+        private readonly Dictionary<string, object> _valueCache = new Dictionary<string, object>();
 
         public LazyResolverMixin(IPublishedContent node)
         {
@@ -28,12 +29,18 @@ namespace UmbracoVault.Proxy
             object value;
             if (!_valueCache.TryGetValue(alias, out value))
             {
-                _umbracoContext.TryGetValueForProperty(
-                    (propAlias, recursive) => ResolveValue(propAlias, recursive, _node),
-                    propertyInfo,
-                    out value);
+                lock (_cacheLock)
+                {
+                    if (!_valueCache.TryGetValue(alias, out value))
+                    {
+                        _umbracoContext.TryGetValueForProperty(
+                            (propAlias, recursive) => ResolveValue(propAlias, recursive, _node),
+                            propertyInfo,
+                            out value);
 
-                _valueCache.Add(alias, value);
+                        _valueCache.Add(alias, value);
+                    }
+                }
             }
             else
             {
