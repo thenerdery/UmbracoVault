@@ -21,7 +21,7 @@ namespace UmbracoVault
     /// <summary>
     /// Implementation of the IUmbracoContext
     /// </summary>
-    public class UmbracoWebContext : BaseUmbracoContext, IUmbracoContext
+    public class UmbracoWebContext : BaseUmbracoContext<IPublishedContent>, IUmbracoContext
     {
         //TODO: fetch classes from configuration and populate this list based on type and assembly strings
         //TODO: Document Default Transformations
@@ -43,12 +43,6 @@ namespace UmbracoVault
                 return GetUmbracoContent(UmbracoContext.Current.PageId.Value);
             }
             return null;
-        }
-
-        private IPublishedContent GetUmbracoContent(int id)
-        {
-            var umbracoItem = Helper.TypedContent(id);
-            return umbracoItem;
         }
 
         /// <summary>
@@ -82,17 +76,26 @@ namespace UmbracoVault
             return GetContentById(type, id.ToString());
         }
 
-        public override T GetContentById<T>(int id)
+        protected override int GetId(IPublishedContent n)
         {
-            var umbracoItem = GetUmbracoContent(id);
+            return n?.Id ?? int.MinValue;
+        }
 
-            if (umbracoItem == null || umbracoItem.Id <= 0)
+        protected override string GetAlias(IPublishedContent n)
+        {
+            return n.DocumentTypeAlias;
+        }
+
+        protected override T CreateAndHydrateItem<T>(IPublishedContent n)
+        {
+            var result = ClassConstructor.CreateWithNode<T>(n);
+            FillClassProperties(result, (alias, recursive) =>
             {
-                LogHelper.Error<T>($"Could not locate umbraco item with Id of '{id}'.", null);
-                return default(T);
-            }
+                var value = n.GetPropertyValue(alias, recursive);
+                return value;
+            });
 
-            return GetItem<T>(umbracoItem);
+            return result;
         }
 
         public override IEnumerable<T> GetContentByCsv<T>(string csv)
@@ -150,42 +153,10 @@ namespace UmbracoVault
             return items.Select(GetItem<T>);
         }
 
-        protected T GetItem<T>(IPublishedContent n)
+        protected override IPublishedContent GetUmbracoContent(int id)
         {
-            var typesMetaData = this.VaultEntities.FirstOrDefault(x => x.Type == typeof(T));
-            var explicitType = this.VaultEntities.FirstOrDefault(x =>
-                                    typeof(T).IsAssignableFrom(x.Type)
-                                        && (x.Type.Name.Equals(n.ContentType.Alias, StringComparison.CurrentCultureIgnoreCase)
-                                            || (x.MetaData.Alias != null && x.MetaData.Alias.Equals(n.ContentType.Alias, StringComparison.CurrentCultureIgnoreCase))));
-
-            var useExplicitType = explicitType != null && typesMetaData != null && typesMetaData.MetaData.ReturnStronglyTypedChildren;
-            var typeToUse = useExplicitType ? explicitType.Type : typeof(T);
-
-            var getItemMethod = this.GetType()
-                                    .GetMethod(nameof(GetItemForExplicitType), BindingFlags.Instance | BindingFlags.NonPublic)
-                                    .MakeGenericMethod(typeToUse);
-
-            var result = getItemMethod.Invoke(this, new object[] { n });
-            return (T)result;
-        }
-
-        protected T GetItemForExplicitType<T>(IPublishedContent n)
-        {
-            var cachedItem = _cacheManager.GetItem<T>(n.Id);
-            if (cachedItem != null)
-            {
-                return (T)cachedItem;
-            }
-
-            var result = ClassConstructor.CreateWithNode<T>(n);
-            FillClassProperties(result, (alias, recursive) =>
-            {
-                var value = n.GetPropertyValue(alias, recursive);
-                return value;
-            });
-
-            _cacheManager.AddItem(n.Id, result);
-            return result;
+            var umbracoItem = Helper.TypedContent(id);
+            return umbracoItem;
         }
 
         public static ReadOnlyCollection<string> GetUmbracoEntityAliasesFromType(Type type)

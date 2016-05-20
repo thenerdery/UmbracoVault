@@ -16,7 +16,7 @@ using UmbracoVault.TypeHandlers;
 // ReSharper disable once CheckNamespace
 namespace UmbracoVault
 {
-    public abstract class BaseUmbracoContext : IUmbracoContext
+    public abstract class BaseUmbracoContext<TUmbracoInterface> : IUmbracoContext
     {
         protected readonly TypeHandlerFactory _typeHandlerFactory;
         protected readonly CacheManager _cacheManager;
@@ -49,6 +49,24 @@ namespace UmbracoVault
 
         public abstract object GetCurrent(Type type);
 
+        protected abstract string GetAlias(TUmbracoInterface n);
+
+        protected abstract T CreateAndHydrateItem<T>(TUmbracoInterface n);
+
+        public abstract IEnumerable<T> GetContentByCsv<T>(string csv);
+
+        public abstract IEnumerable<T> GetByDocumentType<T>();
+
+        public abstract IEnumerable<string> GetUrlsForDocumentType<T>();
+
+        public abstract IEnumerable<T> GetChildren<T>(int? parentNodeId = null);
+
+        public abstract IEnumerable<T> QueryRelative<T>(string query);
+
+        protected abstract TUmbracoInterface GetUmbracoContent(int id);
+
+        protected abstract int GetId(TUmbracoInterface n);
+
         public object GetContentById(Type type, string idString)
         {
             var methodInfo = typeof(UmbracoWebContext).GetMethod("GetContentById", new[] { typeof(string) });
@@ -57,7 +75,19 @@ namespace UmbracoVault
             return result;
         }
 
-        public abstract T GetContentById<T>(int id);
+        public T GetContentById<T>(int id)
+        {
+            var umbracoItem = GetUmbracoContent(id);
+            var itemId = GetId(umbracoItem);
+
+            if (umbracoItem == null || itemId <= 0)
+            {
+                LogHelper.Error<T>($"Could not locate umbraco item with Id of '{id}'.", null);
+                return default(T);
+            }
+
+            return GetItem<T>(umbracoItem);
+        }
 
         public T GetContentById<T>(string idString)
         {
@@ -84,15 +114,40 @@ namespace UmbracoVault
             return GetMediaById<T>(id);
         }
 
-        public abstract IEnumerable<T> GetContentByCsv<T>(string csv);
+        protected T GetItem<T>(TUmbracoInterface n)
+        {
+            var typesMetaData = this.VaultEntities.FirstOrDefault(x => x.Type == typeof(T));
+            var explicitType = this.VaultEntities.FirstOrDefault(x =>
+                                    typeof(T).IsAssignableFrom(x.Type)
+                                        && (x.Type.Name.Equals(GetAlias(n), StringComparison.CurrentCultureIgnoreCase)
+                                            || (x.MetaData.Alias != null && x.MetaData.Alias.Equals(GetAlias(n), StringComparison.CurrentCultureIgnoreCase))));
 
-        public abstract IEnumerable<T> GetByDocumentType<T>();
+            var useExplicitType = explicitType != null && typesMetaData != null && typesMetaData.MetaData.ReturnStronglyTypedChildren;
+            var typeToUse = useExplicitType ? explicitType.Type : typeof(T);
 
-        public abstract IEnumerable<string> GetUrlsForDocumentType<T>();
+            var getItemMethod = this.GetType()
+                                    .GetMethod(nameof(GetItemForExplicitType), BindingFlags.Instance | BindingFlags.NonPublic)
+                                    .MakeGenericMethod(typeToUse);
 
-        public abstract IEnumerable<T> GetChildren<T>(int? parentNodeId = null);
+            var result = getItemMethod.Invoke(this, new object[] { n });
+            return (T)result;
+        }
 
-        public abstract IEnumerable<T> QueryRelative<T>(string query);
+        protected T GetItemForExplicitType<T>(TUmbracoInterface n)
+        {
+            var sourceId = GetId(n);
+
+            var cachedItem = _cacheManager.GetItem<T>(sourceId);
+            if (cachedItem != null)
+            {
+                return (T)cachedItem;
+            }
+
+            var result = CreateAndHydrateItem<T>(n);
+
+            _cacheManager.AddItem(sourceId, result);
+            return result;
+        }
 
         /// <summary>
         /// Fills out class properties based on a provided, instantiated class and a Func instructing it how to get the raw property data based on alias

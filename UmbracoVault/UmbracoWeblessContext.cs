@@ -7,14 +7,13 @@ using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
 using UmbracoVault.Exceptions;
 using UmbracoVault.Extensions;
-using UmbracoVault.Models;
 
 namespace UmbracoVault
 {
     /// <summary>
     /// Implementation of the IUmbracoContext for running completely independently of the WebContext.
     /// </summary>
-    public class UmbracoWeblessContext : BaseUmbracoContext
+    public class UmbracoWeblessContext : BaseUmbracoContext<IContent>
     {
         public override T GetCurrent<T>()
         {
@@ -26,17 +25,51 @@ namespace UmbracoVault
             throw new VaultNotImplementedException("Since we aren't running under the Umbraco Web Context, there is no 'current' in this context");
         }
 
-        public override T GetContentById<T>(int id)
+        protected override int GetId(IContent n)
         {
-            var umbracoItem = GetUmbracoContent(id);
+            return n?.Id ?? int.MinValue;
+        }
 
-            if (umbracoItem == null || umbracoItem.Id <= 0)
+        protected override string GetAlias(IContent n)
+        {
+            return n.ContentType.Alias;
+        }
+
+        protected override T CreateAndHydrateItem<T>(IContent n)
+        {
+            var result = ClassConstructor.CreateWithContent<T>(n);
+            FillClassProperties(result, (alias, propertyInfo, recursive) =>
             {
-                LogHelper.Error<T>($"Could not locate umbraco item with Id of '{id}'.", null);
-                return default(T);
-            }
+                var targetType = propertyInfo.PropertyType;
 
-            return GetItem<T>(umbracoItem);
+                var containsProperty = n.HasProperty(alias);
+
+                if (containsProperty)
+                {
+                    var property = n.Properties.First(p => string.Equals(p.Alias, alias, StringComparison.InvariantCultureIgnoreCase));
+
+                    // the IPublishedNode.GetPropertyValue() will fetch the prevalue of the numeric item if 
+                    // the target is a string.  This emulates that functionality.
+                    if (targetType == typeof(string) && property.Value.IsNumeric())
+                    {
+                        var name = n.GetPrevalues(ApplicationContext.Current.Services.DataTypeService, alias);
+                        return name;
+                    }
+
+                    return property.Value;
+                }
+                else
+                {
+                    if (string.Equals("name", propertyInfo.Name, StringComparison.CurrentCultureIgnoreCase) && propertyInfo.PropertyType == typeof(string))
+                    {
+                        return n.Name;
+                    }
+                }
+
+                return null;
+            });
+
+            return result;
         }
 
         public override IEnumerable<T> GetContentByCsv<T>(string csv)
@@ -75,73 +108,10 @@ namespace UmbracoVault
             throw new VaultNotImplementedException("The Umbraco Content service does not support relative searches due to lack of XPath support.");
         }
 
-        protected IContent GetUmbracoContent(int id)
+        protected override IContent GetUmbracoContent(int id)
         {
             var umbracoItem = ApplicationContext.Current.Services.ContentService.GetById(id);
             return umbracoItem;
-        }
-
-        protected T GetItem<T>(IContent n)
-        {
-            var typesMetaData = this.VaultEntities.FirstOrDefault(x => x.Type == typeof(T));
-            var explicitType = this.VaultEntities.FirstOrDefault(x =>
-                                    typeof(T).IsAssignableFrom(x.Type)
-                                        && (x.Type.Name.Equals(n.ContentType.Alias, StringComparison.CurrentCultureIgnoreCase)
-                                            || (x.MetaData.Alias != null && x.MetaData.Alias.Equals(n.ContentType.Alias, StringComparison.CurrentCultureIgnoreCase))));
-
-            var useExplicitType = explicitType != null && typesMetaData != null && typesMetaData.MetaData.ReturnStronglyTypedChildren;
-            var typeToUse = useExplicitType ? explicitType.Type : typeof(T);
-
-            var getItemMethod = this.GetType()
-                                    .GetMethod(nameof(GetItemForExplicitType), BindingFlags.Instance | BindingFlags.NonPublic)
-                                    .MakeGenericMethod(typeToUse);
-
-            var result = getItemMethod.Invoke(this, new object[] { n });
-            return (T)result;
-        }
-
-        private T GetItemForExplicitType<T>(IContent n)
-        {
-            var cachedItem = _cacheManager.GetItem<T>(n.Id);
-            if (cachedItem != null)
-            {
-                return (T)cachedItem;
-            }
-
-            var result = ClassConstructor.CreateWithContent<T>(n);
-            FillClassProperties(result, (alias, propertyInfo, recursive) =>
-            {
-                var targetType = propertyInfo.PropertyType;
-
-                var containsProperty = n.HasProperty(alias);
-
-                if (containsProperty)
-                {
-                    var property = n.Properties.First(p => string.Equals(p.Alias, alias, StringComparison.InvariantCultureIgnoreCase));
-
-                    // the IPublishedNode.GetPropertyValue() will fetch the prevalue of the numeric item if 
-                    // the target is a string.  This emulates that functionality.
-                    if (targetType == typeof(string) && property.Value.IsNumeric())
-                    {
-                        var name = n.GetPrevalues(ApplicationContext.Current.Services.DataTypeService, alias);
-                        return name;
-                    }
-
-                    return property.Value;
-                }
-                else
-                {
-                    if (string.Equals("name", propertyInfo.Name, StringComparison.CurrentCultureIgnoreCase) && propertyInfo.PropertyType == typeof(string))
-                    {
-                        return n.Name;
-                    }
-                }
-
-                return null;
-            });
-
-            _cacheManager.AddItem(n.Id, result);
-            return result;
         }
     }
 }

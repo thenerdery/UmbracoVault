@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Web;
-using System.Web.Caching;
+using System.Runtime.Caching;
 
 namespace UmbracoVault.Caching
 {
@@ -12,7 +9,7 @@ namespace UmbracoVault.Caching
         public virtual object GetItem<T>(int id)
         {
             var cacheKey = $"{typeof(T).Name}_{id}";
-            var item = HttpContext.Current.Cache.Get(cacheKey);
+            var item = MemoryCache.Default.Get(cacheKey);
             return item;
         }
 
@@ -20,7 +17,11 @@ namespace UmbracoVault.Caching
         {
             var cacheKey = $"{typeof(T).Name}_{id}";
             var expiration = DateTime.Now.AddSeconds(GetCacheSeconds());
-            HttpContext.Current.Cache.Insert(cacheKey, value, null, expiration, Cache.NoSlidingExpiration);
+
+            var cacheItem = new CacheItem(cacheKey, value);
+            var cachePolicy = new CacheItemPolicy { AbsoluteExpiration = expiration };
+
+            MemoryCache.Default.Add(cacheItem, cachePolicy);
         }
 
         private static int GetCacheSeconds()
