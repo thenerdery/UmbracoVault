@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-## v1.3.0 (UNRELEASED)
+## v1.3.0
 
 **New Feature: Independence from Web Context**
 
