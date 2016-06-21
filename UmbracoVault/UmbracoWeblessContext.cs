@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
+
 using Umbraco.Core;
-using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
+
 using UmbracoVault.Exceptions;
 using UmbracoVault.Extensions;
 
 namespace UmbracoVault
 {
     /// <summary>
-    /// Implementation of the IUmbracoContext for running completely independently of the WebContext.
+    ///     Implementation of the IUmbracoContext for running completely independently of the WebContext.
     /// </summary>
     public class UmbracoWeblessContext : BaseUmbracoContext<IContent>
     {
@@ -96,9 +96,9 @@ namespace UmbracoVault
             var parentId = parentNodeId.HasValue ? parentNodeId.Value : umbracoHomeNodeId;
 
             var children = ApplicationContext.Current.Services.ContentService
-                                             .GetChildren(parentId)
-                                             .Where(c => c.Published)
-                                             .Select(GetItem<T>);
+                .GetChildren(parentId)
+                .Where(c => c.Published)
+                .Select(GetItem<T>);
 
             return children;
         }

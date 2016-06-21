@@ -250,6 +250,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DefaultInstanceFactoryTests.cs" />
+    <Compile Include="ProxyInstanceInterfaceFactoryTests.cs" />
+    <Compile Include="DefaultInstanceInterfaceFactoryTests.cs" />
     <Compile Include="Models\AutoRegisteredTypeHandler.cs" />
     <Compile Include="Models\ExampleRecursiveAttributesViewModel.cs" />
     <Compile Include="Models\IgnoredTypeHandler.cs" />

@@ -1,27 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Linq;
-using System.Reflection;
-
-using UmbracoVault.Attributes;
-using UmbracoVault.Caching;
-using UmbracoVault.Extensions;
-using UmbracoVault.Transformations;
-using UmbracoVault.TypeHandlers;
 
 using Umbraco.Core;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 
+using UmbracoVault.Extensions;
+using UmbracoVault.Transformations;
+
 namespace UmbracoVault
 {
     /// <summary>
-    /// Implementation of the IUmbracoContext
+    ///     Implementation of the IUmbracoContext
     /// </summary>
-    public class UmbracoWebContext : BaseUmbracoContext<IPublishedContent>, IUmbracoContext
+    public class UmbracoWebContext : BaseUmbracoContext<IPublishedContent>
     {
         //TODO: fetch classes from configuration and populate this list based on type and assembly strings
         //TODO: Document Default Transformations
@@ -46,7 +41,7 @@ namespace UmbracoVault
         }
 
         /// <summary>
-        /// Retrieves a data item for the current node.
+        ///     Retrieves a data item for the current node.
         /// </summary>
         /// <typeparam name="T">The object type to cast the item to</typeparam>
         /// <returns>a strongly typed version (T) of the current umbraco item.</returns>
@@ -63,9 +58,11 @@ namespace UmbracoVault
         }
 
         /// <summary>
-        /// Retrieves a data item for the current node, instantiating and hydrating a type as defined by the passed-in type parameter.
-        /// This method is for use primarily when the desired return type is not known at compile time (i.e. in instances where a type is built from a string at runtime).
-        /// If the desired return type is known at compile time, use GetCurrent&lt;T&gt;() instead.
+        ///     Retrieves a data item for the current node, instantiating and hydrating a type as defined by the passed-in type
+        ///     parameter.
+        ///     This method is for use primarily when the desired return type is not known at compile time (i.e. in instances where
+        ///     a type is built from a string at runtime).
+        ///     If the desired return type is known at compile time, use GetCurrent&lt;T&gt;() instead.
         /// </summary>
         /// <param name="type">The desired Type to be returned</param>
         /// <returns>A fully-hydrated type (as defined by the Type parameter) containing data mapped from the current umbraco item</returns>
@@ -142,7 +139,7 @@ namespace UmbracoVault
         }
 
         /// <summary>
-        /// Given an XPath Query, it returns objects of a specific type.
+        ///     Given an XPath Query, it returns objects of a specific type.
         /// </summary>
         /// <typeparam name="T">Type of object to return</typeparam>
         /// <param name="query">XPath query for objects which are relative to the root</param>

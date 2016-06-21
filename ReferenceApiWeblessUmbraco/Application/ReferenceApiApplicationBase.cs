@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web;
+
 using Umbraco.Core;
 
 namespace ReferenceApiWeblessUmbraco.Application
@@ -52,8 +52,10 @@ namespace ReferenceApiWeblessUmbraco.Application
             }
 
             if (currentFolder.Parent == null)
+            {
                 throw new Exception("Base directory containing an 'App_Data' and 'Config' folder was not found." +
-                    " These folders are required to run this console application as it relies on the normal umbraco configuration files.");
+                                    " These folders are required to run this console application as it relies on the normal umbraco configuration files.");
+            }
 
             return ResolveBasePath(currentFolder.Parent);
         }

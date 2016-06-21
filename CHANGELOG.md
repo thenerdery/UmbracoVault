@@ -18,7 +18,7 @@ public class Bar : Foo { }
 Vault.GetItem<Foo>();
 ```
 
-## v1.3.0 (UNRELEASED)
+## v1.3.0
 
 **New Feature: Independence from Web Context**
 
@@ -27,6 +27,14 @@ Extended the current UmbracoContext implementation to include a secondary implem
 **Other**
  
  * Added `PropertyInfo` parameter to `FillClassProperties` to support additional behavior for libraries that extend Vault.  [#25]
+
+## v1.2.3
+ * Fixes an issue where high amount of concurrent threads would cause multiple entries with same key to proxy property cache
+
+## v1.2.2
+ * Fixes an issue where models implementing an interface would not properly have their values set [#29]
+ * Fixes an issue where explicit interface implementations would not properly have their values set [#29]
+>>>>>>> master
 
 ## v1.2.1
 

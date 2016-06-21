@@ -1,9 +1,9 @@
-@using System.Web.Http
+@using System
+@using System.Collections.Generic
+@using System.Linq
 @using System.Web.Http.Controllers
 @using System.Web.Http.Description
-@using System.Collections.ObjectModel
-@using ReferenceApiWeblessUmbraco.Areas.HelpPage.Models
-@model Collection<ApiDescription>
+@model System.Collections.ObjectModel.Collection<System.Web.Http.Description.ApiDescription>
 
 @{
     ViewBag.Title = "ASP.NET Web API Help Page";
@@ -12,7 +12,7 @@
     ILookup<HttpControllerDescriptor, ApiDescription> apiGroups = Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor);
 }
 
-<link type="text/css" href="~/Areas/HelpPage/HelpPage.css" rel="stylesheet" />
+<link type="text/css" href="~/Areas/HelpPage/HelpPage.css" rel="stylesheet"/>
 <header class="help-page">
     <div class="content-wrapper">
         <div class="float-left">
