@@ -88,7 +88,26 @@ namespace UmbracoVault.Extensions
 
         public static IEnumerable<PropertyInfo> GetPublicSettableProperties(this Type type)
         {
-            return type.GetProperties(BindingFlags.SetProperty | BindingFlags.Public | BindingFlags.Instance);
+            var result = type.GetProperties(BindingFlags.SetProperty | BindingFlags.Public | BindingFlags.Instance).ToList();
+
+            // Find explicitly implemented properties
+            var privateProps = type.GetProperties(BindingFlags.SetProperty | BindingFlags.NonPublic | BindingFlags.Instance);
+
+            var interfaces = type.FindInterfaces((type1, criteria) => true, null);
+            foreach (var @interface in interfaces)
+            {
+                var map = type.GetInterfaceMap(@interface);
+                foreach (var targetMethod in map.TargetMethods)
+                {
+                    var explicitInterfaceImplementation = privateProps.FirstOrDefault(x => x.SetMethod != null && x.SetMethod.Name == targetMethod.Name);
+                    if (explicitInterfaceImplementation != null)
+                    {
+                        result.Add(explicitInterfaceImplementation);
+                    }
+                }
+            }
+
+            return result;
         }
 
         /// <summary>

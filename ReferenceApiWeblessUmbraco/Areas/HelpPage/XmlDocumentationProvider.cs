@@ -1,20 +1,22 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using System.Xml.XPath;
+
 using ReferenceApiWeblessUmbraco.Areas.HelpPage.ModelDescriptions;
 
 namespace ReferenceApiWeblessUmbraco.Areas.HelpPage
 {
     /// <summary>
-    /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+    ///     A custom <see cref="IDocumentationProvider" /> that reads the API documentation from an XML documentation file.
     /// </summary>
     public class XmlDocumentationProvider : IDocumentationProvider, IModelDocumentationProvider
     {
-        private XPathNavigator _documentNavigator;
+        private readonly XPathNavigator _documentNavigator;
         private const string TypeExpression = "/doc/members/member[@name='T:{0}']";
         private const string MethodExpression = "/doc/members/member[@name='M:{0}']";
         private const string PropertyExpression = "/doc/members/member[@name='P:{0}']";
@@ -22,7 +24,7 @@ namespace ReferenceApiWeblessUmbraco.Areas.HelpPage
         private const string ParameterExpression = "param[@name='{0}']";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="XmlDocumentationProvider"/> class.
+        ///     Initializes a new instance of the <see cref="XmlDocumentationProvider" /> class.
         /// </summary>
         /// <param name="documentPath">The physical path to XML document.</param>
         public XmlDocumentationProvider(string documentPath)

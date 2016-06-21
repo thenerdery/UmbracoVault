@@ -296,7 +296,7 @@ namespace ReferenceApiWeblessUmbraco.Areas.HelpPage
                 throw new ArgumentNullException("mediaType");
             }
 
-            object sample = String.Empty;
+            object sample;
             MemoryStream ms = null;
             HttpContent content = null;
             try

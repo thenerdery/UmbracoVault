@@ -19,9 +19,9 @@
           for retrieving data from Umbraco, the [ServiceContext](https://our.umbraco.org/documentation/Reference/Management/Services/) 
           is used. [#27]
 	
-	  **Other**
+	        **Other**
 	 
-	    * Added `PropertyInfo` parameter to `FillClassProperties` to support additional behavior for libraries that extend Vault.[#25]
+	          * Added `PropertyInfo` parameter to `FillClassProperties` to support additional behavior for libraries that extend Vault.[#25]
         </releaseNotes>
       <copyright>(c) The Nerdery LLC 2016. All Rights Reserved.</copyright>
       <tags>Umbraco UmbracoVault Mapping ObjectMapper ORM CMS</tags>

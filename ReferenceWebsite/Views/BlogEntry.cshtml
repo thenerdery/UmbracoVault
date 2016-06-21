@@ -1,4 +1,5 @@
-﻿@model ReferenceWebsite.Models.BlogEntryViewModel
+﻿@using ReferenceWebsite.Models;
+@model BlogEntryViewModel
 
 @{
     Layout = null;
@@ -12,7 +13,7 @@
     <div>@Model.PostDate.Value.ToShortDateString()</div>
 }
 <div>
-    @Html.Raw(Model.Content)
+    @Html.Raw(((IBlogEntryViewModel)Model).Content)
 </div>	
 
 A Recursive Value: @Model.SomeRecursiveValue

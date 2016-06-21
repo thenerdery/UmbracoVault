@@ -6,7 +6,6 @@ using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
 using UmbracoVault.Exceptions;
 using UmbracoVault.Extensions;
-using UmbracoVault.Models;
 
 namespace UmbracoVault
 {

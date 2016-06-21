@@ -17,20 +17,5 @@ namespace ReferenceApiWeblessUmbraco.Application
             base.InitializeApplicationRootPath(baseDirectory);
         }
 
-        /// <summary>
-        /// Can be used to initialize our own Application Events
-        /// </summary>
-        protected override void InitializeApplicationEventsResolver()
-        {
-            base.InitializeApplicationEventsResolver();
-        }
-
-        /// <summary>
-        /// Can be used to add custom resolvers or overwrite existing resolvers once they are made public
-        /// </summary>
-        protected override void InitializeResolvers()
-        {
-            base.InitializeResolvers();
-        }
     }
 }
