@@ -1,11 +1,24 @@
+<<<<<<< HEAD
+## v1.3.0 (UNRELEASED)
+
+**New Feature: Independence from Web Context**
+
+Extended the current UmbracoContext implementation to include a secondary implementation that removes any dependency on `IPublishedContext`, `UmbracoHelper`, and the Umbraco WebContext.  Instead of using the WebContext as a vehicle for retrieving data from Umbraco, the [ServiceContext](https://our.umbraco.org/documentation/Reference/Management/Services/) is used. [#27]
+
+**Other**
+ 
+ * Added `PropertyInfo` parameter to `FillClassProperties` to support additional behavior for libraries that extend Vault.  [#25]
+
 ## v1.2.3
  * Fixes an issue where high amount of concurrent threads would cause multiple entries with same key to proxy property cache
 
 ## v1.2.2
  * Fixes an issue where models implementing an interface would not properly have their values set [#29]
  * Fixes an issue where explicit interface implementations would not properly have their values set [#29]
+>>>>>>> master
 
 ## v1.2.1
+
  * Fixes an issue where classes that used type inheritance would cause duplicate results to return in calls to `GetUmbracoEntityAliasesFromType` [#12]
 
 ## v1.2.0

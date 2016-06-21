@@ -24,6 +24,19 @@ namespace UmbracoVault.Reflection
             return result;
         }
 
+        public T CreateInstance<T>(IContent content)
+        {
+            var targetType = typeof(T);
+            var result = targetType.CreateWithContentConstructor<T>(content);
+
+            if (result == null)
+            {
+                result = targetType.CreateWithNoParams<T>();
+            }
+
+            return result;
+        }
+
         public IList<PropertyInfo> GetPropertiesToFill<T>()
         {
             return GetPropertiesToFill(typeof(T));

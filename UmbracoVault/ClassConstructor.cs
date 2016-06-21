@@ -56,6 +56,14 @@ namespace UmbracoVault
             return result;
         }
 
+        public static T CreateWithContent<T>(IContent content)
+        {
+            var result = _instanceFactory.CreateInstance<T>(content);
+            SetContent(content, result);
+
+            return result;
+        }
+
         internal static void SetPublishedContent<T>(IPublishedContent content, T result)
         {
             var contentProperty = typeof(T).GetPublicSettableProperties()
@@ -64,6 +72,14 @@ namespace UmbracoVault
             contentProperty?.SetValue(result, content);
 
             SetContentProperty(content, result);
+        }
+
+        internal static void SetContent<T>(IContent content, T result)
+        {
+            var contentProperty = typeof(T).GetPublicSettableProperties()
+                .FirstOrDefault(x => x.PropertyType.IsAssignableFrom(typeof(IContent)) && x.CanWrite);
+
+            contentProperty?.SetValue(result, content);
         }
 
         /// <summary>
@@ -80,7 +96,8 @@ namespace UmbracoVault
 
         internal static T CreateWithMember<T>(IMember member)
         {
-            var memberModel = _instanceFactory.CreateInstance<T>(null);
+            // since we're passing in NULL here, it doesn't matter which type we cast it to.
+            var memberModel = _instanceFactory.CreateInstance<T>((IPublishedContent)null);
 
             var targetType = typeof(T);
             var memberProperty = targetType.GetPublicSettableProperties()

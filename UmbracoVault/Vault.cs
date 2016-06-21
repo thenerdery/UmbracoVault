@@ -5,6 +5,7 @@ namespace UmbracoVault
 {
     public static class Vault
     {
+        private static IUmbracoContext _instance = new UmbracoWebContext();
         private static readonly List<string> _defaultControllerNamespaces = new List<string>();
         private static bool _isLocked;
 
@@ -32,6 +33,11 @@ namespace UmbracoVault
         /// <summary>
         /// Retrieves an Umbraco Context to be used to generate Vault objects
         /// </summary>
-        public static IUmbracoContext Context => new UmbracoWebContext();
+        public static IUmbracoContext Context => _instance;
+
+        public static void SetOverrideContext(IUmbracoContext context)
+        {
+            _instance = context;
+        }
     }
 }

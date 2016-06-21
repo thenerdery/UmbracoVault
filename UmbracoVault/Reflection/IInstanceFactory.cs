@@ -17,6 +17,13 @@ namespace UmbracoVault.Reflection
         T CreateInstance<T>(IPublishedContent content);
 
         /// <summary>
+        /// Creates a new instance of type T.  If content is provided a constructor on the type taking 
+        /// IContent will be attempted first.
+        /// </summary>
+        /// <param name="content">Content to use to populate instance</param>
+        T CreateInstance<T>(IContent content);
+
+        /// <summary>
         ///     Gets the properties that need to be filled on an instance
         /// </summary>
         /// <typeparam name="T">Type of instance</typeparam>
