@@ -1,7 +1,7 @@
 #Vault for Umbraco 6 and 7
 
 [![NuGet](https://img.shields.io/nuget/v/UmbracoVault.svg?style=flat-square)](https://www.nuget.org/packages/UmbracoVault)
-[![Build status](https://img.shields.io/appveyor/ci/gruntjs/grunt.svg?style=flat-square)](https://ci.appveyor.com/project/TheNerdery/umbracovault/branch/master)
+[![Build status](https://img.shields.io/appveyor/ci/TheNerdery/umbracovault.svg?style=flat-square)](https://ci.appveyor.com/project/TheNerdery/umbracovault)
 [![License](https://img.shields.io/github/license/thenerdery/UmbracoVault.svg?style=flat-square)](https://github.com/thenerdery/UmbracoVault/blob/master/LICENSE)
 
 ## Overview
