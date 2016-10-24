@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Web;
 
 using Umbraco.Core;
 using Umbraco.Core.Logging;
@@ -28,8 +29,7 @@ namespace UmbracoVault
             //new SuperScriptTransformation()
         };
 
-        private UmbracoHelper _helper;
-        protected UmbracoHelper Helper => _helper ?? (_helper = new UmbracoHelper(UmbracoContext.Current));
+        protected UmbracoHelper Helper => GetUmbracoHelperForRequest();
 
         private IPublishedContent GetCurrentUmbracoContent()
         {
@@ -164,6 +164,12 @@ namespace UmbracoVault
 
             _cacheManager.AddItem(n.Id, result);
             return result;
+        }
+
+        private static UmbracoHelper GetUmbracoHelperForRequest()
+        {
+            const string umbracoHelperKey = "__vaultUmbracoHelper";
+            return HttpContext.Current?.Items.GetOrAddThreadSafe(string.Intern(umbracoHelperKey), new UmbracoHelper(UmbracoContext.Current));
         }
 
         public static ReadOnlyCollection<string> GetUmbracoEntityAliasesFromType(Type type)
