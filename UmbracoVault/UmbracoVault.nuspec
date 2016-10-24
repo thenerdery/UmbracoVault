@@ -12,16 +12,7 @@
         <description>Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your views. It allows you to create lightly-decorated classes that Vault will understand how to hydrate. This gives you the full view model-style experience in Umbraco that you are accustomed to in MVC, complete with strongly-typed view properties (no more magic strings in your views).</description>
         <summary>Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your views.</summary>
         <releaseNotes>
-          **New Feature: Independence from Web Context**
-
-          Extended the current UmbracoContext implementation to include a secondary implementation that removes any dependency 
-          on `IPublishedContext`, `UmbracoHelper`, and the Umbraco WebContext.  Instead of using the WebContext as a vehicle 
-          for retrieving data from Umbraco, the [ServiceContext](https://our.umbraco.org/documentation/Reference/Management/Services/) 
-          is used. [#27]
-	
-	        **Other**
-	 
-	          * Added `PropertyInfo` parameter to `FillClassProperties` to support additional behavior for libraries that extend Vault.[#25]
+          * Fixes issue where preview content breaks due to use of a singleton UmbracoHelper. [#34]
         </releaseNotes>
       <copyright>(c) The Nerdery LLC 2016. All Rights Reserved.</copyright>
       <tags>Umbraco UmbracoVault Mapping ObjectMapper ORM CMS</tags>
