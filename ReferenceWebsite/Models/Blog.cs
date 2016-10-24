@@ -9,7 +9,7 @@ namespace ReferenceWebsite.Models
         public virtual string Title { get; set; }
         public virtual DateTime? PostDate { get; set; }
         [UmbracoRichTextProperty]
-        string IBlogEntryViewModel.Content { get; set; }
+        public string Content { get; set; }
         [UmbracoProperty(Alias = "image")]
         public virtual Image PostImage { get; set; }
     }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -15,8 +16,7 @@ namespace UmbracoVault.Proxy
     {
         private readonly IPublishedContent _node;
         private readonly IUmbracoContext _umbracoContext;
-        private readonly object _cacheLock = new object();
-        private readonly Dictionary<string, object> _valueCache = new Dictionary<string, object>();
+        private readonly ConcurrentDictionary<string, object> _valueCache = new ConcurrentDictionary<string, object>();
 
         public LazyResolverMixin(IPublishedContent node)
         {
@@ -26,28 +26,21 @@ namespace UmbracoVault.Proxy
 
         public object GetOrResolve(string alias, PropertyInfo propertyInfo)
         {
-            object value;
-            if (!_valueCache.TryGetValue(alias, out value))
+            return _valueCache.GetOrAdd(alias, key =>
             {
-                lock (_cacheLock)
-                {
-                    if (!_valueCache.TryGetValue(alias, out value))
-                    {
-                        _umbracoContext.TryGetValueForProperty(
-                            (propAlias, recursive) => ResolveValue(propAlias, recursive, _node),
-                            propertyInfo,
-                            out value);
+                object value;
+                _umbracoContext.TryGetValueForProperty(
+                    (propAlias, recursive) => ResolveValue(propAlias, recursive, _node),
+                    propertyInfo,
+                    out value);
 
-                        _valueCache.Add(alias, value);
-                    }
-                }
-            }
-            else
-            {
-                Console.WriteLine("From cache");
-            }
+                return value;
+            });
+        }
 
-            return value;
+        public void Set(string alias, object value)
+        {
+            _valueCache.AddOrUpdate(alias, key => value, (key, oldValue) => value);
         }
 
         private static object ResolveValue(string alias, bool recursive, IPublishedContent node)

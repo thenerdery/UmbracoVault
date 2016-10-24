@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -10,8 +11,8 @@ namespace UmbracoVault.Proxy
     public class LazyContentResolverMixin : ILazyResolverMixin
     {
         private readonly IContent _content;
-        private readonly Dictionary<string, object> _valueCache = new Dictionary<string, object>();
         private readonly IUmbracoContext _umbracoContext;
+        private readonly ConcurrentDictionary<string, object> _valueCache = new ConcurrentDictionary<string, object>();
 
         public LazyContentResolverMixin(IContent content)
         {
@@ -21,22 +22,21 @@ namespace UmbracoVault.Proxy
 
         public object GetOrResolve(string alias, PropertyInfo propertyInfo)
         {
-            object value;
-            if (!_valueCache.TryGetValue(alias, out value))
+            return _valueCache.GetOrAdd(alias, key =>
             {
+                object value;
                 _umbracoContext.TryGetValueForProperty(
                     (propAlias, recursive) => ResolveValue(propAlias, recursive, _content),
                     propertyInfo,
                     out value);
 
-                _valueCache.Add(alias, value);
-            }
-            else
-            {
-                Console.WriteLine("From cache");
-            }
+                return value;
+            });
+        }
 
-            return value;
+        public void Set(string alias, object value)
+        {
+            _valueCache.AddOrUpdate(alias, key => value, (key, oldValue) => value);
         }
 
         private static object ResolveValue(string alias, bool recursive, IContent node)
