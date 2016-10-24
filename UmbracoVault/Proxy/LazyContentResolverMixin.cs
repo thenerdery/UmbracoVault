@@ -41,13 +41,18 @@ namespace UmbracoVault.Proxy
 
         private static object ResolveValue(string alias, bool recursive, IContent node)
         {
-            if (node.HasProperty(alias))
+            var value = node.HasProperty(alias) ? node.GetValue(alias) : null;
+            if (recursive)
             {
-                var value = node.GetValue(alias);
-                return value;
+                node = node.Parent();
+                while (node != null && value == null)
+                {
+                    value = node.HasProperty(alias) ? node.GetValue(alias) : null;
+                    node = node.Parent();
+                }
             }
 
-            return null;
+            return value;
         }
     }
 }
