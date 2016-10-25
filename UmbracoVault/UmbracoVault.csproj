@@ -87,6 +87,7 @@
     <Compile Include="Controllers\VaultDefaultGenericController.cs" />
     <Compile Include="Controllers\VaultRenderMvcController.cs" />
     <Compile Include="Exceptions\VaultNotImplementedException.cs" />
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Models\NamedItem.cs" />
     <Compile Include="Proxy\ILazyResolverMixin.cs" />

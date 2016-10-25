@@ -1,4 +1,7 @@
-<<<<<<< HEAD
+## v1.3.1
+
+* Fixes issue where preview content breaks due to use of a singleton UmbracoHelper. [#34]
+
 ## v1.3.0
 
 **New Feature: Independence from Web Context**
