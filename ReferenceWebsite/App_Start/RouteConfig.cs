@@ -19,6 +19,12 @@ namespace ReferenceWebsite
                 "Performance/{action}",
                 new { controller = "Performance", action = "RunProxyPerfTests" }
                 );
+
+            routes.MapRoute(
+                "Proxy Tests",
+                "ProxyTests/{action}",
+                new { controller = "ProxyTests", action = "ValueShouldMatchCmsContent" }
+                );
         }
     }
 }

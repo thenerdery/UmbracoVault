@@ -1,5 +1,7 @@
 ## v1.3.1
 
+* Fixes issue where proxied models created from IContent models did not support recursive hydration.
+* Fixes issue where if a proxy property was overwritten with some value not from CMS, it would not persist and would still use CMS value.
 * Fixes issue where preview content breaks due to use of a singleton UmbracoHelper. [#34]
 
 ## v1.3.0
