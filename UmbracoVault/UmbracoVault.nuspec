@@ -14,6 +14,7 @@
         <releaseNotes>
           * Fixes issue where proxied models created from IContent models did not support recursive hydration.
           * Fixes issue where if a proxy property was overwritten with some value not from CMS, it would not persist and would still use CMS value.
+          * Fixes issue where preview content breaks due to use of a singleton UmbracoHelper. [#34]
         </releaseNotes>
       <copyright>(c) The Nerdery LLC 2016. All Rights Reserved.</copyright>
       <tags>Umbraco UmbracoVault Mapping ObjectMapper ORM CMS</tags>
