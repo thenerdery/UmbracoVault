@@ -29,7 +29,7 @@ namespace UmbracoVault.Collections
                 var alias = attribute.Alias;
                 if (string.IsNullOrWhiteSpace(alias))
                 {
-                    // account for doc type models use naming convention of [DocumentTypeAlias]ViewModel
+                    // account for doc type models using naming convention of [DocumentTypeAlias]ViewModel
                     alias = type.Name.TrimEnd("ViewModel");
                 }
 
