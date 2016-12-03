@@ -97,12 +97,12 @@ namespace UmbracoVault.Extensions
             return richtextHtmlWithMacros;
         }
 
-        public static string ToPascalCase(this string source)
+        internal static string ToPascalCase(this string source)
         {
             return ToPascalCase(source, CultureInfo.CurrentCulture);
         }
 
-        public static string ToPascalCase(this string source, CultureInfo culture)
+        internal static string ToPascalCase(this string source, CultureInfo culture)
         {
             if (string.IsNullOrEmpty(source))
             {
@@ -117,6 +117,29 @@ namespace UmbracoVault.Extensions
             return string.IsNullOrEmpty(s)
                 ? s
                 : new string(s.Select((c, i) => i == 0 ? char.ToUpper(c, culture) : c)
+                              .ToArray());
+        }
+
+        internal static string ToCamelCase(this string source)
+        {
+            return ToCamelCase(source, CultureInfo.CurrentCulture);
+        }
+
+        internal static string ToCamelCase(this string source, CultureInfo culture)
+        {
+            if (string.IsNullOrEmpty(source))
+            {
+                return source;
+            }
+
+            return string.Join("", source.Split().Select((s,i) => i == 0 ? SingleStringToCamelCase(s, culture) : s));
+        }
+
+        private static string SingleStringToCamelCase(string s, CultureInfo culture)
+        {
+            return string.IsNullOrEmpty(s)
+                ? s
+                : new string(s.Select((c, i) => i == 0 ? char.ToLower(c, culture) : c)
                               .ToArray());
         }
     }
