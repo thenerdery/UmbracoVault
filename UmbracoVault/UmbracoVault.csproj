@@ -82,7 +82,10 @@
     <Compile Include="Attributes\UmbracoRichTextPropertyAttribute.cs" />
     <Compile Include="Base\BaseUmbracoContext.cs" />
     <Compile Include="Caching\CacheManager.cs" />
+    <Compile Include="Collections\ReadOnlySet.cs" />
+    <Compile Include="Collections\TypeAliasSet.cs" />
     <Compile Include="Collections\VaultItemCollection.cs" />
+    <Compile Include="Comparers\CamelCaseStringComparer.cs" />
     <Compile Include="Controllers\VaultDefaultRenderController.cs" />
     <Compile Include="Controllers\VaultDefaultGenericController.cs" />
     <Compile Include="Controllers\VaultRenderMvcController.cs" />

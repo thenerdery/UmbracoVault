@@ -64,6 +64,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DefaultInstanceFactoryTests.cs" />
+    <Compile Include="Models\RecursiveModelWithAliases.cs" />
     <Compile Include="ProxyInstanceInterfaceFactoryTests.cs" />
     <Compile Include="DefaultInstanceInterfaceFactoryTests.cs" />
     <Compile Include="Models\AutoRegisteredTypeHandler.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Models\ExampleModelAllTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProxyInstanceFactoryTests.cs" />
+    <Compile Include="TypeAliasSetTests.cs" />
     <Compile Include="UmbracoContextTests.cs" />
     <Compile Include="TypeHandlerFactoryTests.cs" />
   </ItemGroup>

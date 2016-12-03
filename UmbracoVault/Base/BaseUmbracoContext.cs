@@ -73,6 +73,8 @@ namespace UmbracoVault
 
         public abstract IEnumerable<T> GetChildren<T>(int? parentNodeId = null);
 
+        public abstract T GetAncestor<T>(int? currentNodeId = null);
+
         public abstract IEnumerable<T> QueryRelative<T>(string query);
 
         /// <summary>
