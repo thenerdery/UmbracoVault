@@ -55,7 +55,7 @@ namespace UmbracoVault
         public override T GetCurrent<T>()
         {
             var umbracoItem = GetCurrentUmbracoContent();
-            if (umbracoItem == null || umbracoItem.Id <= 0)
+            if (umbracoItem == null)
             {
                 LogHelper.Error<T>("Could not retrieve current umbraco item.", null);
                 return default(T);
