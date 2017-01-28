@@ -1,3 +1,7 @@
+## v1.3.2
+
+* Updates UmbracoWebContext.GetCurrent to use the PublishedContent from the PublishedContentRequest rather than getting a page by the current id. 
+
 ## v1.3.1
 
 * Fixes issue where proxied models created from IContent models did not support recursive hydration.
