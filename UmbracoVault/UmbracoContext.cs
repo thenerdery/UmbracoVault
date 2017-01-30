@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 
 using Umbraco.Core;
@@ -33,9 +34,9 @@ namespace UmbracoVault
 
         private IPublishedContent GetCurrentUmbracoContent()
         {
-            if (UmbracoContext.Current.PageId != null)
+            if (UmbracoContext.Current.PublishedContentRequest.HasPublishedContent)
             {
-                return GetUmbracoContent(UmbracoContext.Current.PageId.Value);
+                return UmbracoContext.Current.PublishedContentRequest.PublishedContent;
             }
             return null;
         }
@@ -54,7 +55,7 @@ namespace UmbracoVault
         public override T GetCurrent<T>()
         {
             var umbracoItem = GetCurrentUmbracoContent();
-            if (umbracoItem == null || umbracoItem.Id <= 0)
+            if (umbracoItem == null)
             {
                 LogHelper.Error<T>("Could not retrieve current umbraco item.", null);
                 return default(T);
@@ -74,9 +75,8 @@ namespace UmbracoVault
         /// <returns>A fully-hydrated type (as defined by the Type parameter) containing data mapped from the current umbraco item</returns>
         public override object GetCurrent(Type type)
         {
-            // ReSharper disable once PossibleInvalidOperationException
-            var id = UmbracoContext.Current.PageId.Value;
-            return GetContentById(type, id.ToString());
+            var methodInfo = GetType().GetMethod(nameof(GetCurrent), new Type[0]);
+            return methodInfo.MakeGenericMethod(type).Invoke(this, null);
         }
 
         public override T GetContentById<T>(int id)
