@@ -13,6 +13,7 @@
         <summary>Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your views.</summary>
         <releaseNotes>
           * Updates UmbracoWebContext.GetCurrent to use the PublishedContent from the PublishedContentRequest rather than getting a page by the current id. 
+          * Updated value transformation process to execute type handler even if value type already matches target type to ensure all proper transforms are applied.
         </releaseNotes>
       <copyright>(c) The Nerdery LLC 2016. All Rights Reserved.</copyright>
       <tags>Umbraco UmbracoVault Mapping ObjectMapper ORM CMS</tags>

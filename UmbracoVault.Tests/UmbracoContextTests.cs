@@ -31,6 +31,7 @@ namespace UmbracoVault.Tests
                 Source.StringArray = new[] {"100", "200", "300"};
                 Source.Object = new { Name = "TestObject" };
                 Source.ExampleEnum = ExampleEnum.Harry;
+                Source.TypeHandledString = "       this string needs to be trimmed        ";
 
                 var specialCases = new NameValueCollection
                 {
@@ -168,6 +169,12 @@ namespace UmbracoVault.Tests
             {
                 Assert.AreNotEqual(Destination.String, default(string));
                 Assert.AreEqual(Source.String, Destination.String);
+            }
+
+            [TestMethod]
+            public void TypeHandler_ShouldExecute_EvenWhenTypesAlreadyMatch()
+            {
+                Assert.AreEqual(Source.TypeHandledString.Trim(), Destination.TypeHandledString);
             }
 
             [TestMethod]
