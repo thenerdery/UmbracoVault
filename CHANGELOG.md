@@ -1,6 +1,7 @@
 ## v1.3.2
 
 * Updates UmbracoWebContext.GetCurrent to use the PublishedContent from the PublishedContentRequest rather than getting a page by the current id. 
+* Updated value transformation process to execute type handler even if value type already matches target type to ensure all proper transforms are applied.
 
 ## v1.3.1
 

@@ -63,7 +63,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Attributes\TrimStringPropertyAttribute.cs" />
     <Compile Include="DefaultInstanceFactoryTests.cs" />
+    <Compile Include="Handlers\TrimStringTypeHandler.cs" />
     <Compile Include="ProxyInstanceInterfaceFactoryTests.cs" />
     <Compile Include="DefaultInstanceInterfaceFactoryTests.cs" />
     <Compile Include="Models\AutoRegisteredTypeHandler.cs" />

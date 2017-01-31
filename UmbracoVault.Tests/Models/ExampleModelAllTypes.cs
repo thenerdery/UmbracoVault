@@ -1,4 +1,5 @@
 ﻿using UmbracoVault.Attributes;
+using UmbracoVault.Tests.Attributes;
 
 namespace UmbracoVault.Tests.Models
 {
@@ -57,5 +58,8 @@ namespace UmbracoVault.Tests.Models
 
         [UmbracoEnumProperty]
         public ExampleEnum ExampleEnum { get; set; }
+
+        [TrimStringProperty]
+        public string TypeHandledString { get; set; }
     }
 }

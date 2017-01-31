@@ -286,19 +286,21 @@ namespace UmbracoVault
                 (current, transform) => transform.Transform(current));
             */
 
-            if (value.GetType() == propertyType)
+            var typeHandler = GetTypeHandler(propertyType, propertyMetaData);
+
+            //unsupported if the value is not target type and there is no handler
+            if (value.GetType() != propertyType && typeHandler == null)
+            {
+                throw new NotSupportedException($"The property type {propertyType} is not supported by Umbraco Vault.");
+            }
+
+            //if there is no handler, but value is already the target type, return value
+            if (typeHandler == null)
             {
                 return value;
             }
 
-            var typeHandler = GetTypeHandler(propertyType, propertyMetaData);
-
-            if (typeHandler == null)
-            {
-                throw new NotSupportedException(
-                    $"The property type {propertyType} is not supported by Umbraco Vault.");
-            }
-
+            //apply handler
             if (typeHandler is EnumTypeHandler)
             {
                 // Unfortunately, the EnumTypeHandler currently requires special attention because the GetAsType has a "where T : class" constraint.
@@ -314,16 +316,14 @@ namespace UmbracoVault
             {
                 var method = typeHandler.GetType().GetMethod("GetAsType");
                 var generic = method.MakeGenericMethod(propertyInfo.PropertyType.GetGenericArguments()[0]);
-                value = generic.Invoke(typeHandler, new[] { value });
+                return generic.Invoke(typeHandler, new[] { value });
             }
             else
             {
                 var method = typeHandler.GetType().GetMethod("GetAsType");
                 var generic = method.MakeGenericMethod(propertyInfo.PropertyType);
-                value = generic.Invoke(typeHandler, new[] { value });
+                return generic.Invoke(typeHandler, new[] { value });
             }
-
-            return value;
         }
 
         private ITypeHandler GetTypeHandler(Type propertyType, UmbracoPropertyAttribute propertyMetaData)
