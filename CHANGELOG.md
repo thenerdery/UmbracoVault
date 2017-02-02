@@ -1,3 +1,6 @@
+## v1.3.3
+* Updates MediaTypeHandler to return null if no media is found rather than returning an object with all null properties
+
 ## v1.3.2
 
 * Updates UmbracoWebContext.GetCurrent to use the PublishedContent from the PublishedContentRequest rather than getting a page by the current id. 
