@@ -1,3 +1,6 @@
+## v1.3.4
+* Updates UmbracoWebContext.GetChildren to ignore case when comparing document type alias with a VM's entity name
+
 ## v1.3.3
 * Updates MediaTypeHandler to return null if no media is found rather than returning an object with all null properties
 

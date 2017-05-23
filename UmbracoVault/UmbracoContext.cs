@@ -131,7 +131,7 @@ namespace UmbracoVault
 
             var type = typeof(T);
             var aliases = GetUmbracoEntityAliasesFromType(type);
-            var nodes = parentNode.Children.Where(c => aliases.Contains(c.DocumentTypeAlias));
+            var nodes = parentNode.Children.Where(c => aliases.Contains(c.DocumentTypeAlias, StringComparer.InvariantCultureIgnoreCase));
             return nodes.Select(GetItem<T>);
         }
 
