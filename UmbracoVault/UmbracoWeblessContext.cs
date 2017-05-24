@@ -4,6 +4,7 @@ using System.Linq;
 using Umbraco.Core;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
+using UmbracoVault.Collections;
 using UmbracoVault.Exceptions;
 using UmbracoVault.Extensions;
 
@@ -58,7 +59,7 @@ namespace UmbracoVault
         public override IEnumerable<T> GetChildren<T>(int? parentNodeId = null)
         {
             const int umbracoHomeNodeId = 1065;
-            var parentId = parentNodeId.HasValue ? parentNodeId.Value : umbracoHomeNodeId;
+            var parentId = parentNodeId ?? umbracoHomeNodeId;
 
             var children = ApplicationContext.Current.Services.ContentService
                                              .GetChildren(parentId)
@@ -66,6 +67,40 @@ namespace UmbracoVault
                                              .Select(GetItem<T>);
 
             return children;
+        }
+
+        public override T GetAncestor<T>(int? currentNodeId = null)
+        {
+            if (!currentNodeId.HasValue)
+            {
+                return default(T);
+            }
+
+            var node = ApplicationContext.Current.Services.ContentService.GetById(currentNodeId.Value);
+            if (node == null)
+            {
+                LogHelper.Error<T>($"Could not locate umbraco item with id {currentNodeId.Value}.", null);
+                return default(T);
+            }
+
+            var aliases = TypeAliasSet.GetAliasesForUmbracoEntityType<T>();
+
+            var parent = node.Parent();
+
+            while (true)
+            {
+                if (parent == null)
+                {
+                    return default(T);
+                }
+
+                if (aliases.Contains(parent.ContentType.Alias))
+                {
+                    return GetItem<T>(parent);
+                }
+
+                parent = parent.Parent();
+            }
         }
 
         public override IEnumerable<T> QueryRelative<T>(string query)

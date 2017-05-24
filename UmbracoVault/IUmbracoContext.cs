@@ -71,8 +71,8 @@ namespace UmbracoVault
         /// <param name="csv">A comma separated list of Node Ids</param>
         /// <typeparam name="T">The object type to cast the item to</typeparam>
         /// <returns>a strongly typed version (T) of the current umbraco item.</returns>
-		IEnumerable<T> GetContentByCsv<T>(string csv);
-		
+        IEnumerable<T> GetContentByCsv<T>(string csv);
+        
         /// <summary>
         /// Creates and returns an IEnumerable of {T} as mapped to Umbraco items. 
         /// The Umbraco doc types to load are read from the [UmbracoEntity] "Alias" parameter(s) defined on {T}.
@@ -80,7 +80,7 @@ namespace UmbracoVault
         /// </summary>
         /// <typeparam name="T">The core type to hydrate and return, and the type that informs which Umbraco aliases to map</typeparam>
         /// <returns>An IEnumerable of {T} as mapped to Umbraco items</returns>
-		IEnumerable<T> GetByDocumentType<T>();
+        IEnumerable<T> GetByDocumentType<T>();
 
         /// <summary>
         /// Returns a list of URLs, given a type
@@ -97,6 +97,17 @@ namespace UmbracoVault
         /// otherwise the method will look up the parent by ID</param>
         /// <returns>A collection of strongly typed version (T) of children of the current node.</returns>
         IEnumerable<T> GetChildren<T>(int? parentNodeId = null);
+
+        /// <summary>Retrieves the first ancestor of a specific type. NOTE: since the root node does
+        /// not have a parent, when calling from a non-web context you must supply the
+        /// current node id. If no node id is specified, the method will return null.
+        /// </summary>
+        /// <typeparam name="T">The object type to match when traversing the object graph</typeparam>
+        /// <param name="currentNodeId">Optional. If omitted or null, will use the Context's CurrentNode as the child node, otherwise
+        /// the method will lookup the the node by ID and use that as the starting point. Some implementations may not
+        /// support this method for null values of the current node id.</param>
+        /// <returns>The first ancestor (not including the child node) of the given type</returns>
+        T GetAncestor<T>(int? currentNodeId = null);
         
         /// <summary>
         /// Given an XPath Query, it returns objects of a specific type.

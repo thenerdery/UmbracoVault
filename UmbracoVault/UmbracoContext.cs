@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Web;
-
-using Umbraco.Core;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
 using Umbraco.Web;
-
+using UmbracoVault.Collections;
 using UmbracoVault.Extensions;
 using UmbracoVault.Transformations;
 
@@ -100,9 +97,8 @@ namespace UmbracoVault
         public override IEnumerable<T> GetByDocumentType<T>()
         {
             var items = new List<T>();
-            var type = typeof(T);
 
-            foreach (var alias in GetUmbracoEntityAliasesFromType(type))
+            foreach (var alias in TypeAliasSet.GetAliasesForUmbracoEntityType<T>())
             {
                 var contents = Helper.GetContentByAlias(alias);
                 items.AddRange(contents.Select(GetItem<T>));
@@ -114,9 +110,8 @@ namespace UmbracoVault
         public override IEnumerable<string> GetUrlsForDocumentType<T>()
         {
             var urls = new List<string>();
-            var type = typeof(T);
 
-            foreach (var alias in GetUmbracoEntityAliasesFromType(type))
+            foreach (var alias in TypeAliasSet.GetAliasesForUmbracoEntityType<T>())
             {
                 var contents = Helper.GetContentByAlias(alias);
                 urls.AddRange(contents.Select(x => x.Url));
@@ -129,10 +124,39 @@ namespace UmbracoVault
         {
             var parentNode = parentNodeId.HasValue ? GetUmbracoContent(parentNodeId.Value) : GetCurrentUmbracoContent();
 
-            var type = typeof(T);
-            var aliases = GetUmbracoEntityAliasesFromType(type);
+            var aliases = TypeAliasSet.GetAliasesForUmbracoEntityType<T>();
             var nodes = parentNode.Children.Where(c => aliases.Contains(c.DocumentTypeAlias, StringComparer.InvariantCultureIgnoreCase));
             return nodes.Select(GetItem<T>);
+        }
+
+        public override T GetAncestor<T>(int? currentNodeId = null)
+        {
+            var currentNode = currentNodeId.HasValue ? GetUmbracoContent(currentNodeId.Value) : GetCurrentUmbracoContent();
+
+            if (currentNode == null)
+            {
+                LogHelper.Error<T>($"Could not locate umbraco item.", null);
+                return default(T);
+            }
+
+            var aliases = TypeAliasSet.GetAliasesForUmbracoEntityType<T>();
+
+            var parent = currentNode.Parent;
+
+            while (true)
+            {
+                if (parent == null)
+                {
+                    return default(T);
+                }
+
+                if (aliases.Contains(parent.DocumentTypeAlias))
+                {
+                    return GetItem<T>(parent);
+                }
+
+                parent = parent.Parent;
+            }
         }
 
         /// <summary>
@@ -170,27 +194,6 @@ namespace UmbracoVault
         {
             const string umbracoHelperKey = "__vaultUmbracoHelper";
             return HttpContext.Current?.Items.GetOrAddThreadSafe(string.Intern(umbracoHelperKey), new UmbracoHelper(UmbracoContext.Current));
-        }
-
-        public static ReadOnlyCollection<string> GetUmbracoEntityAliasesFromType(Type type)
-        {
-            var results = new HashSet<string>();
-            var attributes = type.GetUmbracoEntityAttributes().ToList();
-            if (attributes.Any())
-            {
-                foreach (var attribute in attributes)
-                {
-                    var alias = attribute.Alias;
-                    if (string.IsNullOrWhiteSpace(alias))
-                    {
-                        //assumes doc type models use naming convention of [DocumentTypeAlias]ViewModel
-                        alias = type.Name.TrimEnd("ViewModel");
-                    }
-                    results.Add(alias);
-                }
-            }
-
-            return results.ToList().AsReadOnly();
         }
     }
 }
