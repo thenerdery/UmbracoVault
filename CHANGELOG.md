@@ -1,4 +1,7 @@
-## v1.3.5
+## v1.3.7
+* Allows media entities to override type handler so Umbraco 7 users can support UDI format
+
+## v1.3.6
 * Fixes issues with enumerable content handling
 
 ## v1.3.5
