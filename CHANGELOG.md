@@ -1,6 +1,5 @@
-## v1.3.4
-* Updates UmbracoWebContext.GetChildren to ignore case when comparing document type alias with a VM's entity name
-* Updates the Media and Entity type handlers to check for IPublishedContent before assuming the input is a string id
+## v1.3.5
+* Automatically mapping media and content entities
 
 ## v1.3.3
 * Updates MediaTypeHandler to return null if no media is found rather than returning an object with all null properties

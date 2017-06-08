@@ -27,12 +27,9 @@ namespace UmbracoVault.TypeHandlers
 
     	public object GetAsType<T>(object input)
 	    {
-	        if (input is IPublishedContent)
-	        {
-	            return input;
-	        }
+	        var mediaObject = input as IPublishedContent;
+	        mediaObject = mediaObject ?? Get(input?.ToString());
 
-	        var mediaObject = Get(input?.ToString());
 	        if (mediaObject == null)
 	        {
 	            return null;
