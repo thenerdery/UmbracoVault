@@ -1,4 +1,7 @@
 ## v1.3.5
+* Fixes issues with enumerable content handling
+
+## v1.3.5
 * Automatically mapping media and content entities
 
 ## v1.3.3
