@@ -1,3 +1,6 @@
+## v1.3.9
+* Performance improvements
+
 ## v1.3.8
 * Adds support for hydrating an IMedia model onto MediaEntity models
 

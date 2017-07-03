@@ -1,7 +1,6 @@
 ﻿using System;
-
-using UmbracoVault.Exceptions;
-using UmbracoVault.Extensions;
+using System.Collections.Generic;
+using System.Linq;
 
 using Umbraco.Core.Models;
 using Umbraco.Web;
@@ -9,11 +8,10 @@ using Umbraco.Web;
 namespace UmbracoVault.TypeHandlers
 {
     /// <summary>
-    /// Responsible for converting Media Types
+    ///     Responsible for converting Media Types
     /// </summary>
     public class MediaTypeHandler : ITypeHandler
     {
-
         private static IPublishedContent Get(string stringValue)
         {
             if (string.IsNullOrWhiteSpace(stringValue))
@@ -25,27 +23,21 @@ namespace UmbracoVault.TypeHandlers
             return helper.TypedMedia(stringValue);
         }
 
-    	public object GetAsType<T>(object input)
-	    {
-	        var mediaObject = input as IPublishedContent;
-	        mediaObject = mediaObject ?? Get(input?.ToString());
+        public object GetAsType<T>(object input)
+        {
+            var mediaObject = input as IPublishedContent;
+            mediaObject = mediaObject ?? Get(input?.ToString());
 
-	        if (mediaObject == null)
-	        {
-	            return null;
-	        }
-
-            var result = typeof(T).CreateWithNoParams<T>();
-            if (result == null)
+            if (mediaObject == null)
             {
-                throw new ConstructorUnavailableException(typeof(T));
+                return null;
             }
 
-            Vault.Context.FillClassProperties(result, (alias, recursive) => mediaObject.GetPropertyValue(alias,recursive));
+            var media = Vault.Context.GetMediaById<T>(mediaObject.Id);
 
-            return result;
+            return media;
         }
 
-        public Type TypeSupported => typeof (Media);
+        public Type TypeSupported => typeof(Media);
     }
 }

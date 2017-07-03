@@ -12,7 +12,7 @@
         <description>Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your views. It allows you to create lightly-decorated classes that Vault will understand how to hydrate. This gives you the full view model-style experience in Umbraco that you are accustomed to in MVC, complete with strongly-typed view properties (no more magic strings in your views).</description>
         <summary>Vault for Umbraco is an easy-to-use, extensible ORM to quickly and easily get strongly-typed Umbraco CMS data into your views.</summary>
         <releaseNotes>
-          * Adds support for hydrating an IMedia model onto MediaEntity models
+          * Performance improvements
         </releaseNotes>
       <copyright>(c) The Nerdery LLC 2016. All Rights Reserved.</copyright>
       <tags>Umbraco UmbracoVault Mapping ObjectMapper ORM CMS</tags>

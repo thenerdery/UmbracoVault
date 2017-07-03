@@ -219,7 +219,7 @@ namespace UmbracoVault
             FillClassProperties(result, (alias, recursive) =>
             {
                 // recursive is ignored in this case
-                var value = m.GetValue(alias);
+                var value = m.HasProperty(alias) ? m.GetValue(alias) : null;
                 return value;
             });
 
