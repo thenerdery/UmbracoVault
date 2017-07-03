@@ -107,5 +107,15 @@ namespace UmbracoVault
 
             return memberModel;
         }
+
+        internal static T CreateWithMedia<T>(IMedia media)
+        {
+            var result = typeof(T).CreateWithNoParams<T>();
+            var memberProperty = typeof(T).GetPublicSettableProperties().FirstOrDefault(x => x.PropertyType.IsAssignableFrom(typeof(IMedia)) && x.CanWrite);
+
+            memberProperty?.SetValue(result, media);
+
+            return result;
+        }
     }
 }

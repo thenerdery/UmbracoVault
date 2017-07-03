@@ -1,3 +1,6 @@
+## v1.3.8
+* Adds support for hydrating an IMedia model onto MediaEntity models
+
 ## v1.3.7
 * Allows media entities to override type handler so Umbraco 7 users can support UDI format
 

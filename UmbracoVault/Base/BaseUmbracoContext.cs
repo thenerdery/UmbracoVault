@@ -214,7 +214,7 @@ namespace UmbracoVault
         // ReSharper disable once SuggestBaseTypeForParameter - OK Here
         protected T GetMediaItem<T>(IMedia m)
         {
-            var result = typeof(T).CreateWithNoParams<T>();
+            var result = ClassConstructor.CreateWithMedia<T>(m);
 
             FillClassProperties(result, (alias, recursive) =>
             {
